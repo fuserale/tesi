@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BeaconTelemetry</string>
+    <string name="no_ble">BLE not supported on this device</string>
+    <string name="state_off">Bluetooth disabled</string>
+    <string name="service_not_found">GATT service not found - incompatible device</string>
+    <string name="characteristic_not_found">GATT characteristic not found - incompatible device</string>
+    <string name="acceleration">Acceleration</string>
+    <string name="xAxis">X: %.2f g</string>
+    <string name="yAxis">Y: %.2f g</string>
+    <string name="zAxis">Z: %.2f g</string>
+    <string name="recording_start">Start recording</string>
+    <string name="recording_stop">Stop recording</string>
+    <string name="recording_export">Export recording</string>
+    <string name="recording">Recording</string>
+    <string name="none">-</string>
+    <string name="combined">Combined</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
+    <string name="z">Z</string>
+    <string name="max">Maximum: %.2f g</string>
+    <string name="error_file">Error while writing file</string>
+    <string name="about_title">About</string>
+    <string name="about_message">Copyright © 2017 Martin Disch\n\nAvailable under the MIT license.</string>
+    <string name="github">GitHub</string>
+    <string name="close">Close</string>
+    <string name="github_url">https://github.com/martindisch/SensorTag-Accelerometer</string>
+    <string name="connection_lost">Lost connection with SensorTag</string>
+    <string name="no_data">There is no recorded data</string>
+</resources>

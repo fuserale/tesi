@@ -1,0 +1,9 @@
+Link a possibili dispositivi wearable:
+
+http://openhealth.wemaketotem.org/#about 																								----------->>> OK
+
+http://www.hexiwear.com/hardware/  && https://developer.mbed.org/platforms/Hexiwear/ 													----------->>> OK
+
+https://www.postscapes.com/open-wearable-sensor-platform-angel/ 																		----------->>> NO (HW/SW proprietario)
+
+https://modernfueldesign.com/projects/wearable-device-product-design-firefly-ice/ (su questo non ho trovato la pagina di supporto HW/SW)----------->>> NO (Penna)

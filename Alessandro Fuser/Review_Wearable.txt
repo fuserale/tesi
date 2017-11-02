@@ -1,0 +1,40 @@
+Riassunto Proposte Wearable:
+
+WEMAKETOTEM
+	Open Source
+	ElectroCardioGram, Accelerometer, Gyroscope, Magnetometer, BLE4.0, MicroSD, AAA battery, 16KB RAM
+	Development--> MBED (online), J-LINK (for failure), BLE capable device
+	Cost--> DevKit
+
+	MCU NRF51822-QFAA -->32kb Flash + 16kb Ram + 1mA/2.6uA
+	IMU --> Sample Rate 1.25-1000Hz, Accelerometer 3axis-16G 2/4/8g, Gyroscope 3-axis, FIFO 1024bytes
+	BLE --> v4.0, maximum throughput 1.5kb/s, OTA rate 125kbs/s-1-2Mb/s, App Throughput 0.27Mb/s, Latency 6ms, Minimum Total Time 3ms
+
+	Sensor rate and data accessibile are modifiable via software
+
+HEXIWEAR
+	Open Source
+	MCU NXP Kinetis K64x, BLE & Wireless, Accelerometer, Magnetometer, Gyroscope, Digital Pressure (6 buttons), humidity and temperature sensor, Heart-rate sensor, 190mah li-po battery
+	Development-->App Android/iOS modifiable, github, hardware expandability
+	Cost-->49$ (only hexiwear), 99$ (power pack)
+
+	MCU Kinets K64F --> 1MB Flash + 256kB RAM + 120MHZ + 40mA/0.2uA
+	IMU Kinetis KW40Z --> 160kB Flash + 20kB RAM + BLE 1000kbs symbol rate GFSK modulation, IEEE 802.15.4
+	Operatin Frequency [max] --> 48MHZ
+
+	Sensor rate and data accessibile are modifiable via software
+
+ZWEAR
+	Open Source Hardware & Software
+	BLE, GPS, Accelerometer, FPC extension
+	Development --> IOS APP, SmartRF Studio/SmartRF Programmer/IAR Embedded Workbench (via USB SmartRF05eb)
+	Cost--> from 35$ to 155$
+
+ANGEL
+	Removed
+
+FIREFLY ICE
+	Open Source Platform
+	ARM processor, BLE, micro USB for lithium battery, accelerometer, magnetometer, temperature, 5 led
+	Development-->APP developers, IDE & GCC toolchain
+	Cost-->250$ but Sold Out

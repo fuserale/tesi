@@ -1,0 +1,10 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {section}{\numberline {1}Future Learning for Detection and Prediction of Freezing of Gait in Parkinson's Disease\cite {uno}}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Sommario}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Articolo}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Conclusioni}{4}{subsection.1.3}
+\contentsline {section}{\numberline {2}Wearable assistant for Parkinson's disease patients with the freezing of gait symptom\cite {due}}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Sommario}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Articolo}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Conclusioni}{5}{subsection.2.3}

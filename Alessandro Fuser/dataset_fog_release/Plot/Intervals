@@ -1,0 +1,13 @@
+Per ogni Dataset, indico l'intervallo più interessante, ossia quello che contiene un numero elevato di freeze
+
+Dataset   ||	RIGA INIZIO		|| 	RIGA FINE	||	SECONDI INIZIO	||	SECONDI FINE
+S01R01			44801				57601			1800				2000
+S01R02			32000				38400			500					600
+S02R01			54400				60800			850					950
+S02R02			28800				39680			450					620
+S03R01			104320				115200			1630				1800
+S03R01			121600				134400			1900				2100
+S03R02			19200				25600			300					400
+S05R01			51200				67200			800					1050
+S05R02			25600				41600			400					650
+S05R02			83200				93440			1300				1460

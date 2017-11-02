@@ -1,0 +1,177 @@
+clear; clc
+
+for isubject = 5
+    for q=0:5:45
+        if q<10
+            datadir = ['../../dataset/CSV/feature/interval/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(q,'%01d') '/'];
+        end
+        if q>5
+            datadir = ['../../dataset/CSV/feature/interval/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(q,'%02d') '/'];
+        end
+        
+        %list of all files for patient number $isubject
+        fileruns = dir([datadir 'feature_1acc*.csv']);
+        
+        %while there's file of patient $isubject
+        for r = 1:length(fileruns)
+            
+            %name of the file
+            filename = [datadir fileruns(r).name];
+            %read table given in input
+            T = readtable(filename);
+            [m,n] = size(T);
+            A = table2array(T(:,:));
+            %plotmatrix(A);
+            
+            % Set the random number seed to make the results repeatable in this script
+            rng('default');
+            
+            % choose the feature to visualize
+            
+            % time sample vs aae1, differentiated by freezing
+            % figure
+            % gscatter(T.TIME_SAMPLE,T.AAE1,T.FREEZE);
+            % xlabel('Time');
+            % ylabel('AAE1');
+            % title('FREEZE TIME GRAPH');
+            
+            % features to cluster
+            bonds = A(:,2:47);
+            %Number of cluster to create
+            numClust = 2;
+            
+            
+            %%% k-means %%%
+            
+%             % choose of parameter
+%                         dist_k = 'sqeuclidean';
+%                         options_km = statset('UseParallel', false);
+%                         maxiter = 1000;
+%                         % cluster
+%                         kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
+%             
+%                         %     [featIdx, pair] = featureScore(bonds, kidx, 10);
+%                         %     disp('Top features for separation of clusters:');
+%                         %     for i = 1:size(pair,1)
+%                         %         fprintf('%d and %d: ', pair(i,1), pair(i,2));
+%                         %         fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
+%                         %         fprintf('\n');
+%                         %     end
+%             
+%                         % visualize results
+%                         %     figure
+%                         %     [coeff,score,latent,tsquared,explained] = pca(bonds);
+%                         %     gscatter(T.TIME_SAMPLE,T.AAE1,kidx);
+%                         %     xlabel('Time');
+%                         %     title('K-MEANS');
+%             
+%                         P = array2table(kidx);
+%                         writetable(P, [datadir 'kmeans_1acc_' dist_k '_' fileruns(r).name] );
+%                         display([datadir 'kmeans_1acc_' dist_k '_' fileruns(r).name]);
+            
+            %%% neural networks - Self organizing Maps %%%
+            %
+            % % %             Create a Self-Organizing Map
+            %             dimension1 = 2;
+            %             dimension2 = 1;
+            %             net = selforgmap([dimension1 dimension2]);
+            %
+            % %             Train the network
+            %             net.trainParam.showWindow = 0;
+            %             [net,tr] = train(net,bonds');
+            %
+            % %             Test the network
+            %             nidx = net(bonds');
+            %             nidx = vec2ind(nidx)';
+            % %
+            % %                 [featIdx, pair] = featureScore(bonds, nidx, 10);
+            % %                 disp('Top features for separation of clusters:');
+            % %                 for i = 1:size(pair,1)
+            % %                     fprintf('%d and %d: ', pair(i,1), pair(i,2));
+            % %                     fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
+            % %                     fprintf('\n');
+            % %                 end
+            %
+            %
+            %             P = array2table(nidx);
+            %             writetable(P, [datadir 'net_1acc_' fileruns(r).name] );
+            %             display([datadir 'net_1acc_' fileruns(r).name]);
+            
+            %     %%% gaussian mixture models %%%
+            
+%                 gmobj = gmdistribution.fit(bonds,numClust, 'SharedCov', true, 'CovType', 'diagonal');
+%                 gidx = cluster(gmobj, bonds);
+%             
+%             %     [featIdx, pair] = featureScore(bonds, gidx, 10);
+%             %     disp('Top features for separation of clusters:');
+%             %     for i = 1:size(pair,1)
+%             %         fprintf('%d and %d: ', pair(i,1), pair(i,2));
+%             %         fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
+%             %         fprintf('\n');
+%             %     end
+%             
+%                 P = array2table(gidx);
+%                 writetable(P, [datadir 'gmm_1acc_' fileruns(r).name] );
+%                 display([datadir 'gmm_1acc_' fileruns(r).name]);
+            
+            %     %%% FUZZY C-MEANS %%%
+%                 options = nan(4,1);
+%                 options(4) = 0;
+%                 % Hide iteration information by passing appropriate options to FCM
+%                 [centres,U] = fcm(bonds,numClust, options);
+%                 [~, fidx] = max(U);
+%                 fidx = fidx';
+%             
+%             %     [featIdx, pair] = featureScore(bonds, fidx, 10);
+%             %     disp('Top features for separation of clusters:');
+%             %     for i = 1:size(pair,1)
+%             %         fprintf('%d and %d: ', pair(i,1), pair(i,2));
+%             %         fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
+%             %         fprintf('\n');
+%             %     end
+%             
+%                 P = array2table(fidx);
+%                 writetable(P, [datadir 'cmeans_1acc_' fileruns(r).name] );
+%                 display([datadir 'cmeans_1acc_' fileruns(r).name]);
+        end
+    end
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% evaluation of cluster %%%%
+
+% similarity matrix
+
+%[dist_metric_h, dist_metric_k] = plotSimilarityMatrix(bonds, dist_h, hidx, dist_k, kidx );
+
+%
+
+% silhouette
+
+% Plot the silhouette values for k-means clustering by creating 2 and 3
+% clusters respectively
+% for i=2:3
+%     figure
+%     kidx = kmeans(bonds,i,'distance',dist_k,'options',options_km);
+%     [~,h] = silhouette(bonds,kidx,dist_k);
+%     title(['Silhouette values with ' num2str(i) ' clusters'])
+%     snapnow
+% end
+%
+% % Compute and plot the average silhouette values for 2 through 10 clusters
+% numC = 10;
+% silh_m = nan(numC,1);
+%
+% for i=1:numC
+%     kidx = kmeans(bonds,i,'distance',dist_k,'options',options_km);
+%     silh = silhouette(bonds,kidx,dist_k);
+%     silh_m(i) = mean(silh);
+% end
+%
+% figure
+% plot(1:numC,silh_m,'o-')
+% xlabel('Number of Clusters')
+% ylabel('Mean Silhouette Value')
+% title('Average Silhouette Values vs. Number of Clusters')

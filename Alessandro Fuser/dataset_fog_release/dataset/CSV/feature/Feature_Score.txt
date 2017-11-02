@@ -1,0 +1,36 @@
+[FEATURE FROM 2:139]
+
+GAUSSIAN MIXTURE MODELS
+Top features for separation of clusters:
+1 and 2: MEDIANACCX2, TRIMX2, MEANCACCX2, RMSX2, MEANACCZ1, TRIMZ1, MEDIANACCZ1, MODEX2, ARMMEANX2, TRIMZ3,
+
+SELF-ORGANIZING MAP NEURAL
+Top features for separation of clusters:
+1 and 2: VARZ3, EVA3, RANGEZ3, STDX1, ARMMEANZ3, RMSZ3, SMA3, VARX1, SMV1, STDY1, 
+
+K-MEANS
+Top features for separation of clusters:
+1 and 2: EVA3, VARZ3, RANGEZ3, RMSZ3, SMA3, ARMMEANZ3, STDX1, VARX1, SMV1, AAE1, 
+
+C-MEANS
+Top features for separation of clusters:
+1 and 2: VARZ3, EVA3, RANGEZ3, RMSZ3, ARMMEANZ3, STDX1, SMA3, VARX1, SMV1, STDY1, 
+
+-------------------------------------------------------------------------------------------------------------
+[FEATURE FROM 2:157]
+
+GAUSSIAN MIXTURE MODELS
+Top features for separation of clusters:
+1 and 2: MEDIANACCX2, TRIMX2, MEANCACCX2, RMSX2, MEANACCZ1, TRIMZ1, MEDIANACCZ1, MODEX2, ARMMEANX2, TRIMZ3, 
+
+SELF-ORGANIZING MAP NEURAL
+Top features for separation of clusters:
+1 and 2: FIY1, VARZ3, FIX1, RANGEZ3, EVA3, STDX1, ARMMEANZ3, RMSZ3, SMA3, VARX1, 
+
+K-MEANS
+Top features for separation of clusters:
+1 and 2: FIY1, VARZ3, FIX1, RANGEZ3, EVA3, STDX1, ARMMEANZ3, RMSZ3, SMA3, VARX1, 
+
+C-MEANS
+Top features for separation of clusters:
+1 and 2: FIY1, VARZ3, FIX1, RANGEZ3, EVA3, STDX1, ARMMEANZ3, RMSZ3, SMA3, VARX1, 
