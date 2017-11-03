@@ -3,7 +3,7 @@ clear; clc
 datadir = '../../dataset/CSV/';
 
 %choose number of patients to examine (from 1 to 10)
-for isubject = 5:5
+for isubject = 6:10
     
     %list of all files for patient number $isubject
     fileruns = dir([datadir 'S' num2str(isubject,'%02d') 'R01.csv']);

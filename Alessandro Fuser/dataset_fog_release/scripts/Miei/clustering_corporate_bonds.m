@@ -1,6 +1,6 @@
 clear; clc
 
-for isubject = 5:5
+for isubject = 4
     for q=5:5:45
         if q<10
             datadir = ['../../dataset/CSV/feature/interval/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(q,'%01d') '/'];
@@ -44,30 +44,47 @@ for isubject = 5:5
             %%% k-means %%%
             
             % choose of parameter
-                        dist_k = 'sqeuclidean';
-                        options_km = statset('UseParallel', false);
-                        maxiter = 1000;
-                        % cluster
-                        kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
-            
-                        %     [featIdx, pair] = featureScore(bonds, kidx, 10);
-                        %     disp('Top features for separation of clusters:');
-                        %     for i = 1:size(pair,1)
-                        %         fprintf('%d and %d: ', pair(i,1), pair(i,2));
-                        %         fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
-                        %         fprintf('\n');
-                        %     end
-            
-                        % visualize results
-                        %     figure
-                        %     [coeff,score,latent,tsquared,explained] = pca(bonds);
-                        %     gscatter(T.TIME_SAMPLE,T.AAE1,kidx);
-                        %     xlabel('Time');
-                        %     title('K-MEANS');
-            
-                        P = array2table(kidx);
-                        writetable(P, [datadir 'kmeans_' dist_k '_' fileruns(r).name] );
-                        display([datadir 'kmeans_' dist_k '_' fileruns(r).name]);
+            means1 = 'sqeuclidean';
+            means2 = 'correlation';
+            means3 = 'cityblock';
+            means4 = 'cosine';
+            for q=1:4
+                if q == 1
+                    dist_k = means1;
+                end
+                if q == 2
+                    dist_k = means2;
+                end
+                if q == 3
+                    dist_k = means3;
+                end
+                if q == 4
+                    dist_k = means4;
+                end
+                options_km = statset('UseParallel', false);
+                maxiter = 1000;
+                % cluster
+                kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
+                
+                %     [featIdx, pair] = featureScore(bonds, kidx, 10);
+                %     disp('Top features for separation of clusters:');
+                %     for i = 1:size(pair,1)
+                %         fprintf('%d and %d: ', pair(i,1), pair(i,2));
+                %         fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
+                %         fprintf('\n');
+                %     end
+                
+                % visualize results
+                %     figure
+                %     [coeff,score,latent,tsquared,explained] = pca(bonds);
+                %     gscatter(T.TIME_SAMPLE,T.AAE1,kidx);
+                %     xlabel('Time');
+                %     title('K-MEANS');
+                
+                P = array2table(kidx);
+                writetable(P, [datadir 'kmeans_' dist_k '_' fileruns(r).name] );
+                display([datadir 'kmeans_' dist_k '_' fileruns(r).name]);
+            end
             
             %%% neural networks - Self organizing Maps %%%
             
@@ -99,8 +116,8 @@ for isubject = 5:5
             
             %     %%% gaussian mixture models %%%
             
-%                 gmobj = gmdistribution.fit(bonds,numClust, 'SharedCov', true, 'CovType', 'diagonal');
-%                 gidx = cluster(gmobj, bonds);
+%             gmobj = gmdistribution.fit(bonds,numClust, 'SharedCov', true, 'CovType', 'diagonal');
+%             gidx = cluster(gmobj, bonds);
 %             
 %             %     [featIdx, pair] = featureScore(bonds, gidx, 10);
 %             %     disp('Top features for separation of clusters:');
@@ -110,29 +127,29 @@ for isubject = 5:5
 %             %         fprintf('\n');
 %             %     end
 %             
-%                 P = array2table(gidx);
-%                 writetable(P, [datadir 'gmm_' fileruns(r).name] );
-%                 display([datadir 'gmm_' fileruns(r).name]);
+%             P = array2table(gidx);
+%             writetable(P, [datadir 'gmm_' fileruns(r).name] );
+%             display([datadir 'gmm_' fileruns(r).name]);
             
             %     %%% FUZZY C-MEANS %%%
-%                 options = nan(4,1);
-%                 options(4) = 0;
-%                 % Hide iteration information by passing appropriate options to FCM
-%                 [centres,U] = fcm(bonds,numClust, options);
-%                 [~, fidx] = max(U);
-%                 fidx = fidx';
-%             
-%             %     [featIdx, pair] = featureScore(bonds, fidx, 10);
-%             %     disp('Top features for separation of clusters:');
-%             %     for i = 1:size(pair,1)
-%             %         fprintf('%d and %d: ', pair(i,1), pair(i,2));
-%             %         fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
-%             %         fprintf('\n');
-%             %     end
-%             
-%                 P = array2table(fidx);
-%                 writetable(P, [datadir 'cmeans_' fileruns(r).name] );
-%                 display([datadir 'cmeans_' fileruns(r).name]);
+            options = nan(4,1);
+            options(4) = 0;
+            % Hide iteration information by passing appropriate options to FCM
+            [centres,U] = fcm(bonds,numClust, options);
+            [~, fidx] = max(U);
+            fidx = fidx';
+            
+            %     [featIdx, pair] = featureScore(bonds, fidx, 10);
+            %     disp('Top features for separation of clusters:');
+            %     for i = 1:size(pair,1)
+            %         fprintf('%d and %d: ', pair(i,1), pair(i,2));
+            %         fprintf('%s, ', T.Properties.VariableNames{featIdx(i,:)});
+            %         fprintf('\n');
+            %     end
+            
+            P = array2table(fidx);
+            writetable(P, [datadir 'cmeans_' fileruns(r).name] );
+            display([datadir 'cmeans_' fileruns(r).name]);
         end
     end
 end

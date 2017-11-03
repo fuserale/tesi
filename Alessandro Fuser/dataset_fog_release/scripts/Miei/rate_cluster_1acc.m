@@ -1,6 +1,6 @@
 clear; clc
 
-for isubject = 1:3
+for isubject = 4:10
     e = [];
     Q = [];
     for q=5:5:45
@@ -15,6 +15,10 @@ for isubject = 1:3
         
         %list of all files for patient number $isubject
         fileruns = dir([datadir 'feature_1acc_*.csv']);
+%         alg = 'kmeans_1acc_cosine_feature';
+%         alg = 'kmeans_1acc_correlation_feature';
+%         alg = 'kmeans_1acc_cityblock_feature';
+%         alg = 'kmeans_1acc_sqeuclidean_feature';
         alg = 'cmeans';
         fileruns2 = dir([datadir alg '_1acc*.csv']);
         

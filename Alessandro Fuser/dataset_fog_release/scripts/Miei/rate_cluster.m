@@ -1,6 +1,6 @@
 clear; clc
 
-for isubject = 5
+for isubject =4:10
     e = [];
     Q = [];
     for q=5:5:45
@@ -15,7 +15,7 @@ for isubject = 5
         
         %list of all files for patient number $isubject
         fileruns = dir([datadir 'feature_sec*.csv']);
-        alg = 'net';
+        alg = 'kmeans_sqeuclidean';
         fileruns2 = dir([datadir alg '_*.csv']);
         
         %while there's file of patient $isubject
