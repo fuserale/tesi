@@ -1,15 +1,16 @@
 clear; clc
 
-for isubject = [1 2 3 5]
+for isubject = [1 2 3]
     E = [];
     D = [];
     C = [];
+    A1 = [];
     for p = 1:6
         datadir = ['../../dataset/CSV/feature/dynamics/'];
         datadir2 = ['../../dataset/CSV/feature/dynamics/clustering/'];
         
         %list of all files for patient number $isubject
-        fileruns = dir([datadir '2cl_dynamics_S' num2str(isubject,'%02d') '*.csv']);
+        fileruns = dir([datadir '2cl_dynamics_2cl_S' num2str(isubject,'%02d') '*.csv']);
         if p == 1
             alg = 'kmeans_cosine';
         end
@@ -28,7 +29,7 @@ for isubject = [1 2 3 5]
         if p == 6
             alg = 'cmeans';
         end
-        fileruns2 = dir([datadir2 alg '_2cl_dynamics_S' num2str(isubject,'%02d') '*.csv']);
+        fileruns2 = dir([datadir2 alg '_2cl_dynamics_2cl_S' num2str(isubject,'%02d') '*.csv']);
         
         %while there's file of patient $isubject
         for r = 1:length(fileruns)
@@ -38,7 +39,7 @@ for isubject = [1 2 3 5]
             %read table given in input
             T1 = readtable(filename);
             [m1,n1] = size(T1);
-            A1 = table2array(T1(:,140));
+            A1 = table2array(T1(:,131));
             
             %name of the file
             filename2 = [datadir2 fileruns2(r).name];
@@ -85,14 +86,14 @@ for isubject = [1 2 3 5]
                 end
             end
             
-            %[C,order] = confusionmat(D(:,2),D(:,1));
+            [Z,order] = confusionmat(D(:,2),D(:,1));
             
             true_positive = positive_positive / number_positive;
             true_negative = negative_negative / number_negative;
             false_positive = positive_negative / number_negative;
             false_negative = negative_positive / number_positive;
             B = [true_positive false_positive; false_negative true_negative];
-            E = [E B];
+            E = [E Z];
             C = [C A2];
         end
     end

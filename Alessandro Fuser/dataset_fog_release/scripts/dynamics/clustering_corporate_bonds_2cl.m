@@ -19,7 +19,7 @@ for r = 1:length(fileruns)
     rng('default');
     
     % features to cluster
-    bonds = A(:,2:139);
+    bonds = A(:,2:130);
     %Number of cluster to create
     numClust = 2;
     
@@ -57,7 +57,7 @@ for r = 1:length(fileruns)
     %%% neural networks - Self organizing Maps %%%
     
     % Create a Self-Organizing Map
-    dimension1 = 3;
+    dimension1 = 2;
     dimension2 = 1;
     net = selforgmap([dimension1 dimension2]);
     

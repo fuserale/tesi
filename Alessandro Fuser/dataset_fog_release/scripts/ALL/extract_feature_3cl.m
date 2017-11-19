@@ -30,18 +30,18 @@ for isubject = [1 2 3]
             for i = (Y+0.5):0.5:5
                 size_windows_sec = i;
                 %size of the windows in number of samples
-                size_windows_sample = (size_windows_sec*1000)/15;
+                size_windows_sample = round((size_windows_sec*1000)/15);
                 
                 %overlap of the windows in seconds
                 size_overlap_sec = Y;
                 %size of the overlap in number of samples
-                size_overlap_samples = (size_overlap_sec * 1000)/15;
+                size_overlap_samples = round((size_overlap_sec * 1000)/15);
                 
                 number_sample = 1;
                 
                 %for each sample window, compute the features
-                for i=1:floor(size_overlap_samples):m - floor(size_overlap_samples)
-                    B = A(i:i+floor(size_overlap_samples)-1,:);
+                for i=1:size_overlap_samples:m - size_overlap_samples
+                    B = A(i:i+size_overlap_samples-1,:);
                     
                     %time sample
                     F(number_sample, 1) = TIME(i,:);
@@ -71,33 +71,31 @@ for isubject = [1 2 3]
                     F(number_sample, 92:100) = mode(B);
                     %trim mean --> trimmed mean of the signal in the window
                     F(number_sample, 101:109) = trimmean(B,10);
-                    %entropy --> measure of the distribution of frequency components
-                    F(number_sample, 110:118) = entropy(B);
                     %range --> difference between the largest and the smallest values of
                     %the signal
-                    F(number_sample, 119:127) = range(B);
+                    F(number_sample, 110:118) = range(B);
                     %signal magnitude vector --> sum of the euclidean norm over the three
                     %axis over the entire window normalized by the windows lenght
-                    F(number_sample, 128) = svmn(B(:,1:3), size_windows_sample);
-                    F(number_sample, 129) = svmn(B(:,4:6), size_windows_sample);
-                    F(number_sample, 130) = svmn(B(:,7:9), size_windows_sample);
+                    F(number_sample, 119) = svmn(B(:,1:3), length(B));
+                    F(number_sample, 120) = svmn(B(:,4:6), length(B));
+                    F(number_sample, 121) = svmn(B(:,7:9), length(B));
                     %normalized signal magnitude area --> acceleration magnitude summed
                     %over three axes normalized by the windows length
-                    F(number_sample, 131) = sman(B(:,1:3), size_windows_sample);
-                    F(number_sample, 132) = sman(B(:,4:6), size_windows_sample);
-                    F(number_sample, 133) = sman(B(:,7:9), size_windows_sample);
+                    F(number_sample, 122) = sman(B(:,1:3), length(B));
+                    F(number_sample, 123) = sman(B(:,4:6), length(B));
+                    F(number_sample, 124) = sman(B(:,7:9), length(B));
                     %eigenvalues of dominant directions --> eigenvalues of the
                     %covariance matrix of the acceleration data along x, y and z axis
-                    F(number_sample,134) = eigs(cov(B(:,1:3)),1);
-                    F(number_sample,135) = eigs(cov(B(:,4:6)),1);
-                    F(number_sample,136) = eigs(cov(B(:,7:9)),1);
+                    F(number_sample,125) = eigs(cov(B(:,1:3)),1);
+                    F(number_sample,126) = eigs(cov(B(:,4:6)),1);
+                    F(number_sample,127) = eigs(cov(B(:,7:9)),1);
                     %averaged acceleration energy --> mean value of the energy over
                     %three acceleration axes
-                    F(number_sample,137) = energyn(B(:,1:3),size_windows_sample);
-                    F(number_sample,138) = energyn(B(:,4:6),size_windows_sample);
-                    F(number_sample,139) = energyn(B(:,7:9),size_windows_sample);
+                    F(number_sample,128) = energyn(B(:,1:3),length(B));
+                    F(number_sample,129) = energyn(B(:,4:6),length(B));
+                    F(number_sample,130) = energyn(B(:,7:9),length(B));
                     %is freezing?
-                    F(number_sample,140) = mode(FREEZE(i:i+floor(size_overlap_samples)-1,:));
+                    F(number_sample,131) = mode(FREEZE(i:i+size_overlap_samples-1,:));
                     
                     %go to next sample
                     number_sample = number_sample + 1;
@@ -106,7 +104,7 @@ for isubject = [1 2 3]
                 
                 
                 P = array2table(F);
-                P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'ENTROPYX1' 'ENTROPYY1' 'ENTROPYZ1' 'ENTROPYX2' 'ENTROPYY2' 'ENTROPYZ2' 'ENTROPYX3' 'ENTROPYY3' 'ENTROPYZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
+                P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
                 writetable(P, ['../../dataset/CSV/feature/interval_3cl/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(k,2) '/3cl_feature_sec' num2str(size_windows_sec*10,2) '_ov' num2str(k,2) '_' fileruns(r).name ]);
                 display(['3cl_feature_sec' num2str(size_windows_sec*10,2) '_ov' num2str(k,2) '_' fileruns(r).name ]);
                 F(:,:) = [];

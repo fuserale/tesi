@@ -3,7 +3,7 @@ clear; clc
 datadir = ['../../dataset/CSV/feature/dynamics/'];
 
 %list of all files for patient number $isubject
-fileruns = dir([datadir 'dynamics_*.csv']);
+fileruns = dir([datadir '2cl_dynamics_*.csv']);
 
 %while there's file of patient $isubject
 for r = 1:length(fileruns)
