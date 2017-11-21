@@ -10,7 +10,7 @@ for isubject = [1 2 3]
         datadir2 = ['../../clustering/'];
         
         %list of all files for patient number $isubject
-        fileruns = dir([datadir '2cl_dynamics_3cl_S' num2str(isubject,'%02d') '*.csv']);
+        fileruns = dir([datadir 'dataset/2cl_dynamics_3cl_S' num2str(isubject,'%02d') '*.csv']);
         if p == 1
             alg = 'kmeans_cosine';
         end
@@ -35,7 +35,7 @@ for isubject = [1 2 3]
         for r = 1:length(fileruns)
             
             %name of the file
-            filename = [datadir fileruns(r).name];
+            filename = [datadir 'dataset/' fileruns(r).name];
             %read table given in input
             T1 = readtable(filename);
             [m1,n1] = size(T1);

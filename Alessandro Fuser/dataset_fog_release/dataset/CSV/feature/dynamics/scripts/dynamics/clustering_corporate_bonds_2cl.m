@@ -3,13 +3,13 @@ clear; clc
 datadir = ['../../'];
 
 %list of all files for patient number $isubject
-fileruns = dir([datadir '2cl_dynamics*.csv']);
+fileruns = dir([datadir 'dataset/2cl_dynamics*.csv']);
 
 %while there's file of patient $isubject
 for r = 1:length(fileruns)
     
     %name of the file
-    filename = [datadir fileruns(r).name];
+    filename = [datadir 'dataset/' fileruns(r).name];
     %read table given in input
     T = readtable(filename);
     [m,n] = size(T);
