@@ -16,7 +16,7 @@ for isubject = [1 2 4 8 10]
             %modificate in 1
             if (k == 5)
                 fileruns = dir([datadir '2cl_dynamics_3cl_S' num2str(isubject,'%02d') '*.csv']);
-            else 
+            else
                 fileruns = dir([datadir '2cl_dynamics_3cl_S' num2str(isubject,'%02d') '*.csv']);
             end
             
@@ -48,7 +48,7 @@ for isubject = [1 2 4 8 10]
             %lista di tutti i file dell'algoritmo del paziente isubject con le 3 etichette (1 = No, 2 = Fog, 3 = Pre)
             if (k == 5)
                 fileruns3 = dir([datadir 'dataset/2cl_dynamics_o' num2str(k,'%01d') '_3cl_S' num2str(isubject,'%02d') '*.csv']);
-            else 
+            else
                 fileruns3 = dir([datadir 'dataset/2cl_dynamics_o' num2str(k,'%02d') '_3cl_S' num2str(isubject,'%02d') '*.csv']);
             end
             
@@ -96,8 +96,10 @@ for isubject = [1 2 4 8 10]
                 tot = 0;
                 num31 = 0;
                 num32 = 0;
+                num33 = 0;
                 num41 = 0;
                 num42 = 0;
+                num43 = 0;
                 %per tutta la tabella
                 for i = 1:m1
                     %se ho etichetta sbagliata
@@ -117,6 +119,9 @@ for isubject = [1 2 4 8 10]
                             %aggiorna numero di 3 che sono 2
                             num32 = num32 + 1;
                         end
+                        if ((F(i,2) == 3) && (F(i,3) == 3))
+                            num33 = num33 + 1;
+                        end
                         if ((F(i,2) == 4) && (F(i,3) == 1))
                             %aggiorna numero di 4 che sono 1
                             num41 = num41 + 1;
@@ -125,11 +130,15 @@ for isubject = [1 2 4 8 10]
                             %aggiorna numero di 4 che sono 2
                             num42 = num42 + 1;
                         end
+                        if ((F(i,2) == 4) && (F(i,3) == 3))
+                            %aggiorna numero di 4 che sono 2
+                            num43 = num43 + 1;
+                        end
                     end
                 end
                 %salva il numero di match, la frazione rispetto al totale
                 %di etichette sbagliate, l'algoritmo scelto e l'algoritmo
-                most_long = [most_long; [numb tot numb/tot num32/tot num41/tot p]];
+                most_long = [most_long; [numb tot round(num31/tot*100,2) round(num32/tot*100,2) round(num33/tot*100,2) round(num41/tot*100,2) round(num42/tot*100,2) round(num43/tot*100) p]];
                 
                 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,38 +153,38 @@ for isubject = [1 2 4 8 10]
                 %                 end
                 %                 patch([x1,x2,x2,x1],[y1 y1 y2 y2],pcol{1+type});
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                figure
-                                x = 1:m1;
-                                subplot(2,1,1)
-                                y1 = F(:,2);
-                                %y1(end) = NaN;
-                                c1 = y1;
-                                patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-                                colorbar;
-                                xlabel('SAMPLE');
-                                ylabel(alg);
-                                title(['DYNAMICS S' num2str(isubject,'%2d')]);
+                figure('visible','off');
+                x = 1:m1;
+                subplot(2,1,1)
+                y1 = F(:,2);
+                %y1(end) = NaN;
+                c1 = y1;
+                patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+                colorbar;
+                xlabel('SAMPLE');
+                ylabel(alg);
+                title(['DYNAMICS S' num2str(isubject,'%2d')]);
                 
-                                subplot(2,1,2)
-                                y2 = F(:,3);
-                                %y2(end) = NaN;
-                                c2 = y2;
-                                patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-                                colorbar;
-                                xlabel('SAMPLE');
-                                ylabel('REAL');
-                                title('REAL 3 LABEL DYNAMICS');
-                                print([datadir 'plot/' alg '_o' num2str(k,'%02d') '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
+                subplot(2,1,2)
+                y2 = F(:,3);
+                %y2(end) = NaN;
+                c2 = y2;
+                patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+                colorbar;
+                xlabel('SAMPLE');
+                ylabel('REAL');
+                title('REAL 3 LABEL DYNAMICS');
+                print([datadir 'plot/' alg '_o' num2str(k,'%02d') '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 F = array2table(F);
                 F.Properties.VariableNames = {'CLUSTER' 'CLUSTER_MOD' 'REAL'};
                 writetable(F, [datadir 'rate/versus_' fileruns2(r).name]);
-                disp([datadir 'rate/versus_' fileruns2(r).name]);               
+                disp([datadir 'rate/versus_' fileruns2(r).name]);
                 
             end
         end
         M = array2table(most_long);
-        M.Properties.VariableNames = {'nMATCH' 'nETICHETTE_SBAGLIATE' 'RATE_3' 'RATE_32' 'RATE_41' 'nALGO'};
+        M.Properties.VariableNames = {'nMATCH' 'nETICHETTE_SBAGLIATE' 'NUM31' 'NUM32' 'NUM33' 'NUM41' 'NUM42' 'NUM43' 'nALGO'};
         writetable(M, ['../../rate/versus_o' num2str(k,'%02d') '_S' num2str(isubject,'%02d') '.csv']);
         disp(['../../rate/versus_o' num2str(k,'%02d') '_S' num2str(isubject,'%02d') '.csv']);
     end

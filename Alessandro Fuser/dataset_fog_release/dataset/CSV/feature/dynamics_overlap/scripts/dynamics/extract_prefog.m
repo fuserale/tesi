@@ -1,8 +1,8 @@
 function extract_prefog
 
-datadir = '../../dataset/CSV/';
-datadir2 = '../../dataset/CSV/original/';
-fileruns = dir([datadir2 '*.csv']);
+datadir = '../../';
+datadir2 = '../../';
+fileruns = dir([datadir2 '3cl_*.csv']);
 for r = 1:length(fileruns)
     T = readtable([datadir2 fileruns(r).name]);
     
@@ -29,6 +29,6 @@ for r = 1:length(fileruns)
         i = i + 1;
     end
     T = array2table(A);
-    writetable(T, [datadir '3cl_' fileruns(r).name]);
+    writetable(T, [datadir fileruns(r).name]);
 end
 end
