@@ -20,7 +20,7 @@ for r = 1:length(fileruns)
     rng('default');
     
     % features to cluster
-    bonds = A(:,2:148);
+    bonds = A(:,2:136);
     %Number of cluster to create
     numClust = 2;
     

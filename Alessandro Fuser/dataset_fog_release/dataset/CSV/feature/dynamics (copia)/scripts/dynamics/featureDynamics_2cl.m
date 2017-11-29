@@ -26,23 +26,33 @@ for isubject = [1 2 3 4 8]
         
         %trasformazione dell'accelerazione da mg (milli-gravity) to m/s^2
         A = A / 1000 * 9.81;
+        %tolgo il contributo della gravità sull'asse verticale
+        for i = 2:3:8
+           A(:,i) = A(:,i) - 9.81; 
+        end
         number_sample = 1;
         indx = 0;
         end_size = 1;
         i = 1;
         Fs = 64;
-%         Fc = 20;
-%         L = length(A);
-%         [b,a] = butter(1, (Fc)/(Fs/2));
-%         A = filtfilt(b,a,A);
         
+        %filtro passa alto, rimuovo tutte i dati con frequenza minore di
+        %0.5Hz
+        [b,a] = butter(2,0.5/(Fs/2),'High');
+        % freqz(b,a);
+        A = filtfilt(b,a,A);
+        %filtro passa basso, rimuovo tutti i dati con frequenza maggiore di
+        %8Hz
+        [b,a] = butter(10,8/(Fs/2),'Low');
+        % freqz(b,a);
+        A = filtfilt(b,a,A);      
         
         %decisione dell'intervallo della finestra massima
         number_seconds = 2;
         number_samples = Fs * number_seconds;
         %decisione dell'intervallo di sovrapposizione
-        number_seconds2 = number_seconds / 2;
-        number_samples2 = Fs * number_seconds2;
+        %         number_seconds2 = number_seconds / 2;
+        %         number_samples2 = Fs * number_seconds2;
         
         %for each sample window, compute the features
         while i < m
@@ -55,6 +65,7 @@ for isubject = [1 2 3 4 8]
                 temp = FREEZE(end_size,1);
             end
             B = A(i:end_size-1,:);
+            [m1,n1] = size(B);
             
             %time sample
             F(number_sample, 1) = TIME(i,:);
@@ -89,14 +100,14 @@ for isubject = [1 2 3 4 8]
             F(number_sample, 110:118) = range(B);
             %signal magnitude vector --> sum of the euclidean norm over the three
             %axis over the entire window normalized by the windows lenght
-            F(number_sample, 119) = svmn(B(:,1:3), length(B));
-            F(number_sample, 120) = svmn(B(:,4:6), length(B));
-            F(number_sample, 121) = svmn(B(:,7:9), length(B));
+            F(number_sample, 119) = svmn(B(:,1:3), m1);
+            F(number_sample, 120) = svmn(B(:,4:6), m1);
+            F(number_sample, 121) = svmn(B(:,7:9), m1);
             %normalized signal magnitude area --> acceleration magnitude summed
             %over three axes normalized by the windows length
-            F(number_sample, 122) = sman(B(:,1:3), length(B));
-            F(number_sample, 123) = sman(B(:,4:6), length(B));
-            F(number_sample, 124) = sman(B(:,7:9), length(B));
+            F(number_sample, 122) = sman(B(:,1:3), m1);
+            F(number_sample, 123) = sman(B(:,4:6), m1);
+            F(number_sample, 124) = sman(B(:,7:9), m1);
             %eigenvalues of dominant directions --> eigenvalues of the
             %covariance matrix of the acceleration data along x, y and z axis
             F(number_sample,125) = eigs(cov(B(:,1:3)),1);
@@ -104,25 +115,29 @@ for isubject = [1 2 3 4 8]
             F(number_sample,127) = eigs(cov(B(:,7:9)),1);
             %averaged acceleration energy --> mean value of the energy over
             %three acceleration axes
-            F(number_sample,128) = energyn(B(:,1:3),length(B));
-            F(number_sample,129) = energyn(B(:,4:6),length(B));
-            F(number_sample,130) = energyn(B(:,7:9),length(B));
-            %%%velocity
-            F(number_sample,131:139) = velocityn(B);
-            %%position
-            F(number_sample,140:148) = positionn(B);
-            %is freezing?
-            F(number_sample,149) = mode(FREEZE(i:end_size-1,:));
+            F(number_sample,128) = energyn(B(:,1:3),m1);
+            F(number_sample,129) = energyn(B(:,4:6),m1);
+            F(number_sample,130) = energyn(B(:,7:9),m1);
+            % velocity
+            F(number_sample,131) = velocityn(B(:,1:3));
+            F(number_sample,132) = velocityn(B(:,4:6));
+            F(number_sample,133) = velocityn(B(:,7:9));
+            % position
+            F(number_sample,134) = trapz(F(:,131));
+            F(number_sample,135) = trapz(F(:,132));
+            F(number_sample,136) = trapz(F(:,133));
+            % is freezing?
+            F(number_sample,137) = mode(FREEZE(i:end_size-1,:));
             
             %go to next sample
             number_sample = number_sample + 1;
             if (end_size == m)
                 break;
-            end   
+            end
         end
         
         P = array2table(F);
-%         P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
+        %         P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
         writetable(P, [datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         display([datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         F(:,:) = [];
@@ -151,11 +166,48 @@ energy = sum1 / windows_length;
 end
 
 function velocity = velocityn(X)
-velocity = trapz(X);
+[m1,~] = size(X);
+for i = 1:m1
+    n(i,:) = norm(X(i,:));
+end
+velocity = trapz(n)/m1;
+% Fs = 64;
+% v = zeros(m1,3);
+% C = zeros(m1,3);
+% for i = 1:m1
+%     C(i,1) = norm(A(i,1:3));
+%     C(i,2) = norm(A(i,4:6));
+%     C(i,3) = norm(A(i,7:9));
+% end
+% for i = 2:m1
+%     v(i,:) = v(i-1,:) + (C(i,:)-C(i-1,:))*1/Fs;
+% end
+% velocity = mean(v);
 end
 
 function position = positionn(X)
-position = trapz(cumtrapz(X));
+[m1,~] = size(X);
+for i = 1:m1
+    n(i,:) = norm(X(i,:));
+end
+n = cumtrapz(n);
+position = trapz(n);
+% Fs = 64;
+% s = zeros(m1,3);
+% v = zeros(m1,3);
+% C = zeros(m1,3);
+% for i = 1:m1
+%     C(i,1) = norm(A(i,1:3));
+%     C(i,2) = norm(A(i,4:6));
+%     C(i,3) = norm(A(i,7:9));
+% end
+% for i = 2:m1
+%     v(i,:) = v(i-1,:) + (C(i,:)-C(i-1,:))*1/Fs;
+% end
+% for i = 2:m1
+%     s(i,:) = s(i-1,:) + (v(i,:)-v(i-1,:))*1/Fs + 0.5*(C(i,:)-C(i-1,:))*(1/Fs).^2;
+% end
+% position = mean(s);
 end
 
 % function [FI, SLF] = freezingindex(X, SR, windows_length, isubject)
@@ -164,37 +216,37 @@ end
 % NFFT = 256;
 % locoBand=[0.5 3];
 % freezeBand=[3 8];
-% 
+%
 % f_res = SR / NFFT;
 % f_nr_LBs  = round(locoBand(1)   / f_res);
 % f_nr_LBs( f_nr_LBs==0 ) = [];
 % f_nr_LBe  = round(locoBand(2)   / f_res);
 % f_nr_FBs  = round(freezeBand(1) / f_res);
 % f_nr_FBe  = round(freezeBand(2) / f_res);
-% 
+%
 % d = NFFT/2;
-% 
+%
 % [m,n] = size(X);
-% 
+%
 % % Compute FFT
 % Y = fft(X);
 % Pyy = Y.* conj(Y) / SR;
-% 
+%
 % % --- calculate sumLocoFreeze and freezeIndex ---
 % areaLocoBand   = x_numericalIntegration( Pyy(f_nr_LBs:f_nr_LBe),SR );
 % areaFreezeBand = x_numericalIntegration( Pyy(f_nr_FBs:f_nr_FBe),SR );
-% 
+%
 % sumLocoFreeze = areaFreezeBand + areaLocoBand;
-% 
+%
 % freezeIndex = areaFreezeBand/areaLocoBand;
 % % --------------------
-% 
+%
 % if sumLocoFreeze < TH.power
 %     freezeIndex = 0;
 % end
-% 
+%
 % %          lframe = (freezeIndex>TH.freeze(isubject));
 % FI = freezeIndex;
 % SLF = sumLocoFreeze;
-% 
+%
 % end

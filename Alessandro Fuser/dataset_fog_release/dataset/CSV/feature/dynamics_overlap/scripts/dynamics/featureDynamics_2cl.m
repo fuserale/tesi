@@ -6,7 +6,7 @@ datadir = '../../';
 for isubject = [1 2 3]
     
     %list of all files for patient number $isubject
-    fileruns = dir([datadir '2cl_S' num2str(isubject,'%02d') 'R01.csv']);
+    fileruns = dir([datadir '3cl_S' num2str(isubject,'%02d') 'R01.csv']);
     
     %while there's file of patient $isubject
     for r = 1:length(fileruns)
@@ -27,15 +27,16 @@ for isubject = [1 2 3]
         indx = 0;
         end_size = 1;
         i = 1;
+        Fs = 64;
         
         %decisione dell'intervallo della finestra massima
-        number_seconds = 2;
-        number_samples = round(number_seconds / 0.015);
+        number_seconds = 2 ;
+        number_samples = number_seconds * Fs;
         %decisione dell'intervallo di sovrapposizione
         for k=5:5:45
-            Y = K / 10;
+            Y = k / 10;
             number_seconds2 = Y;
-            number_samples2 = round(number_seconds2 / 0.015);
+            number_samples2 = number_seconds2 * Fs;
             
             %for each sample window, compute the features
             while i < m
@@ -47,8 +48,8 @@ for isubject = [1 2 3]
                     end_size = end_size + 1;
                     temp = FREEZE(end_size,1);
                 end
-                if (end_size + number_second2 < m)
-                    end_size2 = end_size + number_seconds2; 
+                if (end_size + number_samples2 < m)
+                    end_size2 = end_size + number_samples2; 
                 else 
                     end_size2 = m;
                 end
