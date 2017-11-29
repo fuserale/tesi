@@ -1,6 +1,6 @@
 clear; clc
 
-for isubject = [1 2 3]
+for isubject = [1 2 3 4 8]
     for q=5:5:45
         if q<10
             datadir = ['../../dataset/CSV/feature/interval_3cl/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(q,'%01d') '/'];
@@ -26,7 +26,7 @@ for isubject = [1 2 3]
             rng('default');
             
             % features to cluster
-            bonds = A(:,2:139);
+            bonds = A(:,2:130);
             %Number of cluster to create
             numClust = 3;
             

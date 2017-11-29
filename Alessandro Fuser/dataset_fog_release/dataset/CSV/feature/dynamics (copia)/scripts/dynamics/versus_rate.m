@@ -42,7 +42,7 @@ for isubject = [1 2 3 4 8]
             %read table given in input (contiene freeze effettivo)
             T1 = readtable(filename);
             [m1,n1] = size(T1);
-            A1 = table2array(T1(:,131));
+            A1 = table2array(T1(:,149));
             TEMP1 = table2array(T1(:,1));
             
             %name of the file
@@ -122,44 +122,44 @@ for isubject = [1 2 3 4 8]
             
             
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            %                 f = find(F(2:end,[1 2])-F(1:end-1,[1 2]));
-            %                 f = [0;f;size(F,1)];
-            %                 for i=1:size(f,1)-1
-            %                    x1 = TEMP1(f(i)+1,1)/1000;
-            %                    x2 = TEMP1(f(i+1),1)/1000;
-            %                    type = F(f(i)+1,1);
-            %                    y1 = 4;
-            %                   ylabel(alg);
-            %                 y2 = 1;
-            %                 end
-            %                 patch([x1,x2,x2,x1],[y1 y1 y2 y2],pcol{1+type});
+%             f = find(F(2:end,[1 2])-F(1:end-1,[1 2]));
+%             f = [0;f;size(F,1)];
+%             for i=1:size(f,1)-1
+%                 x1 = TEMP1(f(i)+1,1)/1000;
+%                 x2 = TEMP1(f(i+1),1)/1000;
+%                 type = F(f(i)+1,1);
+%                 y1 = 4;
+%                 ylabel(alg);
+%                 y2 = 1;
+%             end
+%             patch([x1,x2,x2,x1],[y1 y1 y2 y2],pcol{1+type});
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            figure('visible','off');
-            x = 1:m1;
-            subplot(2,1,1)
-            y1 = F(:,2);
-            c1 = y1;
-            patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            ylabel(alg);
-            title(['DYNAMICS S' num2str(isubject,'%2d')]);
-            
-            subplot(2,1,2)
-            y2 = F(:,3);
-            c2 = y2;
-            patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            ylabel(alg);
-            title('REAL 3 LABEL DYNAMICS');
-            print([datadir_plot alg '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
-            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            F = array2table(F);
-            F.Properties.VariableNames = {'CLUSTER' 'CLUSTER_MOD' 'REAL'};
-            writetable(F, [datadir_rate 'versus_' fileruns2(r).name]);
-            disp([datadir_rate 'versus_' fileruns2(r).name]);
-            
+%             figure('visible','off');
+%             x = 1:m1;
+%             subplot(2,1,1)
+%             y1 = F(:,2);
+%             c1 = y1;
+%             patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             ylabel(alg);
+%             title(['DYNAMICS S' num2str(isubject,'%2d')]);
+%             
+%             subplot(2,1,2)
+%             y2 = F(:,3);
+%             c2 = y2;
+%             patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             ylabel(alg);
+%             title('REAL 3 LABEL DYNAMICS');
+%             print([datadir_plot alg '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
+%             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                F = array2table(F);
+                F.Properties.VariableNames = {'CLUSTER' 'CLUSTER_MOD' 'REAL'};
+                writetable(F, [datadir_rate 'versus_' fileruns2(r).name]);
+                disp([datadir_rate 'versus_' fileruns2(r).name]);
+%             
         end
     end
     M = array2table(most_long);

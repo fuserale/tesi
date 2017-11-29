@@ -1,5 +1,5 @@
 clear; clc
-for isubject = [1 2 3]
+for isubject = [1 2 3 4 8]
     datadir = ['../../../dataset/CSV/feature/interval_2cl/S' num2str(isubject,'%02d') 'R01/rate/'];
     
     %list of all files for patient number $isubject
@@ -35,8 +35,8 @@ for isubject = [1 2 3]
                     maxPN = A(m,n+1);
                     maxNP = A(m+1,n);
                     maxNN = A(m+1,n+1);
-                    riga = m;
-                    colonna = n +1;
+                    riga = m+1;
+                    colonna = n;
                     sc = temp;
                     score = temp / ((A(m,n) + A(m+1,n+1)) + (A(m+1,n) + A(m,n+1)));
                 end

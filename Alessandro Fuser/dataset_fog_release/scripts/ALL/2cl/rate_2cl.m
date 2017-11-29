@@ -1,5 +1,5 @@
 clear; clc
-for isubject =1:3
+for isubject =[1 2 3 4 8]
     for p = 1:6
         e = [];
         Q = [];

@@ -1,6 +1,6 @@
 clear; clc
 
-for isubject = [1 2 3]
+for isubject = [1 2 3 4 8]
     for q=5:5:45
         if q<10
             datadir = ['../../../dataset/CSV/feature/interval_2cl/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(q,'%01d') '/'];

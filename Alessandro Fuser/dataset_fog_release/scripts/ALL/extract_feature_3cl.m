@@ -3,7 +3,7 @@ clear; clc
 datadir = '../../dataset/CSV/';
 
 %choose number of patients to examine (from 1 to 10)
-for isubject = [1 2 3]
+for isubject = [4 8]
     
     %list of all files for patient number $isubject
     fileruns = dir([datadir '3cl_S' num2str(isubject,'%02d') 'R01.csv']);
@@ -21,6 +21,7 @@ for isubject = [1 2 3]
         A = table2array(T(:,2:10));
         TIME = table2array(T(:,1));
         FREEZE = table2array(T(:,11));
+        Fs = 64;
         
         %size of the windows in seconds
         for k = 5:5:45
@@ -30,12 +31,12 @@ for isubject = [1 2 3]
             for i = (Y+0.5):0.5:5
                 size_windows_sec = i;
                 %size of the windows in number of samples
-                size_windows_sample = round((size_windows_sec*1000)/15);
+                size_windows_sample = Fs * i;
                 
                 %overlap of the windows in seconds
                 size_overlap_sec = Y;
                 %size of the overlap in number of samples
-                size_overlap_samples = round((size_overlap_sec * 1000)/15);
+                size_overlap_samples = Fs * Y;
                 
                 number_sample = 1;
                 

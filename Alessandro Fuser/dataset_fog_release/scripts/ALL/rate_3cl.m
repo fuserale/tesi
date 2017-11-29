@@ -1,6 +1,6 @@
 clear; clc
 
-for isubject =[1 2 3]
+for isubject =[1 2 3 4 8]
     for p = 1:6
         e = [];
         Q = [];
@@ -44,7 +44,7 @@ for isubject =[1 2 3]
                 %read table given in input
                 T1 = readtable(filename);
                 [m1,n1] = size(T1);
-                A1 = table2array(T1(:,140));
+                A1 = table2array(T1(:,131));
                 
                 %name of the file
                 filename2 = [datadir fileruns2(r).name];

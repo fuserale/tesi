@@ -20,22 +20,29 @@ for isubject = [1 2 3 4 8]
         [m,n] = size(T);
         %table to array to do maths
         A = table2array(T(:,2:10));
-        A2 = A*0.00981 ;
         TIME = table2array(T(:,1));
         FREEZE = table2array(T(:,11));
         B = [];
         
+        %trasformazione dell'accelerazione da mg (milli-gravity) to m/s^2
+        A = A / 1000 * 9.81;
         number_sample = 1;
         indx = 0;
         end_size = 1;
         i = 1;
+        Fs = 64;
+%         Fc = 20;
+%         L = length(A);
+%         [b,a] = butter(1, (Fc)/(Fs/2));
+%         A = filtfilt(b,a,A);
+        
         
         %decisione dell'intervallo della finestra massima
         number_seconds = 2;
-        number_samples = round(number_seconds / 0.015);
+        number_samples = Fs * number_seconds;
         %decisione dell'intervallo di sovrapposizione
         number_seconds2 = number_seconds / 2;
-        number_samples2 = round(number_seconds2 / 0.015);
+        number_samples2 = Fs * number_seconds2;
         
         %for each sample window, compute the features
         while i < m
@@ -47,7 +54,7 @@ for isubject = [1 2 3 4 8]
                 end_size = end_size + 1;
                 temp = FREEZE(end_size,1);
             end
-            B = A2(i:end_size-1,:);
+            B = A(i:end_size-1,:);
             
             %time sample
             F(number_sample, 1) = TIME(i,:);
@@ -100,8 +107,12 @@ for isubject = [1 2 3 4 8]
             F(number_sample,128) = energyn(B(:,1:3),length(B));
             F(number_sample,129) = energyn(B(:,4:6),length(B));
             F(number_sample,130) = energyn(B(:,7:9),length(B));
+            %%%velocity
+            F(number_sample,131:139) = velocityn(B);
+            %%position
+            F(number_sample,140:148) = positionn(B);
             %is freezing?
-            F(number_sample,131) = mode(FREEZE(i:end_size-1,:));
+            F(number_sample,149) = mode(FREEZE(i:end_size-1,:));
             
             %go to next sample
             number_sample = number_sample + 1;
@@ -111,7 +122,7 @@ for isubject = [1 2 3 4 8]
         end
         
         P = array2table(F);
-        P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
+%         P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
         writetable(P, [datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         display([datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         F(:,:) = [];
@@ -120,62 +131,70 @@ for isubject = [1 2 3 4 8]
 end
 
 function svm = svmn(X, windows_length)
-[m,n] = size(X);
-
-sum =norm(X);
-svm = sum / windows_length;
+sum1 = norm(X);
+svm = sum1 / windows_length;
 end
 
 function sma = sman(X, windows_length)
-[m,n] = size(X);
-som = 0;
-som =sum(abs(X(:,1))) + sum(abs(X(:,2))) + sum(abs(X(:,3)));
+som = sum(abs(X(:,1))) + sum(abs(X(:,2))) + sum(abs(X(:,3)));
 sma = som / windows_length;
 end
 
 function energy = energyn(X, windows_length)
-[m,n] = size(X);
-sum1 = sum(abs(X(:,1)).^2 + abs(X(:,2)).^2 + abs(X(:,3)).^2);
+%sum1 = sum(abs(X(:,1)).^2 + abs(X(:,2)).^2 + abs(X(:,3)).^2);
+Fs = 64;
+FT = fft(X);
+pow = FT.*conj(FT) / Fs;
+sum1 = sum(pow);
+sum1 = sum(sum1,2);
 energy = sum1 / windows_length;
 end
 
-function [FI, SLF] = freezingindex(X, SR, windows_length, isubject)
-TH.freeze  =  [3 1.5 3 1.5 1.5 1.5 3 3 1.5 3];
-TH.power   = 2.^ 12 ; %4096
-NFFT = 256;
-locoBand=[0.5 3];
-freezeBand=[3 8];
-
-f_res = SR / NFFT;
-f_nr_LBs  = round(locoBand(1)   / f_res);
-f_nr_LBs( f_nr_LBs==0 ) = [];
-f_nr_LBe  = round(locoBand(2)   / f_res);
-f_nr_FBs  = round(freezeBand(1) / f_res);
-f_nr_FBe  = round(freezeBand(2) / f_res);
-
-d = NFFT/2;
-
-[m,n] = size(X);
-
-% Compute FFT
-Y = fft(X);
-Pyy = Y.* conj(Y) / SR;
-
-% --- calculate sumLocoFreeze and freezeIndex ---
-areaLocoBand   = x_numericalIntegration( Pyy(f_nr_LBs:f_nr_LBe),SR );
-areaFreezeBand = x_numericalIntegration( Pyy(f_nr_FBs:f_nr_FBe),SR );
-
-sumLocoFreeze = areaFreezeBand + areaLocoBand;
-
-freezeIndex = areaFreezeBand/areaLocoBand;
-% --------------------
-
-if sumLocoFreeze < TH.power
-    freezeIndex = 0;
+function velocity = velocityn(X)
+velocity = trapz(X);
 end
 
-%          lframe = (freezeIndex>TH.freeze(isubject));
-FI = freezeIndex;
-SLF = sumLocoFreeze;
-
+function position = positionn(X)
+position = trapz(cumtrapz(X));
 end
+
+% function [FI, SLF] = freezingindex(X, SR, windows_length, isubject)
+% TH.freeze  =  [3 1.5 3 1.5 1.5 1.5 3 3 1.5 3];
+% TH.power   = 2.^ 12 ; %4096
+% NFFT = 256;
+% locoBand=[0.5 3];
+% freezeBand=[3 8];
+% 
+% f_res = SR / NFFT;
+% f_nr_LBs  = round(locoBand(1)   / f_res);
+% f_nr_LBs( f_nr_LBs==0 ) = [];
+% f_nr_LBe  = round(locoBand(2)   / f_res);
+% f_nr_FBs  = round(freezeBand(1) / f_res);
+% f_nr_FBe  = round(freezeBand(2) / f_res);
+% 
+% d = NFFT/2;
+% 
+% [m,n] = size(X);
+% 
+% % Compute FFT
+% Y = fft(X);
+% Pyy = Y.* conj(Y) / SR;
+% 
+% % --- calculate sumLocoFreeze and freezeIndex ---
+% areaLocoBand   = x_numericalIntegration( Pyy(f_nr_LBs:f_nr_LBe),SR );
+% areaFreezeBand = x_numericalIntegration( Pyy(f_nr_FBs:f_nr_FBe),SR );
+% 
+% sumLocoFreeze = areaFreezeBand + areaLocoBand;
+% 
+% freezeIndex = areaFreezeBand/areaLocoBand;
+% % --------------------
+% 
+% if sumLocoFreeze < TH.power
+%     freezeIndex = 0;
+% end
+% 
+% %          lframe = (freezeIndex>TH.freeze(isubject));
+% FI = freezeIndex;
+% SLF = sumLocoFreeze;
+% 
+% end
