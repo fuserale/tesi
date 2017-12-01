@@ -34,6 +34,7 @@ for isubject = [1 2 3 4 8]
         indx = 0;
         end_size = 1;
         i = 1;
+        % sample rate
         Fs = 64;
         
         %filtro passa alto, rimuovo tutte i dati con frequenza minore di
@@ -56,15 +57,20 @@ for isubject = [1 2 3 4 8]
         
         %for each sample window, compute the features
         while i < m
+            % aggiorno i e lo metto nella posizione raggiunta prima
             i = end_size;
+            % prendo l'indice attuale (fog/nofog)
             indx = FREEZE(i,1);
+            % variabile che scorrerà tra gli indici
             temp = indx;
-            end_size = i;
+            % scorro i dati fino a cambiare indice o fino a finestra massima
             while ((indx == temp) && (end_size < number_samples + i) && (end_size < m))
                 end_size = end_size + 1;
                 temp = FREEZE(end_size,1);
             end
+            % tabella su cui calcolo i dati
             B = A(i:end_size-1,:);
+            % dimensioni della tabella
             [m1,n1] = size(B);
             
             %time sample
@@ -161,6 +167,7 @@ Fs = 64;
 FT = fft(X);
 pow = FT.*conj(FT) / Fs;
 sum1 = sum(pow);
+% somma tra colonne diverse
 sum1 = sum(sum1,2);
 energy = sum1 / windows_length;
 end
@@ -170,7 +177,7 @@ function velocity = velocityn(X)
 for i = 1:m1
     n(i,:) = norm(X(i,:));
 end
-velocity = trapz(n)/m1;
+velocity = trapz(n) / m1;
 % Fs = 64;
 % v = zeros(m1,3);
 % C = zeros(m1,3);
@@ -185,30 +192,30 @@ velocity = trapz(n)/m1;
 % velocity = mean(v);
 end
 
-function position = positionn(X)
-[m1,~] = size(X);
-for i = 1:m1
-    n(i,:) = norm(X(i,:));
-end
-n = cumtrapz(n);
-position = trapz(n);
-% Fs = 64;
-% s = zeros(m1,3);
-% v = zeros(m1,3);
-% C = zeros(m1,3);
+% function position = positionn(X)
+% [m1,~] = size(X);
 % for i = 1:m1
-%     C(i,1) = norm(A(i,1:3));
-%     C(i,2) = norm(A(i,4:6));
-%     C(i,3) = norm(A(i,7:9));
+%     n(i,:) = norm(X(i,:));
 % end
-% for i = 2:m1
-%     v(i,:) = v(i-1,:) + (C(i,:)-C(i-1,:))*1/Fs;
+% n = cumtrapz(n);
+% position = trapz(n) / m1;
+% % Fs = 64;
+% % s = zeros(m1,3);
+% % v = zeros(m1,3);
+% % C = zeros(m1,3);
+% % for i = 1:m1
+% %     C(i,1) = norm(A(i,1:3));
+% %     C(i,2) = norm(A(i,4:6));
+% %     C(i,3) = norm(A(i,7:9));
+% % end
+% % for i = 2:m1
+% %     v(i,:) = v(i-1,:) + (C(i,:)-C(i-1,:))*1/Fs;
+% % end
+% % for i = 2:m1
+% %     s(i,:) = s(i-1,:) + (v(i,:)-v(i-1,:))*1/Fs + 0.5*(C(i,:)-C(i-1,:))*(1/Fs).^2;
+% % end
+% % position = mean(s);
 % end
-% for i = 2:m1
-%     s(i,:) = s(i-1,:) + (v(i,:)-v(i-1,:))*1/Fs + 0.5*(C(i,:)-C(i-1,:))*(1/Fs).^2;
-% end
-% position = mean(s);
-end
 
 % function [FI, SLF] = freezingindex(X, SR, windows_length, isubject)
 % TH.freeze  =  [3 1.5 3 1.5 1.5 1.5 3 3 1.5 3];

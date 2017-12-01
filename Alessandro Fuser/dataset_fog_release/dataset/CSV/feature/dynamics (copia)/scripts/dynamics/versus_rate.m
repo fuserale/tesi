@@ -42,7 +42,7 @@ for isubject = [1 2 3 4 8]
             %read table given in input (contiene freeze effettivo)
             T1 = readtable(filename);
             [m1,n1] = size(T1);
-            A1 = table2array(T1(:,137));
+            A1 = table2array(T1(:,11));
             TEMP1 = table2array(T1(:,1));
             
             %name of the file

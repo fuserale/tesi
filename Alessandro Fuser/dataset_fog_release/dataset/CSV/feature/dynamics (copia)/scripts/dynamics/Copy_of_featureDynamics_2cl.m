@@ -34,6 +34,7 @@ for isubject = [1 2 3 4 8]
         indx = 0;
         end_size = 1;
         i = 1;
+        % sample rate
         Fs = 64;
         
         %filtro passa alto, rimuovo tutte i dati con frequenza minore di
@@ -51,98 +52,98 @@ for isubject = [1 2 3 4 8]
         number_seconds = 2;
         number_samples = Fs * number_seconds;
         %decisione dell'intervallo di sovrapposizione
-        number_seconds2 = number_seconds / 2;
-        number_samples2 = Fs * number_seconds2;
+        %         number_seconds2 = number_seconds / 2;
+        %         number_samples2 = Fs * number_seconds2;
         
         %for each sample window, compute the features
-        for i = 1:number_samples2:m-number_samples
-            B = A(i:number_samples,:);
+        while i < m
+            % aggiorno i e lo metto nella posizione raggiunta prima
+            i = end_size;
+            % prendo l'indice attuale (fog/nofog)
+            indx = FREEZE(i,1);
+            % variabile che scorrerà tra gli indici
+            temp = indx;
+            % scorro i dati fino a cambiare indice o fino a finestra massima
+            while ((indx == temp) && (end_size < number_samples + i) && (end_size < m))
+                end_size = end_size + 1;
+                temp = FREEZE(end_size,1);
+            end
+            % tabella su cui calcolo i dati
+            B = A(i:end_size-1,:);
+            % dimensioni della tabella
             [m1,n1] = size(B);
             
-            % tempo campionamento
-            F(number_sample,1) = TIME(i,:);
-            % media
-            F(number_sample,2:10) = mean(B);
-            % media delle differenza tra X e Z
-            F(number_sample,11) = mean(B(:,1)-B(:,2));
-            F(number_sample,12) = mean(B(:,4)-B(:,6));
-            F(number_sample,13) = mean(B(:,7)-B(:,9));
-            % media delle differenze tra Y e X
-            F(number_sample,14) = mean(B(:,2)-B(:,1));
-            F(number_sample,15) = mean(B(:,5)-B(:,4));
-            F(number_sample,16) = mean(B(:,8)-B(:,7));
-            % differenza tra i valori medi dell'asse X in finestre
-            % temporali consecutive
-            if number_sample > 1
-                F(number_sample,17) = F(number_sample,2) - F(number_sample-1,2);
-                F(number_sample,18) = F(number_sample,5) - F(number_sample-1,5);
-                F(number_sample,19) = F(number_sample,8) - F(number_sample-1,8);
-            else
-                F(number_sample,17) = F(number_sample,2);
-                F(number_sample,18) = F(number_sample,5);
-                F(number_sample,19) = F(number_sample,8);
-            end
-            % differenza tra i valori medi dell'asse Y e Z in finestre
-            % temporali consecutive
-            if number_sample > 1
-                F(number_sample,20) = F(number_sample,3) - F(number_sample-1,4);
-                F(number_sample,21) = F(number_sample,6) - F(number_sample-1,7);
-                F(number_sample,22) = F(number_sample,9) - F(number_sample-1,10);
-            else
-                F(number_sample,20) = F(number_sample,3);
-                F(number_sample,21) = F(number_sample,6);
-                F(number_sample,22) = F(number_sample,9);
-            end
-            %differenza tra i valori medi dell'asse Z e X in finestre
-            %temporali diverse
-            if number_sample > 1
-                F(number_sample,23) = F(number_sample,4) - F(number_sample-1,2);
-                F(number_sample,24) = F(number_sample,7) - F(number_sample-1,5);
-                F(number_sample,25) = F(number_sample,10) - F(number_sample-1,8);
-            else
-                F(number_sample,23) = F(number_sample,4);
-                F(number_sample,24) = F(number_sample,7);
-                F(number_sample,25) = F(number_sample,10);
-            end
-            % deviazione standard
-            F(number_sample,26:34) = std(B);
-            % correlation between axes
-            %             F(number_sample,35) = eigs(cov(B(:,[1 2])),1);
-            %             F(number_sample,36) = eigs(cov(B(:,[1 3])),1);
-            %             F(number_sample,37) = eigs(cov(B(:,[2 3])),1);
-            %             F(number_sample,38) = eigs(cov(B(:,[4 5])),1);
-            %             F(number_sample,39) = eigs(cov(B(:,[4 6])),1);
-            %             F(number_sample,40) = eigs(cov(B(:,[5 6])),1);
-            %             F(number_sample,41) = eigs(cov(B(:,[7 8])),1);
-            %             F(number_sample,42) = eigs(cov(B(:,[7 9])),1);
-            %             F(number_sample,43) = eigs(cov(B(:,[8 9])),1);
-            %             F(number_sample,35) = eigs(cov(B(:,1:3)),1);
-            %             F(number_sample,36) = eigs(cov(B(:,4:6)),1);
-            %             F(number_sample,37) = eigs(cov(B(:,7:9)),1);
-            % skewness
-            for z = 1:m1
-               C(i,1) = norm(B(:,1:3));
-               C(i,2) = norm(B(:,4:6));
-               C(i,3) = norm(B(:,7:9));
-            end
-            F(number_sample,35:43) = skewness(B);
-            F(number_sample,44:46) = skewness(C);
-            % kurtosis
-            F(number_sample,47:55) = kurtosis(B);
-            F(number_sample,56:58) = kurtosis(C);
-            % integrals = discrete summation
-            F(number_sample,59:67) = sum(B);
-            % auto-regression
-            % F(number_sample,77:85) = arburg(B,4);          
+            %time sample
+            F(number_sample, 1) = TIME(i,:);
+            %min --> minimum value for each accelerometer
+            F(number_sample, 2:10) = min(B);
+            %max --> maximum value for each accelerometer
+            F(number_sample, 11:19) = max(B);
+            %median --> median signal value
+            F(number_sample, 20:28) = median(B);
+            %mean --> average value
+            F(number_sample, 29:37) = mean(B);
+            %ArmMean --> harmonic average of the signal
+            F(number_sample, 38:46) = harmmean(B);
+            %root mean square --> quadratic mean value of the signal
+            F(number_sample, 47:55) = rms(B);
+            %variance --> square of the standard deviation
+            F(number_sample, 56:64) = var(B);
+            %standard deviation --> mean deviation of the signal compared to the
+            %average
+            F(number_sample, 65:73) = std(B);
+            %kurtosis --> degree of peakedness of the sensor signal distribution
+            %(allontanamento dalla normalità distributiva)
+            F(number_sample, 74:82) = kurtosis(B);
+            %skewdness --> degree of asymmetry of the sensor signal distribution
+            F(number_sample, 83:91) = skewness(B);
+            %mode --> number that appears most often in the signal
+            F(number_sample, 92:100) = mode(B);
+            %trim mean --> trimmed mean of the signal in the window
+            F(number_sample, 101:109) = trimmean(B,10);
+            %range --> difference between the largest and the smallest values of
+            %the signal
+            F(number_sample, 110:118) = range(B);
+            %signal magnitude vector --> sum of the euclidean norm over the three
+            %axis over the entire window normalized by the windows lenght
+            F(number_sample, 119) = svmn(B(:,1:3), m1);
+            F(number_sample, 120) = svmn(B(:,4:6), m1);
+            F(number_sample, 121) = svmn(B(:,7:9), m1);
+            %normalized signal magnitude area --> acceleration magnitude summed
+            %over three axes normalized by the windows length
+            F(number_sample, 122) = sman(B(:,1:3), m1);
+            F(number_sample, 123) = sman(B(:,4:6), m1);
+            F(number_sample, 124) = sman(B(:,7:9), m1);
+            %eigenvalues of dominant directions --> eigenvalues of the
+            %covariance matrix of the acceleration data along x, y and z axis
+            F(number_sample,125) = eigs(cov(B(:,1:3)),1);
+            F(number_sample,126) = eigs(cov(B(:,4:6)),1);
+            F(number_sample,127) = eigs(cov(B(:,7:9)),1);
+            %averaged acceleration energy --> mean value of the energy over
+            %three acceleration axes
+            F(number_sample,128) = energyn(B(:,1:3),m1);
+            F(number_sample,129) = energyn(B(:,4:6),m1);
+            F(number_sample,130) = energyn(B(:,7:9),m1);
+            % velocity
+            F(number_sample,131) = velocityn(B(:,1:3));
+            F(number_sample,132) = velocityn(B(:,4:6));
+            F(number_sample,133) = velocityn(B(:,7:9));
+            % position
+            F(number_sample,134) = trapz(F(:,131));
+            F(number_sample,135) = trapz(F(:,132));
+            F(number_sample,136) = trapz(F(:,133));
             % is freezing?
-            F(number_sample,68) = mode(FREEZE(i:end_size-1,:));
+            F(number_sample,137) = mode(FREEZE(i:end_size-1,:));
             
             %go to next sample
             number_sample = number_sample + 1;
+            if (end_size == m)
+                break;
+            end
         end
         
         P = array2table(F);
-%       P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
+        %         P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX1' 'MINACCY1' 'MINACCZ1' 'MINACCX2' 'MINACCY2' 'MINACCZ2' 'MINACCX3' 'MINACCY3' 'MINACCZ3' 'MAXACCX1' 'MAXACCY1' 'MAXACCZ1' 'MAXACCX2' 'MAXACCY2', 'MAXACCZ2' 'MAXACCX3' 'MAXACCY3' 'MAXACCZ3' 'MEDIANACCX1' 'MEDIANACCY1' 'MEDIANACCZ1' 'MEDIANACCX2' 'MEDIANACCY2' 'MEDIANACCZ2' 'MEDIANACCX3' 'MEDIANACCY3' 'MEDIANACCZ3' 'MEANACCX1' 'MEANACCY1' 'MEANACCZ1' 'MEANCACCX2' 'MEANACCY2' 'MEANACCZ2' 'MEANACCX3' 'MEANACCY3' 'MEANACCZ3' 'ARMEMANX1' 'ARMMEANY1' 'ARMMEANZ1' 'ARMMEANX2' 'ARMMEANY2' 'ARMMEANZ2' 'ARMMEANX3' 'ARMMEANY3' 'ARMMEANZ3' 'RMSX1' 'RMSY1' 'RMSZ1' 'RMSX2' 'RMSY2' 'RMSZ2' 'RMSX3' 'RMSY3' 'RMSZ3' 'VARX1' 'VARY1' 'VARZ1' 'VARX2' 'VARY2' 'VARZ2' 'VARX3' 'VARY3' 'VARZ3' 'STDX1' 'STDY1' 'STDZ1' 'STDX2' 'STDY2' 'STDZ2' 'STDX3' 'STDY3' 'STDZ3' 'KURTX1' 'KURTY1' 'KURTZ1' 'KURTX2' 'KURTY2' 'KURTZ2' 'KURTX3' 'KURTY3' 'KURTZ3' 'SKEWX1' 'SKEWY1' 'SKEWZ1' 'SKEWX2' 'SKEWY2' 'SKEWZ2' 'SKEWX3' 'SKEWY3' 'SKEWZ3' 'MODEX1' 'MODEY1' 'MODEZ1' 'MODEX2' 'MODEY2' 'MODEZ2' 'MODEX3' 'MODEY3' 'MODEZ3' 'TRIMX1' 'TRIMY1' 'TRIMZ1' 'TRIMX2' 'TRIMY2' 'TRIMZ2' 'TRIMX3' 'TRIMY3' 'TRIMZ3' 'RANGEX1' 'RANGEY1' 'RANGEZ1' 'RANGEX2' 'RANGEY2' 'RANGEZ2' 'RANGEX3' 'RANGEY3' 'RANGEZ3' 'SMV1' 'SMV2' 'SMV3' 'SMA1' 'SMA2' 'SMA3' 'EVA1' 'EVA2' 'EVA3' 'AAE1' 'AAE2' 'AAE3' 'FREEZE'};
         writetable(P, [datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         display([datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         F(:,:) = [];
@@ -166,6 +167,7 @@ Fs = 64;
 FT = fft(X);
 pow = FT.*conj(FT) / Fs;
 sum1 = sum(pow);
+% somma tra colonne diverse
 sum1 = sum(sum1,2);
 energy = sum1 / windows_length;
 end
@@ -175,7 +177,7 @@ function velocity = velocityn(X)
 for i = 1:m1
     n(i,:) = norm(X(i,:));
 end
-velocity = trapz(n)/m1;
+velocity = trapz(n) / m1;
 % Fs = 64;
 % v = zeros(m1,3);
 % C = zeros(m1,3);
@@ -190,30 +192,30 @@ velocity = trapz(n)/m1;
 % velocity = mean(v);
 end
 
-function position = positionn(X)
-[m1,~] = size(X);
-for i = 1:m1
-    n(i,:) = norm(X(i,:));
-end
-n = cumtrapz(n);
-position = trapz(n);
-% Fs = 64;
-% s = zeros(m1,3);
-% v = zeros(m1,3);
-% C = zeros(m1,3);
+% function position = positionn(X)
+% [m1,~] = size(X);
 % for i = 1:m1
-%     C(i,1) = norm(A(i,1:3));
-%     C(i,2) = norm(A(i,4:6));
-%     C(i,3) = norm(A(i,7:9));
+%     n(i,:) = norm(X(i,:));
 % end
-% for i = 2:m1
-%     v(i,:) = v(i-1,:) + (C(i,:)-C(i-1,:))*1/Fs;
+% n = cumtrapz(n);
+% position = trapz(n) / m1;
+% % Fs = 64;
+% % s = zeros(m1,3);
+% % v = zeros(m1,3);
+% % C = zeros(m1,3);
+% % for i = 1:m1
+% %     C(i,1) = norm(A(i,1:3));
+% %     C(i,2) = norm(A(i,4:6));
+% %     C(i,3) = norm(A(i,7:9));
+% % end
+% % for i = 2:m1
+% %     v(i,:) = v(i-1,:) + (C(i,:)-C(i-1,:))*1/Fs;
+% % end
+% % for i = 2:m1
+% %     s(i,:) = s(i-1,:) + (v(i,:)-v(i-1,:))*1/Fs + 0.5*(C(i,:)-C(i-1,:))*(1/Fs).^2;
+% % end
+% % position = mean(s);
 % end
-% for i = 2:m1
-%     s(i,:) = s(i-1,:) + (v(i,:)-v(i-1,:))*1/Fs + 0.5*(C(i,:)-C(i-1,:))*(1/Fs).^2;
-% end
-% position = mean(s);
-end
 
 % function [FI, SLF] = freezingindex(X, SR, windows_length, isubject)
 % TH.freeze  =  [3 1.5 3 1.5 1.5 1.5 3 3 1.5 3];

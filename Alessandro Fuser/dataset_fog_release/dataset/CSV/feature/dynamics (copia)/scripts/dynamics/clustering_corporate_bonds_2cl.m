@@ -16,11 +16,17 @@ for r = 1:length(fileruns)
     [m,n] = size(T);
     A = table2array(T(:,:));
     
+    % feature selection
+%     mdl = fscnca(A(:,2:10),A(:,11));
+%     plot(mdl.FeatureWeights,'ro');
+%     
+%     Mdl = rica(A(:,2:136),10,'IterationLimit',100);
+    
     % Set the random number seed to make the results repeatable in this script
     rng('default');
     
     % features to cluster
-    bonds = A(:,2:136);
+    bonds = A(:,2:10);
     %Number of cluster to create
     numClust = 2;
     
@@ -45,10 +51,9 @@ for r = 1:length(fileruns)
         if q == 4
             dist_k = means4;
         end
-        options_km = statset('UseParallel', false);
         maxiter = 100000;
         % cluster
-        kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
+        kidx = kmeans(bonds, numClust, 'distance', dist_k, 'MaxIter', maxiter,'Replicates',5);
         
         P = array2table(kidx);
         writetable(P, [datadir_clustering 'kmeans_' dist_k '_' fileruns(r).name] );
