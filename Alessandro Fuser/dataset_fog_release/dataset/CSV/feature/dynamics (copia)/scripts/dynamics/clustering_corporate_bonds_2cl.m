@@ -8,7 +8,7 @@ fileruns = dir([datadir_dataset '2cl_dynamics*.csv']);
 
 %while there's file of patient $isubject
 for r = 1:length(fileruns)
-    
+    id = [];
     %name of the file
     filename = [datadir_dataset fileruns(r).name];
     %read table given in input
@@ -17,16 +17,38 @@ for r = 1:length(fileruns)
     A = table2array(T(:,:));
     
     % feature selection
-%     mdl = fscnca(A(:,2:10),A(:,11));
+    mdl = fscnca(A(:,2:136),A(:,137));
+    plot(mdl.FeatureWeights,'ro');
+    
+    z = 1;
+    for i=1:length(mdl.FeatureWeights)
+        if (mdl.FeatureWeights(i) > 0.3)
+           id(z) = i + 1;
+           z = z + 1;
+        end
+    end
+%     
+%     mdl2 = fscnca(A(:,id),A(:,137));
 %     plot(mdl.FeatureWeights,'ro');
 %     
+%     z = 1;
+%     for i=1:length(mdl2.FeatureWeights)
+%         weight = mdl2.FeatureWeights(i);
+%         if (mdl2.FeatureWeights(i) > 0.3)
+%            id2(z) = id(i);
+%            z = z + 1;
+%         end
+%     end
+% %     
 %     Mdl = rica(A(:,2:136),10,'IterationLimit',100);
     
     % Set the random number seed to make the results repeatable in this script
     rng('default');
-    
+    if isempty(id)
+        id = 2:136;
+    end
     % features to cluster
-    bonds = A(:,2:10);
+    bonds = A(:,id);
     %Number of cluster to create
     numClust = 2;
     
