@@ -37,7 +37,7 @@ for isubject = [1 2 3 4 8]
         % sample rate
         Fs = 64;
         
-        %filtro passa alto, rimuovo tutte i dati con frequenza minore di
+        %filtro passa alto, rimuovo tutti i dati con frequenza minore di
         %0.5Hz
         [b,a] = butter(2,0.5/(Fs/2),'High');
         % freqz(b,a);
@@ -132,6 +132,16 @@ for isubject = [1 2 3 4 8]
             F(number_sample,134) = trapz(F(:,131));
             F(number_sample,135) = trapz(F(:,132));
             F(number_sample,136) = trapz(F(:,133));
+            % freezing index
+%             [F(number_sample, 137),F(number_sample,138)] = freezingindex(B(:,1), Fs);
+%             [F(number_sample, 139),F(number_sample,140)] = freezingindex(B(:,2), Fs);
+%             [F(number_sample, 141),F(number_sample,142)] = freezingindex(B(:,3), Fs);
+%             [F(number_sample, 143),F(number_sample,144)] = freezingindex(B(:,4), Fs);
+%             [F(number_sample, 145),F(number_sample,146)] = freezingindex(B(:,5), Fs);
+%             [F(number_sample, 147),F(number_sample,148)] = freezingindex(B(:,6), Fs);
+%             [F(number_sample, 149),F(number_sample,150)] = freezingindex(B(:,7), Fs);
+%             [F(number_sample, 151),F(number_sample,152)] = freezingindex(B(:,8), Fs);
+%             [F(number_sample, 153),F(number_sample,154)] = freezingindex(B(:,9), Fs);
             % is freezing?
             F(number_sample,137) = mode(FREEZE(i:end_size-1,:));
             
@@ -217,43 +227,37 @@ end
 % % position = mean(s);
 % end
 
-% function [FI, SLF] = freezingindex(X, SR, windows_length, isubject)
-% TH.freeze  =  [3 1.5 3 1.5 1.5 1.5 3 3 1.5 3];
-% TH.power   = 2.^ 12 ; %4096
-% NFFT = 256;
-% locoBand=[0.5 3];
-% freezeBand=[3 8];
-%
-% f_res = SR / NFFT;
-% f_nr_LBs  = round(locoBand(1)   / f_res);
-% f_nr_LBs( f_nr_LBs==0 ) = [];
-% f_nr_LBe  = round(locoBand(2)   / f_res);
-% f_nr_FBs  = round(freezeBand(1) / f_res);
-% f_nr_FBe  = round(freezeBand(2) / f_res);
-%
-% d = NFFT/2;
-%
-% [m,n] = size(X);
-%
-% % Compute FFT
-% Y = fft(X);
-% Pyy = Y.* conj(Y) / SR;
-%
-% % --- calculate sumLocoFreeze and freezeIndex ---
-% areaLocoBand   = x_numericalIntegration( Pyy(f_nr_LBs:f_nr_LBe),SR );
-% areaFreezeBand = x_numericalIntegration( Pyy(f_nr_FBs:f_nr_FBe),SR );
-%
-% sumLocoFreeze = areaFreezeBand + areaLocoBand;
-%
-% freezeIndex = areaFreezeBand/areaLocoBand;
-% % --------------------
-%
-% if sumLocoFreeze < TH.power
-%     freezeIndex = 0;
-% end
-%
-% %          lframe = (freezeIndex>TH.freeze(isubject));
-% FI = freezeIndex;
-% SLF = sumLocoFreeze;
-%
-% end
+function [FI, SLF] = freezingindex(X, SR)
+TH.power   = 2.^ 12 ; %4096
+NFFT = 256;
+locoBand=[0.5 3];
+freezeBand=[3 8];
+
+f_res = SR / NFFT;
+f_nr_LBs  = round(locoBand(1)   / f_res);
+f_nr_LBs( f_nr_LBs==0 ) = [];
+f_nr_LBe  = round(locoBand(2)   / f_res);
+f_nr_FBs  = round(freezeBand(1) / f_res);
+f_nr_FBe  = round(freezeBand(2) / f_res);
+
+% Compute FFT
+Y = fft(X);
+Pyy = Y.* conj(Y) / NFFT;
+
+% --- calculate sumLocoFreeze and freezeIndex ---
+areaLocoBand   = x_numericalIntegration( Pyy(f_nr_LBs:f_nr_LBe),SR );
+areaFreezeBand = x_numericalIntegration( Pyy(f_nr_FBs:f_nr_FBe),SR );
+
+sumLocoFreeze = areaFreezeBand + areaLocoBand;
+
+freezeIndex = areaFreezeBand/areaLocoBand;
+% --------------------
+
+if sumLocoFreeze < TH.power
+    freezeIndex = 0;
+end
+
+FI = freezeIndex;
+SLF = sumLocoFreeze;
+
+end
