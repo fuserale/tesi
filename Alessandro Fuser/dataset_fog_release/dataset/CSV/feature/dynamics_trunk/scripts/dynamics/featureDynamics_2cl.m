@@ -1,6 +1,6 @@
 clear; clc
 
-datadir_original = '../../../../';
+datadir_original = '../../';
 datadir_feature = '../../dataset/';
 
 %choose number of patients to examine (from 1 to 10)
@@ -28,13 +28,14 @@ for isubject = [1 2 3 4 8]
         indx = 0;
         end_size = 1;
         i = 1;
+        Fs = 64;
         
         %decisione dell'intervallo della finestra massima
         number_seconds = 2;
-        number_samples = round(number_seconds / 0.015);
+        number_samples = Fs * 2;
         %decisione dell'intervallo di sovrapposizione
         number_seconds2 = number_seconds / 2;
-        number_samples2 = round(number_seconds2 / 0.015);
+        number_samples2 = Fs * number_seconds2;
         
         %for each sample window, compute the features
         while i < m
@@ -102,7 +103,7 @@ for isubject = [1 2 3 4 8]
         end
         
         P = array2table(F);
-        P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX' 'MINACCY' 'MINACCZ' 'MAXACCX' 'MAXACCY' 'MAXACCZ' 'MEDIANACCX' 'MEDIANACCY' 'MEDIANACCZ' 'MEANACCX' 'MEANACCY' 'MEANACCZ' 'ARMEMANX' 'ARMMEANY' 'ARMMEANZ' 'RMSX' 'RMSY' 'RMSZ' 'VARX' 'VARY' 'VARZ' 'STDX' 'STDY' 'STDZ' 'KURTX' 'KURTY' 'KURTZ' 'SKEWX' 'SKEWY' 'SKEWZ' 'MODEX' 'MODEY' 'MODEZ' 'TRIMX' 'TRIMY' 'TRIMZ' 'RANGEX' 'RANGEY' 'RANGEZ' 'SMV' 'SMA' 'EVA' 'AAE' 'FREEZE'};        
+        %P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX' 'MINACCY' 'MINACCZ' 'MAXACCX' 'MAXACCY' 'MAXACCZ' 'MEDIANACCX' 'MEDIANACCY' 'MEDIANACCZ' 'MEANACCX' 'MEANACCY' 'MEANACCZ' 'ARMEMANX' 'ARMMEANY' 'ARMMEANZ' 'RMSX' 'RMSY' 'RMSZ' 'VARX' 'VARY' 'VARZ' 'STDX' 'STDY' 'STDZ' 'KURTX' 'KURTY' 'KURTZ' 'SKEWX' 'SKEWY' 'SKEWZ' 'MODEX' 'MODEY' 'MODEZ' 'TRIMX' 'TRIMY' 'TRIMZ' 'RANGEX' 'RANGEY' 'RANGEZ' 'SMV' 'SMA' 'EVA' 'AAE' 'FREEZE'};        
         writetable(P, [datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         display([datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         F(:,:) = [];

@@ -1,8 +1,7 @@
 function extract_prefog
 
-datadir = '../../dataset/';
-datadir2 = '../../dataset/';
-fileruns = dir([datadir2 '*.csv']);
+datadir2 = '../../';
+fileruns = dir([datadir2 '3cl_*.csv']);
 for r = 1:length(fileruns)
     T = readtable([datadir2 fileruns(r).name]);
     
@@ -13,8 +12,8 @@ for r = 1:length(fileruns)
     %size of the windows in number of samples
     size_windows_sample = Fs * size_windows_sec;
     
-    
-    for i = 1:m
+    i = 1;
+    while i < m
         %disp(T.Var11);
         if A(i,11) == 2
             for l = i-(size_windows_sample+1):i-1
@@ -30,6 +29,6 @@ for r = 1:length(fileruns)
         i = i + 1;
     end
     T = array2table(A);
-    writetable(T, [datadir fileruns(r).name]);
+    writetable(T, [datadir2 fileruns(r).name]);
 end
 end

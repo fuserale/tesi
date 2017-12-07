@@ -134,26 +134,26 @@ for isubject = [1 2 3 4 8]
             %                 end
             %                 patch([x1,x2,x2,x1],[y1 y1 y2 y2],pcol{1+type});
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            figure('visible','off');
-            x = 1:m1;
-            subplot(2,1,1)
-            y1 = F(:,2);
-            c1 = y1;
-            patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            ylabel(alg);
-            title(['DYNAMICS S' num2str(isubject,'%2d')]);
-            
-            subplot(2,1,2)
-            y2 = F(:,3);
-            c2 = y2;
-            patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            ylabel(alg);
-            title('REAL 3 LABEL DYNAMICS');
-            print([datadir_plot alg '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
+%             figure('visible','off');
+%             x = 1:m1;
+%             subplot(2,1,1)
+%             y1 = F(:,2);
+%             c1 = y1;
+%             patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             ylabel(alg);
+%             title(['DYNAMICS S' num2str(isubject,'%2d')]);
+%             
+%             subplot(2,1,2)
+%             y2 = F(:,3);
+%             c2 = y2;
+%             patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             ylabel(alg);
+%             title('REAL 3 LABEL DYNAMICS');
+%             print([datadir_plot alg '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             F = array2table(F);
             F.Properties.VariableNames = {'CLUSTER' 'CLUSTER_MOD' 'REAL'};
