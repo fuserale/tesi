@@ -2,7 +2,7 @@ clear; clc
 
 pcol = {[1 1 1],[0 .75 0],'r','b',[0 0 1], [0 0 1]};
 
-for isubject = [1 2 4 8 10]
+for isubject = [1 2 3 4 8]
     for k = 5:5:45
         
         y = k / 10;
@@ -47,9 +47,9 @@ for isubject = [1 2 4 8 10]
             end
             %lista di tutti i file dell'algoritmo del paziente isubject con le 3 etichette (1 = No, 2 = Fog, 3 = Pre)
             if (k == 5)
-                fileruns3 = dir([datadir 'dataset/2cl_dynamics_o' num2str(k,'%01d') '_3cl_S' num2str(isubject,'%02d') '*.csv']);
+                fileruns3 = dir([datadir '2cl_dynamics_3cl_S' num2str(isubject,'%02d') '*.csv']);
             else
-                fileruns3 = dir([datadir 'dataset/2cl_dynamics_o' num2str(k,'%02d') '_3cl_S' num2str(isubject,'%02d') '*.csv']);
+                fileruns3 = dir([datadir '2cl_dynamics_3cl_S' num2str(isubject,'%02d') '*.csv']);
             end
             
             %while there's file of patient $isubject
@@ -71,7 +71,7 @@ for isubject = [1 2 4 8 10]
                 A2 = table2array(T2(:,1));
                 
                 %tabella con 3 etichette
-                filename3 = [datadir 'dataset/' fileruns3(r).name];
+                filename3 = [datadir fileruns3(r).name];
                 T3 = readtable(filename3);
                 A3 = table2array(T3(:,131));
                 
@@ -184,7 +184,7 @@ for isubject = [1 2 4 8 10]
             end
         end
         M = array2table(most_long);
-        M.Properties.VariableNames = {'nMATCH' 'nETICHETTE_SBAGLIATE' 'NUM31' 'NUM32' 'NUM33' 'NUM41' 'NUM42' 'NUM43' 'nALGO'};
+       % M.Properties.VariableNames = {'nMATCH' 'nETICHETTE_SBAGLIATE' 'NUM31' 'NUM32' 'NUM33' 'NUM41' 'NUM42' 'NUM43' 'nALGO'};
         writetable(M, ['../../rate/versus_o' num2str(k,'%02d') '_S' num2str(isubject,'%02d') '.csv']);
         disp(['../../rate/versus_o' num2str(k,'%02d') '_S' num2str(isubject,'%02d') '.csv']);
     end

@@ -1,11 +1,11 @@
 clear; clc
 
-datadir = ['../../'];
+datadir = '../../';
 for k = 5:5:45
     
     y = k / 10;
     %list of all files for patient number $isubject
-    fileruns = dir([datadir 'dataset/2cl_dynamics_o' num2str(k,'%2d') '*.csv']);
+    fileruns = dir([datadir 'dataset/ov_' num2str(k,'%2d') '*.csv']);
     
     %while there's file of patient $isubject
     for r = 1:length(fileruns)

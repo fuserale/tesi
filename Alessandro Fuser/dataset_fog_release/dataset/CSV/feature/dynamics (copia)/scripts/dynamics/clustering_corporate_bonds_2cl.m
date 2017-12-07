@@ -18,7 +18,7 @@ for r = 1:length(fileruns)
     
     % feature selection
     mdl = fscnca(A(:,2:136),A(:,137));
-    % plot(mdl.FeatureWeights,'ro');
+    plot(mdl.FeatureWeights,'ro');
     
     z = 1;
     for i=1:length(mdl.FeatureWeights)
