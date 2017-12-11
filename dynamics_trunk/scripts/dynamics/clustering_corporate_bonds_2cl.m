@@ -22,7 +22,10 @@ for r = 1:length(fileruns)
     % features to cluster
     bonds = A(:,2:44);
     %Number of cluster to create
-    numClust = 2;
+    numClust = 4;
+    
+
+
     
     
     %%% k-means %%%
@@ -47,7 +50,17 @@ for r = 1:length(fileruns)
         end
         options_km = statset('UseParallel', false);
         maxiter = 100000;
-        % cluster
+        %%%%%%%%%%%%%%%%%%%%%%%%
+%         % evalcluster
+%         clust= zeros(size(bonds,1),6);
+%         for i=1:6
+%             [idx,C,sumd,D]= kmeans(bonds, i, 'distance', dist_k, 'options', options_km, 'Replicates',1000,'Display','final', 'MaxIter', maxiter, 'Display','off');
+%             clust(:,i)=idx;
+%         end
+%         
+%         val=evalclusters(bonds,clust,'CalinskiHarabasz')
+        %%%%%%%%%%%%%%%%%%%%%%%%
+        %cluster
         kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
         
         P = array2table(kidx);
@@ -58,7 +71,7 @@ for r = 1:length(fileruns)
     %%% neural networks - Self organizing Maps %%%
     
     % Create a Self-Organizing Map
-    dimension1 = 2;
+    dimension1 = numClust;
     dimension2 = 1;
     net = selforgmap([dimension1 dimension2]);
     

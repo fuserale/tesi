@@ -1,0 +1,79 @@
+% !TEX root = ../main.tex
+
+\chapter{Experimental Results}\label{chap8:results}
+The proposed methodology has been implemented in a tool that automatically generates the self-adaptive wrapper for connecting a cycle-accurate TLM SystemC target to a generic (not necessarily cycle-accurate) TLM SystemC initiator.
+Its effectiveness has been evaluated by generating the self-adaptive wrappers for the IPs reported in Table~\ref{TAB:DESIGN}, whose RTL versions have been retrieved from the Open Core Library. Cycle-accurate TLM SystemC models of the considered IPs have been obtained by using HIFSuite-A2T. 
+%abstracting the RTL descriptions as reported in Section~\ref{SEC:F_ABSTRACTION}.
+
+Table~\ref{TAB:DESIGN} reports first information related to the RTL version of the IPs, i.e., the number of assertions defined to describe their cycle-accurate communication protocol ($|A|$), the lines of code ($\#lines$), the number of processes ($\#proc$) and the number of input/output ports ($\#I/O$). Then, it reports the number of fields included in the payload of the cycle accurate TLM target ($\#P^T$), which corresponds to $\#I/O-1$ (only clock is removed), and the number of fields included in the payload of the initiator ($\#P^I$), which is lower that $\#P^T$, since the initiator implements a more abstracted loosely timed protocol, where some ports included in the RTL IPs have been removed.
+
+Table~\ref{TAB:RES} reports the simulation times, in seconds, achieved by stimulating each IP with a testbench that generates a sequence of $10^5$ input stimuli. 
+The simulation has been performed by composing the testbench, which represents the initiator, and the IP, which represents the target, in different ways and at different abstraction levels.
+Column \textit{RTL-TLM (trans)} shows the worst case, where the RTL version of the IP is connected to a loosely timed TLM testbench by means of an ad hoc transactor. This is the simplest solution to reuse an already existing RTL IP inside a TLM design, when a corresponding TLM version of the IP is not available.
+On the contrary, Column \textit{LT-LT (no trans)} shows the ideal case, where both the testbench and the target IP implement a perfectly matching, loosely timed TLM protocol. This happens, generally, when the TLM version of the IP is manually implemented. In this case, pin-accurate ports that implement low-level details of the RTL protocol are not included in the payload, thus  the maximum grade of abstraction is reached. In this case, there is no need of generating the transactor between the testbench and the IP. 
+Since, manual implementation of a TLM model is time-consuming and error-prone, the fastest and the most safe solution, when an RTL IP of the target design is available, consists of using tools that automatically abstract the IP towards TLM.
+Unfortunately, commercial tools that automatically perform RTL-to-TLM abstraction generate cycle-accurate TLM models, since they are not able to automatically abstract low-level details related to the pin-accurate RTL protocol. In such cases, only a TLM cycle-accurate simulation is possible by directly connecting the abstracted IP with a cycle-accurate initiator, which is represented by Column \textit{CA-CA (no trans)}. However, if the initiator implements a more abstracted protocol than a cycle-accurate one, a wrapper is required to allow its communication with the cycle-accurate abstracted IP. This case is showed in Column \textit{LT-CA  (wrapper)}, where we adopted the self-adaptive wrappers that have been automatically generated according to the proposed methodology .
+
+From Table~\ref{TAB:RES} we first observe that for all the benchmarks, but UART, the mixed RTL-TLM simulation via the transactor is orders of magnitude slower than the other simulation schemas. This confirms that the adoption of the transactor generally slows down the overall simulation at the speed of the RTL models, thus making inconvenient the reuse of RTL IPs through transactors. 
+This drawback is not particularly evident for the UART, because its RTL model is a structural (not behavioural) description. In such a case, the automatic abstraction of the UART's functionality, via HIFSuite-A2T, generates a TLM version with a low speed-up with respect to the original RTL model. However, this does not depend on the methodology we propose in \chapterref{chap5:Automatic} and \chapterref{chap6:SW_IMP_MET} for the generation of the wrapper, which is independent form the way we abstract the functionality.
+Indeed, the efficiency of our self-adaptive wrapper is confirmed by comparing Columns \textit{LT}-LT, \textit{CA-CA} and \textit{LT-CA} for all the benchmarks. The time required by the mixed LT-CA simulation with the use of our wrapper introduces a small overhead in the simulation in comparison with the  LT-LT simulation, and it is faster than the  CA-CA simulation.
+This highlights the efficiency of the overall methodology foreseen in \ref{fig:wrapper-gen}, which combines the use of an automatic procedure for abstracting the IP functionality of an RTL IP towards a cycle-accurate TLM model, and the automatic generation of the proposed self-adaptive wrapper to allow the communication between the cycle-accurate TLM model and more abstracted TLM components.
+
+
+
+\begin{figure}[h!]
+\centering
+%\scriptsize
+\begin{tabular}{ l || c |c |c |c ||c| c|| }
+\multicolumn{1}{l||}{} & 
+\multicolumn{4}{c||}{RTL} & 
+\multicolumn{2}{c||}{TLM} \\
+%\cline{2-7}
+$Design$	&	
+$|A|$		&	
+$\#lines$	&	
+$\#proc$	&
+$\#I/O$	&
+ $\#P^T$	&	
+ $\#P^I$\\
+\hline
+\hline
+AES			&	7		&	1778	&	30 	&	8 	& 	7 	&	5	\\
+Camellia	&	12		&	955		&	49	&	12	&	11	&	6	\\
+DES56 		&	10		&	1054	&	6	&	10	&	9	&	4	\\
+UART		&	9		&	3262	&	60	&	23	&	22	&	20\\
+%\hline
+\end{tabular}
+\vspace{0.1cm}
+\caption{Characteristics of benchmarks.}
+%\vspace{-0.2cm}
+\label{TAB:DESIGN}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+%\scriptsize
+\begin{tabular}{ l || c |c |c |c || }
+\multirow{2}{*}{$Design$} &
+RTL-TLM &
+LT-LT &
+CA-CA &
+LT-CA					\\
+						&
+$(trans)$ 			&
+$(no~trans)$ 	&
+$(no~trans)$ 	&
+$(wrapper)$				\\
+\hline
+\hline
+AES			&	26495	&844		&904	&			911	\\
+Camellia	&	7883	&9			&11		&			10	\\
+DES56 		&	410		&45			&54		&			52	\\
+UART		&	4300	&3770		&3960	&			3870\\
+%\hline
+\end{tabular}
+\vspace{0.1cm}
+\caption{Simulation times (in seconds).}
+\vspace{-0.3cm}
+\label{TAB:RES}
+\end{figure}
