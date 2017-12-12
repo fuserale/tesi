@@ -22,11 +22,7 @@ for r = 1:length(fileruns)
     % features to cluster
     bonds = A(:,2:44);
     %Number of cluster to create
-    numClust = 4;
-    
-
-
-    
+    numClust = 2;    
     
     %%% k-means %%%
     
@@ -59,6 +55,8 @@ for r = 1:length(fileruns)
 %         end
 %         
 %         val=evalclusters(bonds,clust,'CalinskiHarabasz')
+%         % % for gap
+%         % val=evalclusters(bonds,'kmeans','silhouette','KList',[1:6],'Distance',dist_k)
         %%%%%%%%%%%%%%%%%%%%%%%%
         %cluster
         kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);

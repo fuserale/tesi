@@ -30,13 +30,12 @@ for isubject = [1 2 3 4 8]
         i = 1;
         Fs = 64;
         
-        
         %decisione dell'intervallo della finestra massima
         number_seconds = 2;
         number_samples = Fs * number_seconds;
         %decisione dell'intervallo di sovrapposizione
-        number_seconds2 = number_seconds / 2;
-        number_samples2 = Fs * number_seconds2;
+%         number_seconds2 = number_seconds / 2;
+%         number_samples2 = Fs * number_seconds2;
         
         %for each sample window, compute the features
         while i < m
