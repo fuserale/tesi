@@ -1,5 +1,4 @@
-clear; clc
-
+function clustering_corporate_bonds_2cl(u)
 datadir_dataset = '../../dataset/';
 datadir_clustering = '../../clustering/';
 
@@ -20,9 +19,9 @@ for r = 1:length(fileruns)
     rng('default');
     
     % features to cluster
-    bonds = A(:,2:44);
+    bonds = A(:,2:n-1);
     %Number of cluster to create
-    numClust = 2;    
+    numClust = u;
     
     %%% k-means %%%
     
@@ -47,16 +46,16 @@ for r = 1:length(fileruns)
         options_km = statset('UseParallel', false);
         maxiter = 100000;
         %%%%%%%%%%%%%%%%%%%%%%%%
-%         % evalcluster
-%         clust= zeros(size(bonds,1),6);
-%         for i=1:6
-%             [idx,C,sumd,D]= kmeans(bonds, i, 'distance', dist_k, 'options', options_km, 'Replicates',1000,'Display','final', 'MaxIter', maxiter, 'Display','off');
-%             clust(:,i)=idx;
-%         end
-%         
-%         val=evalclusters(bonds,clust,'CalinskiHarabasz')
-%         % % for gap
-%         % val=evalclusters(bonds,'kmeans','silhouette','KList',[1:6],'Distance',dist_k)
+        %         % evalcluster
+        %         clust= zeros(size(bonds,1),6);
+        %         for i=1:6
+        %             [idx,C,sumd,D]= kmeans(bonds, i, 'distance', dist_k, 'options', options_km, 'Replicates',1000,'Display','final', 'MaxIter', maxiter, 'Display','off');
+        %             clust(:,i)=idx;
+        %         end
+        %
+        %         val=evalclusters(bonds,clust,'CalinskiHarabasz')
+        %         % % for gap
+        %         % val=evalclusters(bonds,'kmeans','silhouette','KList',[1:6],'Distance',dist_k)
         %%%%%%%%%%%%%%%%%%%%%%%%
         %cluster
         kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
@@ -100,4 +99,5 @@ for r = 1:length(fileruns)
     P = array2table(fidx);
     writetable(P, [datadir_clustering 'cmeans_' fileruns(r).name] );
     display([datadir_clustering 'cmeans_' fileruns(r).name]);
+end
 end

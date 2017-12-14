@@ -16,7 +16,7 @@ for r = 1:length(fileruns)
     while i < m
         %disp(T.Var11);
         if A(i,11) == 2
-            for l = i-(size_windows_sample+1):i-1
+            for l = i-(size_windows_sample):i-1
                 if A(l,11) ~= 2
                     A(l,11) = 3;
                 end

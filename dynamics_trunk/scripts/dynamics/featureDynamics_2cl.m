@@ -19,7 +19,7 @@ for isubject = [1 2 3 4 8]
         %take the dimesion
         [m,n] = size(T);
         %table to array to do maths
-        A = table2array(T(:,8:10));
+        A = table2array(T(:,5:7));
         TIME = table2array(T(:,1));
         FREEZE = table2array(T(:,11));
         B = [];
@@ -92,8 +92,12 @@ for isubject = [1 2 3 4 8]
             %averaged acceleration energy --> mean value of the energy over
             %three acceleration axes
             F(number_sample,44) = energyn(B(:,1:3),length(B));
+            %velocity
+            F(number_sample,45) = velocityn(B(:,1:3));
+            %position
+            F(number_sample,46) = trapz(F(:,45));
             %is freezing?
-            F(number_sample,45) = mode(FREEZE(i:end_size-1,:));
+            F(number_sample,47) = mode(FREEZE(i:end_size-1,:));
             
             %go to next sample
             number_sample = number_sample + 1;
@@ -133,6 +137,14 @@ function energy = energyn(X, windows_length)
 [m,n] = size(X);
 sum1 = sum(abs(X(:,1)).^2 + abs(X(:,2)).^2 + abs(X(:,3)).^2);
 energy = sum1 / windows_length;
+end
+
+function velocity = velocityn(X)
+[m1,~] = size(X);
+for i = 1:m1
+    n(i,:) = norm(X(i,:));
+end
+velocity = trapz(n) / m1;
 end
 
 function [FI, SLF] = freezingindex(X, SR, windows_length, isubject)
