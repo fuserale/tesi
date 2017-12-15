@@ -19,7 +19,7 @@ for isubject = [1 2 3 4 8]
         %take the dimesion
         [m,n] = size(T);
         %table to array to do maths
-        A = table2array(T(:,[2:4 8:10]));
+        A = table2array(T(:,[5:7 8:10]));
         TIME = table2array(T(:,1));
         FREEZE = table2array(T(:,11));
         B = [];
