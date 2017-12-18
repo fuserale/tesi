@@ -1,4 +1,4 @@
-function extract_prefog
+function extract_prefog(u)
 
 datadir2 = '../../';
 fileruns = dir([datadir2 '3cl_*.csv']);
@@ -8,7 +8,7 @@ for r = 1:length(fileruns)
     [m,~] = size(T);
     A = table2array(T);
     Fs = 64;
-    size_windows_sec = 2;
+    size_windows_sec = u;
     %size of the windows in number of samples
     size_windows_sample = Fs * size_windows_sec;
     

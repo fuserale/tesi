@@ -1,5 +1,4 @@
-clear; clc
-
+function versus_rate(u)
 pcol = {[1 1 1],[0 .75 0],'r','b',[0 0 1], [0 0 1]};
 
 for isubject = [1 2 3 4 8]
@@ -56,16 +55,18 @@ for isubject = [1 2 3 4 8]
             D = [A2 A1];
             
             %cambia etichette per i casi sbagliati (3 = AB, 4 = BA)
-%             for i=1:m1
-%                 if D(i,1) ~= D(i,2)
-%                     if D(i,1) == 1
-%                         D(i,1) = 3;
-%                     end
-%                     if D(i,1) == 2
-%                         D(i,1) = 4;
-%                     end
-%                 end
-%             end
+            if u == 2
+                for i=1:m1
+                    if D(i,1) ~= D(i,2)
+                        if D(i,1) == 1
+                            D(i,1) = 3;
+                        end
+                        if D(i,1) == 2
+                            D(i,1) = 4;
+                        end
+                    end
+                end
+            end
             
             %tabella con etichette cambiate e con file da 3 etichette
             F = [A2 D(:,1) A1];
@@ -193,5 +194,6 @@ for isubject = [1 2 3 4 8]
     M = array2table(most_long);
     M.Properties.VariableNames = {'nMATCH' 'nETICHETTE_SBAGLIATE' 'NUM31' 'NUM32' 'NUM33' 'NUM41' 'NUM42' 'NUM43' 'nALGO'};
     writetable(M, [datadir_rate 'versus_S' num2str(isubject,'%02d') '.csv']);
+end
 end
 

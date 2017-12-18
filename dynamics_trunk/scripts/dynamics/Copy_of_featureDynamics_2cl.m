@@ -1,5 +1,4 @@
-clear; clc
-
+function Copy_of_featureDynamics_2cl(u)
 datadir_original = '../../';
 datadir_feature = '../../dataset/';
 
@@ -24,18 +23,36 @@ for isubject = [1 2 3 4 8]
         FREEZE = table2array(T(:,11));
         B = [];
         
+        %trasformazione dell'accelerazione da mg (milli-gravity) to m/s^2
+        A = A / 1000 * 9.81;
+        %tolgo il contributo della gravità sull'asse verticale
+        for i = 2:3:8
+            A(:,i) = A(:,i) - 9.81;
+        end
+        
         number_sample = 1;
         indx = 0;
         end_size = 1;
         i = 1;
         Fs = 64;
         
+        %filtro passa alto, rimuovo tutti i dati con frequenza minore di
+        %0.5Hz
+        [b,a] = butter(2,0.5/(Fs/2),'High');
+        % freqz(b,a);
+        A = filtfilt(b,a,A);
+        %filtro passa basso, rimuovo tutti i dati con frequenza maggiore di
+        %8Hz
+        [b,a] = butter(20,8/(Fs/2),'Low');
+        % freqz(b,a);
+        A = filtfilt(b,a,A);
+        
         %decisione dell'intervallo della finestra massima
         number_seconds = 2;
         number_samples = Fs * number_seconds;
         %decisione dell'intervallo di sovrapposizione
-%         number_seconds2 = number_seconds / 2;
-%         number_samples2 = Fs * number_seconds2;
+        %         number_seconds2 = number_seconds / 2;
+        %         number_samples2 = Fs * number_seconds2;
         
         %for each sample window, compute the features
         while i < m
@@ -122,16 +139,17 @@ for isubject = [1 2 3 4 8]
             number_sample = number_sample + 1;
             if (end_size == m)
                 break;
-            end   
+            end
         end
         
         P = array2table(F);
-        %P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX' 'MINACCY' 'MINACCZ' 'MAXACCX' 'MAXACCY' 'MAXACCZ' 'MEDIANACCX' 'MEDIANACCY' 'MEDIANACCZ' 'MEANACCX' 'MEANACCY' 'MEANACCZ' 'ARMEMANX' 'ARMMEANY' 'ARMMEANZ' 'RMSX' 'RMSY' 'RMSZ' 'VARX' 'VARY' 'VARZ' 'STDX' 'STDY' 'STDZ' 'KURTX' 'KURTY' 'KURTZ' 'SKEWX' 'SKEWY' 'SKEWZ' 'MODEX' 'MODEY' 'MODEZ' 'TRIMX' 'TRIMY' 'TRIMZ' 'RANGEX' 'RANGEY' 'RANGEZ' 'SMV' 'SMA' 'EVA' 'AAE' 'FREEZE'};        
+        %P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX' 'MINACCY' 'MINACCZ' 'MAXACCX' 'MAXACCY' 'MAXACCZ' 'MEDIANACCX' 'MEDIANACCY' 'MEDIANACCZ' 'MEANACCX' 'MEANACCY' 'MEANACCZ' 'ARMEMANX' 'ARMMEANY' 'ARMMEANZ' 'RMSX' 'RMSY' 'RMSZ' 'VARX' 'VARY' 'VARZ' 'STDX' 'STDY' 'STDZ' 'KURTX' 'KURTY' 'KURTZ' 'SKEWX' 'SKEWY' 'SKEWZ' 'MODEX' 'MODEY' 'MODEZ' 'TRIMX' 'TRIMY' 'TRIMZ' 'RANGEX' 'RANGEY' 'RANGEZ' 'SMV' 'SMA' 'EVA' 'AAE' 'FREEZE'};
         writetable(P, [datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         display([datadir_feature '2cl_dynamics_' fileruns(r).name ]);
         F(:,:) = [];
         
     end
+end
 end
 
 function svm = svmn(X, windows_length)

@@ -1,4 +1,4 @@
-clear; clc
+function featureDynamics_2cl(u)
 
 datadir_original = '../../';
 datadir_feature = '../../dataset/';
@@ -24,14 +24,32 @@ for isubject = [1 2 3 4 8]
         FREEZE = table2array(T(:,11));
         B = [];
         
+        %trasformazione dell'accelerazione da mg (milli-gravity) to m/s^2
+        A = A / 1000 * 9.81;
+        %tolgo il contributo della gravità sull'asse verticale
+        for i = 2:3:8
+           A(:,i) = A(:,i) - 9.81; 
+        end
+        
         number_sample = 1;
         indx = 0;
         end_size = 1;
         i = 1;
         Fs = 64;
         
+        %filtro passa alto, rimuovo tutti i dati con frequenza minore di
+        %0.5Hz
+        [b,a] = butter(2,0.5/(Fs/2),'High');
+        % freqz(b,a);
+        A = filtfilt(b,a,A);
+        %filtro passa basso, rimuovo tutti i dati con frequenza maggiore di
+        %8Hz
+        [b,a] = butter(20,8/(Fs/2),'Low');
+        % freqz(b,a);
+        A = filtfilt(b,a,A);  
+        
         %decisione dell'intervallo della finestra massima
-        number_seconds = 2;
+        number_seconds = u;
         number_samples = Fs * number_seconds;
         %decisione dell'intervallo di sovrapposizione
 %         number_seconds2 = number_seconds / 2;
@@ -113,6 +131,7 @@ for isubject = [1 2 3 4 8]
         F(:,:) = [];
         
     end
+end
 end
 
 function svm = svmn(X, windows_length)
