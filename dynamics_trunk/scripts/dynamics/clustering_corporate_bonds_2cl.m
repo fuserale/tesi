@@ -46,16 +46,16 @@ for r = 1:length(fileruns)
         options_km = statset('UseParallel', false);
         maxiter = 100000;
         %%%%%%%%%%%%%%%%%%%%%%%%
-                % evalcluster
-                clust= zeros(size(bonds,1),6);
-                for i=1:6
-                    [idx,C,sumd,D]= kmeans(bonds, i, 'distance', dist_k, 'options', options_km, 'Replicates',1000,'Display','final', 'MaxIter', maxiter, 'Display','off');
-                    clust(:,i)=idx;
-                end
-        
-%                 val=evalclusters(bonds,clust,'gap')
-                % % for gap & silhouette
-                val=evalclusters(bonds,'kmeans','gap','KList',[1:6],'Distance',dist_k)
+%                 % evalcluster
+%                 clust= zeros(size(bonds,1),6);
+%                 for i=1:6
+%                     [idx,C,sumd,D]= kmeans(bonds, i, 'distance', dist_k, 'options', options_km, 'Replicates',1000,'Display','final', 'MaxIter', maxiter, 'Display','off');
+%                     clust(:,i)=idx;
+%                 end
+%         
+% %                 val=evalclusters(bonds,clust,'gap')
+%                 % % for gap & silhouette
+%                 val=evalclusters(bonds,'kmeans','gap','KList',[1:6],'Distance',dist_k)
         %%%%%%%%%%%%%%%%%%%%%%%
         %cluster
         kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);

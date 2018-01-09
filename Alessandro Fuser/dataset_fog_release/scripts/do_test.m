@@ -1,6 +1,6 @@
 datadir = '../dataset/TXT/';
 SR = 64;            % Sample rate in herz
-stepSize=32;        % Step size in samples
+stepSize=128;        % Step size in samples
 offDelay=2;         % Evaluation delay in seconds: tolerates delay after detecting
 onDelay=2;          % Evaluation delay in seconds: tolerates delay before detecting
 
@@ -17,12 +17,12 @@ TH.power   = 2.^ 12 ;
 % axis: 0=horizontal forward, 1=vertical, 2=horizontal lateral
 
 % 4,10 have no freeze
-for isubject=[1:3]
+for isubject=1:3
     
     % 0:2
-    for isensor=0:0
+    for isensor=0:2
         % 0:2
-        for iaxis=1:1
+        for iaxis=0:2
 
             fprintf(1,'Subject %02d sensor %d axis %d\n',isubject,isensor,iaxis);
             

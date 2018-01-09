@@ -1,4 +1,4 @@
-function Copy_of_featureDynamics_2cl(u)
+function Copy_of_featureDynamics_2cl(u,o)
 datadir_original = '../../';
 datadir_feature = '../../dataset/';
 
@@ -51,8 +51,8 @@ for isubject = [1 2 3 4 8]
         number_seconds = 2;
         number_samples = Fs * number_seconds;
         %decisione dell'intervallo di sovrapposizione
-        %         number_seconds2 = number_seconds / 2;
-        %         number_samples2 = Fs * number_seconds2;
+        number_seconds2 = o;
+        number_samples2 = Fs * number_seconds2;
         
         %for each sample window, compute the features
         while i < m
