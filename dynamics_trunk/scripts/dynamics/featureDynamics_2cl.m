@@ -121,9 +121,9 @@ for isubject = [1 2 3 4 8]
             F(number_sample,45) = velocityn(B(:,1:3));
             %position
             F(number_sample,46) = trapz(F(:,45));
-            F(number_sample,47:49) = freezingindex(B,Fs,length(B),isubject);
+            %F(number_sample,47:49) = freezingindex(B,Fs,length(B),isubject);
             %is freezing?
-            F(number_sample,50) = mode(FREEZE(i:end_size-1,:));
+            F(number_sample,47) = mode(FREEZE(i:end_size-1,:));
 
 %             %time sample
 %             F(number_sample, 1) = TIME(i,:);
@@ -151,7 +151,7 @@ for isubject = [1 2 3 4 8]
                 break;
             end   
         end
-        
+        %gplotmatrix(F,F,F(:,50));
         P = array2table(F);
         %P.Properties.VariableNames = {'TIME_SAMPLE' 'MINACCX' 'MINACCY' 'MINACCZ' 'MAXACCX' 'MAXACCY' 'MAXACCZ' 'MEDIANACCX' 'MEDIANACCY' 'MEDIANACCZ' 'MEANACCX' 'MEANACCY' 'MEANACCZ' 'ARMEMANX' 'ARMMEANY' 'ARMMEANZ' 'RMSX' 'RMSY' 'RMSZ' 'VARX' 'VARY' 'VARZ' 'STDX' 'STDY' 'STDZ' 'KURTX' 'KURTY' 'KURTZ' 'SKEWX' 'SKEWY' 'SKEWZ' 'MODEX' 'MODEY' 'MODEZ' 'TRIMX' 'TRIMY' 'TRIMZ' 'RANGEX' 'RANGEY' 'RANGEZ' 'SMV' 'SMA' 'EVA' 'AAE' 'FREEZE'};        
         writetable(P, [datadir_feature '2cl_dynamics_' fileruns(r).name ]);
@@ -195,45 +195,47 @@ velocity = trapz(n) / m1;
 end
 
 function FI = freezingindex(X, SR, windows_length, isubject)
-TH.freeze  =  [3 1.5 3 1.5 1.5 1.5 3 3 1.5 3];
-TH.power   = 2.^ 12 ; %4096
-NFFT = 128;
-locoBand=[0.5 3];
-freezeBand=[3 8];
-
-f_res = SR / NFFT;
-f_nr_LBs  = round(locoBand(1)   / f_res);
-f_nr_LBs( f_nr_LBs==0 ) = [];
-f_nr_LBe  = round(locoBand(2)   / f_res);
-f_nr_FBs  = round(freezeBand(1) / f_res);
-f_nr_FBe  = round(freezeBand(2) / f_res);
-
-% d = NFFT/2;
-
-% [m,n] = size(X);
-X = X - mean(X);
-
-% Compute FFT
-Y = fft(X);
-Pyy = Y.* conj(Y) / SR;
-
-% --- calculate sumLocoFreeze and freezeIndex ---
-areaLocoBand   = x_numericalIntegration( Pyy(f_nr_LBs:f_nr_LBe),SR );
-areaFreezeBand = x_numericalIntegration( Pyy(f_nr_FBs:f_nr_FBe),SR );
-
-sumLocoFreeze = areaFreezeBand + areaLocoBand;
-
-freezeIndex = areaFreezeBand/areaLocoBand;
-% --------------------
-
-% if sumLocoFreeze < TH.power
-%     freezeIndex = 0;
-% end
-
-% lframe = (freezeIndex>TH.freeze(isubject));
-FI = freezeIndex;
-SLF = sumLocoFreeze;
-
+% TH.freeze  =  [3 1.5 3 1.5 1.5 1.5 3 3 1.5 3];
+% TH.power   = 2.^ 12 ; %4096
+% NFFT = 128;
+% locoBand=[0.5 3];
+% freezeBand=[3 8];
+% 
+% f_res = SR / NFFT;
+% f_nr_LBs  = round(locoBand(1)   / f_res);
+% f_nr_LBs( f_nr_LBs==0 ) = [];
+% f_nr_LBe  = round(locoBand(2)   / f_res);
+% f_nr_FBs  = round(freezeBand(1) / f_res);
+% f_nr_FBe  = round(freezeBand(2) / f_res);
+% 
+% % d = NFFT/2;
+% 
+% % [m,n] = size(X);
+% X = X - mean(X);
+% 
+% % Compute FFT
+% Y = fft(X);
+% Pyy = Y.* conj(Y) / SR;
+% 
+% % --- calculate sumLocoFreeze and freezeIndex ---
+% areaLocoBand   = x_numericalIntegration( Pyy(f_nr_LBs:f_nr_LBe),SR );
+% areaFreezeBand = x_numericalIntegration( Pyy(f_nr_FBs:f_nr_FBe),SR );
+% 
+% sumLocoFreeze = areaFreezeBand + areaLocoBand;
+% 
+% freezeIndex = areaFreezeBand/areaLocoBand;
+% % --------------------
+% 
+% % if sumLocoFreeze < TH.power
+% %     freezeIndex = 0;
+% % end
+% 
+% % lframe = (freezeIndex>TH.freeze(isubject));
+% FI = freezeIndex;
+% SLF = sumLocoFreeze;
+[m,n] = size(X);
+res = x_fi(X, SR, m);
+FI = res.quot;
 end
 
 %% --- Helper functions

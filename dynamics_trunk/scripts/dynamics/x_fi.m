@@ -4,7 +4,7 @@
 % be equal
 
 function res = x_fi(data,SR,stepSize)   
-    NFFT = 256;
+    NFFT = stepSize;
     locoBand=[0.5 3];
     freezeBand=[3 8];
     windowLength=256;
@@ -25,18 +25,20 @@ function res = x_fi(data,SR,stepSize)
 
     % Online implementation
     % jPos is the current position, 0-based, we take a window 
-    jPos = windowLength+1;      % This should not be +1 but we follow Baechlin's implementation.
+    jPos = 1;      % This should not be +1 but we follow Baechlin's implementation.
     i=1;
-    freezeindex = [];
-
+    sumLocoFreeze = [];
+    freezeIndex = [];
+    time = [];
+    
     % Iterate the FFT windows
     while jPos <= length(data)       
-        jStart = jPos - windowLength + 1;
+        jStart = jPos;
         % Time (sample nr) of this window
         time(i) = jPos;             
                
         % get the signal in the window
-        y = data(jStart:jPos);
+        y = data(jStart:stepSize);
         y = y - mean(y); % make signal zero-mean
 
         % Compute FFT
@@ -60,10 +62,9 @@ function res = x_fi(data,SR,stepSize)
         %break;
     end
 
-%res.sum = sumLocoFreeze;
-%res.quot = freezeIndex;
-%res.time = time;
+res.sum = sumLocoFreeze;
+res.quot = freezeIndex;
+res.time = time;
 
-res = freezeIndex;
 
 end
