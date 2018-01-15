@@ -1,0 +1,39 @@
+{
+	"tasks": [
+		{
+			"type":	"FBReader",
+			"id":	"MySensorReader",
+			"format" : "DX1;cs-s-s-s;x",
+			"deviceName" : "/dev/rfcomm26",
+			"baudRate" : 115200
+			
+		},	
+		{
+			"type": "LoggerTask",
+			"id": "file",
+			"name": "sensor.dat",
+			"encoder": { "type": "TimestampedLinesEncoder" },
+			"quiet": true
+		},
+		{
+			"type": "ConsoleWriter",
+			"id": "console",
+			"encoder": { "type":"TimestampedLinesEncoder" }
+		}
+	],
+	
+	"connections": [
+		{
+			"type": "Connection",
+			"sourceTask": "MySensorReader",
+			"destTask":"file"
+		},
+		{
+			"type": "Connection",
+			"sourceTask": "MySensorReader",
+			"destTask": "console"
+		}
+	]
+	
+}
+

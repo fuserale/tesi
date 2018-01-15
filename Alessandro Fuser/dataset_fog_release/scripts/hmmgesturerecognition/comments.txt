@@ -1,2 +1,0 @@
-Attention: When using the bluetooth sensors make sure students dont turn the sensors off once connected, otherwise the matlab will hang.
-A fix would be to close all open filedescriptors in matlab before switching the sensor on again.

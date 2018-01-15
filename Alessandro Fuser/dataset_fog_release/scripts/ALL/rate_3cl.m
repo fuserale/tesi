@@ -130,9 +130,12 @@ for isubject =[1 2 3 4 8]
                 B = [true_A false_A2 false_A3; false_B1 true_B false_B3; false_C1 false_C2 true_C];
                 E = [E B];
                 
+                V = array2table(D);
+                writetable(V,[datadir 'versus_' fileruns2(r).name]);
+                display([datadir 'versus_' fileruns2(r).name]);
                 
             end
-            Q = [Q ; e E];
+            Q = [Q ; [e E]];
             e = [e [0 0 0; 0 0 0; 0 0 0]];
             
         end
