@@ -30,5 +30,6 @@ for r = 1:length(fileruns)
     end
     T = array2table(A);
     writetable(T, [datadir2 fileruns(r).name]);
+    display([datadir2 fileruns(r).name]);
 end
 end

@@ -1,4 +1,4 @@
-datadir = '../dataset/TXT/';
+datadir = '../dataset/CSV/';
 SR = 64;            % Sample rate in herz
 stepSize=128;        % Step size in samples
 offDelay=2;         % Evaluation delay in seconds: tolerates delay after detecting
@@ -17,8 +17,8 @@ TH.power   = 2.^ 12 ;
 % axis: 0=horizontal forward, 1=vertical, 2=horizontal lateral
 
 % 4,10 have no freeze
-for isubject=1:3
-    
+for isubject=[1:3 5:9]
+    F = [];
     % 0:2
     for isensor=0:2
         % 0:2
@@ -26,7 +26,7 @@ for isubject=1:3
 
             fprintf(1,'Subject %02d sensor %d axis %d\n',isubject,isensor,iaxis);
             
-            fileruns = dir([datadir 'S' num2str(isubject,'%02d') 'R*.txt']);
+            fileruns = dir([datadir '3cl_S' num2str(isubject,'%02d') 'R01.csv']);
             resrun=[0 0 0 0 0];
             
             for r = 1:length(fileruns)
@@ -34,20 +34,18 @@ for isubject=1:3
                 filename = [datadir fileruns(r).name];
                 fprintf(1,'\tProcessing %s\n',filename);
 
-                data = load(filename);
+                data = table2array(readtable(filename));
 
                 % Moore's algorithm
                 res = x_fi(data(:,2+isensor*3+iaxis),SR,stepSize);
-
+                F(:,1) = res.time';
+                F(:,2+isensor*3+iaxis) = res.quot';
                 % Extension of Baechlin to handle low-enery situations
                 % (e.g. standing)
                 res.quot(res.sum < TH.power) = 0;
 
                 % Classification
-                lframe = (res.quot>TH.freeze(isubject))';
-
-
-                
+                lframe = (res.quot>TH.freeze(isubject))';             
 
 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,6 +85,9 @@ for isubject=1:3
 
         end
     end
+    M = array2table([F gtframe]);
+    writetable(M, ['FreezeIndex_S' num2str(isubject,'%02d') 'R01.csv']);
+    disp(['FreezeIndex_S' num2str(isubject,'%02d') 'R01.csv']);
 end %subject
 
 
