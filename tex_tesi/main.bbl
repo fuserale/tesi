@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.6 $
+% $ biblatex bbl format version 2.9 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -16,7 +16,454 @@
   {}
 \endgroup
 
-%\lossort
-%\endlossort
+\datalist[entry]{nty/global//global/global}
+  \entry{21}{article}{}
+    \name{author}{1}{}{%
+      {{hash=BMPMHJGNTGRD}{%
+         family={Bachlin\bibnamedelima M},
+         familyi={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+         suffix={Roggen\bibnamedelima D},
+         suffixi={R\bibinitperiod\bibinitdelim D\bibinitperiod},
+         given={Plotnik M Hausdorff JM Giladi N TroÈster\bibnamedelima G.},
+         giveni={P\bibinitperiod\bibinitdelim M\bibinitperiod H\bibinitperiod
+  J\bibinitperiod G\bibinitperiod N\bibinitperiod T\bibinitperiod\bibinitdelim
+  G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BMRDPMHJGNTG1}
+    \strng{fullhash}{BMRDPMHJGNTG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Online Detection of Freezing of Gait in Parkinson's Disease
+  Patients: A Performance Characterization.}
+    \field{journaltitle}{Proc 4th Int ICST Conf Body Area,Networks.}
+    \field{year}{2009}
+  \endentry
 
+  \entry{25}{article}{}
+    \name{author}{1}{}{%
+      {{hash=CBNSRS}{%
+         family={Cole\bibnamedelima BT},
+         familyi={C\bibinitperiod\bibinitdelim B\bibinitperiod},
+         suffix={Roy\bibnamedelima SH},
+         suffixi={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+         given={Nawab\bibnamedelima SH},
+         giveni={N\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CBRSNS1}
+    \strng{fullhash}{CBRSNS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{pages}{5649\bibrangedash 5652}
+    \field{title}{Detecting Freezing-of-Gait During Unscripted and
+  UNconstrained Activity}
+    \field{journaltitle}{33rdAnnual International Conference of the IEEE EMBS}
+    \field{year}{2011}
+  \endentry
+
+  \entry{23}{article}{}
+    \name{author}{1}{}{%
+      {{hash=DAWVDJDLGNeaSA}{%
+         family={Delval\bibnamedelima A},
+         familyi={D\bibinitperiod\bibinitdelim A\bibinitperiod},
+         suffix={Snijders\bibnamedelima AH},
+         suffixi={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+         given={Weerdesteyn V Duysens JE Defebvre L Giladi N et\bibnamedelima
+  al.},
+         giveni={W\bibinitperiod\bibinitdelim V\bibinitperiod D\bibinitperiod
+  J\bibinitperiod D\bibinitperiod L\bibinitperiod G\bibinitperiod
+  N\bibinitperiod e\bibinitperiod\bibinitdelim a\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DASAWVDJDLGNea1}
+    \strng{fullhash}{DASAWVDJDLGNea1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{pages}{25: 1684\bibrangedash 1693}
+    \field{title}{Objective detection of subtle freezing of gait episodes in
+  Parkinson's disease.}
+    \field{journaltitle}{Mov Disord.}
+    \field{year}{2010}
+  \endentry
+
+  \entry{19}{article}{}
+    \name{author}{1}{}{%
+      {{hash=HJTBABSJKSPLW}{%
+         family={Han\bibnamedelima JH},
+         familyi={H\bibinitperiod\bibinitdelim J\bibinitperiod},
+         suffix={Lee\bibnamedelima WJ},
+         suffixi={L\bibinitperiod\bibinitdelim W\bibinitperiod},
+         given={Tae Beom A Beom Suk J Kwang Suk\bibnamedelima P.},
+         giveni={T\bibinitperiod\bibinitdelim B\bibinitperiod A\bibinitperiod
+  B\bibinitperiod S\bibinitperiod J\bibinitperiod K\bibinitperiod
+  S\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HJLWTBABSJKSP1}
+    \strng{fullhash}{HJLWTBABSJKSP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{pages}{1863\bibrangedash 1865}
+    \field{title}{Gait analysis for freezing detection in patients with
+  movement disorder using three dimensional acceleration system.}
+    \field{journaltitle}{25th Annual International Conference of the IEEE
+  EMBS.}
+    \field{year}{2003}
+  \endentry
+
+  \entry{38}{article}{}
+    \name{author}{1}{}{%
+      {{hash=HJGNBY}{%
+         family={Hausdorff\bibnamedelima JM},
+         familyi={H\bibinitperiod\bibinitdelim J\bibinitperiod},
+         suffix={Balash\bibnamedelima Y},
+         suffixi={B\bibinitperiod\bibinitdelim Y\bibinitperiod},
+         given={Giladi\bibnamedelima N.},
+         giveni={G\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HJBYGN1}
+    \strng{fullhash}{HJBYGN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{pages}{321:656\bibrangedash 570}
+    \field{title}{Time series analysis of leg movements during freezing of gait
+  in Parkinson's disease:akinesia,rhyme or reason?}
+    \field{journaltitle}{Physica A.}
+    \field{year}{2003}
+  \endentry
+
+  \entry{22}{article}{}
+    \name{author}{1}{}{%
+      {{hash=JEVLFMFRWE}{%
+         family={Jovanov\bibnamedelima E},
+         familyi={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+         suffix={Wang\bibnamedelima E},
+         suffixi={W\bibinitperiod\bibinitdelim E\bibinitperiod},
+         given={Verhagen L Fredrickson M Fratangelo\bibnamedelima R.},
+         giveni={V\bibinitperiod\bibinitdelim L\bibinitperiod F\bibinitperiod
+  M\bibinitperiod F\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JEWEVLFMFR1}
+    \strng{fullhash}{JEWEVLFMFR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{J}
+    \field{sortinithash}{J}
+    \field{pages}{5151\bibrangedash 5154}
+    \field{title}{deFOGÐA real time system for detection and unfreezing of
+  gait of Parkinson's patients.}
+    \field{journaltitle}{31st Annual International Conference of the IEEE
+  EMBS.}
+    \field{year}{2009}
+  \endentry
+
+  \entry{42}{article}{}
+    \name{author}{1}{}{%
+      {{hash=HaMNTTYLSNHSJ}{%
+         prefix={Handojoseno\bibnamedelima a},
+         prefixi={H\bibinitperiod\bibinitdelim a\bibinitperiod},
+         family={MA},
+         familyi={M\bibinitperiod},
+         suffix={Shine\bibnamedelima JM},
+         suffixi={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+         given={Nguyen TN Tran Y Lewis SJG Nguyen\bibnamedelima HT},
+         giveni={N\bibinitperiod\bibinitdelim T\bibinitperiod T\bibinitperiod
+  Y\bibinitperiod L\bibinitperiod S\bibinitperiod N\bibinitperiod\bibinitdelim
+  H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MSJNTTYLSNHHa1}
+    \strng{fullhash}{MSJNTTYLSNHHa1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{pages}{2012:69\bibrangedash 72}
+    \field{title}{The detection of Freezing of Gait in Parkinson's disease
+  patients using EEG signals based on Wavelet decomposition}
+    \field{journaltitle}{34th AnnuInt Conf IEEE Eng Med Biol Soc.}
+    \field{year}{2012}
+  \endentry
+
+  \entry{43}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MSGEMAHJTGCA}{%
+         family={Mazilu\bibnamedelima S},
+         familyi={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+         suffix={Calatroni\bibnamedelima A},
+         suffixi={C\bibinitperiod\bibinitdelim A\bibinitperiod},
+         given={Gazit E Mirelman A Hausdorff J Troester\bibnamedelima G.},
+         giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod M\bibinitperiod
+  A\bibinitperiod H\bibinitperiod J\bibinitperiod T\bibinitperiod\bibinitdelim
+  G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MSCAGEMAHJTG1}
+    \strng{fullhash}{MSCAGEMAHJTG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{pages}{6:1\bibrangedash 1}
+    \field{title}{Prediction of Freezing of Gait in Parkinson's from
+  Physiological Wearables: An Exploratory Study.}
+    \field{journaltitle}{IEEE J Biomed Heal Informatics.}
+    \field{year}{2015}
+  \endentry
+
+  \entry{48}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MSZZRDTGPMeaHM}{%
+         family={Mazilu\bibnamedelima S},
+         familyi={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+         suffix={Hardegger\bibnamedelima M},
+         suffixi={H\bibinitperiod\bibinitdelim M\bibinitperiod},
+         given={Zhu Z Roggen D TroÈster G Plotnik M et\bibnamedelima al.},
+         giveni={Z\bibinitperiod\bibinitdelim Z\bibinitperiod R\bibinitperiod
+  D\bibinitperiod T\bibinitperiod G\bibinitperiod P\bibinitperiod
+  M\bibinitperiod e\bibinitperiod\bibinitdelim a\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MSHMZZRDTGPMea1}
+    \strng{fullhash}{MSHMZZRDTGPMea1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{pages}{123\bibrangedash 130}
+    \field{title}{Online Detection of Freezing of Gait with Smartphones and
+  Machine Learning Techniques.}
+    \field{journaltitle}{Proc 6th Int ICST Conf Pervasive Comput Technol
+  Healthc.}
+    \field{year}{2012}
+  \endentry
+
+  \entry{27}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MSMTDVMHSJeaYD}{%
+         family={Moore\bibnamedelima ST},
+         familyi={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+         suffix={Yungher\bibnamedelima Da},
+         suffixi={Y\bibinitperiod\bibinitdelim D\bibinitperiod},
+         given={Morris TR Dilda V MacDougall HG Shine JM et\bibnamedelima al.},
+         giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod D\bibinitperiod
+  V\bibinitperiod M\bibinitperiod H\bibinitperiod S\bibinitperiod
+  J\bibinitperiod e\bibinitperiod\bibinitdelim a\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MSYDMTDVMHSJea1}
+    \strng{fullhash}{MSYDMTDVMHSJea1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{Autonomous identification of freezing of gait in Parkinson's
+  disease from lower-body segmental accelerometry}
+    \field{journaltitle}{Neuroeng Rehabil. Journal of NeuroEngineering and
+  Rehabilitation}
+    \field{year}{2013}
+  \endentry
+
+  \entry{26}{article}{}
+    \name{author}{1}{}{%
+      {{hash=NKZYFUSFZKeaTK}{%
+         family={Niazmand\bibnamedelima K},
+         familyi={N\bibinitperiod\bibinitdelim K\bibinitperiod},
+         suffix={Tonn\bibnamedelima K},
+         suffixi={T\bibinitperiod\bibinitdelim K\bibinitperiod},
+         given={Zhao Y Fietzek UM Schroeteler F Ziegler K et\bibnamedelima
+  al.},
+         giveni={Z\bibinitperiod\bibinitdelim Y\bibinitperiod F\bibinitperiod
+  U\bibinitperiod S\bibinitperiod F\bibinitperiod Z\bibinitperiod
+  K\bibinitperiod e\bibinitperiod\bibinitdelim a\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NKTKZYFUSFZKea1}
+    \strng{fullhash}{NKTKZYFUSFZKea1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{pages}{201\bibrangedash 204}
+    \field{title}{Freezing of Gait detection in Parkinson's disease using
+  accelerometer based smart clothes.}
+    \field{journaltitle}{IEEE Biomedical Circuits and Systems Conference
+  (BioCAS).}
+    \field{year}{2011}
+  \endentry
+
+  \entry{39}{article}{}
+    \name{author}{1}{}{%
+      {{hash=NADKFSBkEDWW}{%
+         family={Nieuwboer\bibnamedelima A},
+         familyi={N\bibinitperiod\bibinitdelim A\bibinitperiod},
+         suffix={De\bibnamedelima Weerdt\bibnamedelima W},
+         suffixi={D\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim
+  W\bibinitperiod},
+         given={Desloovere K Fieuws S Broens-kaucsik\bibnamedelima E.},
+         giveni={D\bibinitperiod\bibinitdelim K\bibinitperiod F\bibinitperiod
+  S\bibinitperiod B\bibinitperiod-k\bibinitperiod\bibinitdelim
+  E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NADWWDKFSBkE1}
+    \strng{fullhash}{NADWWDKFSBkE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{pages}{16: 1066\bibrangedash 1075}
+    \field{title}{Abnormalities of the Spatiotemporal Characteristics of Gait
+  at the Onset of Freezing in Parkinson ` s Disease.}
+    \field{journaltitle}{Mov Disord.}
+    \field{year}{2001}
+  \endentry
+
+  \entry{34}{article}{}
+    \name{author}{1}{}{%
+      {{hash=PLCRMDCACJdMEeaSA}{%
+         family={Pérez-Lòpez\bibnamedelima C},
+         familyi={P\bibinitperiod-L\bibinitperiod\bibinitdelim
+  C\bibinitperiod},
+         suffix={Samà\bibnamedelima A},
+         suffixi={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+         given={Rodrìguez-Martìn D Català A-Cabestany J de Mingo E
+  et\bibnamedelima al.},
+         giveni={R\bibinitperiod-M\bibinitperiod D\bibinitperiod
+  C\bibinitperiod A\bibinitperiod-C\bibinitperiod J\bibinitperiod
+  d\bibinitperiod M\bibinitperiod E\bibinitperiod e\bibinitperiod\bibinitdelim
+  a\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PLCSARMDCACJdMEea1}
+    \strng{fullhash}{PLCSARMDCACJdMEea1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{pages}{461\bibrangedash 474}
+    \field{title}{Monitoring Motor Fluctuations in Parkinson's Disease Using a
+  Waist-Worn Inertial Sensor.}
+    \field{journaltitle}{International Work Conference on Artificial Neural
+  Networks Advances in Computational Intelligence Lecture Notes on Computer
+  Science.}
+    \field{year}{2015}
+  \endentry
+
+  \entry{44}{article}{}
+    \name{author}{1}{}{%
+      {{hash=TBRMDvdANCWRMCA}{%
+         family={Takač\bibnamedelima B},
+         familyi={T\bibinitperiod\bibinitdelim B\bibinitperiod},
+         suffix={Català\bibnamedelima A},
+         suffixi={C\bibinitperiod\bibinitdelim A\bibinitperiod},
+         given={Rodrìguez Martìn D van der Aa N Chen W
+  Rauterberg\bibnamedelima M.},
+         giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod D\bibinitperiod
+  v\bibinitperiod d\bibinitperiod A\bibinitperiod N\bibinitperiod
+  C\bibinitperiod W\bibinitperiod R\bibinitperiod\bibinitdelim
+  M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TBCARMDvdANCWRM1}
+    \strng{fullhash}{TBCARMDvdANCWRM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{pages}{1: e14}
+    \field{title}{Position and Orientation Tracking in a Ubiquitous Monitoring
+  System for Parkinson Disease Patients With Freezing of Gait Symptom.}
+    \field{journaltitle}{JMIR mhealth uhealth}
+    \field{year}{2013}
+  \endentry
+
+  \entry{45}{article}{}
+    \name{author}{1}{}{%
+      {{hash=WAGNHJHT}{%
+         family={Weiss\bibnamedelima A},
+         familyi={W\bibinitperiod\bibinitdelim A\bibinitperiod},
+         suffix={Herman\bibnamedelima T},
+         suffixi={H\bibinitperiod\bibinitdelim T\bibinitperiod},
+         given={Giladi N Hausdorff\bibnamedelima JM.},
+         giveni={G\bibinitperiod\bibinitdelim N\bibinitperiod
+  H\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WAHTGNHJ1}
+    \strng{fullhash}{WAHTGNHJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{Objective assessment of fall risk in Parkinson's disease
+  using a body-fixed sensor worn for 3 days.}
+    \field{journaltitle}{PLoS One}
+    \field{year}{2014}
+  \endentry
+
+  \entry{24}{article}{}
+    \name{author}{1}{}{%
+      {{hash=ZHFEKT}{%
+         family={Zabaleta\bibnamedelima H},
+         familyi={Z\bibinitperiod\bibinitdelim H\bibinitperiod},
+         suffix={Keller\bibnamedelima T},
+         suffixi={K\bibinitperiod\bibinitdelim T\bibinitperiod},
+         given={Fimbel\bibnamedelima EJ.},
+         giveni={F\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZHKTFE1}
+    \strng{fullhash}{ZHKTFE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{title}{Gait analysis in frequency domain for freezing detection in
+  patients with Parkinson's disease.}
+    \field{journaltitle}{Gerontechnology.}
+    \field{year}{2008}
+  \endentry
+
+  \entry{46}{article}{}
+    \name{author}{1}{}{%
+      {{hash=ZYNKFUDLCBaeaTK}{%
+         family={Zhao\bibnamedelima Y},
+         familyi={Z\bibinitperiod\bibinitdelim Y\bibinitperiod},
+         suffix={Tonn\bibnamedelima K},
+         suffixi={T\bibinitperiod\bibinitdelim K\bibinitperiod},
+         given={Niazmand K Fietzek UM D'Angelo LT Ceballos-Baumann a.
+  et\bibnamedelima al.},
+         giveni={N\bibinitperiod\bibinitdelim K\bibinitperiod F\bibinitperiod
+  U\bibinitperiod D\bibinitperiod L\bibinitperiod
+  C\bibinitperiod-B\bibinitperiod a\bibinitperiod e\bibinitperiod\bibinitdelim
+  a\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZYTKNKFUDLCBaea1}
+    \strng{fullhash}{ZYTKNKFUDLCBaea1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{pages}{192\bibrangedash 195}
+    \field{title}{Online FOG Identification in Parkinson's disease with a
+  time-frequency combined Algorithm.}
+    \field{journaltitle}{Proc 2012 IEEE-EMBS Int Conf Biomed Heal Informatics.}
+    \field{year}{2012}
+  \endentry
+\enddatalist
 \endinput
