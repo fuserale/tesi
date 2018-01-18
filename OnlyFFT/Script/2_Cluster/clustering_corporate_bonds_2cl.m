@@ -21,7 +21,7 @@ for isubject = [1 2 3 8]
         rng('default');
         
         % features to cluster
-        bonds = A(:,2:55);
+        bonds = A(:,2:n-1);
         %Number of cluster to create
         numClust = 2;
         
@@ -51,32 +51,32 @@ for isubject = [1 2 3 8]
             % cluster
             kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
             
-            P = array2table(kidx);
-            writetable(P, [datadir2 'kmeans_' dist_k '_' fileruns(r).name] );
-            display([datadir2 'kmeans_' dist_k '_' fileruns(r).name]);
+%             P = array2table(kidx);
+%             writetable(P, [datadir2 'kmeans_' dist_k '_' fileruns(r).name] );
+%             display([datadir2 'kmeans_' dist_k '_' fileruns(r).name]);
             V = array2table([A(:,n) kidx]);
             writetable(V, [datadir2 'versus_kmeans_' dist_k '_' fileruns(r).name] );
             display([datadir2 'versus_kmeans_' dist_k '_' fileruns(r).name]);
         end
         
-%         %%% neural networks - Self organizing Maps %%%
-%         
-%         % Create a Self-Organizing Map
-%         dimension1 = numClust;
-%         dimension2 = 1;
-%         net = selforgmap([dimension1 dimension2]);
-%         
-%         % Train the network
-%         net.trainParam.showWindow = 0;
-%         [net,tr] = train(net,bonds');
-%         
-%         % Test the network
-%         nidx = net(bonds');
-%         nidx = vec2ind(nidx)';
-%         
-%         P = array2table(nidx);
-%         writetable(P, [datadir2 'net_' fileruns(r).name] );
-%         display([datadir2 'net_' fileruns(r).name]);
+        %%% neural networks - Self organizing Maps %%%
+        
+        % Create a Self-Organizing Map
+        dimension1 = numClust;
+        dimension2 = 1;
+        net = selforgmap([dimension1 dimension2]);
+        
+        % Train the network
+        net.trainParam.showWindow = 0;
+        [net,tr] = train(net,bonds');
+        
+        % Test the network
+        nidx = net(bonds');
+        nidx = vec2ind(nidx)';
+        
+        P = array2table([A(:,n) nidx]);
+        writetable(P, [datadir2 'versus_net_' fileruns(r).name] );
+        display([datadir2 'versus_net_' fileruns(r).name]);
 %         
 %         
 %         %     %%% FUZZY C-MEANS %%%

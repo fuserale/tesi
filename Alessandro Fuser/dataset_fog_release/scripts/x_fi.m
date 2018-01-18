@@ -35,7 +35,7 @@ function res = x_fi(data,SR,stepSize)
         time(i) = jPos;             
                
         % get the signal in the window
-        y = data(jStart:jPos);
+        y = data(jStart:jPos,1);
         y = y - mean(y); % make signal zero-mean
 
         % Compute FFT
@@ -52,7 +52,7 @@ function res = x_fi(data,SR,stepSize)
          freezeIndex(i) = areaFreezeBand/areaLocoBand;
          % --------------------
          
-        
+        fr(i)=mode(data(jStart:jPos,2));
         % next window
         jPos = jPos + stepSize;
         i = i + 1;
@@ -62,6 +62,7 @@ function res = x_fi(data,SR,stepSize)
 res.sum = sumLocoFreeze;
 res.quot = freezeIndex;
 res.time = time;
+res.fr = fr;
 
 
 

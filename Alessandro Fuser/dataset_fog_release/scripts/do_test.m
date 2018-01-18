@@ -1,6 +1,6 @@
 datadir = '../dataset/CSV/';
 SR = 64;            % Sample rate in herz
-stepSize=128;        % Step size in samples
+stepSize=32;        % Step size in samples
 offDelay=2;         % Evaluation delay in seconds: tolerates delay after detecting
 onDelay=2;          % Evaluation delay in seconds: tolerates delay before detecting
 
@@ -37,16 +37,18 @@ for isubject=[1:3 5:9]
                 data = table2array(readtable(filename));
 
                 % Moore's algorithm
-                res = x_fi(data(:,2+isensor*3+iaxis),SR,stepSize);
-                F(:,1) = res.time';
-                F(:,2+isensor*3+iaxis) = res.quot';
-                % Extension of Baechlin to handle low-enery situations
+                res = x_fi(data(:,[2+isensor*3+iaxis 11]),SR,stepSize);
+
+                % Extension of Baechlin to handle low-energy situations
                 % (e.g. standing)
                 res.quot(res.sum < TH.power) = 0;
+                
+                F(:,1) = res.time';
+                F(:,2+isensor*3+iaxis) = res.quot';
 
                 % Classification
                 lframe = (res.quot>TH.freeze(isubject))';             
-
+                
 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 % We do not want to compute performance on the "non experiment" part, 
@@ -66,6 +68,7 @@ for isubject=[1:3 5:9]
                 % Remove the non experiment part from the ground truth and classification 
                 gtframe2 = gtframe(xp)-1;       % subtract 1 to have 0 or 1 as labels
                 lframe2 = lframe(xp);           % 0=no freeze, 1=freeze
+                T = [res.quot' lframe2 gtframe2];
 
                 res = x_countTxFx(gtframe2,lframe2,offDelay*SR/stepSize,onDelay*SR/stepSize);
                 resrun = resrun + res;
@@ -85,7 +88,7 @@ for isubject=[1:3 5:9]
 
         end
     end
-    M = array2table([F gtframe]);
+    M = array2table([F(:,1:4) gtframe]);
     writetable(M, ['FreezeIndex_S' num2str(isubject,'%02d') 'R01.csv']);
     disp(['FreezeIndex_S' num2str(isubject,'%02d') 'R01.csv']);
 end %subject

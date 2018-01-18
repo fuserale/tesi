@@ -15,12 +15,12 @@ function x_plot(file)
     ttext={'sensor ankle','sensor knee', 'sensor hip'};
     
     clf;
-    subplot(3,3,1);
+    %subplot(3,3,1);
     %subplot(3,1,1);
     sensorpos=0;
     for sensorpos = 0:2
         for sensoraxis = 0:2
-            subplot(3,3,1+sensoraxis*3 + sensorpos);
+            %subplot(3,3,1+sensoraxis*3 + sensorpos);
             %subplot(3,1,1+sensoraxis);
             
             % Plot the patches: find the discontinuities in the labels

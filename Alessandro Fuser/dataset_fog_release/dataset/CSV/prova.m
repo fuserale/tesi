@@ -7,6 +7,7 @@ for i=1:64*2:92802
         xlabel('NOFOG');
     end
     if mode(A(i:i+128,11) == 2)
+        figure()
         plot(A(i:i+128,1),A(i:i+128,8));
         xlabel('FOG');
     end

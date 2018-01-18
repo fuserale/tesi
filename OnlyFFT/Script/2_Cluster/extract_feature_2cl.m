@@ -25,7 +25,7 @@ for isubject = [1 2 3 8]
         
         % filtro passa alto
         fhp = hpfilter;
-        A = filter(fhp,A); 
+        A = filter(fhp,A);
         
         size_windows_sec = 2;
         %size of the windows in number of samples
@@ -45,37 +45,56 @@ for isubject = [1 2 3 8]
             
             % time sample
             F(number_sample, 1) = TIME(i,:);
-            % media
-            F(number_sample, 2:10) = mean(B);
-            % deviazione standard
-            F(number_sample, 11:19) = std(B);
-            % varianza
-            F(number_sample, 20:28) = std(B);
-            % energia
-            F(number_sample, 29:37) = energyn(B,Fs);
-            % potenza
-            F(number_sample, 38:46) = powern(B,Fs,m);
+%             % media
+%             F(number_sample, 2:10) = mean(B);
+%             % deviazione standard
+%             F(number_sample, 11:19) = std(B);
+%             % varianza
+%             F(number_sample, 20:28) = std(B);
+%             % energia
+%             F(number_sample, 29:37) = energyn(B,Fs);
+%             % potenza
+%             F(number_sample, 38:46) = powern(B,Fs,m);
+%             % freezing index
+%             F(number_sample, 47) = freeze(B(:,1),Fs);
+%             F(number_sample, 48) = freeze(B(:,2),Fs);
+%             F(number_sample, 49) = freeze(B(:,3),Fs);
+%             F(number_sample, 50) = freeze(B(:,4),Fs);
+%             F(number_sample, 51) = freeze(B(:,5),Fs);
+%             F(number_sample, 52) = freeze(B(:,6),Fs);
+%             F(number_sample, 53) = freeze(B(:,7),Fs);
+%             F(number_sample, 54) = freeze(B(:,8),Fs);
+%             F(number_sample, 55) = freeze(B(:,9),Fs);
             % freezing index
-            F(number_sample, 47) = freeze(B(:,1),Fs);
-            F(number_sample, 48) = freeze(B(:,2),Fs);
-            F(number_sample, 49) = freeze(B(:,3),Fs);
-            F(number_sample, 50) = freeze(B(:,4),Fs);
-            F(number_sample, 51) = freeze(B(:,5),Fs);
-            F(number_sample, 52) = freeze(B(:,6),Fs);
-            F(number_sample, 53) = freeze(B(:,7),Fs);
-            F(number_sample, 54) = freeze(B(:,8),Fs);
-            F(number_sample, 55) = freeze(B(:,9),Fs);
+            F(number_sample, 2) = freeze(B(:,1),Fs);
+            F(number_sample, 3) = freeze(B(:,2),Fs);
+            F(number_sample, 4) = freeze(B(:,3),Fs);
+            F(number_sample, 5) = freeze(B(:,4),Fs);
+            F(number_sample, 6) = freeze(B(:,5),Fs);
+            F(number_sample, 7) = freeze(B(:,6),Fs);
+            F(number_sample, 8) = freeze(B(:,7),Fs);
+            F(number_sample, 9) = freeze(B(:,8),Fs);
+            F(number_sample, 10) = freeze(B(:,9),Fs);
             %is freezing?
-            F(number_sample,56) = mode(FREEZE(i:i+size_overlap_samples-1,:));
+            F(number_sample,11) = mode(FREEZE(i:i+size_windows_sample-1,:));
             
             %go to next sample
             number_sample = number_sample + 1;
             
         end
         
-        
+        %% riduzione delle feature
+%         mdl = fscnca(F(:,2:n-1),F(:,n));
+% %         figure()
+% %         plot(mdl.FeatureWeights,'ro')
+% %         grid on
+% %         xlabel('Feature index')
+% %         ylabel('Feature weight')
+%         F = [F(:,1) F(:,mdl.FeatureWeights > 0.001) F(:,n)];
+%         
+        %% salvo la tabella
         P = array2table(F);
-        writetable(P, ['../../features/2cl_feature_sec' num2str(size_windows_sec,2) '_ov' num2str(size_overlap_sec,2) '_' fileruns(r).name ]);
+        writetable(P, ['../../Features/2cl_feature_sec' num2str(size_windows_sec,2) '_ov' num2str(size_overlap_sec,2) '_' fileruns(r).name ]);
         display(['2cl_feature_sec' num2str(size_windows_sec,2) '_ov' num2str(size_overlap_sec,2) '_' fileruns(r).name]);
         F(:,:) = [];
     end
