@@ -23,6 +23,9 @@ for isubject = [1 2 3 4 8]
         FREEZE = table2array(T(:,11));
         Fs = 64;
         
+        fhp = hpfilter;
+        A = filter(fhp,A); 
+        
         %size of the windows in seconds
         for k = 5:5:45
             
@@ -31,18 +34,18 @@ for isubject = [1 2 3 4 8]
             for i = (Y+0.5):0.5:5
                 size_windows_sec = i;
                 %size of the windows in number of samples
-                size_windows_sample = Fs * i;
+                size_windows_sample = Fs * size_windows_sec;
                 
                 %overlap of the windows in seconds
                 size_overlap_sec = Y;
                 %size of the overlap in number of samples
-                size_overlap_samples = Fs * Y;
+                size_overlap_samples = Fs * size_overlap_sec;
                 
                 number_sample = 1;
                 
                 %for each sample window, compute the features
-                for i=1:size_overlap_samples:m - size_overlap_samples
-                    B = A(i:i+size_overlap_samples-1,:);
+                for i=1:size_overlap_samples:m - size_windows_sample
+                    B = A(i:i+size_windows_sample-1,:);
                     
                     %time sample
                     F(number_sample, 1) = TIME(i,:);
@@ -96,7 +99,7 @@ for isubject = [1 2 3 4 8]
                     F(number_sample,129) = energyn(B(:,4:6),length(B));
                     F(number_sample,130) = energyn(B(:,7:9),length(B));
                     %is freezing?
-                    F(number_sample,131) = mode(FREEZE(i:i+size_overlap_samples-1,:));
+                    F(number_sample,131) = mode(FREEZE(i:i+size_windows_sample-1,:));
                     
                     %go to next sample
                     number_sample = number_sample + 1;
