@@ -3,7 +3,9 @@ clear;
 close all;
 
 %% Load Data
-T = readtable('3cl_S01R01.csv');
+%T = readtable('3cl_S01R01.csv');
+x = 1;
+T = readtable(['leaveout_' num2str(x, '%01d') '.csv']);
 [m,n] = size(T);
 A = table2array(T(:,2:10));
 TIME = table2array(T(:,1));
@@ -108,7 +110,7 @@ ldaResubErr = resubLoss(lda)
 
 %% Predizione su altri dati
 clear F;
-T = readtable('3cl_S02R01.csv');
+T = readtable('3cl_S01R01.csv');
 [m,n] = size(T);
 A = table2array(T(:,2:10));
 TIME = table2array(T(:,1));
