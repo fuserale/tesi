@@ -10,13 +10,15 @@ clear all
 
 %ho messo un run solo
 
-datadir = 'dataset_3cl/';
+% 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
+
+datadir = 'dataset_2cl/';
 
 %choose number of patients to examine (from 1 to 10)
 for isubject = [1:10]
     
     %list of all files for patient number $isubject
-    fileruns = dir([datadir '3cl_S' num2str(isubject,'%02d') 'R01.csv']);
+    fileruns = dir([datadir 'S' num2str(isubject,'%02d') 'R01.csv']);
     
     %while there's file of patient $isubject
     for r = 1:length(fileruns)
@@ -140,15 +142,16 @@ for isubject = [1:10]
         Y = W'*A;
         
         % 7: plot
-%         figure, gscatter(Y(1,:),Y(2,:),class);
-%         legend('NoFog','Fog','PreFog');
+        figure('visible', 'off'), gscatter(Y(1,:),Y(2,:),class);
+        legend('NoFog','Fog','PreFog');
+        savefig([datadir 'LDA_S' num2str(isubject, '%02d')]);
         
         %% Fase di Clustering
-        
-        idx = kmeans(Y', K);
-        versus = [idx class'];
-        writetable(array2table(versus), [datadir 'versus_3cl_S' num2str(isubject,'%02d') 'R01.csv']);
-        isequal(idx,class')
+
+%         idx = kmeans(Y', K);
+%         versus = [idx class'];
+%         writetable(array2table(versus), [datadir 'versus_2cl_S' num2str(isubject,'%02d') 'R01.csv']);
+%         isequal(idx,class')
     end
 end
 
