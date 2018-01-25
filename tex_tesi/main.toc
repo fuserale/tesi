@@ -21,14 +21,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Machine Learning}{10}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Motivations and Goals}{11}{chapter.4}
+\contentsline {subsection}{\numberline {3.2.1}Cluster Analysis}{13}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Self-adaptive TLM model}{13}{chapter.5}
+\contentsline {subsection}{\numberline {3.2.2}Classificazione}{15}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Software Implementation}{15}{chapter.6}
+\contentsline {chapter}{\numberline {4}Motivations and Goals}{19}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Case Studies}{17}{chapter.7}
+\contentsline {chapter}{\numberline {5}Self-adaptive TLM model}{21}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{19}{chapter.8}
+\contentsline {chapter}{\numberline {6}Software Implementation}{23}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{21}{chapter*.4}
+\contentsline {chapter}{\numberline {7}Case Studies}{25}{chapter.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{27}{chapter.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{29}{chapter*.4}
