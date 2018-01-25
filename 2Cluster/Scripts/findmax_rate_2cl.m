@@ -37,10 +37,11 @@ for isubject = [1 2 3 4 8]
                     maxPN = A(m,n+1);
                     maxNP = A(m+1,n);
                     maxNN = A(m+1,n+1);
-                    riga = m+1;
+                    riga = m;
                     colonna = n;
                     sensitivity = temp1;
                     specificity = temp2;
+                    diffscore = temp;
                 end
             end
         end

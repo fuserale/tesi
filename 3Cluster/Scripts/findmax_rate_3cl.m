@@ -36,7 +36,8 @@ for isubject = [1 2 3 4 8]
         
         for m = 1:3:m1-2
             for n = 1:3:n1-2
-                temp = ((A(m,n) + A(m+1,n+1) + A(m+2,n+2)) - (A(m+1,n) + A(m+2,n) + A(m,n+1) + A(m+2,n+1) + A(m,n+2) + A(m+1,n+2)));
+                TRE = A(m:m+2,n:n+2);
+                temp = ((A(m,n) + A(m+1,n+1) + A(m+2,n+2))/(A(m,n)+A(m,n+1)+A(m,n+2)+A(m+1,n)+A(m+1,n+1)+A(m+1,n+2)+A(m+2,n)+A(m+2,n+1)+A(m+2,n+2)));
                 if temp > diffscore
                     maxA1 = A(m,n);
                     maxA2 = A(m+1,n);
@@ -49,7 +50,8 @@ for isubject = [1 2 3 4 8]
                     maxC3 = A(m+2,n+2);
                     riga = m;
                     colonna = n;
-                    temp1 = (maxA1 + maxB2 + maxC3) / 3;
+                    temp1 = temp;
+                    diffscore = temp;
                 end
             end
         end

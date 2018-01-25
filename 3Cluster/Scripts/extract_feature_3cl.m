@@ -44,7 +44,7 @@ for isubject = [1 2 3 4 8]
                 number_sample = 1;
                 
                 %for each sample window, compute the features
-                for i=1:size_overlap_samples:m - size_windows_sample
+                for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
                     B = A(i:i+size_windows_sample-1,:);
                     
                     %time sample
