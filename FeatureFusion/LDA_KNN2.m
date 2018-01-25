@@ -1,25 +1,15 @@
-%  LDA
-
-%2� prova uso i range
-
-
-clc;clear all
-%close all
-
-%carico il dato
-
-%ho messo un run solo
-
 % 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
-
-
-
 datadir = 'dataset_3cl/';
+
 o=0.5;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
 w=4;  %dimensione della finestra
 
+clear F;
+clear Ck;
+clear class;
+clear mk;
 %choose number of patients to examine (from 1 to 10)
-for isubject = [1 2 3 5 6 7 8 9]
+for isubject = [1]
     
     %list of all files for patient number $isubject
     fileruns = dir([datadir 'S' num2str(isubject,'%02d') 'R01.csv']);
@@ -148,24 +138,24 @@ for isubject = [1 2 3 5 6 7 8 9]
         
         % 6: transformation
         Y = W'*A;
-        
+        PR2 = [Y' class'];
         % 7: plot
         if k > 2
-            figure('visible', 'off'), gscatter(Y(1,:),Y(2,:),class);
+            figure('visible', 'on'), gscatter(Y(1,:),Y(2,:),class);
             legend('NoFog','Fog','PreFog');
         end
         if K == 2
-            figure('visible', 'off'), gscatter(1:length(Y(1,:)),Y(1,:),class);
+            figure('visible', 'on'), gscatter(1:length(Y(1,:)),Y(1,:),class);
             legend('NoFog','Fog');
         end
         title(['LDA S' num2str(isubject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-        savefig([datadir 'LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
+        %savefig([datadir 'LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
         
         %% Fase di Clustering
         
         idx = kmeans(Y', K);
         versus = [idx class'];
-        writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(isubject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
+        %writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(isubject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
         [ldaResubCM,~] = confusionmat(class',idx)
         toc;
     end

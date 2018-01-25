@@ -1,9 +1,6 @@
 %  LDA
 
 %2� prova uso i range
-
-clc;clear all
-
 %carico il dato
 
 %ho messo un run solo
@@ -15,7 +12,7 @@ o=0.5;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
 w=4;  %dimensione della finestra
 
 tic;
-for l = [1 2 3 5 6 7 8 9]
+for l = [1]
     leaveout_subject = l;
     subject = [1 2 3 5 6 7 8 9];
     for i=1:length(subject)-1
@@ -42,7 +39,7 @@ for l = [1 2 3 5 6 7 8 9]
             %take the dimesion
             [m,n] = size(T);
             %table to array to do maths
-            A = table2array(T(:,2:4));
+            A = table2array(T(:,2:10));
             TIME = table2array(T(:,1));
             FREEZE = table2array(T(:,11));
             Fs = 64;
@@ -151,7 +148,7 @@ for l = [1 2 3 5 6 7 8 9]
     
     % 6: transformation
     Y = W'*A;
-    
+    PR = [Y' class'];
     % 7: plot
     if k > 2
         figure('visible', 'on'), gscatter(Y(1,:),Y(2,:),class);
@@ -162,13 +159,13 @@ for l = [1 2 3 5 6 7 8 9]
         legend('NoFog','Fog');
     end
     title(['LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-    savefig([datadir 'LDA Caviglia Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
+    %savefig([datadir 'LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
     
     %% Fase di Clustering
     
     idx = kmeans(Y', K);
     versus = [idx class'];
-    writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(l,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
+    %writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(l,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
     [ldaResubCM,~] = confusionmat(class',idx)
     
     toc;
