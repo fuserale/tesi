@@ -1,6 +1,5 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\defcounter {refsection}{0}\relax 
-\select@language {english}
+\babel@toc {english}{}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Acknowledgements}{v}{chapter*.1}
 \defcounter {refsection}{0}\relax 
@@ -14,14 +13,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Background}{7}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Motivations and Goals}{9}{chapter.4}
+\contentsline {section}{\numberline {3.1}Freezing Of Gait}{7}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Self-adaptive TLM model}{11}{chapter.5}
+\contentsline {subsection}{\numberline {3.1.1}Le tipologie di Fog}{8}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Software Implementation}{13}{chapter.6}
+\contentsline {subsection}{\numberline {3.1.2}Influenza del FoG nella camminata}{9}{subsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Case Studies}{15}{chapter.7}
+\contentsline {section}{\numberline {3.2}Machine Learning}{10}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{17}{chapter.8}
+\contentsline {chapter}{\numberline {4}Motivations and Goals}{11}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{19}{chapter*.4}
+\contentsline {chapter}{\numberline {5}Self-adaptive TLM model}{13}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Software Implementation}{15}{chapter.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Case Studies}{17}{chapter.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{19}{chapter.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{21}{chapter*.4}

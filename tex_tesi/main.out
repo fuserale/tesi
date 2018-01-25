@@ -4,9 +4,13 @@
 \BOOKMARK [1][-]{section.1.2}{Outline}{chapter.1}% 4
 \BOOKMARK [0][-]{chapter.2}{Letteratura}{}% 5
 \BOOKMARK [0][-]{chapter.3}{Background}{}% 6
-\BOOKMARK [0][-]{chapter.4}{Motivations and Goals}{}% 7
-\BOOKMARK [0][-]{chapter.5}{Self-adaptive TLM model}{}% 8
-\BOOKMARK [0][-]{chapter.6}{Software Implementation}{}% 9
-\BOOKMARK [0][-]{chapter.7}{Case Studies}{}% 10
-\BOOKMARK [0][-]{chapter.8}{Conclusions and Future Work}{}% 11
-\BOOKMARK [0][-]{chapter*.4}{Bibliography}{}% 12
+\BOOKMARK [1][-]{section.3.1}{Freezing Of Gait}{chapter.3}% 7
+\BOOKMARK [2][-]{subsection.3.1.1}{Le tipologie di Fog}{section.3.1}% 8
+\BOOKMARK [2][-]{subsection.3.1.2}{Influenza del FoG nella camminata}{section.3.1}% 9
+\BOOKMARK [1][-]{section.3.2}{Machine Learning}{chapter.3}% 10
+\BOOKMARK [0][-]{chapter.4}{Motivations and Goals}{}% 11
+\BOOKMARK [0][-]{chapter.5}{Self-adaptive TLM model}{}% 12
+\BOOKMARK [0][-]{chapter.6}{Software Implementation}{}% 13
+\BOOKMARK [0][-]{chapter.7}{Case Studies}{}% 14
+\BOOKMARK [0][-]{chapter.8}{Conclusions and Future Work}{}% 15
+\BOOKMARK [0][-]{chapter*.4}{Bibliography}{}% 16
