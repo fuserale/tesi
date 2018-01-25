@@ -3,7 +3,7 @@
 %2� prova uso i range
 
 
-clear all
+clc;clear all
 %close all
 
 %carico il dato
@@ -12,10 +12,14 @@ clear all
 
 % 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
 
-datadir = 'dataset_2cl/';
+
+
+datadir = 'dataset_3cl/';
+o=0.5;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
+w=4;  %dimensione della finestra
 
 %choose number of patients to examine (from 1 to 10)
-for isubject = [1:10]
+for isubject = [1 2 3 5 6 7 8 9]
     
     %list of all files for patient number $isubject
     fileruns = dir([datadir 'S' num2str(isubject,'%02d') 'R01.csv']);
@@ -35,26 +39,25 @@ for isubject = [1:10]
         FREEZE = table2array(T(:,11));
         Fs = 64;
         
-        Y=1;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
-        i=2;  %dimensione della finestra
+        tic;
         
         
         %% RANGE..popolo F, vettore di range
-        size_windows_sec = i;
+        size_windows_sec = w;
         %size of the windows in number of samples
         size_windows_sample = Fs * size_windows_sec;
         
         %overlap of the windows in seconds
-        size_overlap_sec = Y;
+        size_overlap_sec = o;
         %size of the overlap in number of samples
-        size_overlap_samples = Fs * Y;
+        size_overlap_samples = Fs * o;
         
         number_sample = 1;
         
         %for each sample window, compute the features
         
         %metto tutta la finestra (matrice 128*9) sulla stessa riga
-        for i=1:size_overlap_samples:m - size_windows_sample
+        for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
             B = A(i:i+size_windows_sample-1,:); %B � 128 * 9 (2 secondi)
             B=B(:);
             F(number_sample,:)=B';
@@ -136,22 +139,34 @@ for isubject = [1:10]
         [V,D] = eig(MA);
         
         % 5: transform matrix
-        W = V(:,1:2);
+        if (k > 1)
+            W = V(:,1:K-1);
+        end
+        if (k == 1)
+            W = V(:,1:1);
+        end
         
         % 6: transformation
         Y = W'*A;
         
         % 7: plot
-        figure('visible', 'off'), gscatter(Y(1,:),Y(2,:),class);
-        legend('NoFog','Fog','PreFog');
-        savefig([datadir 'LDA_S' num2str(isubject, '%02d')]);
+        if k > 2
+            figure('visible', 'off'), gscatter(Y(1,:),Y(2,:),class);
+            legend('NoFog','Fog','PreFog');
+        end
+        if K == 2
+            figure('visible', 'off'), gscatter(1:length(Y(1,:)),Y(1,:),class);
+            legend('NoFog','Fog');
+        end
+        title(['LDA S' num2str(isubject,'%02d') ' #CLASS' num2str(K,'%01d')]);
+        savefig([datadir 'LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
         
         %% Fase di Clustering
-
-%         idx = kmeans(Y', K);
-%         versus = [idx class'];
-%         writetable(array2table(versus), [datadir 'versus_2cl_S' num2str(isubject,'%02d') 'R01.csv']);
-%         isequal(idx,class')
+        
+        idx = kmeans(Y', K);
+        versus = [idx class'];
+        writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(isubject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
+        [ldaResubCM,~] = confusionmat(class',idx)
+        toc;
     end
 end
-

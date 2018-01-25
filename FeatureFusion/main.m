@@ -108,7 +108,7 @@ end
 lda = fitcdiscr(F,class');
 ldaClass = resubPredict(lda);
 ldaResubErr = resubLoss(lda)
-[ldaResubCM,grpOrder] = confusionmat(class',ldaClass)
+[ldaResubCM,~] = confusionmat(class',ldaClass)
 % figure, gscatter(lda.Mu(1,:), lda.Mu(2,:), class');
 % legend('NoFog','Fog');
 
