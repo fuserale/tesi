@@ -54,19 +54,19 @@ for isubject = [1 2 3 4 8]
             %la prima colonna è il cluster, la seconda è il reale
             D = [A2 A1];
             
-%             %cambia etichette per i casi sbagliati (3 = AB, 4 = BA)
-%             if u == 2
-%                 for i=1:m1
-%                     if D(i,1) ~= D(i,2)
-%                         if D(i,1) == 1
-%                             D(i,1) = 3;
-%                         end
-%                         if D(i,1) == 2
-%                             D(i,1) = 4;
-%                         end
-%                     end
-%                 end
-%             end
+            %cambia etichette per i casi sbagliati (3 = AB, 4 = BA)
+            if u == 2
+                for i=1:m1
+                    if D(i,1) ~= D(i,2)
+                        if D(i,1) == 1
+                            D(i,1) = 3;
+                        end
+                        if D(i,1) == 2
+                            D(i,1) = 4;
+                        end
+                    end
+                end
+            end
             
             %tabella con etichette cambiate e con file da 3 etichette
             F = [A2 D(:,1) A1];
@@ -141,47 +141,47 @@ for isubject = [1 2 3 4 8]
             %                 end
             %                 patch([x1,x2,x2,x1],[y1 y1 y2 y2],pcol{1+type});
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            figure('visible','off');
-            x = 1:m1;
-            
-            subplot(4,1,1)
-            y2 = real_12;
-            c2 = y2;
-            patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            %ylabel(alg);
-            title('REAL 2 LABEL DYNAMICS');
-            
-            subplot(4,1,2)
-            y2 = F(:,3);
-            c2 = y2;
-            patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            %ylabel(alg);
-            title('REAL 3 LABEL DYNAMICS');
-            
-            
-            subplot(4,1,3)
-            y1 = A2;
-            c1 = y1;
-            patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            %ylabel(alg);
-            title(['DYNAMICS 12 S' num2str(isubject,'%2d')]);
-            
-            subplot(4,1,4)
-            y1 = F(:,2);
-            c1 = y1;
-            patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
-            colorbar;
-            xlabel('SAMPLE');
-            %ylabel(alg);
-            title(['DYNAMICS 1234 S' num2str(isubject,'%2d')]);
-            
-            print([datadir_plot alg '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
+%             figure('visible','off');
+%             x = 1:m1;
+%             
+%             subplot(4,1,1)
+%             y2 = real_12;
+%             c2 = y2;
+%             patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             %ylabel(alg);
+%             title('REAL 2 LABEL DYNAMICS');
+%             
+%             subplot(4,1,2)
+%             y2 = F(:,3);
+%             c2 = y2;
+%             patch(x,y2,c2, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             %ylabel(alg);
+%             title('REAL 3 LABEL DYNAMICS');
+%             
+%             
+%             subplot(4,1,3)
+%             y1 = A2;
+%             c1 = y1;
+%             patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             %ylabel(alg);
+%             title(['DYNAMICS 12 S' num2str(isubject,'%2d')]);
+%             
+%             subplot(4,1,4)
+%             y1 = F(:,2);
+%             c1 = y1;
+%             patch(x,y1,c1, 'EdgeColor','flat','Marker','x','MarkerFaceColor','flat');
+%             colorbar;
+%             xlabel('SAMPLE');
+%             %ylabel(alg);
+%             title(['DYNAMICS 1234 S' num2str(isubject,'%2d')]);
+%             
+%             print([datadir_plot alg '_S' num2str(isubject,'%2d') '.jpg'], '-dpng');
             
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             F = array2table(F);
