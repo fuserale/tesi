@@ -27,14 +27,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.3}Riduzione della dimensionalit\IeC {\`a}}{17}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Motivations and Goals}{19}{chapter.4}
+\contentsline {subsection}{\numberline {3.3.1}Analisi Delle Componenti Principali}{17}{subsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Self-adaptive TLM model}{21}{chapter.5}
+\contentsline {subsection}{\numberline {3.3.2}Analisi dei Discriminanti Lineari}{19}{subsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Software Implementation}{23}{chapter.6}
+\contentsline {chapter}{\numberline {4}Motivations and Goals}{21}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Case Studies}{25}{chapter.7}
+\contentsline {chapter}{\numberline {5}Self-adaptive TLM model}{23}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{27}{chapter.8}
+\contentsline {chapter}{\numberline {6}Software Implementation}{25}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{29}{chapter*.4}
+\contentsline {chapter}{\numberline {7}Case Studies}{27}{chapter.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {8}Conclusions and Future Work}{29}{chapter.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{31}{chapter*.4}
