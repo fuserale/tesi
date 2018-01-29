@@ -6,15 +6,15 @@
 %ho messo un run solo
 
 % 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
-
+clc;clear;
 datadir = 'dataset_3cl/';
 o=0.5;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
-w=4;  %dimensione della finestra
+w=2;  %dimensione della finestra
 
 tic;
 for l = [1]
     leaveout_subject = l;
-    subject = [1 2 3 5 6 7 8 9];
+    subject = [1 2 3 4 5 6 7 8 9 10];
     for i=1:length(subject)-1
         if subject(i) == leaveout_subject
             subject(i) = [];
@@ -163,10 +163,33 @@ for l = [1]
     
     %% Fase di Clustering
     
+    %% K-means
     idx = kmeans(Y', K);
     versus = [idx class'];
     %writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(l,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
     [ldaResubCM,~] = confusionmat(class',idx)
     
-    toc;
+    %% Gaussian Mixture Model
+    %     figure('visible', 'on'), gscatter(Y(1,:),Y(2,:),class);
+    %     legend('NoFog','Fog','PreFog');
+    %     options = statset('Display','final','MaxIter',10000);
+    %     gm = fitgmdist(Y',3,'Options',options)
+    % %     hold on
+    % %     fcontour(@(x,y)pdf(gm,[x y]));
+    % %     title('Scatter Plot and Fitted GMM Contour')
+    % %     hold off
+    %
+    %     [idx,~,P0] = cluster(gm,Y');
+    %     cluster1 = (idx == 1); % |1| for cluster 1 membership
+    %     cluster2 = (idx == 2); % |2| for cluster 2 membership
+    %     cluster3 = (idx == 3); % |3| for cluster 3 membership
+    %
+    %
+    %     figure;
+    %     gscatter(Y(1,:),Y(2,:),idx');
+    %     legend('Cluster 1','Cluster 2','Cluster 3');
+    %
+    %     [ldaResubCM,~] = confusionmat(class',idx)
+    %
+    %     toc;
 end

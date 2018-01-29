@@ -26,6 +26,8 @@ for isubject = [1 2 3 4 8]
         fhp = hpfilter;
         A = filter(fhp,A);
         
+        A = zscore(A);
+        
         %size of the windows in seconds
         for k = 5:5:45
             
