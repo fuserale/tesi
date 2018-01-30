@@ -1,13 +1,11 @@
+clc;clear;
+
 % 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
 datadir = 'dataset_3cl/';
 
 o=0.5;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
 w=2;  %dimensione della finestra
 
-clear F;
-clear Ck;
-clear class;
-clear mk;
 %choose number of patients to examine (from 1 to 10)
 for isubject = [1 2 3 4 5 6 7 8 9 10]
     
@@ -60,23 +58,7 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             number_sample = number_sample + 1;
             
         end
-        
-        
-        % P = array2table(F);
-        
-        
-        
         %% Linear Discriminant Analysis
-        %
-        % FREEZE
-        % 1 non fog
-        % 2 fog
-        % 3 prefog
-        
-        % perch� in A ho i dati cosi
-        % ogni colonna corrisponde
-        % ad un accelerometro, li prendo tutti
-        %     A=A';
         clear A;
         A=F';
         
@@ -149,13 +131,13 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             legend('NoFog','Fog');
         end
         title(['LDA S' num2str(isubject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-        %savefig([datadir 'LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
+        savefig([datadir '/plot/LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.fig']);
         
         %% Fase di Clustering
         
         idx = kmeans(Y', K);
         versus = [idx class'];
-        %writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(isubject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
+        writetable(array2table(versus), [datadir '/versus/versus_S' num2str(isubject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.csv']);
         [ldaResubCM,~] = confusionmat(class',idx)
         toc;
     end
