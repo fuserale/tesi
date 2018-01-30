@@ -79,7 +79,7 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
 %         legend('NoFog','Fog');
         
         %% Predizione su altri dati
-        T2 = readtable([datadir 'S' num2str(isubject+1, '%02d') 'R01.csv']);
+        T2 = readtable([datadir 'S' num2str(isubject, '%02d') 'R02.csv']);
         [m,n] = size(T2);
         A2 = table2array(T2(:,2:10));
         TIME2 = table2array(T2(:,1));
