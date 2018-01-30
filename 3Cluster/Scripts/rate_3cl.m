@@ -130,8 +130,8 @@ for isubject =[1 2 3 4 5 6 7 8 9 10]
                 %                 false_C2 = C_2 / number_2;
                 %
                 %                 B = [true_A false_A2 false_A3; false_B1 true_B false_B3; false_C1 false_C2 true_C];
-                [C,T,D,M,N]=multic(D(:,2),D(:,1));
-                B = [D(1) D(2) D(7) D(11) D(16)];
+                [c_matrix,Result,RefereceResult]=my_confusion(D(:,2),D(:,1));
+                B = [ReferenceResult.AccuracyInTotal Result.Precision Result.Sensitivity Result.Specificity Result.F1_score];
                 E = [E B];
                 
             end
