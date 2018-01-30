@@ -1,7 +1,7 @@
 
 clear; clc
 
-for isubject = [1 2 3 4 8]
+for isubject = [1 2 3 4 5 6 7 8 9 10]
     datadir = ['../interval_3cl/S' num2str(isubject,'%02d') 'R01/rate/'];
     
     %list of all files for patient number $isubject
