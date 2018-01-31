@@ -9,7 +9,7 @@ I file sono divisi in questa maniera:
 Quello che si può dire è che le stime massime che si raggiungono sono simili, anche se con intervalli diversi, per cui si può usare benissimo un solo accelerometro.
 Non c'è un intervallo che predomina sugli altri, ogni paziente, in base all'algoritmo, ha il suo migliore.
 
-Comunque i punteggi sono veramente buoni, almeno nel caso migliore
+Comunque i punteggi sono veramente buoni, almeno nel caso migliore; anche nel paper originale parlavano di caso migliore, se non sbaglio ( e con sole 2 classi)
 
 Possibile prova: fissiamo un intervallo preciso (tipo 2 secondi e 1 di overlap) e vediamo i risultati che si ottengono
 
