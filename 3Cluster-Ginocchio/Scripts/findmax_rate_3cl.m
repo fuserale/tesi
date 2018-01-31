@@ -1,6 +1,6 @@
 
 clear; clc
-
+U = [];
 for isubject = [1 2 3 4 5 6 7 8 9 10]
     datadir = ['../interval_3cl/S' num2str(isubject,'%02d') 'R01/rate/'];
     
@@ -63,13 +63,15 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
         %         end
         
         % 1 = accuracy, 2 = precision, 7 = recall, 11 = specificity, 16 = F1score 
-        for i = 1:m1
-            for j = 1:5:n1-4
-                temp = sum(A(j:j+4));
+%         for i = 1:m1
+%             for j = 1:5:n1-4
+        for i = 1:4
+            for j = 1:5:16
+                temp = sum(A(i,j:j+4),2);
                 if temp > diffscore
                     TRE = A(i,j:j+4);
-                    riga = i;
-                    colonna = j;
+                    riga = i/2;
+                    colonna = secondi(j);
                     diffscore = temp;
                 end
             end
@@ -79,9 +81,40 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
         C = [C B];
     end
     T = array2table(C);
-    %     T.Properties.VariableNames = {'CMEANS_A' 'CMEANS_B' 'CMEANS_C' 'KMEANS_CB_A' 'KMEANS_CB_B' 'KMEANS_CB_C' 'KMEANS_CR_A' 'KMEANS_CR_B' 'KMEANS_CR_C' 'KMEANS_CS_A' 'KMEANS_CS_B' 'KMEANS_CS_C' 'KMEANS_SQ_A' 'KMEANS_SQ_B' 'KMEANS_SQ_C' 'NET_A' 'NET_B' 'NET_C'};
-    %T.Properties.RowNames = {'P' 'N' 'R_C'};
+    U = [U;T];
     writetable(T, [datadir '3cl_maxrate.csv']);
     disp([datadir '3cl_maxrate.csv']);
     
+end
+writetable(U, '../RateTotale1.csv');
+disp('../RateTotale1.csv');
+
+function second = secondi(j)
+    if (j == 1)
+        second = 1;
+    end
+    if (j == 6)
+        second = 1.5;
+    end
+    if (j == 11)
+        second = 2;
+    end
+    if (j == 16)
+        second = 2.5;
+    end
+    if (j == 21)
+        second = 3;
+    end
+    if (j == 26)
+        second = 3.5;
+    end
+    if (j == 31)
+        second = 4;
+    end
+    if (j == 36)
+        second = 4.5;
+    end
+    if (j == 41)
+        second = 5;
+    end
 end
