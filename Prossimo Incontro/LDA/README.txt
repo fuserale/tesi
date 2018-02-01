@@ -5,3 +5,5 @@ I file sono divisi in questa maniera:
 	- nella cartella versus invece si può vedere dove sbaglia a classificare
 	
 Quello che possiamo dire è che con 1 acc alla volta c'è errore, mentre con 3 acc difficilmente ce n'è, anche se comunque si riesce a distinguere abbastanza bene le 3 classi
+
+Ho fatto anche la prova con samples diversi, e si può vedere come più scendo di campioni al secondo, più ho confusione
