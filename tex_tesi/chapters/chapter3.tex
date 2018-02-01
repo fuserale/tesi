@@ -152,6 +152,36 @@ I principali algoritmi di classificazione sono:
 	guarda le loro etichette. Qualsiasi label ricorra più frequentemente tra le k label più vicine è scelta per assegnare la classe a x.
 	\item \textbf{Support Vector Machine}:  l'idea principale di questo classificatore consiste nel rappresentare gli esempi del training come punti nello spazio mappati in modo tale che punti appartenenti a classi differenti siano separati dal più ampio gap possibile. I punti che mappano il test set saranno assegnati ad una categoria o all'altra in base al lato del gap su cui cadono. Più specificatamente, SVM costruisce un iperpiano ed esegue una buona separazione quando l'iperpiano ha la più ampia distanza dai punti di training più vicini di ciascuna classe. Ci sono molti iperpiani che potrebbero classificare il dato. La miglior scelta è quella di selezionare l'iperpiano che rappresenta la più ampia separazione, o margine, tra due classi, ossia l'iperpiano tale che la distanza tra esso e il punto più vicino su ciascun lato sia massima.
 \end{itemize}
+\subsection{Validazione della Classificazione}
+Al fine di valutare la bontà della classificazione effettuata, viene introdotto il concetto di \textbf{Matrice di Confusione}. Essa è una matrice nxn, con n=numero di classi, nella quale vengono messe a confronto le etichette reali con quelle del classificatore proposto. La figura \ref{immagine_matrice_confusione_2classi}  rapprestra la matrice di confusione con 2 classi possibili:
+\begin{itemize}
+	\item Il \textbf{Veri Positivi} indica quante volte ho classificato giusto l'etichetta che io considero come positiva, ad esempio la classe 1;
+	\item Il \textbf{Veri Negativi} indica quante volte ho classificato giusto l'etichetta che io considero come negativa, ad esempio la classe 2;
+	\item Il \textbf{Falsi Positivi} indica quante volte ho classificato sbagliato l'etichetta che io considero come positiva, ossia il mio classificatore ha etichettato il mio campione con la classe 1, ma in realtà quella misurazione appartiene alla classe 2;
+	\item Il \textbf{Falsi Negativi} indica quante volte ho classificato sbagliato l'etichetta che io considero come negativa, ossia il mio classificatore ha etichettato il mio campione con la classe 2, ma in realtà quella misurazione appartiene alla classe 1;
+\end{itemize}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{images/matrice_confusione.png}
+	\caption{Rappresentazione della matrice di confusione per 2 classi}
+	\label{immagine_matrice_confusione_2classi}
+\end{figure}
+La condizione ideale di classificazione sarebbe quella in cui la matrice di confusione è diagonale, ossia non presento falsi positivi o falsi negativi. Da questa si possono ricavare varie misure, tutte nell'intervallo [0,1]:
+\begin{itemize}
+	\item \textbf{Accuratezza}: $\dfrac{tp+tn}{tp+tn+fp+fn}$
+	\item \textbf{Precisione}: $\dfrac{tp}{tp+fp}$
+	\item \textbf{Sensitività}: $\dfrac{tp}{tp+tn}$
+	\item \textbf{F1-measue}: $\dfrac{2*precisione*sensitivita' }{sensitivita' + precisione}$
+	\item \textbf{Specificità}: $\dfrac{tn}{fp+tn}$
+\end{itemize}
+Nel caso di più classi, di possono generalizzare le misure di precisione e sensitività associate alle singole classe, mentre il concetto di accuratezza resta sempre lo stesso. La figura \ref{immagine_matrice_confusione_cclassi} rappresenta la generalizzazione delle formula suddette.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{images/matrice_confusione_cclassi.png}
+	\caption{Rappresentazione della matrice di confusione per c classi}
+	\label{immagine_matrice_confusione_cclassi}
+\end{figure}
+
 \section{Riduzione della dimensionalità}
 \subsection{Analisi Delle Componenti Principali}
 \begin{figure}[]

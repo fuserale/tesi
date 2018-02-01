@@ -4,6 +4,20 @@
 % Automatic generation of a self-adaptive TLM model
 % ---------------------------------------------------------------
 
-\chapter[Self-adaptive TLM model]{Automatic generation of a self-adaptive TLM model}\label{chap5:Automatic}
-qui ci va la spiegaxione del tuo lavoro
+\chapter[Apprendimento non supervisionato]{Apprendimento non supervisionato per l'identificazione di contensti di FoG}\label{chap5:Automatic}
+\section{Dataset}
+L'approccio che andiamo a proporre è stato testato sul dataset DAPHNET\footnote{www.wearable.ethz.ch/resources/Dataset}, il quale contiene dati collezionati da 10 pazienti parkinsoniani, dei quali 8 presentano contesti di FoG, mentre 2 di loro non ne presentano. I dati sono stati registrati usando 3 accelerometri 3D attaccati alla caviglia, al ginocchio e nella zona lombare del paziente.\\
+I soggetti hanno completato sessioni da 20-30 minuti ciascuno, consistenti di 3 fasi di camminata:
+\begin{enumerate}
+	\item Camminata avanti ed indietro lungo una linea retta, con delle rotazioni di 180 gradi;
+	\item Camminata casuale con una serie di fermate volontarie e rotazioni di 360 gradi;
+	\item Camminata che simula attività di vita quotidiana, tra le quali entrare in stanze ed uscirne, camminare nella cucina, prendersi un bicchiere d'acqua e tornare al punto di partenza.
+\end{enumerate}
+Le prestazioni motorie variano molto tra i pazienti. Mentre alcuni soggetti hanno mantenuto una camminata regolare durante gli episodi di non FoG, altri hanno camminato molto lentamente ed in modo instabile. L'intero dataset contiene in totale 237 episodi di FoG; la durata di ognuno di essi è tra i 0.5s ed i 40.5s. Il 50\% degli episodi di FoG è durato meno di 5.4s ed il 93.2\% è più corto di 20s. Gli episodi di FoG sono stati identificati da fisioterapisti usando registrazioni video sincronizzate. L'inizio di un episodio di FoG è stato definito come il punto dove la sequenza normale di camminata è stata interrotta, mentre la fine del FoG è stata definita come il momento in cui tale sequenza riprende.
+\section{Feature Statistiche}
 
+
+\section{Feature Dinamiche}
+
+
+\section{Linear Discriminant Analysis}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.1.17)  30 JAN 2018 18:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.1.17)  1 FEB 2018 11:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1463,7 +1463,7 @@ LaTeX Info: Redefining \nameref on input line 145.
 Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-<titlepage/titlepage.pdf, id=91, 597.50829pt x 845.0471pt>
+<titlepage/titlepage.pdf, id=119, 597.50829pt x 845.0471pt>
 File: titlepage/titlepage.pdf Graphic file (type pdf)
 <use titlepage/titlepage.pdf>
 Package pdftex.def Info: titlepage/titlepage.pdf  used on input line 153.
@@ -1472,7 +1472,7 @@ File: titlepage/titlepage.pdf Graphic file (type pdf)
 <use titlepage/titlepage.pdf>
 Package pdftex.def Info: titlepage/titlepage.pdf  used on input line 153.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<titlepage/titlepage.pdf, id=94, page=1, 597.50829pt x 845.0471pt>
+<titlepage/titlepage.pdf, id=122, page=1, 597.50829pt x 845.0471pt>
 File: titlepage/titlepage.pdf Graphic file (type pdf)
 <use titlepage/titlepage.pdf, page 1>
 Package pdftex.def Info: titlepage/titlepage.pdf , page1 used on input line 153
@@ -1526,21 +1526,27 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 9.
 
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [7])
 \tf@toc=\write8
 \openout8 = `main.toc'.
 
- [7] [8
-
-] (./main.lof)
+ [8] (./main.lof)
 \tf@lof=\write9
 \openout9 = `main.lof'.
 
 
-[9] [10
+[9
+
+] [10
 
 ] (./chapters/chapter1.tex
 Capitolo 1.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 37.
+(c:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
 ) (./chapters/chapter2.tex [1
 
 ] [2
@@ -1556,13 +1562,6 @@ Capitolo 3.
 [7
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 13.
- (c:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
-
 Underfull \hbox (badness 10000) in paragraph at lines 17--18
 
  []
@@ -1571,7 +1570,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--18
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 28.
 
-<images/Proportion_of_FOG_sub-types.png, id=290, 858.95906pt x 544.28343pt>
+<images/Proportion_of_FOG_sub-types.png, id=331, 858.95906pt x 544.28343pt>
 File: images/Proportion_of_FOG_sub-types.png Graphic file (type png)
 <use images/Proportion_of_FOG_sub-types.png>
 Package pdftex.def Info: images/Proportion_of_FOG_sub-types.png  used on input 
@@ -1582,7 +1581,7 @@ line 30.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 42.
 
-<images/Schema_Concettuale_Stress.png, id=300, 1091.57813pt x 539.76656pt>
+<images/Schema_Concettuale_Stress.png, id=340, 1091.57813pt x 539.76656pt>
 File: images/Schema_Concettuale_Stress.png Graphic file (type png)
 <use images/Schema_Concettuale_Stress.png>
 Package pdftex.def Info: images/Schema_Concettuale_Stress.png  used on input li
@@ -1605,7 +1604,7 @@ _Stress.png>]
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 60.
 
-<images/Tipologie_Machine_Learning.png, id=314, 304.13625pt x 233.37187pt>
+<images/Tipologie_Machine_Learning.png, id=354, 304.13625pt x 233.37187pt>
 File: images/Tipologie_Machine_Learning.png Graphic file (type png)
 <use images/Tipologie_Machine_Learning.png>
 Package pdftex.def Info: images/Tipologie_Machine_Learning.png  used on input l
@@ -1616,7 +1615,7 @@ ine 62.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 79.
 
-<images/Workflow_ML.png, id=323, 640.64343pt x 210.03468pt>
+<images/Workflow_ML.png, id=362, 640.64343pt x 210.03468pt>
 File: images/Workflow_ML.png Graphic file (type png)
 <use images/Workflow_ML.png>
 Package pdftex.def Info: images/Workflow_ML.png  used on input line 81.
@@ -1631,7 +1630,7 @@ Overfull \hbox (152.51544pt too wide) in paragraph at lines 81--82
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 99.
 
-<images/Esempio_Cluster.png, id=337, 453.19313pt x 225.84375pt>
+<images/Esempio_Cluster.png, id=376, 453.19313pt x 225.84375pt>
 File: images/Esempio_Cluster.png Graphic file (type png)
 <use images/Esempio_Cluster.png>
 Package pdftex.def Info: images/Esempio_Cluster.png  used on input line 101.
@@ -1651,55 +1650,61 @@ Overfull \hbox (30.31638pt too wide) in paragraph at lines 108--122
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 136.
 
-<images/Approcci_Clustering.png, id=346, 233.37187pt x 313.17pt>
+<images/Approcci_Clustering.png, id=385, 233.37187pt x 313.17pt>
 File: images/Approcci_Clustering.png Graphic file (type png)
 <use images/Approcci_Clustering.png>
 Package pdftex.def Info: images/Approcci_Clustering.png  used on input line 138
 .
 (pdftex.def)             Requested size: 186.69774pt x 250.53633pt.
-[15] [16 <./images/Approcci_Clustering.png>]
+[15] [16 <./images/Approcci_Clustering.png>] [17]
+<images/matrice_confusione.png, id=400, 628.59843pt x 359.84438pt>
+File: images/matrice_confusione.png Graphic file (type png)
+<use images/matrice_confusione.png>
+Package pdftex.def Info: images/matrice_confusione.png  used on input line 165.
+
+(pdftex.def)             Requested size: 314.29845pt x 179.92174pt.
+<images/matrice_confusione_cclassi.png, id=402, 624.08156pt x 209.28188pt>
+File: images/matrice_confusione_cclassi.png Graphic file (type png)
+<use images/matrice_confusione_cclassi.png>
+Package pdftex.def Info: images/matrice_confusione_cclassi.png  used on input l
+ine 180.
+(pdftex.def)             Requested size: 312.04001pt x 104.64067pt.
+ [18 <./images/matrice_confusione.png>]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 157.
+               Default added (so using `tbp') on input line 187.
 
-<images/pca.png, id=356, 378.66469pt x 325.96782pt>
+<images/pca.png, id=408, 378.66469pt x 325.96782pt>
 File: images/pca.png Graphic file (type png)
 <use images/pca.png>
-Package pdftex.def Info: images/pca.png  used on input line 159.
+Package pdftex.def Info: images/pca.png  used on input line 189.
 (pdftex.def)             Requested size: 302.93216pt x 260.7746pt.
-[17]
-Underfull \vbox (badness 3118) has occurred while \output is active []
-
- [18 <./images/pca.png>]
+[19 <./images/matrice_confusione_cclassi.png>] [20 <./images/pca.png>]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 169.
+               Default added (so using `tbp') on input line 199.
 
-<images/lda.png, id=365, 366.61969pt x 303.38344pt>
+<images/lda.png, id=418, 366.61969pt x 303.38344pt>
 File: images/lda.png Graphic file (type png)
 <use images/lda.png>
-Package pdftex.def Info: images/lda.png  used on input line 171.
+Package pdftex.def Info: images/lda.png  used on input line 201.
 (pdftex.def)             Requested size: 293.29614pt x 242.70708pt.
-) (./chapters/chapter4.tex [19] [20 <./images/lda.png>]
+) (./chapters/chapter4.tex [21] [22 <./images/lda.png>]
 Capitolo 4.
-) (./chapters/chapter5.tex [21
+) (./chapters/chapter5.tex [23
 
-] [22
+] [24
 
 ]
 Capitolo 5.
-) (./chapters/chapter6.tex [23] [24
-
-]
+) (./chapters/chapter6.tex [25] [26]
 Capitolo 6.
-) (./chapters/chapter7.tex [25] [26
+) (./chapters/chapter9.tex [27
+
+] [28
 
 ]
 Capitolo 7.
-) (./chapters/chapter9.tex [27] [28
-
-]
-Capitolo 8.
 ) Excluding 'comment' comment. [29] [30
 
 ] [31
@@ -1719,17 +1724,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 228.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 228.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 228.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C0FF7C5E63DC9EF49643828FEB25AD37;1321.
+(rerunfilecheck)             Checksum: 35BF184E224DE73AFD3D175341FDA428;1898.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28364 strings out of 492980
- 504809 string characters out of 6136207
- 851161 words of memory out of 5000000
- 31230 multiletter control sequences out of 15000+600000
- 15157 words of font info for 41 fonts, out of 8000000 for 9000
+ 28414 strings out of 492980
+ 505648 string characters out of 6136207
+ 851165 words of memory out of 5000000
+ 31259 multiletter control sequences out of 15000+600000
+ 19642 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,18n,58p,1973b,2209s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texl
@@ -1746,12 +1751,15 @@ t/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts/ty
 pe1/public/cm-super/sfbx1095.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public
 /cm-super/sfbx1200.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/cm-super/
 sfbx1440.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sfbx1728.p
-fb><c:/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb><c:/tex
-live/2017/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on main.pdf (45 pages, 796989 bytes).
+fb><c:/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/tex
+live/2017/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb><c:/texlive/2017/
+texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><c:/texlive/2017/texmf-dist
+/fonts/type1/public/cm-super/sfrm1095.pfb><c:/texlive/2017/texmf-dist/fonts/typ
+e1/public/cm-super/sfti1095.pfb>
+Output written on main.pdf (45 pages, 879143 bytes).
 PDF statistics:
- 544 PDF objects out of 1000 (max. 8388607)
- 463 compressed objects within 5 object streams
- 135 named destinations out of 1000 (max. 500000)
- 241 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 608 PDF objects out of 1000 (max. 8388607)
+ 521 compressed objects within 6 object streams
+ 148 named destinations out of 1000 (max. 500000)
+ 307 words of extra memory for PDF output out of 10000 (max. 10000000)
 
