@@ -61,6 +61,13 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
                 display([datadir 'versus_kmeans_' dist_k '_' fileruns(r).name]);
             end
             
+            
+%             Z = linkage(bonds,'ward','euclidean');
+%             P = clusterdata(Z,3);
+%             dendrogram(Z);
+%             figure; gscatter(1:length(P),P);
+            
+            
             %%% neural networks - Self organizing Maps %%%
             
             % Create a Self-Organizing Map
