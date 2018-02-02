@@ -54,8 +54,11 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
         %metto tutta la finestra (matrice 128*9) sulla stessa riga
         for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
             B = A(i:i+size_windows_sample-1,:);
+            
             B=B(:);
+            TT(number_sample,:)=eigs(cov(B),2);
             F(number_sample,:)=B';
+            
             
             
             %salvo la classe di ogni finestra
@@ -65,6 +68,8 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             number_sample = number_sample + 1;
             
         end
+        [V,D] = eigs(cov(F'),1);
+        gscatter(1:length(TT),TT(:,1)',class);
         
         %% Default linear discriminant analysis (LDA)
         
