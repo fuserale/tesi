@@ -56,4 +56,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {7}Conclusione e Lavori Futuri}{29}{chapter.7}
 \defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Risultati}{29}{section.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}Lavori Futuri}{29}{section.7.2}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Bibliography}{31}{chapter*.4}
