@@ -69,19 +69,24 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             
         end
         [V,D] = eigs(cov(F'),1);
+        Z = linkage(TT,'average','euclidean');
+        P = clusterdata(Z,3);
+        dendrogram(Z,0,'ColorThreshold',0.7*max(Z(:,3)));
+        figure; gscatter(1:length(P),P);
+        title(filename);
         gscatter(1:length(TT),TT(:,1)',class);
         
         %% Default linear discriminant analysis (LDA)
         
-%         lda = fitcdiscr(F,class','OptimizeHyperparameters','auto',...
-%     'HyperparameterOptimizationOptions',...
-%     struct('AcquisitionFunctionName','expected-improvement-plus'))
+        %         lda = fitcdiscr(F,class','OptimizeHyperparameters','auto',...
+        %     'HyperparameterOptimizationOptions',...
+        %     struct('AcquisitionFunctionName','expected-improvement-plus'))
         lda = fitcdiscr(F,class','Prior','uniform');
         ldaClass = resubPredict(lda);
         ldaResubErr = resubLoss(lda);
         [ldaResubCM,~] = confusionmat(class',ldaClass)
-%         figure, gscatter(lda.Mu(1,:), lda.Mu(2,:), class');
-%         legend('NoFog','Fog');
+        %         figure, gscatter(lda.Mu(1,:), lda.Mu(2,:), class');
+        %         legend('NoFog','Fog');
         
         %% Predizione su altri dati
         T2 = readtable([datadir 'S' num2str(isubject, '%02d') 'R02.csv']);
@@ -94,12 +99,12 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
         for i=1:size_overlap_samples:m - size_windows_sample
             B2 = A2(i:i+size_windows_sample-1,:);
             [m,~] = size(B2);
-        
+            
             F2(number_sample, :) = B2(:);
             class2(number_sample) = mode(FREEZE2(i:i+size_windows_sample-1,:));
-        
+            
             number_sample = number_sample + 1;
-        
+            
         end
         %classss = classify(F2, F, class');
         label = predict(lda, F2);

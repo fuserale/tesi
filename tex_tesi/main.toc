@@ -1,6 +1,8 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\babel@toc {italian}{}
-\babel@toc {italian}{}
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Ringraziamenti}{v}{chapter*.1}
 \defcounter {refsection}{0}\relax 
