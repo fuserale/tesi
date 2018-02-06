@@ -131,13 +131,13 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             legend('NoFog','Fog');
         end
         title(['LDA S' num2str(isubject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-        savefig([datadir '/plot/LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.fig']);
+        %savefig([datadir '/plot/LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.fig']);
         
         %% Fase di Clustering
         
         idx = kmeans(Y', K);
         versus = [idx class'];
-        writetable(array2table(versus), [datadir '/versus/versus_S' num2str(isubject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.csv']);
+        %writetable(array2table(versus), [datadir '/versus/versus_S' num2str(isubject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.csv']);
         [ldaResubCM,~] = confusionmat(class',idx)
         toc;
     end
