@@ -1,7 +1,7 @@
 
 clear; clc
 U = [];
-for isubject = [1 ]
+for isubject = [1 2]
     datadir = ['../interval_2cl/S' num2str(isubject,'%02d') 'R01/rate/'];
     
     %list of all files for patient number $isubject
@@ -25,10 +25,10 @@ for isubject = [1 ]
         B = [];
         
         % 1 = accuracy, 2 = precision, 3 = recall, 4 = F1score 
-%         for i = 1:m1
-%             for j = 1:4:n1-3
-        for i = 1:4
-            for j = 1:4:13
+        for i = 1:m1
+            for j = 1:4:n1-3
+%         for i = 1:4
+%             for j = 1:4:13
                 temp = sum(A(i,j:j+3),2);
                 if temp > diffscore
                     TRE = A(i,j:j+3);

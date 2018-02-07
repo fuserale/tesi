@@ -1,9 +1,9 @@
 clear; clc
-for isubject =[1 ]
-    for p = 1:6
+for isubject =[1 2]
+    for p = 4
         e = [];
         Q = [];
-        for q=5:5:45
+        for q=5:5:15
             if q<10
                 datadir = ['../interval_2cl/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(q,'%01d') '/'];
             end

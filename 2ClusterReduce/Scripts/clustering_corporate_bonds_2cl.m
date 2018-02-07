@@ -1,7 +1,7 @@
 clear; clc
 
-for isubject = [1 ]
-    for q=5:5:45
+for isubject = [1 2]
+    for q=5:5:15
         if q<10
             datadir = ['../interval_2cl/S' num2str(isubject,'%02d') 'R01/overlap_' num2str(q,'%01d') '/'];
         end
@@ -35,10 +35,10 @@ for isubject = [1 ]
             
             % choose of parameter
             means1 = 'sqeuclidean';
-            means2 = 'correlation';
-            means3 = 'cityblock';
-            means4 = 'cosine';
-            for q=1:4
+%             means2 = 'correlation';
+%             means3 = 'cityblock';
+%             means4 = 'cosine';
+            for q=1:1
                 if q == 1
                     dist_k = means1;
                 end
@@ -61,40 +61,40 @@ for isubject = [1 ]
                 display([datadir 'versus_kmeans_' dist_k '_' fileruns(r).name]);
             end
             
-            %%% neural networks - Self organizing Maps %%%
-            
-            % Create a Self-Organizing Map
-            dimension1 = numClust;
-            dimension2 = 1;
-            net = selforgmap([dimension1 dimension2]);
-            
-            % Train the network
-            net.trainParam.showWindow = 0;
-            [net,tr] = train(net,bonds');
-            
-            % Test the network
-            nidx = net(bonds');
-            nidx = vec2ind(nidx)';
-
-            P = array2table([A(:,n) nidx]);
-            writetable(P, [datadir 'versus_net_' fileruns(r).name] );
-            display([datadir 'versus_net_' fileruns(r).name]);
-            
-            
-            %     %%% FUZZY C-MEANS %%%
-            options(1) = 2;
-            options(2) = 10000;
-            options(3) = 1e-5;
-            options(4) = 0;
-            % Hide iteration information by passing appropriate options to FCM
-            [centres,U] = fcm(bonds,numClust,options);
-            [~, fidx] = max(U);
-            fidx = fidx';
-            
-            
-            P = array2table([A(:,n) fidx]);
-            writetable(P, [datadir 'versus_cmeans_' fileruns(r).name] );
-            display([datadir 'versus_cmeans_' fileruns(r).name]);
+%             %%% neural networks - Self organizing Maps %%%
+%             
+%             % Create a Self-Organizing Map
+%             dimension1 = numClust;
+%             dimension2 = 1;
+%             net = selforgmap([dimension1 dimension2]);
+%             
+%             % Train the network
+%             net.trainParam.showWindow = 0;
+%             [net,tr] = train(net,bonds');
+%             
+%             % Test the network
+%             nidx = net(bonds');
+%             nidx = vec2ind(nidx)';
+% 
+%             P = array2table([A(:,n) nidx]);
+%             writetable(P, [datadir 'versus_net_' fileruns(r).name] );
+%             display([datadir 'versus_net_' fileruns(r).name]);
+%             
+%             
+%             %     %%% FUZZY C-MEANS %%%
+%             options(1) = 2;
+%             options(2) = 10000;
+%             options(3) = 1e-5;
+%             options(4) = 0;
+%             % Hide iteration information by passing appropriate options to FCM
+%             [centres,U] = fcm(bonds,numClust,options);
+%             [~, fidx] = max(U);
+%             fidx = fidx';
+%             
+%             
+%             P = array2table([A(:,n) fidx]);
+%             writetable(P, [datadir 'versus_cmeans_' fileruns(r).name] );
+%             display([datadir 'versus_cmeans_' fileruns(r).name]);
         end
     end
 end
