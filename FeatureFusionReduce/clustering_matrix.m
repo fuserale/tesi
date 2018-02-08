@@ -2,7 +2,7 @@
 clc; clear
 tic
 datadir_patient = 'dataset_3cl/';
-datadir = 'dataset_3cl/matrix/';
+datadir_matrix = 'dataset_3cl/matrix/';
 datadir_versus = 'dataset_3cl/versus/';
 datadir_rate = 'dataset_3cl/rate/';
 best = 0;
@@ -13,8 +13,8 @@ for windows = 1.5:0.5:2
     for overlap = 0.5:0.5:1
         E = [];
         for isubject = [1 2 3 5 6 7 8 9]
-            fileruns = dir([datadir 'matrix_leaveout_S' num2str(isubject,'%02d') '_second' num2str(windows,'%.1f') '_overlap' num2str(overlap,'%.1f') '.csv']);
-            filename = [datadir fileruns(1).name];
+            fileruns = dir([datadir_matrix 'matrix_leaveout_S' num2str(isubject,'%02d') '_second' num2str(windows,'%.1f') '_overlap' num2str(overlap,'%.1f') '.csv']);
+            filename = [datadir_matrix fileruns(1).name];
             T = readtable(filename);
             T = table2array(T);
             feature = T(:,1:2);
@@ -74,7 +74,7 @@ for isubject = [1 2 3 5 6 7]
     Fs = 64;
     %% Carico la matrice di trasformazione del leaveout
     fileruns2 = dir([datadir_matrix 'W_S' num2str(isubject,'%02d') '_second' num2str(best_windows,'%.01f') '_overlap' num2str(best_overlap,'%.01f') '.csv']);
-    filename2 = [datadir_patient fileruns(1).name];
+    filename2 = [datadir_matrix fileruns2(1).name];
     W1 = readtable(filename2);
     W1 = table2array(W1);
     %% Vettorizzo il paziente escluso
@@ -94,7 +94,7 @@ for isubject = [1 2 3 5 6 7]
         classi(number_sample)=mode(FREEZE(i:i+size_windows_sample-1,:));
         number_sample = number_sample + 1;
     end
-    %% Faccio cluster sul paziente escludo e faccio LDA sui dati del cluster per poi allenare il knn
+    %% Faccio cluster sul paziente escluso e faccio LDA sui dati del cluster per poi allenare il knn
     ALL = [F classi'];
     idx = kmeans(F,3,'MaxIter',10000,'Start','cluster','Replicates',5);
     
@@ -161,7 +161,7 @@ for isubject = [1 2 3 5 6 7]
     
     % 6: transformation
     Y = W'*A;
-    Mdl2 = fitcknn(Y,idx,'NumNeighbors',k,'Standardize',1);
+    Mdl2 = fitcknn(Y',idx,'NumNeighbors',k,'Standardize',1);
 
     %% Carico il secondo file del paziente escluso
     fileruns3 = dir([datadir_patient 'S' num2str(isubject,'%02d') 'R02.csv']);
@@ -182,7 +182,8 @@ for isubject = [1 2 3 5 6 7]
         number_sample = number_sample + 1;
     end
     %% Testo il knn del cluster sul secondo file del paziente
-    [label,score,cost] = predict(Mdl2,F3);
+    Y3 = W'*F3';
+    [label,score,cost] = predict(Mdl2,Y3');
     classification3 = [classi3' label];
     [C,~] = confusionmat(classi3',label);
     accuracy3 = c_accuracy(C);
@@ -191,30 +192,19 @@ for isubject = [1 2 3 5 6 7]
     F1measure3 = c_F1measure(precision3,recall3);
     
     B3 = [accuracy3 precision3 recall3 F1measure3];
-    %% Trasformo i dati del paziente escluso
-    Y = W'*F';
+    %% Trasformo i dati del paziente escluso usando la W del leaveout
+    Y1 = W1'*F3';
+    [label,score,cost] = predict(Mdl,Y1');
+    [C,~] = confusionmat(classi3',label);
+    accuracy1 = c_accuracy(C);
+    precision1 = c_precision(C);
+    recall1 = c_recall(C);
+    F1measure1 = c_F1measure(precision1,recall1);
     
-
-    
-    % fai LDA usando label idx W-->2 si cluster 
-    % fai LDA usando W1 no cluster  
-    % investiga prior probabilities
-    % plot leaveout su tutti i dati (no X*size(FOG))
-    % LDA su feature statistiche e poi stessa knn e cluster
-    
-    [label,score,cost] = predict(Mdl,Y');
-    
-%     [label,score,cost] = predict(Mdl2,F);
-%     
-%     [C,~] = confusionmat(label,classi);
-%     accuracy = c_accuracy(C);
-%     precision = c_precision(C);
-%     recall = c_recall(C);
-%     F1measure = c_F1measure(precision,recall);
-%     
-%     B = [accuracy precision recall F1measure]
+    B1 = [accuracy1 precision1 recall1 F1measure1];
 end
 
+%% Funzioni per la matrice di confusione 3x3
 function accuracy = c_accuracy(C)
 giusti = sum(diag(C));
 totale = sum(sum(C));
