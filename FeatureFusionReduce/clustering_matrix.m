@@ -41,24 +41,25 @@ for windows = 1.5:0.5:2
             best_overlap = overlap;
             best_feature = feature;
             best_classi = classi;
+            best_C = C;
         end
     end
 end
 %% Trovo il migliore k per knn sul leaveout
 classError_tmp=1;
 for i=1:100
-    Mdl = fitcknn(best_feature,best_classi,'NumNeighbors',i,'Standardize',1);
-    CVKNNMdl = crossval(Mdl);
+    Mdl_LDA = fitcknn(best_feature,best_classi,'NumNeighbors',i,'Standardize',1);
+    CVKNNMdl = crossval(Mdl_LDA);
     classError = kfoldLoss(CVKNNMdl);
     if classError_tmp > classError
         k=i;
         classError_tmp = classError;
     end
 end
-%% Alleno il knn con il k migliore trovato
-Mdl = fitcknn(best_feature,best_classi,'NumNeighbors',k,'Standardize',1);
-CVKNNMdl = crossval(Mdl);
-classError = kfoldLoss(CVKNNMdl);
+%% Alleno il knn con il numero di vicini migliore trovato
+Mdl_LDA = fitcknn(best_feature,best_classi,'NumNeighbors',k,'Standardize',1);
+CVKNNMdl = crossval(Mdl_LDA);
+classError = kfoldLoss(CVKNNMdl)
 clear classError_tmp;
 toc;
 
@@ -94,16 +95,16 @@ for isubject = [1 2 3 5 6 7]
         classi(number_sample)=mode(FREEZE(i:i+size_windows_sample-1,:));
         number_sample = number_sample + 1;
     end
-    %% Faccio cluster sul paziente escluso e faccio LDA sui dati del cluster per poi allenare il knn
+    %% Faccio cluster sul paziente escluso e poi LDA sui dati del cluster per allenare il secondo knn
     ALL = [F classi'];
     idx = kmeans(F,3,'MaxIter',10000,'Start','cluster','Replicates',5);
     
-    [C,~] = confusionmat(idx,classi);
-    accuracy = c_accuracy(C);
-    precision = c_precision(C);
-    recall = c_recall(C);
-    F1measure = c_F1measure(precision,recall); 
-    B = [accuracy precision recall F1measure];
+    [C1,~] = confusionmat(idx,classi);
+    accuracy_1 = c_accuracy(C1);
+    precision_1 = c_precision(C1);
+    recall_1 = c_recall(C1);
+    F1measure_1 = c_F1measure(precision_1,recall_1); 
+    rate_cluster = [accuracy_1 precision_1 recall_1 F1measure_1]
     
     A=F';
     [d,N] = size(A);
@@ -161,11 +162,14 @@ for isubject = [1 2 3 5 6 7]
     
     % 6: transformation
     Y = W'*A;
-    Mdl2 = fitcknn(Y',idx,'NumNeighbors',k,'Standardize',1);
+    
+    Mdl_cluster = fitcknn(Y',idx,'NumNeighbors',k,'Standardize',1);
+    CVKNNMdl_cluster = crossval(Mdl_cluster);
+    classError_cluster = kfoldLoss(CVKNNMdl_cluster)
 
     %% Carico il secondo file del paziente escluso
     fileruns3 = dir([datadir_patient 'S' num2str(isubject,'%02d') 'R02.csv']);
-    filename3 = [datadir_patient fileruns(1).name];
+    filename3 = [datadir_patient fileruns3(1).name];
     T3 = readtable(filename3);
     T3 = table2array(T3);
     [m,n] = size(T3);
@@ -183,26 +187,24 @@ for isubject = [1 2 3 5 6 7]
     end
     %% Testo il knn del cluster sul secondo file del paziente
     Y3 = W'*F3';
-    [label,score,cost] = predict(Mdl2,Y3');
+    [label,~,~] = predict(Mdl_cluster,Y3');
     classification3 = [classi3' label];
-    [C,~] = confusionmat(classi3',label);
-    accuracy3 = c_accuracy(C);
-    precision3 = c_precision(C);
-    recall3 = c_recall(C);
-    F1measure3 = c_F1measure(precision3,recall3);
-    
-    B3 = [accuracy3 precision3 recall3 F1measure3];
+    [C2,~] = confusionmat(classi3',label);
+    accuracy_2 = c_accuracy(C2);
+    precision_2 = c_precision(C2);
+    recall_2 = c_recall(C2);
+    F1measure_2 = c_F1measure(precision_2,recall_2);
+    rate_knn_cluster = [accuracy_2 precision_2 recall_2 F1measure_2]
     %% Trasformo i dati del paziente escluso usando la W del leaveout
     Y1 = W1'*F3';
-    [label,score,cost] = predict(Mdl,Y1');
-    [C,~] = confusionmat(classi3',label);
-    accuracy1 = c_accuracy(C);
-    precision1 = c_precision(C);
-    recall1 = c_recall(C);
-    F1measure1 = c_F1measure(precision1,recall1);
-    
-    B1 = [accuracy1 precision1 recall1 F1measure1];
-end
+    [label,~,~] = predict(Mdl_LDA,Y1');
+    [C3,~] = confusionmat(classi3',label);
+    accuracy_3 = c_accuracy(C3);
+    precision_3 = c_precision(C3);
+    recall_3 = c_recall(C3);
+    F1measure_3 = c_F1measure(precision_3,recall_3);
+    rate_knn_LDA = [accuracy_3 precision_3 recall_3 F1measure_3]
+deend
 
 %% Funzioni per la matrice di confusione 3x3
 function accuracy = c_accuracy(C)

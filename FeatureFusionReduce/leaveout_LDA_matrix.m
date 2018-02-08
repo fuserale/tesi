@@ -1,10 +1,13 @@
+%% Inizializzazione
 % 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
 clc;clear;
 datadir = 'dataset_3cl/';
 
 tic;
-for windows = 2:0.5:2
+%% Creo la matrice di feature del leaveout
+for windows = 1:0.5:2
     for overlap = 0.5:0.5:1
+        clear F class;
         for l = [1 2 3 5 6 7 8 9]
             leaveout_subject = l;
             subject = [1 2 3 5 6 7 8 9];
@@ -55,7 +58,7 @@ for windows = 2:0.5:2
                 end
             end
             
-            
+            %% Riduco la cardinalità delle classi
             [~,col] = find (class == 1);
             NOFOG = F(col,:);
             LABEL_NOFOG = class(col)';
