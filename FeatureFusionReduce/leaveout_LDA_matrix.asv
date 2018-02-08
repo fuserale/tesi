@@ -1,6 +1,8 @@
 % 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
 clc;clear;
 datadir = 'dataset_3cl/';
+overlap=1;
+windows=1.5;
 
 tic;
 for windows = 1.5:0.5:2
@@ -55,17 +57,17 @@ for windows = 1.5:0.5:2
             end
             
             
-            [~,col] = find (class == 1);
+            [row,col] = find (class == 1);
             NOFOG = F(col,:);
             LABEL_NOFOG = class(col)';
-            [~,col] = find (class == 2);
+            [row,col] = find (class == 2);
             FOG = F(col,:);
             LABEL_FOG = class(col)';
-            [~,col] = find (class == 3);
+            [row,col] = find (class == 3);
             PREFOG = F(col,:);
             LABEL_PREFOG = class(col)';
             
-            X = 3;
+            X = 2;
             [num_fog,~] = size(FOG);
             NOFOG = NOFOG(1:X*num_fog,:);
             LABEL_NOFOG = LABEL_NOFOG(1:X*num_fog);
@@ -145,9 +147,7 @@ for windows = 1.5:0.5:2
             %savefig([datadir 'LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
             
             matrix_tr = [matrix_tr; Y' class'];
-            writetable(array2table(matrix_tr), [datadir 'matrix/matrix_leaveout_S' num2str(leaveout_subject,'%02d') '_second' num2str(windows,'%.01f') '_overlap' num2str(overlap,'%.01f') '.csv']);
-            disp(['matrix/matrix_leaveout_S' num2str(leaveout_subject,'%02d') '_second' num2str(windows,'%.01f') '_overlap' num2str(overlap,'%.01f') '.csv']);
-            toc;
+            writetable(array2table(matrix_tr)
         end
     end
 end
