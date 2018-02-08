@@ -1,0 +1,73 @@
+clc; clear
+tic
+datadir = 'dataset_3cl/matrix/';
+datadir_versus = 'dataset_3cl/versus/';
+datadir_rate = 'dataset_3cl/rate/';
+% combinazioni --> 1,0.5; 1.5,0.5; 2,0.5; 1.5,1; 2,1;
+for windows = 1.5:0.5:2
+    for overlap = 0.5:0.5:1
+        E = [];
+        for isubject = [1 2 3 5 6 7 8 9]
+            fileruns = dir([datadir 'matrix_leaveout_S' num2str(isubject,'%02d') '_second' num2str(windows,'%.1f') '_overlap' num2str(overlap,'%.1f') '.csv']);
+            filename = [datadir fileruns(1).name];
+            T = readtable(filename);
+            T = table2array(T);
+            feature = T(:,1:2);
+            classi = T(:,3);
+            
+            Mdl = fitcknn(feature,classi,'NumNeighbors',5,'Standardize',1);
+            
+            idx = kmeans(feature, 3);
+            versus = [idx classi];
+            writetable(array2table(versus), [datadir_versus 'versus_' num2str(K,'%01d') 'cl_S' num2str(l,'%02d') '_Sec' num2str(w,'%.01f') '_Ov' num2str(o,'%.01f') 'R01.csv']);
+            
+            [C,order] = confusionmat(idx,classi);
+            accuracy = c_accuracy(C);
+            precision = c_precision(C);
+            recall = c_recall(C);
+            F1measure = c_F1measure(precision,recall);
+            
+            B = [accuracy precision recall F1measure];
+            E = [E;B];
+        end
+        writetable(array2table(E), [datadir_rate 'rate_second' num2str(windows,'%.1f') '_overlap' num2str(overlap,'%.1f') '.csv']);
+        all = mean(mean(E))
+    end
+end
+toc;
+
+function accuracy = c_accuracy(C)
+giusti = sum(diag(C));
+totale = sum(sum(C));
+accuracy = giusti/totale;
+if isnan(accuracy)
+    accuracy = 0;
+end
+end
+
+function precision = c_precision(C)
+precision1 = C(1,1)/(C(1,1)+C(2,1)+C(3,1));
+precision2 = C(2,2)/(C(1,2)+C(2,2)+C(3,2));
+precision3 = C(3,3)/(C(1,3)+C(2,3)+C(3,3));
+precision = mean([precision1;precision2;precision3]);
+if isnan(precision)
+    precision = 0;
+end
+end
+
+function recall = c_recall(C)
+recall1 = C(1,1)/(C(1,1)+C(1,2)+C(1,3));
+recall2 = C(2,2)/(C(2,1)+C(2,2)+C(2,3));
+recall3 = C(3,3)/(C(3,1)+C(3,2)+C(3,3));
+recall = mean([recall1;recall2;recall3]);
+if isnan(recall)
+    recall = 0;
+end
+end
+
+function F1measure = c_F1measure(precision,recall)
+F1measure = 2*precision*recall/(precision+recall);
+if isnan(F1measure)
+    F1measure = 0;
+end
+end
