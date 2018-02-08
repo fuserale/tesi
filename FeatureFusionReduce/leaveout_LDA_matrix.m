@@ -3,7 +3,7 @@ clc;clear;
 datadir = 'dataset_3cl/';
 
 tic;
-for windows = 1.5:0.5:2
+for windows = 2:0.5:2
     for overlap = 0.5:0.5:1
         for l = [1 2 3 5 6 7 8 9]
             leaveout_subject = l;
@@ -16,6 +16,7 @@ for windows = 1.5:0.5:2
             
             number_sample = 1;
             matrix_tr = [];
+            clear F class
             
             for isubject = subject
                 
@@ -132,21 +133,23 @@ for windows = 1.5:0.5:2
             % 6: transformation
             Y = W'*A;
             
-            %         % 7: plot
-            %         if k > 2
-            %             figure('visible', 'on'), gscatter(Y(1,:),Y(2,:),class);
-            %             legend('NoFog','Fog','PreFog');
-            %         end
-            %         if K == 2
-            %             figure('visible', 'on'), gscatter(1:length(Y(1,:)),Y(1,:),class);
-            %             legend('NoFog','Fog');
-            %         end
-            %         title(['LDA S' num2str(isubject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-            %savefig([datadir 'LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
+            % 7: plot
+            if k > 2
+                figure('visible', 'on'), gscatter(Y(1,:),Y(2,:),class);
+                legend('NoFog','Fog','PreFog');
+            end
+            if K == 2
+                figure('visible', 'on'), gscatter(1:length(Y(1,:)),Y(1,:),class);
+                legend('NoFog','Fog');
+            end
+            title(['LDA S' num2str(leaveout_subject,'%02d') ' #CLASS' num2str(K,'%01d')]);
+            savefig([datadir 'LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(windows,'%02d') '_Ov' num2str(overlap,'%.02f') '.fig']);
             
             matrix_tr = [matrix_tr; Y' class'];
             writetable(array2table(matrix_tr), [datadir 'matrix/matrix_leaveout_S' num2str(leaveout_subject,'%02d') '_second' num2str(windows,'%.01f') '_overlap' num2str(overlap,'%.01f') '.csv']);
             disp(['matrix/matrix_leaveout_S' num2str(leaveout_subject,'%02d') '_second' num2str(windows,'%.01f') '_overlap' num2str(overlap,'%.01f') '.csv']);
+            
+            writetable(array2table(W), [datadir 'matrix/W_S' num2str(leaveout_subject,'%02d') '_second' num2str(windows,'%.01f') '_overlap' num2str(overlap,'%.01f') '.csv']);
             toc;
         end
     end
