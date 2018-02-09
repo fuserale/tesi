@@ -12,9 +12,9 @@ o=0.5;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
 w=2;  %dimensione della finestra
 
 tic;
-for l = [1]
+for l = [1 2 3]
     leaveout_subject = l;
-    subject = [1 2 3 4 5 6 7 8 9 10];
+    subject = [1 2 3 5 6 7 8 9];
     for i=1:length(subject)-1
         if subject(i) == leaveout_subject
             subject(i) = [];
@@ -39,7 +39,7 @@ for l = [1]
             %take the dimesion
             [m,n] = size(T);
             %table to array to do maths
-            A = table2array(T(:,2:10));
+            A = table2array(T(:,8:10));
             TIME = table2array(T(:,1));
             FREEZE = table2array(T(:,11));
             Fs = 64;
@@ -158,8 +158,8 @@ for l = [1]
         figure('visible', 'on'), gscatter(1:length(Y(1,:)),Y(1,:),class);
         legend('NoFog','Fog');
     end
-    title(['LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-    %savefig([datadir 'LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
+    title(['LDA Schiena Leaveout S' num2str(leaveout_subject,'%02d') ' #CLASS' num2str(K,'%01d')]);
+    savefig([datadir 'LDA Schiena Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') '.fig']);
     
     %% Fase di Clustering
     
@@ -169,27 +169,4 @@ for l = [1]
     %writetable(array2table(versus), [datadir 'versus_' num2str(K,'%01d') 'cl_S' num2str(l,'%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.02f') 'R01.csv']);
     [ldaResubCM,~] = confusionmat(class',idx)
     
-    %% Gaussian Mixture Model
-    %     figure('visible', 'on'), gscatter(Y(1,:),Y(2,:),class);
-    %     legend('NoFog','Fog','PreFog');
-    %     options = statset('Display','final','MaxIter',10000);
-    %     gm = fitgmdist(Y',3,'Options',options)
-    % %     hold on
-    % %     fcontour(@(x,y)pdf(gm,[x y]));
-    % %     title('Scatter Plot and Fitted GMM Contour')
-    % %     hold off
-    %
-    %     [idx,~,P0] = cluster(gm,Y');
-    %     cluster1 = (idx == 1); % |1| for cluster 1 membership
-    %     cluster2 = (idx == 2); % |2| for cluster 2 membership
-    %     cluster3 = (idx == 3); % |3| for cluster 3 membership
-    %
-    %
-    %     figure;
-    %     gscatter(Y(1,:),Y(2,:),idx');
-    %     legend('Cluster 1','Cluster 2','Cluster 3');
-    %
-    %     [ldaResubCM,~] = confusionmat(class',idx)
-    %
-    %     toc;
 end

@@ -19,7 +19,7 @@ for windows = 1.5:0.5:2
             T = table2array(T);
             feature = T(:,1:2);
             classi = T(:,3);
-
+            
             idx = kmeans(feature,3,'MaxIter',10000,'Start','cluster','Replicates',5);
             versus = [idx classi];
             writetable(array2table(versus), [datadir_versus 'versus_Feature_S' num2str(isubject,'%02d') '_Sec' num2str(windows,'%.01f') '_Ov' num2str(overlap,'%.01f') 'R01.csv']);
@@ -86,62 +86,62 @@ for isubject = [1 2 3 5 6 7]
     size_overlap_samples = Fs * overlap;
     
     number_sample = 1;
-    clear B F class
+    clear B F classi
     
     for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
         B = A(i:i+size_windows_sample-1,:);
         
-        %time sample
-        F(number_sample, 1) = TIME(i,:);
-        %min --> minimum value for each accelerometer
-        F(number_sample, 2:10) = min(B);
-        %max --> maximum value for each accelerometer
-        F(number_sample, 11:19) = max(B);
+        %                         %time sample
+        %                         F(number_sample, 1) = TIME(i,:);
+        %                         %min --> minimum value for each accelerometer
+        %                         F(number_sample, 2:10) = min(B);
+        %                         %max --> maximum value for each accelerometer
+        %                         F(number_sample, 11:19) = max(B);
         %median --> median signal value
-        F(number_sample, 20:28) = median(B);
+        F(number_sample, 1:9) = median(B);
         %mean --> average value
-        F(number_sample, 29:37) = mean(B);
-        %ArmMean --> harmonic average of the signal
-        F(number_sample, 38:46) = harmmean(B);
+        F(number_sample, 10:18) = mean(B);
+        %                         %ArmMean --> harmonic average of the signal
+        %                         F(number_sample, 38:46) = harmmean(B);
         %root mean square --> quadratic mean value of the signal
-        F(number_sample, 47:55) = rms(B);
+        F(number_sample, 19:27) = rms(B);
         %variance --> square of the standard deviation
-        F(number_sample, 56:64) = var(B);
+        F(number_sample, 28:36) = var(B);
         %standard deviation --> mean deviation of the signal compared to the
         %average
-        F(number_sample, 65:73) = std(B);
+        F(number_sample, 37:45) = std(B);
         %kurtosis --> degree of peakedness of the sensor signal distribution
         %(allontanamento dalla normalità distributiva)
-        F(number_sample, 74:82) = kurtosis(B);
+        F(number_sample, 46:54) = kurtosis(B);
         %skewdness --> degree of asymmetry of the sensor signal distribution
-        F(number_sample, 83:91) = skewness(B);
-        %mode --> number that appears most often in the signal
-        F(number_sample, 92:100) = mode(B);
-        %trim mean --> trimmed mean of the signal in the window
-        F(number_sample, 101:109) = trimmean(B,10);
+        F(number_sample, 55:63) = skewness(B);
+        %                         %mode --> number that appears most often in the signal
+        %                         F(number_sample, 92:100) = mode(B);
+        %                         %trim mean --> trimmed mean of the signal in the window
+        %                         F(number_sample, 101:109) = trimmean(B,10);
         %range --> difference between the largest and the smallest values of
         %the signal
-        F(number_sample, 110:118) = range(B);
-        %signal magnitude vector --> sum of the euclidean norm over the three
-        %axis over the entire window normalized by the windows lenght
-        F(number_sample, 119) = svmn(B(:,1:3), length(B));
-        F(number_sample, 120) = svmn(B(:,4:6), length(B));
-        F(number_sample, 121) = svmn(B(:,7:9), length(B));
-        %normalized signal magnitude area --> acceleration magnitude summed
-        %over three axes normalized by the windows length
-        F(number_sample, 122) = sman(B(:,1:3), length(B));
-        F(number_sample, 123) = sman(B(:,4:6), length(B));
-        F(number_sample, 124) = sman(B(:,7:9), length(B));
-        %eigenvalues of dominant directions --> eigenvalues of the
-        %covariance matrix of the acceleration data along x, y and z axis
-        F(number_sample,125) = eigs(cov(B(:,1:3)),1);
-        F(number_sample,126) = eigs(cov(B(:,4:6)),1);
-        F(number_sample,127) = eigs(cov(B(:,7:9)),1);
-        %averaged acceleration energy --> mean value of the energy over
-        %three acceleration axes
-        F(number_sample,128) = energyn(B(:,1:3),length(B));
-        F(number_sample,129) = energyn(B(:,4:6),length(B));
-        F(number_sample,130) = energyn(B(:,7:9),length(B));
+        F(number_sample, 64:72) = range(B);
+        %                         %signal magnitude vector --> sum of the euclidean norm over the three
+        %                         %axis over the entire window normalized by the windows lenght
+        %                         F(number_sample, 119) = svmn(B(:,1:3), length(B));
+        %                         F(number_sample, 120) = svmn(B(:,4:6), length(B));
+        %                         F(number_sample, 121) = svmn(B(:,7:9), length(B));
+        %                         %normalized signal magnitude area --> acceleration magnitude summed
+        %                         %over three axes normalized by the windows length
+        %                         F(number_sample, 122) = sman(B(:,1:3), length(B));
+        %                         F(number_sample, 123) = sman(B(:,4:6), length(B));
+        %                         F(number_sample, 124) = sman(B(:,7:9), length(B));
+        %                         %eigenvalues of dominant directions --> eigenvalues of the
+        %                         %covariance matrix of the acceleration data along x, y and z axis
+        %                         F(number_sample,125) = eigs(cov(B(:,1:3)),1);
+        %                         F(number_sample,126) = eigs(cov(B(:,4:6)),1);
+        %                         F(number_sample,127) = eigs(cov(B(:,7:9)),1);
+        %                         %averaged acceleration energy --> mean value of the energy over
+        %                         %three acceleration axes
+        %                         F(number_sample,128) = energyn(B(:,1:3),length(B));
+        %                         F(number_sample,129) = energyn(B(:,4:6),length(B));
+        %                         F(number_sample,130) = energyn(B(:,7:9),length(B));
         %is freezing?
         classi(number_sample) = mode(FREEZE(i:i+size_windows_sample-1,:));
         
@@ -149,7 +149,6 @@ for isubject = [1 2 3 5 6 7]
         number_sample = number_sample + 1;
         
     end
-    F = F(:,2:130);
     %% Faccio cluster sul paziente escluso e poi LDA sui dati del cluster per allenare il secondo knn
     ALL = [F classi'];
     idx = kmeans(F,3,'MaxIter',10000,'Start','cluster','Replicates',5);
@@ -158,7 +157,7 @@ for isubject = [1 2 3 5 6 7]
     accuracy_1 = c_accuracy(C1);
     precision_1 = c_precision(C1);
     recall_1 = c_recall(C1);
-    F1measure_1 = c_F1measure(precision_1,recall_1); 
+    F1measure_1 = c_F1measure(precision_1,recall_1);
     rate_cluster = [accuracy_1 precision_1 recall_1 F1measure_1]
     
     A=F';
@@ -221,7 +220,7 @@ for isubject = [1 2 3 5 6 7]
     Mdl_cluster = fitcknn(Y',idx,'NumNeighbors',k,'Standardize',1);
     CVKNNMdl_cluster = crossval(Mdl_cluster);
     classError_cluster = kfoldLoss(CVKNNMdl_cluster)
-
+    
     %% Carico il secondo file del paziente escluso
     fileruns3 = dir([datadir_patient 'S' num2str(isubject,'%02d') 'R02.csv']);
     filename3 = [datadir_patient fileruns3(1).name];
@@ -236,57 +235,57 @@ for isubject = [1 2 3 5 6 7]
     for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
         B = A3(i:i+size_windows_sample-1,:);
         
-        %time sample
-        F(number_sample, 1) = TIME(i,:);
-        %min --> minimum value for each accelerometer
-        F(number_sample, 2:10) = min(B);
-        %max --> maximum value for each accelerometer
-        F(number_sample, 11:19) = max(B);
+        %                         %time sample
+        %                         F(number_sample, 1) = TIME(i,:);
+        %                         %min --> minimum value for each accelerometer
+        %                         F(number_sample, 2:10) = min(B);
+        %                         %max --> maximum value for each accelerometer
+        %                         F(number_sample, 11:19) = max(B);
         %median --> median signal value
-        F(number_sample, 20:28) = median(B);
+        F(number_sample, 1:9) = median(B);
         %mean --> average value
-        F(number_sample, 29:37) = mean(B);
-        %ArmMean --> harmonic average of the signal
-        F(number_sample, 38:46) = harmmean(B);
+        F(number_sample, 10:18) = mean(B);
+        %                         %ArmMean --> harmonic average of the signal
+        %                         F(number_sample, 38:46) = harmmean(B);
         %root mean square --> quadratic mean value of the signal
-        F(number_sample, 47:55) = rms(B);
+        F(number_sample, 19:27) = rms(B);
         %variance --> square of the standard deviation
-        F(number_sample, 56:64) = var(B);
+        F(number_sample, 28:36) = var(B);
         %standard deviation --> mean deviation of the signal compared to the
         %average
-        F(number_sample, 65:73) = std(B);
+        F(number_sample, 37:45) = std(B);
         %kurtosis --> degree of peakedness of the sensor signal distribution
         %(allontanamento dalla normalità distributiva)
-        F(number_sample, 74:82) = kurtosis(B);
+        F(number_sample, 46:54) = kurtosis(B);
         %skewdness --> degree of asymmetry of the sensor signal distribution
-        F(number_sample, 83:91) = skewness(B);
-        %mode --> number that appears most often in the signal
-        F(number_sample, 92:100) = mode(B);
-        %trim mean --> trimmed mean of the signal in the window
-        F(number_sample, 101:109) = trimmean(B,10);
+        F(number_sample, 55:63) = skewness(B);
+        %                         %mode --> number that appears most often in the signal
+        %                         F(number_sample, 92:100) = mode(B);
+        %                         %trim mean --> trimmed mean of the signal in the window
+        %                         F(number_sample, 101:109) = trimmean(B,10);
         %range --> difference between the largest and the smallest values of
         %the signal
-        F(number_sample, 110:118) = range(B);
-        %signal magnitude vector --> sum of the euclidean norm over the three
-        %axis over the entire window normalized by the windows lenght
-        F(number_sample, 119) = svmn(B(:,1:3), length(B));
-        F(number_sample, 120) = svmn(B(:,4:6), length(B));
-        F(number_sample, 121) = svmn(B(:,7:9), length(B));
-        %normalized signal magnitude area --> acceleration magnitude summed
-        %over three axes normalized by the windows length
-        F(number_sample, 122) = sman(B(:,1:3), length(B));
-        F(number_sample, 123) = sman(B(:,4:6), length(B));
-        F(number_sample, 124) = sman(B(:,7:9), length(B));
-        %eigenvalues of dominant directions --> eigenvalues of the
-        %covariance matrix of the acceleration data along x, y and z axis
-        F(number_sample,125) = eigs(cov(B(:,1:3)),1);
-        F(number_sample,126) = eigs(cov(B(:,4:6)),1);
-        F(number_sample,127) = eigs(cov(B(:,7:9)),1);
-        %averaged acceleration energy --> mean value of the energy over
-        %three acceleration axes
-        F(number_sample,128) = energyn(B(:,1:3),length(B));
-        F(number_sample,129) = energyn(B(:,4:6),length(B));
-        F(number_sample,130) = energyn(B(:,7:9),length(B));
+        F(number_sample, 64:72) = range(B);
+        %                         %signal magnitude vector --> sum of the euclidean norm over the three
+        %                         %axis over the entire window normalized by the windows lenght
+        %                         F(number_sample, 119) = svmn(B(:,1:3), length(B));
+        %                         F(number_sample, 120) = svmn(B(:,4:6), length(B));
+        %                         F(number_sample, 121) = svmn(B(:,7:9), length(B));
+        %                         %normalized signal magnitude area --> acceleration magnitude summed
+        %                         %over three axes normalized by the windows length
+        %                         F(number_sample, 122) = sman(B(:,1:3), length(B));
+        %                         F(number_sample, 123) = sman(B(:,4:6), length(B));
+        %                         F(number_sample, 124) = sman(B(:,7:9), length(B));
+        %                         %eigenvalues of dominant directions --> eigenvalues of the
+        %                         %covariance matrix of the acceleration data along x, y and z axis
+        %                         F(number_sample,125) = eigs(cov(B(:,1:3)),1);
+        %                         F(number_sample,126) = eigs(cov(B(:,4:6)),1);
+        %                         F(number_sample,127) = eigs(cov(B(:,7:9)),1);
+        %                         %averaged acceleration energy --> mean value of the energy over
+        %                         %three acceleration axes
+        %                         F(number_sample,128) = energyn(B(:,1:3),length(B));
+        %                         F(number_sample,129) = energyn(B(:,4:6),length(B));
+        %                         F(number_sample,130) = energyn(B(:,7:9),length(B));
         %is freezing?
         classi(number_sample) = mode(FREEZE3(i:i+size_windows_sample-1,:));
         
@@ -294,7 +293,6 @@ for isubject = [1 2 3 5 6 7]
         number_sample = number_sample + 1;
         
     end
-    F = F(:,2:130);
     %% Testo il knn del cluster sul secondo file del paziente
     Y3 = W'*F';
     [label,~,~] = predict(Mdl_cluster,Y3');

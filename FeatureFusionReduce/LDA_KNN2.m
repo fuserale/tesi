@@ -131,8 +131,17 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             legend('NoFog','Fog');
         end
         title(['LDA S' num2str(isubject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-        %savefig([datadir '/plot/LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.fig']);
+%         %savefig([datadir '/plot/LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.fig']);
         
+
+%         %%t-SNE
+%         % Set parameters
+%         no_dims = 2;
+%         initial_dims = 50;
+%         perplexity = 30;
+%         mappedX = tsne(F, [], no_dims, initial_dims, perplexity);
+%         
+%         gscatter(mappedX(:,1), mappedX(:,2), class);
         %% Fase di Clustering
         
         idx = kmeans(Y', K);
