@@ -38,10 +38,7 @@ for windows = 1.5:0.5:2
                     
                     size_overlap_sec = overlap;
                     size_overlap_samples = Fs * overlap;
-                    
-                    
-                    % clear F class NOFOG LABEL_NOFOG FOG LABEL_FOG PREFOG LABEL_PREFOG
-                    
+                                        
                     for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
                         B = A(i:i+size_windows_sample-1,:);
                         

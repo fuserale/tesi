@@ -204,7 +204,7 @@ for isubject = [1 2 3 5 6 7]
     recall_3 = c_recall(C3);
     F1measure_3 = c_F1measure(precision_3,recall_3);
     rate_knn_LDA = [accuracy_3 precision_3 recall_3 F1measure_3]
-deend
+end
 
 %% Funzioni per la matrice di confusione 3x3
 function accuracy = c_accuracy(C)
