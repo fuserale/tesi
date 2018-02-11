@@ -1,16 +1,12 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\defcounter {refsection}{0}\relax 
-\select@language {italian}
-\defcounter {refsection}{0}\relax 
-\select@language {italian}
+\babel@toc {italian}{}
+\babel@toc {italian}{}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Ringraziamenti}{v}{chapter*.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Contributo della Tesi}{1}{section.1.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Struttura della Tesi}{1}{section.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Letteratura}{3}{chapter.2}
 \defcounter {refsection}{0}\relax 
@@ -20,9 +16,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1.1}Le tipologie di Fog}{8}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Influenza del FoG nella camminata}{9}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.2}Influenza del FoG nella camminata}{8}{subsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Machine Learning}{10}{section.3.2}
+\contentsline {section}{\numberline {3.2}Machine Learning}{9}{section.3.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.1}Cluster Analysis}{13}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
@@ -30,9 +26,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.3}Validazione della Classificazione}{17}{subsection.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Riduzione della dimensionalit\IeC {\`a}}{19}{section.3.3}
+\contentsline {section}{\numberline {3.3}Riduzione della dimensionalit\IeC {\`a}}{18}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Analisi Delle Componenti Principali}{19}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.1}Analisi Delle Componenti Principali}{18}{subsection.3.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.2}Analisi dei Discriminanti Lineari}{20}{subsection.3.3.2}
 \defcounter {refsection}{0}\relax 

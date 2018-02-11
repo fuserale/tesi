@@ -1097,6 +1097,27 @@
     \field{year}{2010}
   \endentry
 
+  \entry{10}{article}{}
+    \name{author}{1}{}{%
+      {{hash=RT}{%
+         family={Raffaella},
+         familyi={R\bibinitperiod},
+         given={Tono},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RT1}
+    \strng{fullhash}{RT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{pages}{49\bibrangedash 50}
+    \field{title}{Natural language processing e tecniche semantiche per il
+  supporto alla diagnosi: un esperimento}
+    \field{year}{2010}
+  \endentry
+
   \entry{55}{article}{}
     \name{author}{1}{}{%
       {{hash=R}{%
