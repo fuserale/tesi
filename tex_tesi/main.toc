@@ -20,17 +20,17 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Machine Learning}{9}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.1}Cluster Analysis}{13}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.1}Cluster Analysis}{12}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.2}Classificazione}{15}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.3}Validazione della Classificazione}{17}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.3}Validazione della Classificazione}{16}{subsection.3.2.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.3}Riduzione della dimensionalit\IeC {\`a}}{18}{section.3.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.1}Analisi Delle Componenti Principali}{18}{subsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Analisi dei Discriminanti Lineari}{20}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Analisi dei Discriminanti Lineari}{19}{subsection.3.3.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Motivazioni ed obiettivi}{23}{chapter.4}
 \defcounter {refsection}{0}\relax 

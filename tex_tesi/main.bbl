@@ -824,6 +824,40 @@
     \field{year}{2015}
   \endentry
 
+  \entry{10}{book}{}
+    \name{author}{3}{}{%
+      {{hash=HJ}{%
+         family={Han},
+         familyi={H\bibinitperiod},
+         given={Jiawei},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=PJ}{%
+         family={Pei},
+         familyi={P\bibinitperiod},
+         given={Jian},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Kamber},
+         familyi={K\bibinitperiod},
+         given={Micheline},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{HJPJKM1}
+    \strng{fullhash}{HJPJKM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Data mining: concepts and techniques}
+    \field{year}{2011}
+  \endentry
+
   \entry{19}{article}{}
     \name{author}{5}{}{%
       {{hash=JH}{%
@@ -1094,27 +1128,6 @@
     \field{title}{Freezing of Gait in Parkinson’s Disease: A Perceptual Cause
   for a Motor Impairment?}
     \field{journaltitle}{Neurol Neurosurg Psychiatry}
-    \field{year}{2010}
-  \endentry
-
-  \entry{10}{article}{}
-    \name{author}{1}{}{%
-      {{hash=RT}{%
-         family={Raffaella},
-         familyi={R\bibinitperiod},
-         given={Tono},
-         giveni={T\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{RT1}
-    \strng{fullhash}{RT1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{R}
-    \field{sortinithash}{R}
-    \field{pages}{49\bibrangedash 50}
-    \field{title}{Natural language processing e tecniche semantiche per il
-  supporto alla diagnosi: un esperimento}
     \field{year}{2010}
   \endentry
 
