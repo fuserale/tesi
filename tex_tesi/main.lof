@@ -36,7 +36,11 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema generale di calcolo delle feature statistiche}}{27}{figure.5.1}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema generale di calcolo delle feature statistiche}}{28}{figure.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Grafico degli intervalli di overlap e secondi della finestra temporale per ogni paziente}}{29}{figure.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Grafico dell'accuratezza per ogni paziente}}{29}{figure.5.3}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
