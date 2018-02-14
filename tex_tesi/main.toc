@@ -40,22 +40,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.2}Feature Statistiche}{26}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Feature Dinamiche}{26}{section.5.3}
+\contentsline {section}{\numberline {5.3}Feature Dinamiche}{27}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Linear Discriminant Analysis}{26}{section.5.4}
+\contentsline {section}{\numberline {5.4}Linear Discriminant Analysis}{27}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Implementazione Software}{27}{chapter.6}
+\contentsline {chapter}{\numberline {6}Implementazione Software}{29}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Implementazione Feature Statistiche}{27}{section.6.1}
+\contentsline {section}{\numberline {6.1}Implementazione Feature Statistiche}{29}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Implementazione Feature Dinamiche}{27}{section.6.2}
+\contentsline {section}{\numberline {6.2}Implementazione Feature Dinamiche}{29}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Implementazione Linear Discriminant Analysis}{27}{section.6.3}
+\contentsline {section}{\numberline {6.3}Implementazione Linear Discriminant Analysis}{29}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Conclusione e Lavori Futuri}{29}{chapter.7}
+\contentsline {chapter}{\numberline {7}Conclusione e Lavori Futuri}{31}{chapter.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Risultati}{29}{section.7.1}
+\contentsline {section}{\numberline {7.1}Risultati}{31}{section.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Lavori Futuri}{29}{section.7.2}
+\contentsline {section}{\numberline {7.2}Lavori Futuri}{31}{section.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{31}{chapter*.4}
+\contentsline {chapter}{Bibliography}{33}{chapter*.5}
