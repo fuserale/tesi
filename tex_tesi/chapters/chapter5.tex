@@ -56,14 +56,14 @@ Una volta filtrati i dati, il passo successivo è scegliere l'intervallo della f
 	\label{Flusso Feature}
 \end{figure}
 Per ogni combinazione di finestra temporale, quindi, vengono calcolate le rispettive feature e si procede ad applicare l'algoritmo di clustering. Quelli che sono stati scelti, in quanto più diffusi nel contesto di clustering, sono: k-means, self-organizing map e fuzzy c-means. Il k-means viene testato con tutte le sue metriche di distanza, per evidenziare eventuali differenze e decidere quale tra le 4 presenti (cosine, euclidean, cityblock, correlation) si adatta di più al nostro problema. Il fuzzy c-means è stato scelto anche perché è di soft clustering, ossia 2 punti potrebbero appartenere a 2 cluster diversi, il che ritorna utile nel trovare correttamente la terza label, in quanto nel dataset originale era etichettata con una diversa label.\\
-Ogni algoritmo di clustering restituisce un vettore di etichette, che indicano il numero di cluster a cui è stato assegnato ogni punto. Questi vengono messi a confronto con le true label, ossia le etichette inserite a mano dal dottore, e si calcolano le metriche di accuratezza, precisione, sensitività e F1-measure attraverso la matrice di confusione descritta precedentemente. Una volta ottenute le misure per tutti i campioni temporali, si cercano gli intervalli con il maggiore punteggio, dove con quest'ultimo intendiamo la media delle 4 grandezze calcolate. Nel nostro caso, come si vede nella figura \ref{SecondiOverlap}, abbiamo che i punteggi migliori vengono raggiunti nell'intervallo compreso tra 1.5 e 2 secondi, con una sovrapposizione di 0.5 o 1 secondo. Dato che nella maggior parte dei casi risultano tali intervalli, decidiamo di concentrarci su questi, anche perché sono accettabili in un'implementazione online.
+Ogni algoritmo di clustering restituisce un vettore di etichette, che indicano il numero di cluster a cui è stato assegnato ogni punto. Questi vengono messi a confronto con le true label, ossia le etichette inserite a mano dal dottore, e si calcolano le metriche di accuratezza, precisione, sensitività e F1-measure attraverso la matrice di confusione descritta precedentemente. Le true label vengono calcolate, per ogni vettore di feature, come la moda tra le label della finestra temporale, ossia come l'etichetta che si presente più volte all'interno della finestra stessa. Una volta ottenute le misure per tutti i campioni temporali, si cercano gli intervalli con il maggiore punteggio, dove con quest'ultimo intendiamo la media delle 4 grandezze calcolate. Nel nostro caso, come si vede nella figura \ref{SecondiOverlap}, abbiamo che i punteggi migliori vengono raggiunti nell'intervallo compreso tra 1.5 e 2 secondi, con una sovrapposizione di 0.5 o 1 secondo. Dato che nella maggior parte dei casi risultano tali intervalli, decidiamo di concentrarci su questi, anche perché sono accettabili in un'implementazione online. Nella figura \ref{Accuratezza} si può vedere il valore di accuratezza per ogni paziente per i vari algoritmi di clustering, mentre nella figura \ref{Precisione} possiamo osservare la precisione per ogni paziente ed infine nella figura \ref{Recall} si può vedere il valore di recall per ogni algortimo e paziente.
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.35]{images/secondi_overlap.png}
 	\caption{Grafico degli intervalli di overlap e secondi della finestra temporale per ogni paziente}
 	\label{SecondiOverlap}
 \end{figure}
-Nella figura \ref{Accuratezza} si può vedere il valore di accuratezza per ogni paziente per i vari algoritmi di clustering, mentre nella figura \ref{Precisione} possiamo osservare la precisione per ogni paziente ed infine nella figura \ref{Recall} si può vedere il valore di recall per ogni algortimo e paziente.
+
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.35]{images/accuratezza.png}
@@ -73,16 +73,16 @@ Nella figura \ref{Accuratezza} si può vedere il valore di accuratezza per ogni 
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.3]{images/precisione.png}
-	\caption{Grafico della precisione per ogni paziente}
+	\caption{Grafico della precisione media delle classi per ogni paziente}
 	\label{Precisione}
 \end{figure}
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.35]{images/recall.png}
-	\caption{Grafico della recall per ogni paziente}
+	\caption{Grafico della recall media delle classi per ogni paziente}
 	\label{Recall}
 \end{figure}
-Oltre a determinare la migliore combinazione secondi-overlap, siamo stati in grado di verificare quale metrica dell'algoritmo di clustering k-means si adatta ai nostri dati. Infatti, nella figura \ref{Precisione} possiamo vedere che la metrica Euclidean ha in media il valore più alto rispetto alle altre, anche se questo, osservando le figure \ref{Precisione} e \ref{Recall}, può essere dato dal fatto che sbaglia meno volte rispetto alle altre metriche ad etichettare come NoFog e, essendo questa label in quantità maggiore rispetto alle altre, porta ad un'accuracy totale più alta.\\
+Oltre a determinare le migliori combinazioni secondi-overlap, siamo stati in grado di verificare quale metrica dell'algoritmo di clustering k-means meglio si adatta ai nostri dati. Infatti, nella figura \ref{Accuratezza} possiamo vedere che la metrica Euclidean ha in media il valore più alto rispetto alle altre, anche se questo, osservando le figure \ref{Precisione} e \ref{Recall}, è dato dal fatto che sbaglia meno volte rispetto alle altre metriche ad etichettare il NoFog e, essendo questa label in quantità maggiore rispetto alle altre, porta ad un'accuracy totale più alta.\\
 
 \section{Feature Dinamiche}
 
