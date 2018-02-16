@@ -20,7 +20,7 @@ for windows = 1.5:0.5:2
             feature = T(:,1:2);
             classi = T(:,3);
 
-            idx = kmeans(feature,3,'MaxIter',10000,'Start','cluster','Replicates',5);
+            idx = kmeans(feature,3,'MaxIter',1000000,'Start','cluster','Replicates',50);
             versus = [idx classi];
             writetable(array2table(versus), [datadir_versus 'versus_S' num2str(isubject,'%02d') '_Sec' num2str(windows,'%.01f') '_Ov' num2str(overlap,'%.01f') 'R01.csv']);
             
@@ -97,7 +97,7 @@ for isubject = [1 2 3 5 6 7]
     end
     %% Faccio cluster sul paziente escluso e poi LDA sui dati del cluster per allenare il secondo knn
     ALL = [F classi'];
-    idx = kmeans(F,3,'MaxIter',10000,'Start','cluster','Replicates',5);
+    idx = kmeans(F,3,'MaxIter',1000000,'Start','cluster','Replicates',50);
     
     [C1,~] = confusionmat(idx,classi);
     accuracy_1 = c_accuracy(C1);

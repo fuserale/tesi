@@ -1,0 +1,81 @@
+classError =
+
+    0.1988
+
+
+C =
+
+   337    67    11
+    24     0     0
+     9     1     0
+
+
+rate =
+
+    0.7506    0.8120    0.0294    0.9108    0.0127
+
+Elapsed time is 869.952375 seconds.
+
+classError =
+
+    0.1901
+
+
+C =
+
+   854     0     0
+   127     0     0
+    33     0     0
+
+
+rate =
+
+    0.8422    1.0000         0    0.8422       NaN
+
+Elapsed time is 1225.943374 seconds.
+
+classError =
+
+    0.1722
+
+
+C =
+
+   175    36     0
+    30     8     0
+     6     4     0
+
+
+rate =
+
+    0.7066    0.8294    0.2500    0.8294    0.2500
+
+Elapsed time is 1562.344828 seconds.
+
+classError =
+
+    0.1676
+
+
+C =
+
+   743    28     0
+   195     9     0
+    52     2     0
+
+
+rate =
+
+    0.7308    0.9637    0.0426    0.7505    0.2821
+
+Elapsed time is 1975.820259 seconds.
+
+classError =
+
+    0.2070
+
+
+C =
+
+    27   282
+     0     0
