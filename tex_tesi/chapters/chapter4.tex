@@ -10,11 +10,11 @@ Quello del FoG, come introdotto in precedenza, è un problema che debilita in mo
 \begin{tikzpicture}
 \node [mybox] (box){%
 	\begin{minipage}{.96\textwidth}
-		Quello che, dunque, si vuole progettare è un algoritmo automatizzato che, attraverso l'uso di accelerometri posizionati sul paziente, permetta di identificare, in tempo reale, gli istanti che chiamiamo pre-FoG e quindi prevenire il blocco della persona. Questo permette di sostuire il dottore, o fisioterapista, nell'identificazione di episodi di FoG anche nella prima fase di test.
+		Quello che, dunque, si vuole progettare è un algoritmo automatizzato non supervisionato che, attraverso l'uso di accelerometri posizionati sul paziente, permetta di identificare, in tempo reale, gli istanti che chiamiamo pre-FoG e quindi prevenire il blocco della persona. Questo permette di sostuire il dottore, o fisioterapista, nell'identificazione di episodi di FoG anche nella prima fase di test.
 	\end{minipage}
 };
 \end{tikzpicture}%
 
 Infatti, fino ad adesso, al paziente venivano fatti fare dei percorsi ed il dottore, tramite l'utilizzo di registrazioni, registrava i FoG ed etichettava dunque tutti gli istanti della registrazione in basse all'occorrenza del blocco oppure no. Con questo approccio, invece, tutto questo viene effettuato dall'algoritmo, senza il bisogno dell'intervento umano.\\
 Dopo una prima fase di test, a questo punto automatizzata, l'algoritmo cerca di adattarsi il più possibile alle abitudini di camminata e di reazione del paziente, al fine di sbagliare il meno possibile. In un contesto di vità quotidiana, poi, l'algoritmo viene eseguito sullo stesso dispositivo che contiene l'accelerometro, per cui anche l'invasività degli strumenti utilizzati è minima. L'indossabile allora raccoglie i dati degli accelerometri ed, ad ogni finestra temporale, esegue l'algoritmo sviluppato che definisce il tipo di situazione in cui il paziente si trova, se a rischio di FoG o non in blocco. Nel primo caso, il dispositivo stesso effettua lo stimolo auditivo al fine di evitare l'occorrenza di FoG, mentre nel secondo caso resta silente.\\
-Riassumendo, l'obiettivo è quello di sviluppare un algoritmo automatizzato che permetta di prevenire i contesti di FoG, senza la supervisione del fisioterapista o del dottore, tramite l'utilizzo di uno o più dispositivi indossabili che facciano uso di accellerometri.
+Riassumendo, l'obiettivo è quello di sviluppare un algoritmo automatizzato che permetta di prevenire i contesti di FoG, senza la supervisione del fisioterapista o del dottore, tramite l'utilizzo di uno o più dispositivi indossabili che facciano uso di accelerometri.

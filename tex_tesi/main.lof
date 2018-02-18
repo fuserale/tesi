@@ -20,33 +20,37 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Rappresentazione dei dati e dei gruppi ottenuti con la cluster analysis}}{13}{figure.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Misure di Similarit\IeC {\`a}}}{14}{figure.3.6}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Esempio di assegnazione dei dati tramite l'algoritmo k-means}}{15}{figure.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Rappresentazione dei possibili approcci usando strategie di clustering}}{15}{figure.3.7}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Esempio di assegnazione dei dati tramite l'algoritmo k-medoids}}{16}{figure.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Rappresentazione della matrice di confusione per 2 classi}}{17}{figure.3.8}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Esempio di assegnazione dei dati tramite cluster gerarchico e la sua rappresentazione tramite dendogramma}}{17}{figure.3.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Rappresentazione della matrice di confusione per c classi}}{18}{figure.3.9}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Schema input-output per una SOM}}{18}{figure.3.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite PCA}}{19}{figure.3.10}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Rappresentazione dei possibili approcci usando strategie di clustering}}{19}{figure.3.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite LDA}}{21}{figure.3.11}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Rappresentazione della matrice di confusione per 2 classi}}{21}{figure.3.11}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Rappresentazione della matrice di confusione per c classi}}{22}{figure.3.12}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite PCA}}{23}{figure.3.13}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite LDA}}{25}{figure.3.14}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema generale di calcolo delle feature statistiche}}{33}{figure.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema generale di calcolo delle feature statistiche}}{28}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Grafico degli intervalli di overlap e secondi della finestra temporale per ogni paziente}}{34}{figure.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Grafico degli intervalli di overlap e secondi della finestra temporale per ogni paziente}}{29}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Grafico dell'accuratezza per ogni paziente}}{35}{figure.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Grafico dell'accuratezza media delle classi per ogni paziente}}{29}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Grafico della precisione media delle classi per ogni paziente}}{35}{figure.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Grafico della precisione media delle classi per ogni paziente}}{30}{figure.5.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Grafico della recall media delle classi per ogni paziente}}{30}{figure.5.5}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Grafico della recall media delle classi per ogni paziente}}{36}{figure.5.5}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

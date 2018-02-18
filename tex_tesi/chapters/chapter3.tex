@@ -99,37 +99,100 @@ La cluster analysis rientra tra le tecniche di tipo esplorativo e pertanto non �
 	\caption{Rappresentazione dei dati e dei gruppi ottenuti con la cluster analysis}
 \end{figure}
 Per classificare e raggruppare gli elementi in gruppi omogenei, è necessario introdurre una nozione di prossimità o similarità. Un indice di prossimità tra due generici elementi $x_i$ e $x_j$ è definito come una funzione dei rispettivi vettori riga nella matrice dei dati: $IP_{ij} = f(x_{i}^{'},x_{j}^{'}) i,j=1,2,..,n$. Due individui sono vicini quando la loro dissimilarità o distanza è piccola o, equivalentemente, quando la loro similarità è grande. Le principali misure di similarità sono illustrate in tabella \ref{TAB:SIMILARITA'}.
+
+\begin{table}[h!]
+	\begin{tabular}{| l | c | c | }
+	\multicolumn{1}{|l|}{Tipo di dato} &  
+	\multicolumn{1}{c|}{Misura} &
+	\multicolumn{1}{c|}{Formula}\\
+	\hline
+	\hline
+	Binario					&	Coefficiente di Sokal		&	$S_{ij}=(a+d)/(a+b+c+d)$	\\
+	Binario					&	Coefficiente di Jaccard		& 	$S_{ij}=a/(a+b+c)$\\
+	Categorici non binari	& 	Media delle variabili		&	$S_{ij}=(1/p) \sum_{k=1}^{p} s_{ijk}$\\
+	Dati Continui			& 	Distanza Euclidea			&	$d_{ij}=[\sum_{k=1}^{p}(x_{ik}-x_{jk})^2]^{1/2}$\\
+	Dati Continui			& 	Distanza City Block			&	$d_{ij}=\sum_{k=1}^{p}|x_{ik}-x_{jk}|$\\
+	
+\end{tabular}
+\vspace{0.1cm}
+\caption{Misure di Similarità}
+%\vspace{-0.2cm}
+\label{TAB:SIMILARITA'}
+\end{table}
+
+I principali algoritmi di clustering sono descritti nelle prossime sottosezioni.
+\subsubsection{K-Means}
+Il K-Means è un algoritmo di clustering partizionale che permette di suddividere un insieme di oggetti in K gruppi sulla base dei loro attributi. E' una variante dell'algoritmo di aspettativa-massimizzazione(EM) il cui obiettivo è determinare i K gruppi di dati generati da distribuzioni gaussiane. Si assume che gli attributi degli oggetti possano essere rappresentati come vettori e che quindi formino uno spazio vettoriale. L'obiettivo che l'algoritmo di prepone è di minimizzare la varianza intra-cluster, dove ogni cluster viene indentificato mediante un centroide o punto medio. L'algoritmo segue una procedura iterativa:
+\begin{enumerate}
+	\item Crea K partizioni (dove K è il numero di cluster che si vogliono ottenere) ed assegna ad ogni partizione dei punti di ingresso (scelti casualmente o euristicamente);
+	\item Costruisce una nuova partizione associando ogni punto d'ingresso al cluster il cui centroide è più vicino ad esso;
+	\item Vengono ricalcolati i centroidi per i nuovi cluster e si itera al punto 2 finché l'algoritmo non converge.
+\end{enumerate}
+L'algoritmo converge molto velocemente, infatti è stato osservato che il numero di iterazioni è minore del numero di punti da osservare. In termini di qualità delle soluzioni, però, l'algoritmo non garantisce il raggiungimento dell'ottimo globale poiché la soluzione dipende largamente dal set di cluster iniziale. Un rimedio a questo aspetto è di applicare l'algoritmo più volte e, fra tutte le soluzioni prodotte, scegliere quella più soddisfacente. Un altro svantaggio è che l'algoritmo richiede di scegliere a priori il numero di cluster da trovare, per cui se i dati non sono naturalmente partizionati si ottengono risultati strani. Inoltre, l'algoritmo funziona bene solo quando sono individuabili cluster sferici nei dati.
 \begin{figure}[h!]
 	\centering
-	%\scriptsize
-	\begin{tabular}{ l | c | c | }
-		\multicolumn{1}{l|}{Tipo di dato} &  
-		\multicolumn{1}{c|}{Misura} &
-		\multicolumn{1}{c|}{Formula}\\
-		\hline
-		\hline
-		Binario					&	Coefficiente di Sokal		&	$S_{ij}=(a+d)/(a+b+c+d)$	\\
-		Binario					&	Coefficiente di Jaccard		& 	$S_{ij}=a/(a+b+c)$\\
-		Categorici non binari	& 	Media delle variabili		&	$S_{ij}=(1/p) \sum_{k=1}^{p} s_{ijk}$\\
-		Dati Continui			& 	Distanza Euclidea			&	$d_{ij}=[\sum_{k=1}^{p}(x_{ik}-x_{jk})^2]^{1/2}$\\
-		Dati Continui			& 	Distanza City Block			&	$d_{ij}=\sum_{k=1}^{p}|x_{ik}-x_{jk}|$\\
-		
-	\end{tabular}
-	\vspace{0.1cm}
-	\caption{Misure di Similarità}
-	%\vspace{-0.2cm}
-	\label{TAB:SIMILARITA'}
+	\includegraphics[scale=0.50]{images/example_kmeans.png}
+	\caption{Esempio di assegnazione dei dati tramite l'algoritmo k-means}
 \end{figure}
-\\
-I principali algoritmi di clustering sono:
+\subsubsection{K-Medoids}
+K-medoids è un algoritmo di clustering partizionale correlato all'algoritmo K-means. Prevede in input un insieme di n oggetti e un numero k che determina quanti cluster si vogliono in output. Entrambi gli algoritmi sono partizionali (suddividendo il dataset in gruppi) ed entrambi cercano di minimizzare l'errore quadratico medio, la distanza tra punti di un cluster e il punto designato per esserne il centro. In K-means il punto è "artificiale" — è la pura media di tutti i punti nel cluster. Nel K-medoids è usato il punto collocato più centralmente, in questo modo il centro è uno dei datapoint attuali. K-medoids è più robusto al rumore e agli outlier rispetto al k-means. Un medoid può essere definito come un oggetto di un cluster la cui dissimilarità media rispetto a tutti gli oggetti nel cluster è minima, in questo modo esso sarà il punto più centrale di un dato dataset.
+L'algoritmo di clustering è il seguente:
+\begin{enumerate}
+	\item Si scelgono arbitrariamente k oggetti (dove K è il numero di cluster che si vogliono ottenere) come punti medoid da un insieme di n data point (n>k);
+	\item In seguito alla selezione di k punti medoid, si associa ogni oggetto nel dato dataset al più simile medoid. La similarità è definita usando misure di distanza;
+	\item Si seleziona in modo casuale un oggetto non medoid O';
+	\item Si calcola il costo totale S per lo scambio del medoid iniziale nell'oggetto O';
+	\item Se S<0, allora si scambia il medoid iniziale con il nuovo (se S<0 allora ci sarà un nuovo insieme di medoid);
+	\item Si ripetono i passi dal 2 al 5 sino a quando si hanno cambiamenti nel medoid.
+\end{enumerate}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.50]{images/example_kmedoids.png}
+	\caption{Esempio di assegnazione dei dati tramite l'algoritmo k-medoids}
+\end{figure}
+\subsubsection{Hierarchical}
+Il clustering gerarchico è un approccio di clustering che mira a costruire una gerarchia di cluster. Le strategie per il clustering gerarchico sono tipicamente di due tipi:
 \begin{itemize}
-	\item \textbf{K-means}: l'obiettivo che l'algoritmo si prepone è di minimizzare la varianza totale intra-cluster. Ogni cluster viene identificato mediante un centroide o punto medio. L'algoritmo segue una procedura iterativa. Inizialmente crea K partizioni e assegna ad ogni partizione i punti d'ingresso o casualmente o usando alcune informazioni euristiche. Quindi calcola il centroide di ogni gruppo. Costruisce quindi una nuova partizione associando ogni punto d'ingresso al cluster il cui centroide è più vicino ad esso. Quindi vengono ricalcolati i centroidi per i nuovi cluster e così via, finché l'algoritmo non converge;
-	\item \textbf{K-medoids}: è molto simile al k-means, con la sola condizione che il centroide deve corrispondere ad un elemento;
-	\item \textbf{Gerarchico}: produce insiemi nidificati di clusters analizzando la similarità tra coppie di oggetti e raggruppando gli elementi in un albero binario gerarchico. Ne esistono di due tipi: agglomerativo, ossia ogni elemento è un cluster e si uniscono tra di loro fino ad arrivare ad unico cluster, e divisivo, nel quale, all'inizio, ho un unico grande cluster che poi viene diviso;
-	\item \textbf{Self-Organizing Map}: sono reti neurali a connessioni laterali dove i neuroni di uscita sono organizzati in griglie di bassa dimensione (2D o 3D). Ogni ingresso è connesso a tutti i neuroni di uscita e ad ogni neurone è associato un vettore dei pesi della stessa dimensione dei vettori d'ingresso. La dimensione del vettore d'ingresso è generalmente molto più alta della dimensione della griglia di uscita;
-	\item \textbf{Fuzzy C-means}: molto simile anch'esso al K-means, con la sola condizione che un elemento può appartenere a più di un cluster contemporaneamente;
-	\item \textbf{Gaussian Mixture Models}: è un modello probabilistico utilizzato per modellare distribuzioni complesse di dati: l’idea base del modello è quella di suddividere un generico dataset di dati(popolation) in diverse partizioni (subpopolation) e rappresentare queste ultime attraverso una funzione di densità di probabilità. L’obiettivo è quindi rappresentare un segnale complesso attraverso una combinazione lineare di semplici distribuzioni di probabilità (Mixture Model) utilizzando, come si può intuire dal nome stesso del modello, un insieme di gaussiane per la modellazione di distribuzioni complesse di dati.
+	\item Agglomerativo: si tratta di un approccio "bottom up" (dal basso verso l'alto) in cui si parte dall'inserimento di ciascun elemento in un cluster differente e si procede quindi all'accorpamento graduale di cluster a due a due;
+	\item Divisivo: si tratta di un approccio "top down" (dall'alto verso il basso) in cui tutti gli elementi si trovano inizialmente in un singolo cluster che viene via via suddiviso ricorsivamente in sotto-cluster.
 \end{itemize}
+Il risultato di un clustering gerarchico è rappresentato in un dendrogramma. Questo è uno strumento grafico per la visualizzazione del coefficiente di similarità quantificato dalle varie macchine e dai vari cluster nel processo di “raggruppamento”. Il dendrogramma viene utilizzato per fornire una rappresentazione grafica del processo di raggruppamento delle istanze che esprime nell'asse delle ascisse la distanza logica dei clusters secondo la metrica definita, nell'asse delle ordinate il livello gerarchico di aggregazione (valori interi positivi). 
+La scelta del livello gerarchico (del valore dell'asse Y) definisce la partizione rappresentativa del processo di aggregazione.\\
+Per decidere quali cluster devono essere combinati (approccio agglomerativo) o quale cluster deve essere suddiviso (approccio divisivo) è necessario definire una misura di dissimilarità tra cluster. Nella maggior parte dei metodi di clustering gerarchico si fa uso di metriche specifiche che quantificano la distanza tra coppie di elementi e di un criterio di collegamento che specifica la dissimilarità di due insiemi di elementi (cluster) come funzione della distanza a coppie tra elementi nei due insiemi. Le metriche di distanza più comuni sono: euclidea, Manhattan, uniforme, Mahalanobis, Hamming. Le metriche più diffuse sono: complete linkage (massimo distanza tra due punti), single linkage (massimo distanza tra due punti) o average linkage (massimo distanza tra due punti).
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.50]{images/example_dendogram.png}
+	\caption{Esempio di assegnazione dei dati tramite cluster gerarchico e la sua rappresentazione tramite dendogramma}
+\end{figure}
+\subsubsection{Neural Networks}
+Le self-organizing map (SOM) sono una fattispecie di organizzazione di processi di informazione in rete analoghi alle reti neurali artificiali. È addestrata usando l'apprendimento non supervisionato per produrre una rappresentazione dei campioni di training in uno spazio a bassa dimensione preservando le proprietà topologiche dello spazio degli ingressi. Questa proprietà rende le SOM particolarmente utili per la visualizzazione di dati di dimensione elevata. Le self-organizing map sono reti neurali a connessioni laterali dove i neuroni di uscita sono organizzati in griglie di bassa dimensione (generalmente 2D o 3D). Ogni ingresso è connesso a tutti i neuroni di uscita. A ogni neurone è associato un vettore dei pesi della stessa dimensione dei vettori d'ingresso. La dimensione del vettore d'ingresso è generalmente molto più alta della dimensione della griglia di uscita. L'obiettivo dell'apprendimento nelle self-organizing map è di specializzare parti differenti del reticolo SOM a rispondere similmente a particolari pattern d'ingresso.\\
+L'algoritmo di clustering è il seguente:
+\begin{enumerate}
+	\item Assegna ai vettori dei pesi valori casuali;
+	\item Prendi un vettore d'ingresso;
+	\item Attraversa ogni nodo della mappa ed usa la distanza euclidea per trovare somiglianze fra il vettore d'ingresso ed il vettore dei pesi di ogni singolo nodo della mappa, individuando il nodo a distanza minore (questo nodo verrà chiamato Best Matching Unit o BMU);
+	\item Aggiorna i nodi del vicinato di BMU "tirandoli" più vicino al vettore d'ingresso.
+\end{enumerate}
+Ci sono due modi per interpretare una SOM:
+\begin{itemize}
+	\item Dato che nella fase di addestramento i pesi di tutto il vicinato sono spostati nella stessa direzione, elementi simili tendono ad eccitare neuroni adiacenti. Perciò le SOM formano una mappa semantica dove campioni simili vengono mappati vicini e dissimili distanti;
+	\item Un altro modo di considerare i pesi neuronali è di pensarli come punti distribuiti nello spazio degli ingressi. Questi formano un'approssimazione della distribuzione dei campioni d'ingresso. Più neuroni puntano a regioni con un'elevata concentrazione di campioni di addestramento, e meno in zone dove i campioni sono scarsi.
+\end{itemize}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.50]{images/example_som.png}
+	\caption{Schema input-output per una SOM}
+\end{figure}
+\subsubsection{Fuzzy C-Means}
+Il Fuzzy C-means (anche riferito come soft clustering) è un algoritmo di clustering nel quale ogni punto può appartenere a più di un cluster. L'algoritmo è molto simile al k-means, ma in questo contesto viene assegnato ad ogni punto un grado di appartenenza. Questo indica il grado con cui un determinato punto appartiene ad un certo cluster. L'algoritmo di clustering è il seguente:
+\begin{enumerate}
+	\item Scegliere un numero K di cluster;
+	\item Assegna randomicamente dei coefficienti di appartenenza ad un cluster per ogni punto;
+	\item Calcola il centroide di ogni cluster;
+	\item Per ogni punto, calcola il suo grado di appartenenza ai clusters;
+	\item Itera fino ad avere convergenza.
+\end{enumerate}
+
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.8]{images/Approcci_Clustering.png}
@@ -152,10 +215,10 @@ I principali algoritmi di classificazione sono:
 \subsection{Validazione della Classificazione}
 Al fine di valutare la bontà della classificazione effettuata, viene introdotto il concetto di \textbf{Matrice di Confusione}. Essa è una matrice nxn, con n=numero di classi, nella quale vengono messe a confronto le etichette reali con quelle del classificatore proposto. La figura \ref{immagine_matrice_confusione_2classi}  rapprestra la matrice di confusione con 2 classi possibili:
 \begin{itemize}
-	\item Il \textbf{Veri Positivi} indica quante volte ho classificato giusto l'etichetta che io considero come positiva, ad esempio la classe 1;
-	\item Il \textbf{Veri Negativi} indica quante volte ho classificato giusto l'etichetta che io considero come negativa, ad esempio la classe 2;
-	\item Il \textbf{Falsi Positivi} indica quante volte ho classificato sbagliato l'etichetta che io considero come positiva, ossia il mio classificatore ha etichettato il mio campione con la classe 1, ma in realtà quella misurazione appartiene alla classe 2;
-	\item Il \textbf{Falsi Negativi} indica quante volte ho classificato sbagliato l'etichetta che io considero come negativa, ossia il mio classificatore ha etichettato il mio campione con la classe 2, ma in realtà quella misurazione appartiene alla classe 1;
+	\item Il \textbf{Vero Positivo} indica quante volte ho classificato giusto l'etichetta che io considero come positiva, ad esempio la classe 1;
+	\item Il \textbf{Vero Negativo} indica quante volte ho classificato giusto l'etichetta che io considero come negativa, ad esempio la classe 2;
+	\item Il \textbf{Falso Positivo} indica quante volte ho classificato sbagliato l'etichetta che io considero come positiva, ossia il mio classificatore ha etichettato il mio campione con la classe 1, ma in realtà quella misurazione appartiene alla classe 2;
+	\item Il \textbf{Falso Negativo} indica quante volte ho classificato sbagliato l'etichetta che io considero come negativa, ossia il mio classificatore ha etichettato il mio campione con la classe 2, ma in realtà quella misurazione appartiene alla classe 1;
 \end{itemize}
 \begin{figure}[h!]
 	\centering

@@ -5,6 +5,8 @@
 % ---------------------------------------------------------------
 
 \chapter[Apprendimento non supervisionato]{Apprendimento non supervisionato per l'identificazione di contensti di FoG}\label{chap5:Automatic}
+I lavori che sono stati svolti e presentati nel capitolo \ref{chap2:related} sul Freezing Of Gait sono basati su approcci di classificazione ossia, come spiegato nel capitolo \ref{chap3:background}, allenano un algoritmo con dei dataset di training nel quale le etichette di ogni istante vengono fornite dalla supervisione di un dottore o fisioterapista e poi, tale algoritmo allenato, viene testato su dei nuovi dati al fine di rilevare i contesti di FoG. Il lavoro che viene presentato in questo capitolo, invece, usa le etichette fornite dal dataset solo come confronto ai risultati forniti dagli algoritmi di clustering. Quest'ultimi, infatti, una volta forniti i dati o feature (proprietà) su cui voglia applicarli, restituiscono, per ogni osservazione(nel nostro caso riga del dataset), un'etichetta che indica a quale contesto è stato assegnato ogni dato, se di FoG, non-FoG o Pre-FoG.\\
+Innanzitutto verrà fornita una descrizione del dataset utilizzato e di come è stato modificato per le nostre esigenze. Verranno poi descritti i metodi utilizzati dall'approccio scelto e viene fornito il codice implementativo. Tutte lo sviluppo è stato effettuato tramite software Matlab \footnote{https://it.mathworks.com/products/matlab.html}.
 \section{Dataset}
 L'approccio che andiamo a proporre è stato testato sul dataset DAPHNET\footnote{www.wearable.ethz.ch/resources/Dataset}, il quale contiene dati collezionati da 10 pazienti parkinsoniani, dei quali 8 presentano contesti di FoG, mentre 2 di loro non ne presentano. I dati sono stati registrati usando 3 accelerometri 3D attaccati alla caviglia, al ginocchio e nella zona lombare del paziente, usando una frequenza di campionamento di 64 Hz, ossia vengono raccolti 64 campioni ogni secondo.\\
 I soggetti hanno completato sessioni da 20-30 minuti ciascuno, consistenti di 3 fasi di camminata:
@@ -14,9 +16,38 @@ I soggetti hanno completato sessioni da 20-30 minuti ciascuno, consistenti di 3 
 	\item Camminata che simula attività di vita quotidiana, tra le quali entrare in stanze ed uscirne, camminare nella cucina, prendersi un bicchiere d'acqua e tornare al punto di partenza.
 \end{enumerate}
 Le prestazioni motorie variano molto tra i pazienti. Mentre alcuni soggetti hanno mantenuto una camminata regolare durante gli episodi di non FoG, altri hanno camminato molto lentamente ed in modo instabile. L'intero dataset contiene in totale 237 episodi di FoG; la durata di ognuno di essi è tra i 0.5s ed i 40.5s. Il 50\% degli episodi di FoG è durato meno di 5.4s ed il 93.2\% è più corto di 20s. Gli episodi di FoG sono stati identificati da fisioterapisti usando registrazioni video sincronizzate. L'inizio di un episodio di FoG è stato definito come il punto dove la sequenza normale di camminata è stata interrotta, mentre la fine del FoG è stata definita come il momento in cui tale sequenza riprende.\\
-Per il lavoro svolto nella tesi, oltre alle etichette date dai dottori nei casi di non FoG e FoG, abbiamo introdotto nei dati una nuova label, che indica il momento che noi indichiamo come pre-FoG, per cui tutti i campioni di poco precedenti ad un'occorrenza di FoG sono stati etichettati con questa nuova label. Quindi ci ritroviamo con 3 label diverse invece di 2 (tutti i lavori in letteratura rientrano nell'ultimo caso): l'etichetta 1 indica un No-FoG, la label 2 indica un FoG, l'etichetta 3 indica invece un pre-FoG.
-\section{Feature Statistiche}
-Le prime prove che sono state effettuate riguardano lo studio di feature statistiche collegate ai dati di ingresso degli accelerometri. Le feature prese in considerazione nel nostro studio sono descritte in tabella \ref{TAB:Feature}.
+Per il lavoro svolto nella tesi, oltre alle etichette date dai dottori nei casi di non FoG e FoG, abbiamo introdotto nei dati una nuova label, che indica il momento che noi indichiamo come pre-FoG, per cui tutti i campioni precedenti ad un'occorrenza di FoG sono stati etichettati con questa nuova label. Quindi ci ritroviamo con 3 label diverse invece di 2 (tutti i lavori in letteratura rientrano nell'ultimo caso): l'etichetta 1 indica un No-FoG, la label 2 indica un FoG, l'etichetta 3 indica invece un pre-FoG.
+\section{Approccio basato su Feature Statistiche}
+I dati raccolti dagli accelerometri, se presi in forma grezza, hanno poca potenza espressiva, ossia non riescono a fornire molte informazioni su ciò che stiamo cercando (contesti di FoG), quindi si rende necessaria una rimodellazione di tali dati. Il primo approccio che è stato preso in considerazione è basato sul calcolo di feature ( o proprietà) basate su grandezze che provengono dalla matematica statistica. Il flusso di tale approccio è:
+\begin{enumerate}
+	\item Pre-processamento dei dati degli accelerometri, al fine di eliminare il rumore presente ed identificare eventuali punti di outline, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni;
+	\item Finestramento dei dati in base ad intervalli variabili al fine di calcolare le feature, dove ogni intervallo presenta una certa sovrapposizione con l'intervallo precedente;
+	\item Calcolo effettivo delle feature statistiche;
+	\item Applicazione degli algoritmi di clustering;
+	\item Calcolo di metriche che indicano quanto bene gli algoritmi di clustering hanno lavorato in relazione alle label fornite dal dataset.
+\end{enumerate}
+\subsection{Pre-processamento dei dati}
+Gli accelerometri sono dispositivi che misurano le vibrazioni o l'accelerazione del movimento di una struttura. La forza generata dalle vibrazioni o una variazione del movimento (accelerazione) fa in modo che la massa "comprima" il materiale piezoelettrico, che genera una carica elettrica proporzionale alla forza esercitata su di esso. Dato che la carica è proporzionale alla forza e che la massa è una costante, la carica è proporzionale anche all'accelerazione. Come tutti i dispositivi che misurano delle grandezze presentano dell'incertezza strumentale che può portare ad avere rumore, ossia un segnale non desiderato, di origine naturale o artificiale, che si sovrappone all'informazione degli accelerometri stessi. QUesto rumore porta ad avere dei punti definiti outlier, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni.\\
+Al fine di rimuovere tali punti, che altererebbero in modo negativo il calcolo delle nostre feature, si rende necessario rimuoverli dal nostro dataset. Per identificarli, è stato implementato un filtro passa-alto che eliminano tutte le frequenze inferiori a 0.5Hz, le quali non appartengono al normale movimento umano ma indicano appunto la presenza di rumore, come evidenziato in \cite{21}. L'implementazione del filtro viene fornita in \ref{hpfilter}.
+\begin{lstlisting}[frame=single, caption=hpfilter, label=hpfilter]  % Start your code-block
+function Hd = hpfilter
+% All frequency values are in Hz.
+Fs = 64;  % Sampling Frequency
+
+Fstop = 0.4;    % Stopband Frequency
+Fpass = 0.8;       % Passband Frequency
+Astop = 60;      % Stopband Attenuation (dB)
+Apass = 1;       % Passband Ripple (dB)
+match = 'passband';  % Band to match exactly
+
+% Construct an FDESIGN object and call its ELLIP method.
+h  = fdesign.highpass(Fstop, Fpass, Astop, Apass, Fs);
+Hd = design(h, 'cheby2', 'MatchExactly', match);
+\end{lstlisting}
+\subsection{Definizione degli intervalli}
+
+\subsection{Calcolo delle Feature}
+ Le feature prese in considerazione nel nostro studio sono descritte in tabella \ref{TAB:Feature}.
 \begin{table}[h!]
 	\begin{tabular}{ |p{0.05\textwidth} | p{0.25\textwidth} | p{0.6\textwidth} | }
 		\multicolumn{1}{|p{0.05\textwidth} |}{\textbf{N}} &  
@@ -47,7 +78,7 @@ Le prime prove che sono state effettuate riguardano lo studio di feature statist
 \caption{Descrizione delle Feature Statistiche}
 \label{TAB:Feature}
 \end{table}\\
-Prima di calcolare tali feature, però, è necessario pre-processare i dati in modo da eliminare il più possibile il rumore presente o gli outlier, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni. A tale scopo, è stato progettato un filtro passa banda in modo da eliminare tutti i movimenti che presentano una frequenza inferiore a 0.5Hz o superiore a 20Hz, in accordo con \cite{21}, dato che il movimento umano è compreso tra questi due valori.\\
+Prima di calcolare tali feature, però, è necessario pre-processare i dati in modo da eliminare il più possibile il rumore presente o gli outlier,  A tale scopo, è stato progettato un filtro passa banda in modo da eliminare tutti i movimenti che presentano una frequenza inferiore a 0.5Hz o superiore a 20Hz, in accordo con \cite{21}, dato che il movimento umano è compreso tra questi due valori.\\
 Una volta filtrati i dati, il passo successivo è scegliere l'intervallo della finestra temporale su cui calcolare le feature. Questa però non ha una lunghezza definita a priori in letteratura, per cui abbiamo condotto uno studio su quale fosse la migliore scelta. Inoltre, poiché non vogliamo perdere determinati movimenti tra una finestra e l'altro, per cui si è deciso di fare sovrapposizione tra finsetre. Anche questo parametro non è definito a priori, per cui anche questo valore è stato fatto variare e condotto un studio su quale fosse il migliore. I range su cui sono stati fatti i test sono: da 1 a 5 secondi per quanto riguarda la dimensione della finestra temporale, da 0.5 a 4.5 secondi invece per l'intervallo di soprapposizione, con la condizione che il tempo di sovrapposizione sia sempre minore di quello della finestra. Per esempio, poiché ho una frequenza di campionamento di 64 Hz, scegliendo 2 secondi come intervallo della finestra e 0.5 secondi di overlap, avrò che la prima finestra va dal campione 1 al campione 129, la seconda finestra va dal campione 98 al campione 226, la terza finestra dal campione 195 al campione 323 e così via. L'intervallo che invece è stato definito a priori è quello relativo al pre-fog, che è stato posto a 2s in accordo con \cite{12}.
 \begin{figure}[h!]
 	\centering
