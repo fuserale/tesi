@@ -1,0 +1,2 @@
+Italian Writing Aids extension: contains the Italian dictionary, thesaurus and hyphenation patterns contributed by volunteers.
+

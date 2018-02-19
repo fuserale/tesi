@@ -52,18 +52,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.2.1}Pre-processamento dei dati}{31}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}Definizione degli intervalli}{31}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.2}Definizione degli intervalli}{32}{subsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.3}Calcolo delle Feature}{31}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.3}Calcolo delle Feature}{33}{subsection.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Feature Dinamiche}{36}{section.5.3}
+\contentsline {subsection}{\numberline {5.2.4}Clustering}{36}{subsection.5.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Linear Discriminant Analysis}{36}{section.5.4}
+\contentsline {subsection}{\numberline {5.2.5}Calcolo delle prestazioni}{38}{subsection.5.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Conclusione e Lavori Futuri}{37}{chapter.6}
+\contentsline {section}{\numberline {5.3}Feature Dinamiche}{38}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Risultati}{37}{section.6.1}
+\contentsline {section}{\numberline {5.4}Linear Discriminant Analysis}{38}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Lavori Futuri}{37}{section.6.2}
+\contentsline {chapter}{\numberline {6}Conclusione e Lavori Futuri}{39}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{39}{chapter*.10}
+\contentsline {section}{\numberline {6.1}Risultati}{39}{section.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Lavori Futuri}{39}{section.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliography}{41}{chapter*.10}

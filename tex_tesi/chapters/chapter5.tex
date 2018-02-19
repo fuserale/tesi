@@ -26,10 +26,16 @@ I dati raccolti dagli accelerometri, se presi in forma grezza, hanno poca potenz
 	\item Applicazione degli algoritmi di clustering;
 	\item Calcolo di metriche che indicano quanto bene gli algoritmi di clustering hanno lavorato in relazione alle label fornite dal dataset.
 \end{enumerate}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.6]{images/flusso_feature.png}
+	\caption{Schema generale di calcolo delle feature statistiche}
+	\label{Flusso Feature}
+\end{figure}
 \subsection{Pre-processamento dei dati}
 Gli accelerometri sono dispositivi che misurano le vibrazioni o l'accelerazione del movimento di una struttura. La forza generata dalle vibrazioni o una variazione del movimento (accelerazione) fa in modo che la massa "comprima" il materiale piezoelettrico, che genera una carica elettrica proporzionale alla forza esercitata su di esso. Dato che la carica è proporzionale alla forza e che la massa è una costante, la carica è proporzionale anche all'accelerazione. Come tutti i dispositivi che misurano delle grandezze presentano dell'incertezza strumentale che può portare ad avere rumore, ossia un segnale non desiderato, di origine naturale o artificiale, che si sovrappone all'informazione degli accelerometri stessi. QUesto rumore porta ad avere dei punti definiti outlier, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni.\\
 Al fine di rimuovere tali punti, che altererebbero in modo negativo il calcolo delle nostre feature, si rende necessario rimuoverli dal nostro dataset. Per identificarli, è stato implementato un filtro passa-alto che eliminano tutte le frequenze inferiori a 0.5Hz, le quali non appartengono al normale movimento umano ma indicano appunto la presenza di rumore, come evidenziato in \cite{21}. L'implementazione del filtro viene fornita in \ref{hpfilter}.
-\begin{lstlisting}[frame=single, caption=hpfilter, label=hpfilter]  % Start your code-block
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=hpfilter, label=hpfilter]  % Start your code-block
 function Hd = hpfilter
 % All frequency values are in Hz.
 Fs = 64;  % Sampling Frequency
@@ -45,9 +51,38 @@ h  = fdesign.highpass(Fstop, Fpass, Astop, Apass, Fs);
 Hd = design(h, 'cheby2', 'MatchExactly', match);
 \end{lstlisting}
 \subsection{Definizione degli intervalli}
+Una volta filtrati i dati, il passo successivo dell'algoritmo consiste nel dividerli in intervalli temporali, al fine di poter computare le caratteristiche degli stessi. Un intervallo contiene un determinato movimento, che però verrebbe "interrotto" con la fine della finestra stessa e quindi potrei perdere informazioni su tale movimento. Per evitare il più possibile tale perdita, è usato usato un approccio che sfrutta le sovrapposizioni tra intervalli, per cui ogni nuova finestra non inizia subito dopo la fine della precedente, ma all'interno di essa. La durata degli intervalli che sono stati presi in considerazione sono:
+\begin{itemize}
+	\item  Da 1 secondi a 5 secondi per la finestra temporale, con un incremento di 0.5 secondi;
+	\item Da 0.5 a 4.5 secondi per l'intervallo di overlap, con un incremento sempre di 0.5 secondi.
+\end{itemize}
+La condizione fondamentale per usare le sovrapposizioni è che l'intervallo delle stesse non sia mai maggiore della durata delle finestre temporali, per cui è stata posta la condizione che la finestra temporale sia sempre almeno 0.5 secondi più lunga dell'intervallo di sovrapposizione. Per capire da dove parte la nuova finestra, quindi, prendiamo la posizione a cui siamo arrivati e togliamo la durata della sovrapposizione. L'implementazione viene fornita in \ref{intervals}.
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Definizione degli intervalli, label=intervals]  % Start your code-block
+...
+for k = 5:5:45
 
+Y = k/10;
+
+for i = (Y+0.5):0.5:5
+%dimensione della finestra in secondi
+size_windows_sec = i;
+%dimensione della finestra in campioni
+size_windows_sample = Fs * i;
+
+%dimensione dell'overlap in secondi
+size_overlap_sec = Y;
+%dimensione dell'overlap in campioni
+size_overlap_samples = Fs * Y;
+
+number_sample = 1;
+
+%for each sample window, compute the features
+for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
+B = A(i:i+size_windows_sample-1,:);
+...
+\end{lstlisting}
 \subsection{Calcolo delle Feature}
- Le feature prese in considerazione nel nostro studio sono descritte in tabella \ref{TAB:Feature}.
+ Per ogni possibile combinazione di finestra temporale e sovrapposizione, a questo punto vengono calcolate le feature per ogni intervallo. Le feature prese in considerazione nel nostro studio sono descritte in tabella \ref{TAB:Feature}.
 \begin{table}[h!]
 	\begin{tabular}{ |p{0.05\textwidth} | p{0.25\textwidth} | p{0.6\textwidth} | }
 		\multicolumn{1}{|p{0.05\textwidth} |}{\textbf{N}} &  
@@ -78,42 +113,169 @@ Hd = design(h, 'cheby2', 'MatchExactly', match);
 \caption{Descrizione delle Feature Statistiche}
 \label{TAB:Feature}
 \end{table}\\
-Prima di calcolare tali feature, però, è necessario pre-processare i dati in modo da eliminare il più possibile il rumore presente o gli outlier,  A tale scopo, è stato progettato un filtro passa banda in modo da eliminare tutti i movimenti che presentano una frequenza inferiore a 0.5Hz o superiore a 20Hz, in accordo con \cite{21}, dato che il movimento umano è compreso tra questi due valori.\\
-Una volta filtrati i dati, il passo successivo è scegliere l'intervallo della finestra temporale su cui calcolare le feature. Questa però non ha una lunghezza definita a priori in letteratura, per cui abbiamo condotto uno studio su quale fosse la migliore scelta. Inoltre, poiché non vogliamo perdere determinati movimenti tra una finestra e l'altro, per cui si è deciso di fare sovrapposizione tra finsetre. Anche questo parametro non è definito a priori, per cui anche questo valore è stato fatto variare e condotto un studio su quale fosse il migliore. I range su cui sono stati fatti i test sono: da 1 a 5 secondi per quanto riguarda la dimensione della finestra temporale, da 0.5 a 4.5 secondi invece per l'intervallo di soprapposizione, con la condizione che il tempo di sovrapposizione sia sempre minore di quello della finestra. Per esempio, poiché ho una frequenza di campionamento di 64 Hz, scegliendo 2 secondi come intervallo della finestra e 0.5 secondi di overlap, avrò che la prima finestra va dal campione 1 al campione 129, la seconda finestra va dal campione 98 al campione 226, la terza finestra dal campione 195 al campione 323 e così via. L'intervallo che invece è stato definito a priori è quello relativo al pre-fog, che è stato posto a 2s in accordo con \cite{12}.
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.6]{images/flusso_feature.png}
-	\caption{Schema generale di calcolo delle feature statistiche}
-	\label{Flusso Feature}
-\end{figure}
-Per ogni combinazione di finestra temporale, quindi, vengono calcolate le rispettive feature e si procede ad applicare l'algoritmo di clustering. Quelli che sono stati scelti, in quanto più diffusi nel contesto di clustering, sono: k-means, self-organizing map e fuzzy c-means. Il k-means viene testato con tutte le sue metriche di distanza, per evidenziare eventuali differenze e decidere quale tra le 4 presenti (cosine, euclidean, cityblock, correlation) si adatta di più al nostro problema. Il fuzzy c-means è stato scelto anche perché è di soft clustering, ossia 2 punti potrebbero appartenere a 2 cluster diversi, il che ritorna utile nel trovare correttamente la terza label, in quanto nel dataset originale era etichettata con una diversa label.\\
-Ogni algoritmo di clustering restituisce un vettore di etichette, che indicano il numero di cluster a cui è stato assegnato ogni punto. Questi vengono messi a confronto con le true label, ossia le etichette inserite a mano dal dottore, e si calcolano le metriche di accuratezza, precisione, sensitività e F1-measure attraverso la matrice di confusione descritta precedentemente. Le true label vengono calcolate, per ogni vettore di feature, come la moda tra le label della finestra temporale, ossia come l'etichetta che si presente più volte all'interno della finestra stessa. Una volta ottenute le misure per tutti i campioni temporali, si cercano gli intervalli con il maggiore punteggio, dove con quest'ultimo intendiamo la media delle 4 grandezze calcolate. Nel nostro caso, come si vede nella figura \ref{SecondiOverlap}, abbiamo che i punteggi migliori vengono raggiunti nell'intervallo compreso tra 1.5 e 2 secondi, con una sovrapposizione di 0.5 o 1 secondo. Dato che nella maggior parte dei casi risultano tali intervalli, decidiamo di concentrarci su questi, anche perché sono accettabili in un'implementazione online. Nella figura \ref{Accuratezza} si può vedere il valore di accuratezza per ogni paziente per i vari algoritmi di clustering, mentre nella figura \ref{Precisione} possiamo osservare la precisione per ogni paziente ed infine nella figura \ref{Recall} si può vedere il valore di recall per ogni algortimo e paziente.
-\begin{figure}[]
-	\centering
-	\includegraphics[scale=0.35]{images/secondi_overlap.png}
-	\caption{Grafico degli intervalli di overlap e secondi della finestra temporale per ogni paziente}
-	\label{SecondiOverlap}
-\end{figure}
+Nel dataset, ogni campione è etichettato. Poiché le nostre feature sono composte da molti campioni messi assieme, si rende necessario trovare un metodo per unire, sbagliando il meno possibile, tutte le etichette della finestra che prendiamo in considerazione. Per fare ciò, si è deciso di utilizzare la funzione di moda, ossia il numero che si ripete più spesso all'intervallo dell'intervallo considerato. L'etichetta risultante viene inserita nella tabella e verrà utilizzata come criterio di confronto, al fine di valutare le prestazioni degli algoritmi di clustering. L'implementazione del codice è fornito in \ref{extract_feature}
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Calcolo delle Feature, label=extract_feature]  % Start your code-block
+...
+%time sample
+F(number_sample, 1) = TIME(i,:);
+%min --> minimum value for each accelerometer
+F(number_sample, 2:10) = min(B);
+%max --> maximum value for each accelerometer
+F(number_sample, 11:19) = max(B);
+%median --> median signal value
+F(number_sample, 20:28) = median(B);
+%mean --> average value
+F(number_sample, 29:37) = mean(B);
+%ArmMean --> harmonic average of the signal
+F(number_sample, 38:46) = harmmean(B);
+%root mean square --> quadratic mean value of the signal
+F(number_sample, 47:55) = rms(B);
+%variance --> square of the standard deviation
+F(number_sample, 56:64) = var(B);
+%standard deviation --> mean deviation of the signal compared to the
+%average
+F(number_sample, 65:73) = std(B);
+%kurtosis --> degree of peakedness of the sensor signal distribution
+%(allontanamento dalla normalita distributiva)
+F(number_sample, 74:82) = kurtosis(B);
+%skewdness --> degree of asymmetry of the sensor signal distribution
+F(number_sample, 83:91) = skewness(B);
+%mode --> number that appears most often in the signal
+F(number_sample, 92:100) = mode(B);
+%trim mean --> trimmed mean of the signal in the window
+F(number_sample, 101:109) = trimmean(B,10);
+%range --> difference between the largest and the smallest values of
+%the signal
+F(number_sample, 110:118) = range(B);
+%signal magnitude vector --> sum of the euclidean norm over the three
+%axis over the entire window normalized by the windows lenght
+F(number_sample, 119) = svmn(B(:,1:3), length(B));
+F(number_sample, 120) = svmn(B(:,4:6), length(B));
+F(number_sample, 121) = svmn(B(:,7:9), length(B));
+%normalized signal magnitude area --> acceleration magnitude summed
+%over three axes normalized by the windows length
+F(number_sample, 122) = sman(B(:,1:3), length(B));
+F(number_sample, 123) = sman(B(:,4:6), length(B));
+F(number_sample, 124) = sman(B(:,7:9), length(B));
+%eigenvalues of dominant directions --> eigenvalues of the
+%covariance matrix of the acceleration data along x, y and z axis
+F(number_sample,125) = eigs(cov(B(:,1:3)),1);
+F(number_sample,126) = eigs(cov(B(:,4:6)),1);
+F(number_sample,127) = eigs(cov(B(:,7:9)),1);
+%averaged acceleration energy --> mean value of the energy over
+%three acceleration axes
+F(number_sample,128) = energyn(B(:,1:3),length(B));
+F(number_sample,129) = energyn(B(:,4:6),length(B));
+F(number_sample,130) = energyn(B(:,7:9),length(B));
+%is freezing?
+F(number_sample,131) = mode(FREEZE(i:i+size_windows_sample-1,:));
 
-\begin{figure}[]
-	\centering
-	\includegraphics[scale=0.35]{images/accuratezza.png}
-	\caption{Grafico dell'accuratezza per ogni paziente}
-	\label{Accuratezza}
-\end{figure}
-\begin{figure}[]
-	\centering
-	\includegraphics[scale=0.3]{images/precisione.png}
-	\caption{Grafico della precisione media delle classi per ogni paziente}
-	\label{Precisione}
-\end{figure}
-\begin{figure}[]
-	\centering
-	\includegraphics[scale=0.35]{images/recall.png}
-	\caption{Grafico della recall media delle classi per ogni paziente}
-	\label{Recall}
-\end{figure}
-Oltre a determinare le migliori combinazioni secondi-overlap, siamo stati in grado di verificare quale metrica dell'algoritmo di clustering k-means meglio si adatta ai nostri dati. Infatti, nella figura \ref{Accuratezza} possiamo vedere che la metrica Euclidean ha in media il valore più alto rispetto alle altre, anche se questo, osservando le figure \ref{Precisione} e \ref{Recall}, è dato dal fatto che sbaglia meno volte rispetto alle altre metriche ad etichettare il NoFog e, essendo questa label in quantità maggiore rispetto alle altre, porta ad un'accuracy totale più alta.\\
+%go to next sample
+number_sample = number_sample + 1;
+...
+\end{lstlisting}
+\subsection{Clustering}
+Avendo il nuovo dataset composto dalle caratteristiche dei dati originali scomposti in intervalli, si possono applicare gli algoritmi di clustering. Quelli che sono stati presi in considerazione nella nostra analisi sono: K-means, Fuzzy C-Means e Neural Network. Il K-means viene testato in 4 varianti diverse, in base alle seguenti metriche di distanza: cityblock, correlation, cosine, euclidean.\\
+Ogni algoritmo di clustering viene applicato in tutte le possibili combinazioni di intervalli ed ognuno di essi restituisce un vettore di numeri, che corrispondono alle etichette che assegnano ad ogni vettore di feature. Questi vengono salvati e verranno poi utilizzati per calcolare le prestazioni degli algoritmi stessi in confronto alla classificazione originale del dottore. L'implementazione del codice è fornita in \ref{clustering}
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Uso degli algoritmi di clustering, label=clustering]  % Start your code-block
+...
+            %% k-means %%%
+
+% choose of parameter
+means1 = 'sqeuclidean';
+means2 = 'correlation';
+means3 = 'cityblock';
+means4 = 'cosine';
+for q=1:4
+if q == 1
+dist_k = means1;
+end
+if q == 2
+dist_k = means2;
+end
+if q == 3
+dist_k = means3;
+end
+if q == 4
+dist_k = means4;
+end
+options_km = statset('UseParallel', false);
+maxiter = 100000;
+% cluster
+kidx = kmeans(bonds, numClust, 'distance', dist_k, 'options', options_km, 'MaxIter', maxiter);
+
+P = array2table([A(:,n) kidx]);
+writetable(P, [datadir 'versus_kmeans_' dist_k '_' fileruns(r).name] );
+display([datadir 'versus_kmeans_' dist_k '_' fileruns(r).name]);
+end
+
+%%% neural networks - Self organizing Maps %%%
+
+% Create a Self-Organizing Map
+dimension1 = 3;
+dimension2 = 1;
+net = selforgmap([dimension1 dimension2]);
+
+% Train the network
+net.trainParam.showWindow = 0;
+[net,tr] = train(net,bonds');
+
+% Test the network
+nidx = net(bonds');
+nidx = vec2ind(nidx)';
+
+P = array2table([A(:,n) nidx]);
+writetable(P, [datadir 'versus_net_' fileruns(r).name] );
+display([datadir 'versus_net_' fileruns(r).name]);
+
+
+%     %%% FUZZY C-MEANS %%%
+options(1) = 2;
+options(2) = 10000;
+options(3) = 1e-5;
+options(4) = 0;
+% Hide iteration information by passing appropriate options to FCM
+[centres,U] = fcm(bonds,numClust,options);
+[~, fidx] = max(U);
+fidx = fidx';
+
+
+P = array2table([A(:,n) fidx]);
+writetable(P, [datadir 'versus_cmeans_' fileruns(r).name] );
+display([datadir 'versus_cmeans_' fileruns(r).name]);
+...
+\end{lstlisting}
+\subsection{Calcolo delle prestazioni}
+
+
+%Per ogni combinazione di finestra temporale, quindi, vengono calcolate le rispettive feature e si procede ad applicare l'algoritmo di clustering. Quelli che sono stati scelti, in quanto più diffusi nel contesto di clustering, sono: k-means, self-organizing map e fuzzy c-means. Il k-means viene testato con tutte le sue metriche di distanza, per evidenziare eventuali differenze e decidere quale tra le 4 presenti (cosine, euclidean, cityblock, correlation) si adatta di più al nostro problema. Il fuzzy c-means è stato scelto anche perché è di soft clustering, ossia 2 punti potrebbero appartenere a 2 cluster diversi, il che ritorna utile nel trovare correttamente la terza label, in quanto nel dataset originale era etichettata con una diversa label.\\
+%Ogni algoritmo di clustering restituisce un vettore di etichette, che indicano il numero di cluster a cui è stato assegnato ogni punto. Questi vengono messi a confronto con le true label, ossia le etichette inserite a mano dal dottore, e si calcolano le metriche di accuratezza, precisione, sensitività e F1-measure attraverso la matrice di confusione descritta precedentemente. Le true label vengono calcolate, per ogni vettore di feature, come la moda tra le label della finestra temporale, ossia come l'etichetta che si presente più volte all'interno della finestra stessa. Una volta ottenute le misure per tutti i campioni temporali, si cercano gli intervalli con il maggiore punteggio, dove con quest'ultimo intendiamo la media delle 4 grandezze calcolate. Nel nostro caso, come si vede nella figura \ref{SecondiOverlap}, abbiamo che i punteggi migliori vengono raggiunti nell'intervallo compreso tra 1.5 e 2 secondi, con una sovrapposizione di 0.5 o 1 secondo. Dato che nella maggior parte dei casi risultano tali intervalli, decidiamo di concentrarci su questi, anche perché sono accettabili in un'implementazione online. Nella figura \ref{Accuratezza} si può vedere il valore di accuratezza per ogni paziente per i vari algoritmi di clustering, mentre nella figura \ref{Precisione} possiamo osservare la precisione per ogni paziente ed infine nella figura \ref{Recall} si può vedere il valore di recall per ogni algortimo e paziente.
+%\begin{figure}[]
+%	\centering
+%	\includegraphics[scale=0.35]{images/secondi_overlap.png}
+%	\caption{Grafico degli intervalli di overlap e secondi della finestra temporale per ogni paziente}
+%	\label{SecondiOverlap}
+%\end{figure}
+%
+%\begin{figure}[]
+%	\centering
+%	\includegraphics[scale=0.35]{images/accuratezza.png}
+%	\caption{Grafico dell'accuratezza per ogni paziente}
+%	\label{Accuratezza}
+%\end{figure}
+%\begin{figure}[]
+%	\centering
+%	\includegraphics[scale=0.3]{images/precisione.png}
+%	\caption{Grafico della precisione media delle classi per ogni paziente}
+%	\label{Precisione}
+%\end{figure}
+%\begin{figure}[]
+%	\centering
+%	\includegraphics[scale=0.35]{images/recall.png}
+%	\caption{Grafico della recall media delle classi per ogni paziente}
+%	\label{Recall}
+%\end{figure}
+%Oltre a determinare le migliori combinazioni secondi-overlap, siamo stati in grado di verificare quale metrica dell'algoritmo di clustering k-means meglio si adatta ai nostri dati. Infatti, nella figura \ref{Accuratezza} possiamo vedere che la metrica Euclidean ha in media il valore più alto rispetto alle altre, anche se questo, osservando le figure \ref{Precisione} e \ref{Recall}, è dato dal fatto che sbaglia meno volte rispetto alle altre metriche ad etichettare il NoFog e, essendo questa label in quantità maggiore rispetto alle altre, porta ad un'accuracy totale più alta.\\
 
 \section{Feature Dinamiche}
 
