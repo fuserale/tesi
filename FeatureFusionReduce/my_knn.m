@@ -36,37 +36,37 @@ for isubject = [1 2]
     end
     toc;
     
-            [~,col] = find (classi == 1);
-            NOFOG = feature(col,:);
-            LABEL_NOFOG = classi(col)';
-            [~,col] = find (classi == 2);
-            FOG = feature(col,:);
-            LABEL_FOG = classi(col)';
-            [~,col] = find (classi == 3);
-            PREFOG = feature(col,:);
-            LABEL_PREFOG = classi(col)';
-    
-            X = 3;
-            [num_fog,~] = size(FOG);
-            NOFOG = NOFOG(1:X*num_fog,:);
-            LABEL_NOFOG = LABEL_NOFOG(1:X*num_fog);
-    
-            feature = [NOFOG;PREFOG;FOG];
-            classi = [LABEL_NOFOG;LABEL_PREFOG;LABEL_FOG]';
+%             [~,col] = find (classi == 1);
+%             NOFOG = feature(col,:);
+%             LABEL_NOFOG = classi(col)';
+%             [~,col] = find (classi == 2);
+%             FOG = feature(col,:);
+%             LABEL_FOG = classi(col)';
+%             [~,col] = find (classi == 3);
+%             PREFOG = feature(col,:);
+%             LABEL_PREFOG = classi(col)';
+%     
+%             X = 3;
+%             [num_fog,~] = size(FOG);
+%             NOFOG = NOFOG(1:X*num_fog,:);
+%             LABEL_NOFOG = LABEL_NOFOG(1:X*num_fog);
+%     
+%             feature = [NOFOG;PREFOG;FOG];
+%             classi = [LABEL_NOFOG;LABEL_PREFOG;LABEL_FOG]';
     %% Trovo il migliore k per knn
-    classError_tmp=1;
-    for i=1:50
-        Mdl_LDA = fitcknn(feature,classi,'NumNeighbors',i,'Standardize',1);
-        CVKNNMdl = crossval(Mdl_LDA);
-        classError = kfoldLoss(CVKNNMdl);
-        if classError_tmp > classError
-            k=i;
-            classError_tmp = classError;
-        end
-    end
-    toc;
+%     classError_tmp=1;
+%     for i=1:50
+%         Mdl_LDA = fitcknn(feature,classi,'NumNeighbors',i,'Standardize',1);
+%         CVKNNMdl = crossval(Mdl_LDA);
+%         classError = kfoldLoss(CVKNNMdl);
+%         if classError_tmp > classError
+%             k=i;
+%             classError_tmp = classError;
+%         end
+%     end
+%     toc;
     %% Alleno il knn con il numero di vicini migliore trovato
-    Mdl_LDA = fitcknn(feature,classi,'NumNeighbors',k,'Standardize',1);
+    Mdl_LDA = fitcknn(feature,classi,'NumNeighbors',5,'Standardize',1);
     CVKNNMdl = crossval(Mdl_LDA);
     classError = kfoldLoss(CVKNNMdl)
     clear DATA FREEZE feature classi
@@ -96,6 +96,6 @@ for isubject = [1 2]
     %% Testo il knn
     [label,~,~] = predict(Mdl_LDA,feature);
     [C,~] = confusionmat(classi,label)
-    CP = classperf(classi,label);
-    rate = [CP.CorrectRate CP.Sensitivity CP.Specificity CP.PositivePredictiveValue CP.NegativePredictiveValue]
+%     CP = classperf(classi,label);
+%     rate = [CP.CorrectRate CP.Sensitivity CP.Specificity CP.PositivePredictiveValue CP.NegativePredictiveValue]
 end
