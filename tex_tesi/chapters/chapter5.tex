@@ -5,8 +5,14 @@
 % ---------------------------------------------------------------
 
 \chapter[Apprendimento non supervisionato]{Apprendimento non supervisionato per l'identificazione di contensti di FoG}\label{chap5:Automatic}
-I lavori che sono stati svolti e presentati nel capitolo \ref{chap2:related} sul Freezing Of Gait sono basati su approcci di classificazione ossia, come spiegato nel capitolo \ref{chap3:background}, allenano un algoritmo con dei dataset di training nel quale le etichette di ogni istante vengono fornite dalla supervisione di un dottore o fisioterapista e poi, tale algoritmo allenato, viene testato su dei nuovi dati al fine di rilevare i contesti di FoG. Il lavoro che viene presentato in questo capitolo, invece, usa le etichette fornite dal dataset solo come confronto ai risultati forniti dagli algoritmi di clustering. Quest'ultimi, infatti, una volta forniti i dati o feature (proprietà) su cui voglia applicarli, restituiscono, per ogni osservazione(nel nostro caso riga del dataset), un'etichetta che indica a quale contesto è stato assegnato ogni dato, se di FoG, non-FoG o Pre-FoG.\\
-Innanzitutto verrà fornita una descrizione del dataset utilizzato e di come è stato modificato per le nostre esigenze. Verranno poi descritti i metodi utilizzati dall'approccio scelto e viene fornito il codice implementativo. Tutte lo sviluppo è stato effettuato tramite software Matlab \footnote{https://it.mathworks.com/products/matlab.html}.
+I lavori che sono stati svolti e presentati nel capitolo \ref{chap2:related} sul Freezing Of Gait sono basati sull'identificazione di 2 classi, ossia quando il paziente e' in una normale attivita' quotidiana, che chiameremo NoFoG, oppure quando il paziente soffre di un episodio di FoG. Il nostro lavoro, invece, vuole basarsi sull'identificazione anche di una nuova classe rispetto alle 2 precedenti, che chiamiamo preFoG. Questa dovrebbe rappresentare la fase di transizione da uno stato di NoFoG ad uno di FoG, per cui identificare tale classe permetterebbe di anticipare l'occorrenza di un FoG e, quindi, dare in anticipo uno stimolo al paziente per evitare il verificarsi del FoG. La durata di ogni preFoG e' stata fissata a 2 secondi in quanto, secondo noi, questo intervallo di tempo e' sufficiente per raccogliere abbastanza informazioni al fine di identificare le occorrenze di preFoG e quindi quelle di FoG in anticipo rispetto al suo verificarsi. Il flusso della tesi viene rappresentato in figura \ref{FlussoTesi}.\\
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.45]{images/FlussoTesi.png}
+	\caption{Rappresentazione del flusso della tesi}
+	\label{FlussoTesi}
+\end{figure}
+Lo sviluppo della procedura e' stato svolto usando software Matlab.
 \section{Dataset}
 L'approccio che andiamo a proporre è stato testato sul dataset DAPHNET\footnote{www.wearable.ethz.ch/resources/Dataset}, il quale contiene dati collezionati da 10 pazienti parkinsoniani, dei quali 8 presentano contesti di FoG, mentre 2 di loro non ne presentano. I dati sono stati registrati usando 3 accelerometri 3D attaccati alla caviglia, al ginocchio e nella zona lombare del paziente, usando una frequenza di campionamento di 64 Hz, ossia vengono raccolti 64 campioni ogni secondo.\\
 I soggetti hanno completato sessioni da 20-30 minuti ciascuno, consistenti di 3 fasi di camminata:
@@ -15,16 +21,109 @@ I soggetti hanno completato sessioni da 20-30 minuti ciascuno, consistenti di 3 
 	\item Camminata casuale con una serie di fermate volontarie e rotazioni di 360 gradi;
 	\item Camminata che simula attività di vita quotidiana, tra le quali entrare in stanze ed uscirne, camminare nella cucina, prendersi un bicchiere d'acqua e tornare al punto di partenza.
 \end{enumerate}
-Le prestazioni motorie variano molto tra i pazienti. Mentre alcuni soggetti hanno mantenuto una camminata regolare durante gli episodi di non FoG, altri hanno camminato molto lentamente ed in modo instabile. L'intero dataset contiene in totale 237 episodi di FoG; la durata di ognuno di essi è tra i 0.5s ed i 40.5s. Il 50\% degli episodi di FoG è durato meno di 5.4s ed il 93.2\% è più corto di 20s. Gli episodi di FoG sono stati identificati da fisioterapisti usando registrazioni video sincronizzate. L'inizio di un episodio di FoG è stato definito come il punto dove la sequenza normale di camminata è stata interrotta, mentre la fine del FoG è stata definita come il momento in cui tale sequenza riprende.\\
-Per il lavoro svolto nella tesi, oltre alle etichette date dai dottori nei casi di non FoG e FoG, abbiamo introdotto nei dati una nuova label, che indica il momento che noi indichiamo come pre-FoG, per cui tutti i campioni precedenti ad un'occorrenza di FoG sono stati etichettati con questa nuova label. Quindi ci ritroviamo con 3 label diverse invece di 2 (tutti i lavori in letteratura rientrano nell'ultimo caso): l'etichetta 1 indica un No-FoG, la label 2 indica un FoG, l'etichetta 3 indica invece un pre-FoG.
-\section{Approccio basato su Feature Statistiche}
-I dati raccolti dagli accelerometri, se presi in forma grezza, hanno poca potenza espressiva, ossia non riescono a fornire molte informazioni su ciò che stiamo cercando (contesti di FoG), quindi si rende necessaria una rimodellazione di tali dati. Il primo approccio che è stato preso in considerazione è basato sul calcolo di feature ( o proprietà) basate su grandezze che provengono dalla matematica statistica. Il flusso di tale approccio è:
+Le prestazioni motorie variano molto tra i pazienti. Mentre alcuni soggetti hanno mantenuto una camminata regolare durante gli episodi di non FoG, altri hanno camminato molto lentamente ed in modo instabile. L'intero dataset contiene in totale 237 episodi di FoG; la durata di ognuno di essi è tra i 0.5s ed i 40.5s. Il 50\% degli episodi di FoG è durato meno di 5.4s ed il 93.2\% è più corto di 20s. Gli episodi di FoG sono stati identificati da fisioterapisti usando registrazioni video sincronizzate. L'inizio di un episodio di FoG è stato definito come il punto dove la sequenza normale di camminata è stata interrotta, mentre la fine del FoG è stata definita come il momento in cui tale sequenza riprende.
+
+\section{Dimostrazione dell'esistenza effettiva delle 3 classi}
+Il lavoro svolto in questa tesi, come scritto precedentemente, si differenzia dagli altri gia' citati in \ref{chap2:related} in quanto si vogliono usare 3 classi invece delle 2 fornite dal dataset. Il primo passo dunque e' quello di dimostrare che effettivamente le 3 classi sono distinte tra loro e che quindi sviluppare un approccio basandosi su tali classi e' possibile.\\
+Per fare questo, si e' usato un approccio di Discriminazione Lineare. Un discriminante e' una funzione che prende in ingresso un vettore x e lo assegna ad una tra le K classi fornite. Il metodo di discriminazione che si vuole usare e' quello di Fisher, il quale viene spiegato nel Capitolo \ref{chap3:background}.\\
+\subsection{Divisione dei dati}
+Per ogni paziente, prendiamo in input la matrice di dati grezzi degli accelerometri fornita dal dataset, la quale contiene anche un campo relativo al tempo di ogni campione ed un'etichetta, che mi indica lo stato in cui si trova il mio paziente. Dividiamo i dati degli accelerometri da quelli relativi al tempo ed allo stato e calcoliamo delle feature su tali dati. Queste vengono calcolate vettorizzando finestre di dati grezzi, dove ognuna di esse dura 2 secondi, in accordo con quanto posto per la durata del pre-FoG. Ogni nuova finestra non comincia dalla fine della precedente, ma presenta una certa sovrapposizione. Per tenere traccia dell'etichetta reale a cui ogni finestra temporale appartiene, abbiamo usato il vettore relativo all'etichetta fornita dal dataset e, per ogni finestra temporale, abbiamo tenuto quella che si presenta piu' volte all'interno di essa. Il codice implementativo di quanto appena descritto e' fornito in \ref{vettorizzazione}.
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Vettorizzazione dei dati degli accelerometri, label=vettorizzazione]
+for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
+B = A(i:i+size_windows_sample-1,:);
+% vettorizzo ogni finestra
+B=B(:);
+F(number_sample,:)=B';
+
+
+%salvo la classe di ogni finestra
+class(number_sample)=mode(FREEZE(i:i+size_windows_sample-1,:));
+
+%go to next sample
+number_sample = number_sample + 1;
+
+end
+\end{lstlisting}
+\subsection{Algoritmo di discriminazione}
+Una volta vettorizzato l'intero dataset, si procede ad applicare l'algoritmo di discriminazione, il quale per prima cosa divide le feature appena calcolate tramite le classi di appartenenza. Calcola quindi la media per ogni classe e determina la dimensione di ognuna di esse. A questo punto, determina la within class covariance e la between class covariance, ossia quanta similarita' esiste tra gli elementi della stessa classe e quanta dissimilarita' e' presente tra classi differenti. Una volta trovate tali misure, prende gli autovalori ed autovettori della soluzione del problema dell'autovalore generalizzato e teniamo solo quelli piu' rappresentativi, che nel caso dell'approccio di Fisher sono pari al numero di classi presenti meno 1. Questi autovalori vengono poi moltiplicati per le feature calcolate precedentemente per ottenere una riduzione della dimensionalità' ed avere 2 feature rappresentative. Il codice della discriminazione viene fornito in \ref{code_LDA}.
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=LDA, label=code_LDA]
+A=F';
+
+%quindi ho A 1152x1449 double
+%1152 finestre
+%ogni finestra ha 1449 features
+[d,N] = size(A);
+
+K =  max(class); % numero classi in gioco;
+
+% 1. Divido le feature tramite le classi Ck
+for k = 1:K
+a = find (class == k);
+Ck{k} = A(:, a);
+end
+
+% 2. Calcolo la media per ogni classe per ogni finestra
+for k = 1:K
+mk{k} = mean(Ck{k},2);
+end
+% 3. Determino la grandezza di ogni classe
+for k = 1:K
+[d, Nk(k)] = size(Ck{k});
+end
+% 4. determino le within class covariance
+for k = 1:K
+S{k} = 0;
+for i = 1:Nk(k)
+S{k} = S{k} + (Ck{k}(:,i)-mk{k})*(Ck{k}(:,i)-mk{k})';
+end
+S{k} = S{k}./Nk(k);
+end
+Swx = 0;
+for k = 1:K
+Swx = Swx + S{k};
+end
+
+% 5. determino la between class covariance
+% 5.1 determino la media totale
+m = mean(A,2);
+Sbx = 0;
+for k=1:K
+Sbx = Sbx + Nk(k)*((mk{k} - m)*(mk{k} - m)');
+end
+Sbx = Sbx/K;
+
+MA = inv(Swx)*Sbx;
+
+% eigenvalues/eigenvectors
+[V,D] = eig(MA);
+
+% 5: transform matrix
+if (k > 1)
+W = V(:,1:K-1);
+end
+if (k == 1)
+W = V(:,1:1);
+end
+
+% 6: transformation
+Y = W'*A;
+\end{lstlisting}
+\subsection{Risultati}
+Una volta calcolate le feature discriminanti, per visualizzare se effettivamente c'e' una distinzione tra le classi, facciamo un grafico con queste due grandezze ed ogni punto viene colorato in base alla reale classe di appartenenza. La figura \ref{LDAS01} mostra tale grafico. Si puo' notare immediatamente come le due feature utilizzate riescono a discriminare effettivamente tra le 3 classi e quindi un approccio basandosi su tali componenti e' giustificato.
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.2]{images/LDAS01.png}
+	\caption{Grafico delle 3 classi in base alla discriminazione data dall'approccio di Fisher per il paziente 1}
+	\label{LDAS01}
+\end{figure}
+\section{Determinazione del miglior intervallo di finestra}
+In letteratura, la finestra temporale su cui vengono calcolate le feature e' sempre stata presa a priori, basandosi su delle ipotesi. Non e' mai stato condotto quindi uno studio su quale possa essere il miglior intervallo di divisione dei dati per calcolare le feature. Quello che ci prefissiamo in questa sezione e' dunque testare diverse combinazioni di durata delle finestre con sovrapposizione al fine di trovare quella che meglio divide i nostri dati. Per fare questo, abbiamo utilizzato algoritmi di clustering in quanto non volevamo che il risultato fosse influenzato dall'appartenenza o meno di un dato ad una determinata classe, come nel caso dell'LDA o di algoritmi di classificazione. L'approccio che è stato preso in considerazione è basato sul calcolo di feature (o proprietà) derivanti dalla matematica statistica. Il flusso di tale approccio è:
 \begin{enumerate}
 	\item Pre-processamento dei dati degli accelerometri, al fine di eliminare il rumore presente ed identificare eventuali punti di outline, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni;
 	\item Finestramento dei dati in base ad intervalli variabili al fine di calcolare le feature, dove ogni intervallo presenta una certa sovrapposizione con l'intervallo precedente;
 	\item Calcolo effettivo delle feature statistiche;
 	\item Applicazione degli algoritmi di clustering;
-	\item Calcolo di metriche che indicano quanto bene gli algoritmi di clustering hanno lavorato in relazione alle label fornite dal dataset.
+	\item Calcolo di metriche che indicano quanto bene gli algoritmi di clustering hanno diviso i dati in relazione alle label fornite dal dataset.
 \end{enumerate}
 \begin{figure}[h!]
 	\centering
@@ -246,224 +345,207 @@ display([datadir 'versus_cmeans_' fileruns(r).name]);
 ...
 \end{lstlisting}
 \subsection{Calcolo delle prestazioni}
+Ogni algoritmo di clustering, per tutte le combinazioni di finestra ed overlap, fornisce un vettore di etichette. Questo rappresenta la divisione in cluster effettuata dall'algoritmo, i quali andranno confrontati con le etichette reali del dataset. Per fare questo, procediamo al calcolo di metriche quali, in ordine, accuratezza, precisione, sensitivita' e F1-measure. Per quanto riguarda la precisione e la sensitivita', esse sarebbero relative ad ogni classe, ma poiche' ci interessa indovinare la maggior parte delle volte tutte e 3 le classi, quelle che saranno riportate sono la media della precisione e sensitivita' delle classi. Il codice implementativo e' fornito in \ref{rate}
 
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Calcolo delle prestazioni, label=rate]  % Start your code-block
+...
+% Per tutti i file del paziente $isubject
+for r = 1:length(fileruns)
 
-%Per ogni combinazione di finestra temporale, quindi, vengono calcolate le rispettive feature e si procede ad applicare l'algoritmo di clustering. Quelli che sono stati scelti, in quanto più diffusi nel contesto di clustering, sono: k-means, self-organizing map e fuzzy c-means. Il k-means viene testato con tutte le sue metriche di distanza, per evidenziare eventuali differenze e decidere quale tra le 4 presenti (cosine, euclidean, cityblock, correlation) si adatta di più al nostro problema. Il fuzzy c-means è stato scelto anche perché è di soft clustering, ossia 2 punti potrebbero appartenere a 2 cluster diversi, il che ritorna utile nel trovare correttamente la terza label, in quanto nel dataset originale era etichettata con una diversa label.\\
-%Ogni algoritmo di clustering restituisce un vettore di etichette, che indicano il numero di cluster a cui è stato assegnato ogni punto. Questi vengono messi a confronto con le true label, ossia le etichette inserite a mano dal dottore, e si calcolano le metriche di accuratezza, precisione, sensitività e F1-measure attraverso la matrice di confusione descritta precedentemente. Le true label vengono calcolate, per ogni vettore di feature, come la moda tra le label della finestra temporale, ossia come l'etichetta che si presente più volte all'interno della finestra stessa. Una volta ottenute le misure per tutti i campioni temporali, si cercano gli intervalli con il maggiore punteggio, dove con quest'ultimo intendiamo la media delle 4 grandezze calcolate. Nel nostro caso, come si vede nella figura \ref{SecondiOverlap}, abbiamo che i punteggi migliori vengono raggiunti nell'intervallo compreso tra 1.5 e 2 secondi, con una sovrapposizione di 0.5 o 1 secondo. Dato che nella maggior parte dei casi risultano tali intervalli, decidiamo di concentrarci su questi, anche perché sono accettabili in un'implementazione online. Nella figura \ref{Accuratezza} si può vedere il valore di accuratezza per ogni paziente per i vari algoritmi di clustering, mentre nella figura \ref{Precisione} possiamo osservare la precisione per ogni paziente ed infine nella figura \ref{Recall} si può vedere il valore di recall per ogni algortimo e paziente.
-%\begin{figure}[]
-%	\centering
-%	\includegraphics[scale=0.35]{images/secondi_overlap.png}
-%	\caption{Grafico degli intervalli di overlap e secondi della finestra temporale per ogni paziente}
-%	\label{SecondiOverlap}
-%\end{figure}
-%
-%\begin{figure}[]
-%	\centering
-%	\includegraphics[scale=0.35]{images/accuratezza.png}
-%	\caption{Grafico dell'accuratezza per ogni paziente}
-%	\label{Accuratezza}
-%\end{figure}
-%\begin{figure}[]
-%	\centering
-%	\includegraphics[scale=0.3]{images/precisione.png}
-%	\caption{Grafico della precisione media delle classi per ogni paziente}
-%	\label{Precisione}
-%\end{figure}
-%\begin{figure}[]
-%	\centering
-%	\includegraphics[scale=0.35]{images/recall.png}
-%	\caption{Grafico della recall media delle classi per ogni paziente}
-%	\label{Recall}
-%\end{figure}
-%Oltre a determinare le migliori combinazioni secondi-overlap, siamo stati in grado di verificare quale metrica dell'algoritmo di clustering k-means meglio si adatta ai nostri dati. Infatti, nella figura \ref{Accuratezza} possiamo vedere che la metrica Euclidean ha in media il valore più alto rispetto alle altre, anche se questo, osservando le figure \ref{Precisione} e \ref{Recall}, è dato dal fatto che sbaglia meno volte rispetto alle altre metriche ad etichettare il NoFog e, essendo questa label in quantità maggiore rispetto alle altre, porta ad un'accuracy totale più alta.\\
+% Etichette del dataset
+filename = [datadir fileruns(r).name];
+T1 = readtable(filename);
+[m1,n1] = size(T1);
+A1 = table2array(T1(:,n1));
 
-\section{Feature Dinamiche}
+% Etichette cluster
+filename2 = [datadir fileruns2(r).name];
+T2 = readtable(filename2);
+[m2,n2] = size(T2);
+A2 = table2array(T2(:,2));
+% Etichette cluster e dataset
+D = [A2 A1];
 
+% Matrice di confusione
+[C,order] = confusionmat(D(:,2),D(:,1));
+accuracy = c_accuracy(C);
+precision = c_precision(C);
+recall = c_recall(C);
+F1measure = c_F1measure(precision,recall);
 
-\section{Linear Discriminant Analysis}
+B = [accuracy precision recall F1measure];
+E = [E B];
 
+end
+Q = [Q ; [e E]];
+e = [e [0 0 0 0]];
+...
+function accuracy = c_accuracy(C)
+giusti = sum(diag(C));
+totale = sum(sum(C));
+accuracy = giusti/totale;
+end
 
+function precision = c_precision(C)
+precision1 = C(1,1)/(C(1,1)+C(2,1)+C(3,1));
+precision2 = C(2,2)/(C(1,2)+C(2,2)+C(3,2));
+precision3 = C(3,3)/(C(1,3)+C(2,3)+C(3,3));
+precision = mean([precision1;precision2;precision3]);
+end
 
+function recall = c_recall(C)
+recall1 = C(1,1)/(C(1,1)+C(1,2)+C(1,3));
+recall2 = C(2,2)/(C(2,1)+C(2,2)+C(2,3));
+recall3 = C(3,3)/(C(3,1)+C(3,2)+C(3,3));
+recall = mean([recall1;recall2;recall3]);
+end
 
+function F1measure = c_F1measure(precision,recall)
+F1measure = 2*precision*recall/(precision+recall);
+end
+\end{lstlisting}
+Viene creata dunque una tabella che riassume, per ogni possibile intervallo, le prestazioni dell'algoritmo, come si vede in \ref{ratecluster1}, \ref{ratecluster2}, \ref{ratecluster3}.
+\begin{table}[htp]
+	\centering
+	\caption{Esempio di tabelle delle prestazioni del clustering}
+	\label{ratecluster1}
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		& \multicolumn{4}{c|}{Secondi: 1} & \multicolumn{4}{c|}{Secondi: 1.5} & \multicolumn{4}{c|}{Secondi: 2} \\ \hline
+		Ov 0.5 & 0,7 & 0,6 & 0,3 & 0,4 & 0,8 & 0,3 & 0,3 & 0,3 & 0,91 & 0,5 & 0,5 & 0,5 \\ \hline
+		Ov 1 & 0 & 0 & 0 & 0 & 0,7 & 0,3 & 0,3 & 0,3 & 0,8 & 0,6 & 0,5 & 0,55 \\ \hline
+		Ov 1.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,91 & 0,72 & 0,6 & 0,6 \\ \hline
+	\end{tabular}%
+}
+\end{table}
+\begin{table}[htp]
+	\centering
+	\caption{Esempio di tabelle delle prestazioni del clustering}
+	\label{ratecluster2}
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		& \multicolumn{4}{c|}{Secondi: 2.5} & \multicolumn{4}{c|}{Secondi: 3} & \multicolumn{4}{c|}{Secondi: 3.5} \\ \hline
+		Ov 0.5 & 0,7 & 0,3 & 0,3 & 0,3 & 0,4 & 0,1 & 0,2 & 0,17 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+		Ov 1 & 0,05 & 0,3 & 0,2 & 0,3 & 0,46 & 0,3 & 0,4 & 0,38 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+		Ov 1.5 & 0,75 & 0,2 & 0,2 & 0,2 & 0,8 & 0,3 & 0,3 & 0,3 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+		Ov 2 & 0,8 & 0,3 & 0,3 & 0,3 & 0,6 & 0,3 & 0,1 & 0,21 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+		Ov2.5 & 0 & 0 & 0 & 0 & 0,81 & 0,26 & 0,24 & 0,25 & 0,7 & 0,3 & 0,2 & 0,26 \\ \hline
+		Ov 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,6 & 0,3 & 0,31 & 0,31 \\ \hline
+	\end{tabular}%
+}
+\end{table}
+\begin{table}[htp]
+	\centering
+	\caption{Esempio di tabelle delle prestazioni del clustering}
+	\label{ratecluster3}
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		& \multicolumn{4}{c|}{Secondi: 4} & \multicolumn{4}{c|}{Secondi: 4.5} & \multicolumn{4}{c|}{Secondi: 5} \\ \hline
+		Ov 0.5 & 0,8 & 0,36 & 0,35 & 0,35 & 0,81 & 0,32 & 0,34 & 0,33 & 0,75 & 0,24 & 0,26 & 0,25 \\ \hline
+		Ov 1 & 0,76 & 0,21 & 0,28 & 0,26 & 0,79 & 0,32 & 0,34 & 0,31 & 0,79 & 0,3 & 0,3 & 0,3 \\ \hline
+		Ov 1.5 & 0,46 & 0,36 & 0,33 & 0,35 & 0,8 & 0,36 & 0,35 & 0,35 & 0,59 & 0,24 & 0,33 & 0,29 \\ \hline
+		Ov 2 & 0,41 & 0,33 & 0,44 & 0,39 & 0,76 & 0,21 & 0,28 & 0,26 & 0,26 & 0,79 & 0,32 & 0,34 \\ \hline
+		Ov2.5 & 0,59 & 0,24 & 0,33 & 0,29 & 0,46 & 0,36 & 0,33 & 0,35 & 0,35 & 0,8 & 0,36 & 0,35 \\ \hline
+		Ov 3 & 0,44 & 0,11 & 0,12 & 0,11 & 0,41 & 0,33 & 0,44 & 0,39 & 0,8 & 0,36 & 0,35 & 0,35 \\ \hline
+		Ov 3.5 & 0,78 & 0,23 & 0,33 & 0,28 & 0,75 & 0,24 & 0,26 & 0,25 & 0,76 & 0,21 & 0,28 & 0,26 \\ \hline
+		Ov 4 & 0 & 0 & 0 & 0 & 0,79 & 0,3 & 0,3 & 0,3 & 0,75 & 0,24 & 0,26 & 0,25 \\ \hline
+		Ov 4.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,79 & 0,3 & 0,3 & 0,3 \\ \hline
+	\end{tabular}%
+	}
+\end{table}
+\subsection{Risultati}
+Dopo che sono state generate tutte le tabelle per tutti i pazienti in cui vengono espressi i valori di accuratezza, precisione, sensitivita' e F1-measure, siamo interessati all'intervallo migliore, ossia quello che ci fornisce i valori maggiori delle metriche suddette. Per fare questo, analizziamo ogni tabella e, per ogni algoritmo, salviamo l'intervallo ed i valori che presentano le metriche migliori, come nel caso delle tabelle \ref{ratecmeans}, \ref{ratekmeans}, \ref{rateneuralnetwork}.\\
+Ogni tabella descrive:
+\begin{itemize}
+	\item l'algoritmo di clustering che e' stato utilizzato;
+	\item il paziente del test;
+	\item i valori delle metriche migliori trovate;
+	\item la combinazione overlap-secondi in cui risultano tali metriche.
+\end{itemize}
 
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[]
+	\centering
+	\caption{Rate Pazienti per l'algoritmo di clustering C-means}
+	\label{ratecmeans}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|l|}
+			\hline
+			\textbf{}         & \multicolumn{6}{c|}{\textbf{CMEANS}}                                                                              \\ \hline
+			\textbf{Paziente} & \textbf{Accuratezza} & \textbf{Precisione} & \textbf{Recall} & \textbf{F1} & \textbf{Overlap} & \textbf{Finestra} \\ \hline
+			\textbf{S01}      & 0,92                 & 0,31                & 0,33            & 0,32        & 1                & 2                 \\ \hline
+			\textbf{S02}      & 0,44                 & 0,46                & 0,63            & 0,53        & 1                & 2                 \\ \hline
+			\textbf{S03}      & 0,7                  & 0,51                & 0,57            & 0,54        & 1                & 2                 \\ \hline
+			\textbf{S04}      & 0,7                  & 0,33                & 0               & 0           & 0,5                & 1               \\ \hline
+			\textbf{S05}      & 0,53                 & 0,49                & 0,46            & 0,47        & 1                & 1,5               \\ \hline
+			\textbf{S06}      & 0,57                 & 0,36                & 0,32            & 0,34        & 1                & 1,5               \\ \hline
+			\textbf{S07}      & 0,48                 & 0,37                & 0,43            & 0,4         & 1                & 1,5               \\ \hline
+			\textbf{S08}      & 0,41                 & 0,39                & 0,43            & 0,41        & 1,5              & 2                 \\ \hline
+			\textbf{S09}      & 0,59                 & 0,35                & 0,37            & 0,36        & 1                & 1,5               \\ \hline
+			\textbf{S10}      & 0,73                 & 0,33                & 0               & 0           & 0,5                & 1               \\ \hline
+		\end{tabular}%
+	}
+\end{table}
 
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[]
+	\centering
+	\caption{Rate Pazienti per l'algoritmo di clustering K-means}
+	\label{ratekmeans}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|l|}
+			\hline
+			\textbf{Tutti}    & \multicolumn{6}{c|}{\textbf{KMEANS}}                                                                              \\ \hline
+			\textbf{Paziente} & \textbf{Accuratezza} & \textbf{Precisione} & \textbf{Recall} & \textbf{F1} & \textbf{Overlap} & \textbf{Finestra} \\ \hline
+			\textbf{S01}      & 0,92                 & 0,72                & 0,34            & 0,46        & 1,5              & 2                 \\ \hline
+			\textbf{S02}      & 0,82                 & 0,61                & 0,34            & 0,44        & 1                & 2                 \\ \hline
+			\textbf{S03}      & 0,75                 & 0,78                & 0,54            & 0,64        & 1,5              & 2                 \\ \hline
+			\textbf{S04}      & 1                    & 0,33                & 0               & 0           & 0,5                & 1               \\ \hline
+			\textbf{S05}      & 0,67                 & 0,56                & 0,33            & 0,42        & 1                & 2                 \\ \hline
+			\textbf{S06}      & 0,91                 & 0,3                 & 0,33            & 0,32        & 1                & 1,5               \\ \hline
+			\textbf{S07}      & 0,92                 & 0,31                & 0,33            & 0,32        & 1                & 2                 \\ \hline
+			\textbf{S08}      & 0,7                  & 0,57                & 0,34            & 0,42        & 1                & 1,5               \\ \hline
+			\textbf{S09}      & 0,81                 & 0,6                 & 0,34            & 0,43        & 1                & 2                 \\ \hline
+			\textbf{S10}      & 1                    & 0,33                & 0               & 0           & 0,5                & 1,5               \\ \hline
+		\end{tabular}%
+	}
+\end{table}
 
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[]
+	\centering
+	\caption{Rate Pazienti per l'algoritmo di clustering Self-Organizing Map}
+	\label{rateneuralnetwork}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|l|l|l|}
+			\hline
+			\textbf{Tutti}    & \multicolumn{6}{c|}{\textbf{NEURAL NETWORK}}                                                                      \\ \hline
+			\textbf{Paziente} & \textbf{Accuratezza} & \textbf{Precisione} & \textbf{Recall} & \textbf{F1} & \textbf{Overlap} & \textbf{Finestra} \\ \hline
+			\textbf{S01}      & 0,92                 & 0,31                & 0,33            & 0,32        & 1                & 1,5               \\ \hline
+			\textbf{S02}      & 0,81                 & 0,44                & 0,34            & 0,38        & 1                & 1,5               \\ \hline
+			\textbf{S03}      & 0,75                 & 0,78                & 0,54            & 0,63        & 1                & 2                 \\ \hline
+			\textbf{S04}      & 0,64                 & 0,33                & 0               & 0           & 0,5                & 1                 \\ \hline
+			\textbf{S05}      & 0,58                 & 0,42                & 0,46            & 0,44        & 1                & 2                 \\ \hline
+			\textbf{S06}      & 0,57                 & 0,32                & 0,31            & 0,31        & 1                & 1,5               \\ \hline
+			\textbf{S07}      & 0,63                 & 0,3                 & 0,26            & 0,28        & 1                & 2                 \\ \hline
+			\textbf{S08}      & 0,56                 & 0,69                & 0,38            & 0,49        & 1,5              & 2                 \\ \hline
+			\textbf{S09}      & 0,57                 & 0,37                & 0,41            & 0,39        & 1                & 2                 \\ \hline
+			\textbf{S10}      & 1                    & 0,33                & 0               & 0           & 0,5                & 1               \\ \hline
+		\end{tabular}%
+	}
+\end{table}
 
+Osservando le tabelle, si nota come il valore di overlap e dimensione della finestra che piu' frequentemente mi portano ad avere metriche migliori sono:
+\begin{itemize}
+	\item 1 secondo di sovrapposizione e 2 secondi di finestra;
+	\item 1 secondo di sovrapposizione e 1,5 secondi di finestra.
+\end{itemize}
+Il nostro studio degli intervalli quindi ci porta a concludere che il miglior modo con cui si possono dividere i dati in finestre per calcolare le feature e' scegliere 1 secondo di sovrapposizione tra le finestre e 1,5 o 2 secondi per quanto riguarda la lunghezza della finestra temporale.
 
-
-
-
-%\begin{table}[htp]
-%	\centering
-%	\begin{tabular}{lllll}
-%		Tutti & CMEANS &  &  &  \\
-%		Paziente & Accuratezza & Precisione & Recall & F1-measure \\
-%		S01 & 0,92 & 0,31 & 0,33 & 0,32 \\
-%		& 1 & 2,50 & 0,00 & 0,00 \\
-%		S02 & 0,44 & 0,46 & 0,63 & 0,53 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S03 & 0,70 & 0,51 & 0,57 & 0,54 \\
-%		& 1 & 2 & 0,00 & 0,00 \\
-%		S04 & 0,70 & 0,33 & 0,00 & 0,00 \\
-%		& 0,50 & 2 & 0,00 & 0,00 \\
-%		S05 & 0,53 & 0,49 & 0,46 & 0,47 \\
-%		& 0,50 & 1,50 & 0,00 & 0,00 \\
-%		S06 & 0,57 & 0,36 & 0,32 & 0,34 \\
-%		& 1,00 & 1,50 & 0,00 & 0,00 \\
-%		S07 & 0,48 & 0,37 & 0,43 & 0,40 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S08 & 0,41 & 0,39 & 0,43 & 0,41 \\
-%		& 1,50 & 2,50 & 0,00 & 0,00 \\
-%		S09 & 0,59 & 0,35 & 0,37 & 0,36 \\
-%		& 1,50 & 2,00 & 0,00 & 0,00 \\
-%		S10 & 0,73 & 0,33 & 0,00 & 0,00 \\
-%		& 1 & 2 & 0,00 & 0,00
-%	\end{tabular}
-%	\caption{Rate Pazienti per l'algoritmo di clustering C-means}
-%	\label{ratecmeans}
-%\end{table}
-%\begin{table}[htp]
-%	\centering
-%	\begin{tabular}{lllll}
-%		Tutti & \multicolumn{4}{c}{KMEANS-CITYBLOCK} \\
-%		Paziente & Accuratezza & Precisione & Recall & F1-measure \\
-%		S01 & 0,32 & 0,33 & 0,24 & 0,28 \\
-%		& 1,00 & 2,50 & 0,00 & 0,00 \\
-%		S02 & 0,61 & 0,54 & 0,49 & 0,51 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S03 & 0,77 & 0,79 & 0,57 & 0,66 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S04 & 0,68 & 0,33 & 0,00 & 0,00 \\
-%		& 0,50 & 1,00 & 0,00 & 0,00 \\
-%		S05 & 0,59 & 0,54 & 0,57 & 0,55 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S06 & 0,30 & 0,36 & 0,41 & 0,38 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S07 & 0,33 & 0,35 & 0,41 & 0,38 \\
-%		& 1,50 & 2,50 & 0,00 & 0,00 \\
-%		S08 & 0,31 & 0,40 & 0,39 & 0,40 \\
-%		& 1,50 & 2,00 & 0,00 & 0,00 \\
-%		S09 & 0,54 & 0,37 & 0,39 & 0,38 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S10 & 0,29 & 0,33 & 0,00 & 0,00 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00
-%	\end{tabular}
-%	\caption{Rate Pazienti per l'algoritmo di clustering K-means con metrica di distanza Cityblock}
-%	\label{ratekmeanscityblock}
-%\end{table}
-%\begin{table}[]
-%	\centering
-%	\begin{tabular}{lllll}
-%		Tutti & \multicolumn{4}{c}{KMEANS-CORRELATION}  \\
-%		Paziente & Accuratezza & Precisione & Recall & F1-measure \\
-%		S01 & 0,47 & 0,36 & 0,48 & 0,41 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S02 & 0,45 & 0,57 & 0,67 & 0,62 \\
-%		& 1,00 & 2,50 & 0,00 & 0,00 \\
-%		S03 & 0,68 & 0,50 & 0,58 & 0,54 \\
-%		& 1,00 & 2,50 & 0,00 & 0,00 \\
-%		S04 & 0,62 & 0,33 & 0,00 & 0,00 \\
-%		& 1,50 & 2,00 & 0,00 & 0,00 \\
-%		S05 & 0,28 & 0,30 & 0,32 & 0,31 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S06 & 0,52 & 0,44 & 0,44 & 0,44 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S07 & 0,54 & 0,35 & 0,35 & 0,35 \\
-%		& 1,50 & 2,50 & 0,00 & 0,00 \\
-%		S08 & 0,53 & 0,38 & 0,40 & 0,39 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S09 & 0,53 & 0,50 & 0,58 & 0,54 \\
-%		& 1,50 & 2,00 & 0,00 & 0,00 \\
-%		S10 & 0,18 & 0,33 & 0,00 & 0,00 \\
-%		& 1,00 & 2,50 & 0,00 & 0,00
-%	\end{tabular}
-%	\caption{Rate Pazienti per l'algoritmo di clustering K-means con metrica di distanza Correlation}
-%	\label{ratekmeanscorrelation}
-%\end{table}
-%\begin{table}[]
-%	\centering
-%	\begin{tabular}{lllll}
-%		Tutti & \multicolumn{4}{c}{KMEANS-COSINE} \\
-%		Paziente & Accuratezza & Precisione & Recall & F1-measure \\
-%		S01 & 0,47 & 0,31 & 0,23 & 0,27 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S02 & 0,79 & 0,36 & 0,35 & 0,35 \\
-%		& 0,50 & 1,50 & 0,00 & 0,00 \\
-%		S03 & 0,76 & 0,46 & 0,55 & 0,50 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S04 & 0,61 & 0,33 & 0,00 & 0,00 \\
-%		& 1,00 & 1,50 & 0,00 & 0,00 \\
-%		S05 & 0,28 & 0,30 & 0,32 & 0,31 \\
-%		& 1,00 & 2,50 & 0,00 & 0,00 \\
-%		S06 & 0,51 & 0,41 & 0,38 & 0,40 \\
-%		& 0,50 & 1,50 & 0,00 & 0,00 \\
-%		S07 & 0,36 & 0,34 & 0,40 & 0,37 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S08 & 0,67 & 0,36 & 0,35 & 0,35 \\
-%		& 1,00 & 1,50 & 0,00 & 0,00 \\
-%		S09 & 0,54 & 0,51 & 0,60 & 0,55 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S10 & 0,18 & 0,33 & 0,00 & 0,00 \\
-%		& 2,00 & 2,50 & 0,00 & 0,00
-%	\end{tabular}
-%	\caption{Rate Pazienti per l'algoritmo di clustering K-means con metrica di distanza Cosine}
-%	\label{ratekmeanscosine}
-%\end{table}
-%\begin{table}[]
-%	\centering
-%	\begin{tabular}{lllll}
-%		Tutti & \multicolumn{4}{c}{KMEANS-EUCLIDEAN} \\
-%		Paziente & Accuratezza & Precisione & Recall & F1-measure \\
-%		S01 & 0,92 & 0,72 & 0,34 & 0,46 \\
-%		& 1,50 & 2,00 & 0,00 & 0,00 \\
-%		S02 & 0,82 & 0,61 & 0,34 & 0,44 \\
-%		& 0,50 & 2,50 & 0,00 & 0,00 \\
-%		S03 & 0,75 & 0,78 & 0,54 & 0,64 \\
-%		& 1,50 & 2,50 & 0,00 & 0,00 \\
-%		S04 & 1,00 & 0,33 & 0,00 & 0,00 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S05 & 0,67 & 0,56 & 0,33 & 0,42 \\
-%		& 1,00 & 2,00 & 0,00 & 0,00 \\
-%		S06 & 0,91 & 0,30 & 0,33 & 0,32 \\
-%		& 1,00 & 1,50 & 0,00 & 0,00 \\
-%		S07 & 0,92 & 0,31 & 0,33 & 0,32 \\
-%		& 2,00 & 2,50 & 0,00 & 0,00 \\
-%		S08 & 0,70 & 0,57 & 0,34 & 0,42 \\
-%		& 0,50 & 1,00 & 0,00 & 0,00 \\
-%		S09 & 0,81 & 0,60 & 0,34 & 0,43 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S10 & 1,00 & 0,33 & 0,00 & 0,00 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00
-%	\end{tabular}
-%	\caption{Rate Pazienti per l'algoritmo di clustering K-means con metrica di distanza Euclidean}
-%	\label{ratekmeanseuclidean}
-%\end{table}
-%\begin{table}[]
-%	\centering
-%	\begin{tabular}{lllll}
-%		Tutti & \multicolumn{4}{c}{NEURAL NETWORK} \\
-%		Paziente & Accuratezza & Precisione & Recall & F1-measure \\
-%		S01 & 0,92 & 0,31 & 0,33 & 0,32 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S02 & 0,81 & 0,44 & 0,34 & 0,38 \\
-%		& 0,50 & 1,50 & 0,00 & 0,00 \\
-%		S03 & 0,75 & 0,78 & 0,54 & 0,63 \\
-%		& 0,50 & 2,50 & 0,00 & 0,00 \\
-%		S04 & 0,64 & 0,33 & 0,00 & 0,00 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S05 & 0,58 & 0,42 & 0,46 & 0,44 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S06 & 0,57 & 0,32 & 0,31 & 0,31 \\
-%		& 1,00 & 1,50 & 0,00 & 0,00 \\
-%		S07 & 0,63 & 0,30 & 0,26 & 0,28 \\
-%		& 2,00 & 2,50 & 0,00 & 0,00 \\
-%		S08 & 0,56 & 0,69 & 0,38 & 0,49 \\
-%		& 1,50 & 2,00 & 0,00 & 0,00 \\
-%		S09 & 0,57 & 0,37 & 0,41 & 0,39 \\
-%		& 0,50 & 2,00 & 0,00 & 0,00 \\
-%		S10 & 1,00 & 0,33 & 0,00 & 0,00 \\
-%		& 0,50 & 1,00 & 0,00 & 0,00
-%	\end{tabular}
-%	\caption{Rate Pazienti per l'algoritmo di clustering Self-Organizing Map}
-%	\label{rateneuralnetwork}
-%\end{table}
+\section{Etichettatura dei Dati}

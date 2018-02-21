@@ -36,24 +36,24 @@ for isubject =[1 2 3 4 5 6 7 8 9 10]
             end
             fileruns2 = dir([datadir 'versus_' alg '_3cl_feature*.csv']);
             
-            %while there's file of patient $isubject
+            % Per tutti i file del paziente $isubject
             for r = 1:length(fileruns)
                 
-                %name of the file
+                % Etichette del dataset
                 filename = [datadir fileruns(r).name];
-                %read table given in input
                 T1 = readtable(filename);
                 [m1,n1] = size(T1);
                 A1 = table2array(T1(:,n1));
                 
-                %name of the file
+                % Etichette cluster
                 filename2 = [datadir fileruns2(r).name];
-                %read table given in input
                 T2 = readtable(filename2);
                 [m2,n2] = size(T2);
                 A2 = table2array(T2(:,2));
+                % Etichette cluster e dataset
                 D = [A2 A1];
-                               
+                
+                % Matrice di confusione
                 [C,order] = confusionmat(D(:,2),D(:,1));
                 accuracy = c_accuracy(C);
                 precision = c_precision(C);
