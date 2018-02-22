@@ -1,6 +1,6 @@
 function extract_prefog
 
-fileruns = dir('S01R02.csv');
+fileruns = dir('S07R02.csv');
 for r = 1:length(fileruns)
     T = readtable(fileruns(r).name);
     
