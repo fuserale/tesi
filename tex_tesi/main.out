@@ -16,7 +16,7 @@
 \BOOKMARK [0][-]{chapter.4}{Motivazioni ed obiettivi}{}% 16
 \BOOKMARK [0][-]{chapter.5}{Apprendimento non supervisionato}{}% 17
 \BOOKMARK [1][-]{section.5.1}{Dataset}{chapter.5}% 18
-\BOOKMARK [1][-]{section.5.2}{Dimostrazione dell'esistenza effettiva delle 3 classi}{chapter.5}% 19
+\BOOKMARK [1][-]{section.5.2}{Dimostrazione dell'esistenza della classe preFoG}{chapter.5}% 19
 \BOOKMARK [2][-]{subsection.5.2.1}{Divisione dei dati}{section.5.2}% 20
 \BOOKMARK [2][-]{subsection.5.2.2}{Algoritmo di discriminazione}{section.5.2}% 21
 \BOOKMARK [2][-]{subsection.5.2.3}{Risultati}{section.5.2}% 22
@@ -26,8 +26,10 @@
 \BOOKMARK [2][-]{subsection.5.3.3}{Calcolo delle Feature}{section.5.3}% 26
 \BOOKMARK [2][-]{subsection.5.3.4}{Clustering}{section.5.3}% 27
 \BOOKMARK [2][-]{subsection.5.3.5}{Calcolo delle prestazioni}{section.5.3}% 28
-\BOOKMARK [2][-]{subsection.5.3.6}{Risultati}{section.5.3}% 29
-\BOOKMARK [1][-]{section.5.4}{Etichettatura dei Dati}{chapter.5}% 30
-\BOOKMARK [0][-]{chapter.6}{Conclusione e Lavori Futuri}{}% 31
-\BOOKMARK [1][-]{section.6.1}{Lavori Futuri}{chapter.6}% 32
-\BOOKMARK [0][-]{chapter*.10}{Bibliography}{}% 33
+\BOOKMARK [2][-]{subsection.5.3.6}{Risultati Clustering}{section.5.3}% 29
+\BOOKMARK [2][-]{subsection.5.3.7}{LDA con intervallo migliore}{section.5.3}% 30
+\BOOKMARK [2][-]{subsection.5.3.8}{Risultati}{section.5.3}% 31
+\BOOKMARK [1][-]{section.5.4}{Primo approccio di classificazione}{chapter.5}% 32
+\BOOKMARK [0][-]{chapter.6}{Conclusione e Lavori Futuri}{}% 33
+\BOOKMARK [1][-]{section.6.1}{Lavori Futuri}{chapter.6}% 34
+\BOOKMARK [0][-]{chapter*.10}{Bibliography}{}% 35

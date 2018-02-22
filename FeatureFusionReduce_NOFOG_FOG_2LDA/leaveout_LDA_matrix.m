@@ -5,10 +5,10 @@ datadir = 'dataset_3cl/';
 
 tic;
 %% Creo la matrice di feature del leaveout
-for windows = 2:0.5:2
+for windows = 2
     for overlap = 0.5:0.5:1
         clear F class;
-        for l = [1]
+        for l = [1 2]
             leaveout_subject = l;
             subject = [1 2 3 5 6 7 8 9];
             for i=1:length(subject)-1
@@ -59,34 +59,34 @@ for windows = 2:0.5:2
             end
             
             %% Riduco la cardinalità delle classi
-            [~,col] = find (class == 1);
-            NOFOG = F(col,:);
-            LABEL_NOFOG = class(col)';
-            [~,col] = find (class == 2);
-            FOG = F(col,:);
-            LABEL_FOG = class(col)';
-            [~,col] = find (class == 3);
-            PREFOG = F(col,:);
-            LABEL_PREFOG = class(col)';
+%             [~,col] = find (class == 1);
+%             NOFOG = F(col,:);
+%             LABEL_NOFOG = class(col)';
+%             [~,col] = find (class == 2);
+%             FOG = F(col,:);
+%             LABEL_FOG = class(col)';
+%             [~,col] = find (class == 3);
+%             PREFOG = F(col,:);
+%             LABEL_PREFOG = class(col)';
+%             
+%             X = 1;
+%             [num_prefog,~] = size(PREFOG);
+%             NOFOG = NOFOG(1:X*num_prefog,:);
+%             LABEL_NOFOG = LABEL_NOFOG(1:X*num_prefog);
+%             FOG = FOG(1:X*num_prefog,:);
+%             LABEL_FOG = LABEL_FOG(1:X*num_prefog);
+%             
+%             F = [NOFOG;PREFOG;FOG];
+%             class = [LABEL_NOFOG;LABEL_FOG;LABEL_PREFOG]';
             
-            X = 1;
-            [num_prefog,~] = size(PREFOG);
-            NOFOG = NOFOG(1:X*num_prefog,:);
-            LABEL_NOFOG = LABEL_NOFOG(1:X*num_prefog);
-            FOG = FOG(1:X*num_prefog,:);
-            LABEL_FOG = LABEL_FOG(1:X*num_prefog);
-            
-            F = [NOFOG;PREFOG;FOG];
-            class = [LABEL_NOFOG;LABEL_FOG;LABEL_PREFOG]';
-            
-            for t = 1:length(class)
-               if class(t) == 2
-                  class(t) = 1; 
-               end
-               if class(t) == 3
-                  class(t) = 2; 
-               end
-            end
+%             for t = 1:length(class)
+%                if class(t) == 2
+%                   class(t) = 1; 
+%                end
+%                if class(t) == 3
+%                   class(t) = 2; 
+%                end
+%             end
             
             %% Linear Discriminant Analysis
             clear A;
@@ -154,7 +154,7 @@ for windows = 2:0.5:2
             end
             if K == 2
                 figure('visible', 'on'), gscatter(1:length(Y(1,:)),Y(1,:),class);
-                legend('NoFog','Fog');
+                legend('NoFog+Fog','preFog');
             end
             title(['LDA S' num2str(leaveout_subject,'%02d') ' #CLASS' num2str(K,'%01d')]);
             savefig([datadir 'LDA ALL Leaveout S' num2str(leaveout_subject,'%02d') '_Sec' num2str(windows,'%02d') '_Ov' num2str(overlap,'%.02f') '.fig']);

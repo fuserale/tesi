@@ -9,7 +9,7 @@ best = 0;
 rng(1)
 % combinazioni --> 1.5,0.5; 2,0.5; 1.5,1; 2,1;
 %% Trovo la finestra e l'overlap migliori
-for windows = 2:0.5:2
+for windows = 2
     for overlap = 0.5:0.5:1
         E = [];
         for isubject = [1 2 3 5 6 7 8 9]
@@ -20,6 +20,17 @@ for windows = 2:0.5:2
             T = table2array(T);
             feature = T(:,1:n-1);
             classi = T(:,n);
+            figure('visible', 'on'), gscatter(T(1,:)',T(2,:)',class);
+            legend('NoFog+Fog','PreFog');
+            
+            for t = 1:length(classi)
+                if classi(t) == 2
+                    classi(t) = 1;
+                end
+                if classi(t) == 3
+                    classi(t) = 2;
+                end
+            end
             
             idx = kmeans(feature,2,'MaxIter',10000,'Start','cluster','Replicates',5);
             versus = [idx classi];

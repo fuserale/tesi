@@ -5,10 +5,10 @@
 % ---------------------------------------------------------------
 
 \chapter[Apprendimento non supervisionato]{Apprendimento non supervisionato per l'identificazione di contensti di FoG}\label{chap5:Automatic}
-I lavori che sono stati svolti e presentati nel capitolo \ref{chap2:related} sul Freezing Of Gait sono basati sull'identificazione di 2 classi, ossia quando il paziente e' in una normale attivita' quotidiana, che chiameremo NoFoG, oppure quando il paziente soffre di un episodio di FoG. Il nostro lavoro, invece, vuole basarsi sull'identificazione anche di una nuova classe rispetto alle 2 precedenti, che chiamiamo preFoG. Questa dovrebbe rappresentare la fase di transizione da uno stato di NoFoG ad uno di FoG, per cui identificare tale classe permetterebbe di anticipare l'occorrenza di un FoG e, quindi, dare in anticipo uno stimolo al paziente per evitare il verificarsi del FoG. La durata di ogni preFoG e' stata fissata a 2 secondi in quanto, secondo noi, questo intervallo di tempo e' sufficiente per raccogliere abbastanza informazioni al fine di identificare le occorrenze di preFoG e quindi quelle di FoG in anticipo rispetto al suo verificarsi. Il flusso della tesi viene rappresentato in figura \ref{FlussoTesi}.\\
+I lavori che sono stati svolti e presentati nel capitolo \ref{chap2:related} sul Freezing Of Gait sono basati principalmente sull'identificazione di 2 classi, ossia quando il paziente e' in una normale attivita' quotidiana, che chiameremo NoFoG, oppure quando il paziente soffre di un episodio di FoG. Qualcuno di essi, invece, ha accennato alla possibile esistenza di una fase intemedia tra noFoG e FoG. Il nostro lavoro vuole dimostrare ed identificare tale nuova classe, che viene chiamata preFoG. Questa dovrebbe rappresentare la fase di transizione da uno stato di NoFoG ad uno di FoG, per cui identificare tale classe permetterebbe di anticipare l'occorrenza di un FoG e, quindi, dare in anticipo uno stimolo al paziente per evitare il verificarsi del FoG. La durata di ogni preFoG, nei lavori in cui è stata accennata la sua esistenza, viene fissata a due secondi, per cui noi vogliamo vedere se, con tale intervallo fissato, la classe è distinguibile effettivamente dalle altre. Il flusso della tesi viene rappresentato in figura \ref{FlussoTesi}.\\
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.45]{images/FlussoTesi.png}
+	\includegraphics[scale=0.35]{images/FlussoTesi.png}
 	\caption{Rappresentazione del flusso della tesi}
 	\label{FlussoTesi}
 \end{figure}
@@ -23,8 +23,8 @@ I soggetti hanno completato sessioni da 20-30 minuti ciascuno, consistenti di 3 
 \end{enumerate}
 Le prestazioni motorie variano molto tra i pazienti. Mentre alcuni soggetti hanno mantenuto una camminata regolare durante gli episodi di non FoG, altri hanno camminato molto lentamente ed in modo instabile. L'intero dataset contiene in totale 237 episodi di FoG; la durata di ognuno di essi è tra i 0.5s ed i 40.5s. Il 50\% degli episodi di FoG è durato meno di 5.4s ed il 93.2\% è più corto di 20s. Gli episodi di FoG sono stati identificati da fisioterapisti usando registrazioni video sincronizzate. L'inizio di un episodio di FoG è stato definito come il punto dove la sequenza normale di camminata è stata interrotta, mentre la fine del FoG è stata definita come il momento in cui tale sequenza riprende.
 
-\section{Dimostrazione dell'esistenza effettiva delle 3 classi}
-Il lavoro svolto in questa tesi, come scritto precedentemente, si differenzia dagli altri gia' citati in \ref{chap2:related} in quanto si vogliono usare 3 classi invece delle 2 fornite dal dataset. Il primo passo dunque e' quello di dimostrare che effettivamente le 3 classi sono distinte tra loro e che quindi sviluppare un approccio basandosi su tali classi e' possibile.\\
+\section{Dimostrazione dell'esistenza della classe preFoG}
+Nel lavoro svolto in questa tesi si vogliono usare 3 classi invece delle 2 fornite dal dataset. Il primo passo dunque e' quello di dimostrare che effettivamente le 3 classi sono distinte tra loro e che quindi sviluppare un approccio basandosi su tali classi e' possibile.\\
 Per fare questo, si e' usato un approccio di Discriminazione Lineare. Un discriminante e' una funzione che prende in ingresso un vettore x e lo assegna ad una tra le K classi fornite. Il metodo di discriminazione che si vuole usare e' quello di Fisher, il quale viene spiegato nel Capitolo \ref{chap3:background}.\\
 \subsection{Divisione dei dati}
 Per ogni paziente, prendiamo in input la matrice di dati grezzi degli accelerometri fornita dal dataset, la quale contiene anche un campo relativo al tempo di ogni campione ed un'etichetta, che mi indica lo stato in cui si trova il mio paziente. Dividiamo i dati degli accelerometri da quelli relativi al tempo ed allo stato e calcoliamo delle feature su tali dati. Queste vengono calcolate vettorizzando finestre di dati grezzi, dove ognuna di esse dura 2 secondi, in accordo con quanto posto per la durata del pre-FoG. Ogni nuova finestra non comincia dalla fine della precedente, ma presenta una certa sovrapposizione. Per tenere traccia dell'etichetta reale a cui ogni finestra temporale appartiene, abbiamo usato il vettore relativo all'etichetta fornita dal dataset e, per ogni finestra temporale, abbiamo tenuto quella che si presenta piu' volte all'interno di essa. Il codice implementativo di quanto appena descritto e' fornito in \ref{vettorizzazione}.
@@ -109,15 +109,30 @@ end
 Y = W'*A;
 \end{lstlisting}
 \subsection{Risultati}
-Una volta calcolate le feature discriminanti, per visualizzare se effettivamente c'e' una distinzione tra le classi, facciamo un grafico con queste due grandezze ed ogni punto viene colorato in base alla reale classe di appartenenza. La figura \ref{LDAS01} mostra tale grafico. Si puo' notare immediatamente come le due feature utilizzate riescono a discriminare effettivamente tra le 3 classi e quindi un approccio basandosi su tali componenti e' giustificato.
+Una volta calcolate le feature discriminanti, per visualizzare se effettivamente c'e' una distinzione tra le classi, facciamo un grafico con queste due grandezze ed ogni punto viene colorato in base alla reale classe di appartenenza. Ognuno di essi, però, ha dei pattern di camminata diversi, quindi posso avere dati molto diversi tra un paziente ed un altro. Abbiamo quindi verificato anche se, utilizzando i dati di tutti i pazienti, la discriminazione lineare riesce ancora a distinguere in modo più o meno buono.\\
+Le figura \ref{LDAS01} e \ref{LDAS02} fanno notare immediatamente come le feature utilizzate riescono a discriminare abbastanza tra le 3 classi, anche se c'è ancora una certa sovrapposizione tra i dati di classi diverse, prendendo i dati di un solo paziente.\\
+La figura \ref{LDAALL} mostra, che prendendo i dati di tutti i pazienti assieme, una certa divisione rimane, anche se è molto meno netta rispetto al singolo paziente. Questo comunque ci permette di dire che anche tra pazienti differenti, quindi con pattern di cammino diversi, i dati che sono di preFoG sono abbastanza divisi da quelli di noFoG o FoG, quindi un approccio concentrato su questa nuova classe sembra sensato.
+
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.2]{images/LDAS01.png}
-	\caption{Grafico delle 3 classi in base alla discriminazione data dall'approccio di Fisher per il paziente 1}
+	\includegraphics[scale=0.25]{images/LDAS01.png}
+	\caption{Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 1}
 	\label{LDAS01}
 \end{figure}
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.25]{images/LDAS02.png}
+	\caption{Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 2}
+	\label{LDAS02}
+\end{figure}
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.3]{images/LDAALL.png}
+	\caption{Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher presi tutti i pazienti}
+	\label{LDAALL}
+\end{figure}
 \section{Determinazione del miglior intervallo di finestra}
-In letteratura, la finestra temporale su cui vengono calcolate le feature e' sempre stata presa a priori, basandosi su delle ipotesi. Non e' mai stato condotto quindi uno studio su quale possa essere il miglior intervallo di divisione dei dati per calcolare le feature. Quello che ci prefissiamo in questa sezione e' dunque testare diverse combinazioni di durata delle finestre con sovrapposizione al fine di trovare quella che meglio divide i nostri dati. Per fare questo, abbiamo utilizzato algoritmi di clustering in quanto non volevamo che il risultato fosse influenzato dall'appartenenza o meno di un dato ad una determinata classe, come nel caso dell'LDA o di algoritmi di classificazione. L'approccio che è stato preso in considerazione è basato sul calcolo di feature (o proprietà) derivanti dalla matematica statistica. Il flusso di tale approccio è:
+In letteratura, la finestra temporale su cui vengono calcolate le feature e' stata presa molte volte a priori, basandosi su delle ipotesi. Non e' mai stato condotto quindi uno studio su quale possa essere il miglior intervallo di divisione dei dati per calcolare le feature. Quello che ci prefissiamo in questa sezione e' dunque testare diverse combinazioni di durata delle finestre con sovrapposizione al fine di trovare quella che meglio divide i nostri dati. Allo stesso tempo, effettuiamo tale studio con l'uso di algoritmi di clustering al fine di cercare di sostituire il dottore nella fase di etichettamento dei dati.  L'approccio che è stato preso in considerazione è basato sul calcolo di feature (o proprietà) derivanti dalla matematica statistica. Il flusso di tale approccio è:
 \begin{enumerate}
 	\item Pre-processamento dei dati degli accelerometri, al fine di eliminare il rumore presente ed identificare eventuali punti di outline, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni;
 	\item Finestramento dei dati in base ad intervalli variabili al fine di calcolare le feature, dove ogni intervallo presenta una certa sovrapposizione con l'intervallo precedente;
@@ -456,7 +471,7 @@ Viene creata dunque una tabella che riassume, per ogni possibile intervallo, le 
 	\end{tabular}%
 	}
 \end{table}
-\subsection{Risultati}
+\subsection{Risultati Clustering}
 Dopo che sono state generate tutte le tabelle per tutti i pazienti in cui vengono espressi i valori di accuratezza, precisione, sensitivita' e F1-measure, siamo interessati all'intervallo migliore, ossia quello che ci fornisce i valori maggiori delle metriche suddette. Per fare questo, analizziamo ogni tabella e, per ogni algoritmo, salviamo l'intervallo ed i valori che presentano le metriche migliori, come nel caso delle tabelle \ref{ratecmeans}, \ref{ratekmeans}, \ref{rateneuralnetwork}.\\
 Ogni tabella descrive:
 \begin{itemize}
@@ -540,13 +555,39 @@ Ogni tabella descrive:
 		\end{tabular}%
 	}
 \end{table}
+\subsection{LDA con intervallo migliore}
+In \ref{LDAS01} e \ref{LDAS02} si era notato come esiste una certa distinzione tra le classi, ma c'era una sovrapposizione tra alcuni dati di esse, il che ci porta a studiare quale sia il miglior intervallo di divisione dei dati. Analogamente al procedimento per la fase di clustering, iteriamo l'algoritmo di LDA cambiando la durata della finestra temporale e la sovrapposizione tra di essi. Gli intervalli possibili, come nel caso del clustering, vanno da 1 a 5 secondi per la finestra, da 0.5 a 4.5 secondi per la sovrapposizione.\\
+Dopo aver provato tutte le possibili combinazioni, risulta anche in questo caso che scegliendo 2 secondi di finestra e 1 secondo di overlap di ottiene una divisione molto più netta per il singolo paziente, come si può vedere in \ref{LDAS01_best.png} e \ref{LDAS02_best.png}.\\
+Anche usando i dati di tutti i pazienti si può notare, in figura \ref{LDAALL2.png}, che c'è un miglioramento nella divisione dei dati usando un intervallo di 2 secondi per la finestra ed 1 secondo per l'overlap.
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.25]{images/LDAS01_best.png}
+	\caption{Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 1 con 2 secondi di finestra ed 1 secondo di overlap}
+	\label{LDAS01_best.png}
+\end{figure}
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.3]{images/LDAS02_best.png}
+	\caption{Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 2 con 2 secondi di finestra ed 1 secondo di overlap}
+	\label{LDAS02_best.png}
+\end{figure}
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.3]{images/LDAALL2.png}
+	\caption{Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per tutti i pazienti con 2 secondi di finestra ed 1 secondo di overlap}
+	\label{LDAALL2.png}
+\end{figure}
 
+\subsection{Risultati}
 Osservando le tabelle, si nota come il valore di overlap e dimensione della finestra che piu' frequentemente mi portano ad avere metriche migliori sono:
 \begin{itemize}
 	\item 1 secondo di sovrapposizione e 2 secondi di finestra;
 	\item 1 secondo di sovrapposizione e 1,5 secondi di finestra.
 \end{itemize}
-Il nostro studio degli intervalli quindi ci porta a concludere che il miglior modo con cui si possono dividere i dati in finestre per calcolare le feature e' scegliere 1 secondo di sovrapposizione tra le finestre e 1,5 o 2 secondi per quanto riguarda la lunghezza della finestra temporale.
+L'obiettivo di sostituire il dottore nella prima fase di test, ossia raccogliere dati dagli accelerometri ed applicare le etichette di noFoG, FoG o preFoG, sembra fattibile, in quanto in molti casi abbiamo un'accuratezza superiore al 70\%, per cui nella maggior parte dei casi il clustering segna l'etichetta come corretta.\\
+Il nostro studio degli intervalli, sia per la parte di clustering che per la parte di LDA, ci porta a concludere che il miglior modo con cui si possono dividere i dati in finestre per calcolare le feature e' scegliere 1 secondo di sovrapposizione tra le finestre e 1,5 o 2 secondi per quanto riguarda la lunghezza della finestra temporale.
 
-\section{Etichettatura dei Dati}
-Nella sezione precedente, lo studio degli intervalli ci ha portato a scegliere, come dimensioni delle finestre temporali, 1,5 o 2 secondi con 1 secondo di overlap. A questo punto, usando tali valori, ritestiamo per ogni paziente gli algoritmi di clustering ed andiamo ad analizzare direttamente le matrici di confusione, le quali ci diranno esattamente come etichettano tali algoritmi a confronto con le etichette reali.\\
+\section{Primo approccio di classificazione}
+Nella sezione precedente, è stato decritto uno studio degli intervalli temporali che ci ha portati a decidere quale sia la migliore scelta di durata sia per la finestra che per la sovrapposizione al fine di dividere al meglio i dati a nostra disposizione. Dalla figura \ref{LDAALL2.png}, si nota come le classi FoG e NoFoG sono a volte confuse tra di loro, mentre il preFoG è meno confuso nelle altre due classi. Ma quest'ultima classe è proprio quella che stiamo studiando ed è quella che ci porterebbe a prevenire le occorrenze di FoG, in quanto, identificandola, avrei il tempo di dare lo stimolo prima dell'avvenuta del FoG, mentre se cerco di identificare solo i Freezing darei lo stimolo uditorio in ritardo in ogni caso. Questo ci porta a provare un primo approccio di classificazione a 2 classi, dove raggruppiamo assieme i dati di FoG e noFoG e teniamo separate le occorrenze di preFoG. L'algoritmo che è stato scelto è il K-nearest Neighbours (KNN), spiegato nel capitolo \ref{chap3:background}. Usiamo sempre l'intervallo che è stato dimostrato nella sezione precedente essere quello più affidabile.\\
+
+

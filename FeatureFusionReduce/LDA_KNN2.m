@@ -3,11 +3,11 @@ clc;clear;
 % 2:4 = caviglia, 5:7 = ginocchio, 8:10 = schiena
 datadir = 'dataset_3cl/';
 
-o=0.5;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
-w=2;  %dimensione della finestra
+o=1;  % overlap di 1 secondo (multiplo del periodo di campoionamento)
+w=3;  %dimensione della finestra
 
 %choose number of patients to examine (from 1 to 10)
-for isubject = [1 2 3 4 5 6 7 8 9 10]
+for isubject = [1 2 3 5 6 7 8 9]
     
     %list of all files for patient number $isubject
     fileruns = dir([datadir 'S' num2str(isubject,'%02d') 'R01.csv']);
@@ -58,6 +58,28 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             number_sample = number_sample + 1;
             
         end
+        
+                    %% Riduco la cardinalità delle classi
+            [~,col] = find (class == 1);
+            NOFOG = F(col,:);
+            LABEL_NOFOG = class(col)';
+            [~,col] = find (class == 2);
+            FOG = F(col,:);
+            LABEL_FOG = class(col)';
+            [~,col] = find (class == 3);
+            PREFOG = F(col,:);
+            LABEL_PREFOG = class(col)';
+            
+            X = 1;
+            [num_fog,~] = size(FOG);
+            NOFOG = NOFOG(1:X*num_fog,:);
+            LABEL_NOFOG = LABEL_NOFOG(1:X*num_fog);
+%             FOG = FOG(1:X*num_fog,:);
+%             LABEL_FOG = LABEL_FOG(1:X*num_fog);
+            
+            F = [NOFOG;PREFOG;FOG];
+            class = [LABEL_NOFOG;LABEL_PREFOG;LABEL_FOG]';
+            
         %% Linear Discriminant Analysis
         clear A;
         A=F';
@@ -131,17 +153,9 @@ for isubject = [1 2 3 4 5 6 7 8 9 10]
             legend('NoFog','Fog');
         end
         title(['LDA S' num2str(isubject,'%02d') ' #CLASS' num2str(K,'%01d')]);
-%         %savefig([datadir '/plot/LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.fig']);
+        savefig([datadir '/plot/LDA_S' num2str(isubject, '%02d') '_Sec' num2str(w,'%02d') '_Ov' num2str(o,'%.01f') '.fig']);
         
 
-%         %%t-SNE
-%         % Set parameters
-%         no_dims = 2;
-%         initial_dims = 50;
-%         perplexity = 30;
-%         mappedX = tsne(F, [], no_dims, initial_dims, perplexity);
-%         
-%         gscatter(mappedX(:,1), mappedX(:,2), class);
         %% Fase di Clustering
         
         idx = kmeans(Y', K);

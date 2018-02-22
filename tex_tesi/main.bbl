@@ -1103,58 +1103,6 @@
     \field{year}{2012}
   \endentry
 
-  \entry{12}{article}{}
-    \name{author}{6}{}{%
-      {{hash=MS}{%
-         family={Mazilu},
-         familyi={M\bibinitperiod},
-         given={Sinziana},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=CA}{%
-         family={Calatroni},
-         familyi={C\bibinitperiod},
-         given={Alberto},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=GE}{%
-         family={Gazit},
-         familyi={G\bibinitperiod},
-         given={Eran},
-         giveni={E\bibinitperiod},
-      }}%
-      {{hash=RD}{%
-         family={Roggen},
-         familyi={R\bibinitperiod},
-         given={Daniel},
-         giveni={D\bibinitperiod},
-      }}%
-      {{hash=HJM}{%
-         family={Hausdorff},
-         familyi={H\bibinitperiod},
-         given={Jeffrey\bibnamedelima M.},
-         giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
-      }}%
-      {{hash=TG}{%
-         family={Troster},
-         familyi={T\bibinitperiod},
-         given={Gerhard},
-         giveni={G\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{MSCAGERDHJMTG1}
-    \strng{fullhash}{MSCAGERDHJMTG1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{M}
-    \field{sortinithash}{M}
-    \field{title}{Feature Learning for Detection and Prediction of Freezing of
-  Gait in Parkinson's Disease}
-    \field{journaltitle}{Machine Learning and Data Mining in Pattern
-  Recognition}
-    \field{year}{2013}
-  \endentry
-
   \entry{37}{article}{}
     \name{author}{2}{}{%
       {{hash=QA}{%
