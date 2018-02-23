@@ -8,8 +8,6 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
-\defcounter {refsection}{0}\relax 
 \contentsline {table}{\numberline {3.1}{\ignorespaces Misure di Similarit\IeC {\`a}}}{14}{table.3.1}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
@@ -18,25 +16,25 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {table}{\numberline {5.1}{\ignorespaces Descrizione delle Feature Statistiche}}{39}{table.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.2}{\ignorespaces Esempio di tabelle delle prestazioni del clustering}}{44}{table.5.2}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Esempio di tabelle delle prestazioni del clustering}}{43}{table.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.3}{\ignorespaces Esempio di tabelle delle prestazioni del clustering}}{45}{table.5.3}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Esempio di tabelle delle prestazioni del clustering}}{44}{table.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.4}{\ignorespaces Esempio di tabelle delle prestazioni del clustering}}{45}{table.5.4}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Esempio di tabelle delle prestazioni del clustering}}{44}{table.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.5}{\ignorespaces Rate Pazienti per l'algoritmo di clustering C-means}}{46}{table.5.5}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Rate Pazienti per l'algoritmo di clustering C-means}}{45}{table.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.6}{\ignorespaces Rate Pazienti per l'algoritmo di clustering K-means}}{46}{table.5.6}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Rate Pazienti per l'algoritmo di clustering K-means}}{45}{table.5.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.7}{\ignorespaces Rate Pazienti per l'algoritmo di clustering Self-Organizing Map}}{46}{table.5.7}
+\contentsline {table}{\numberline {5.7}{\ignorespaces Rate Pazienti per l'algoritmo di clustering Self-Organizing Map}}{45}{table.5.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.8}{\ignorespaces Matrici di confusione per la cross-validation del singolo paziente}}{50}{table.5.8}
+\contentsline {table}{\numberline {5.8}{\ignorespaces Matrici di confusione per la cross-validation del singolo paziente}}{49}{table.5.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.9}{\ignorespaces Matrici di confusione per la previsione del singolo paziente}}{50}{table.5.9}
+\contentsline {table}{\numberline {5.9}{\ignorespaces Matrici di confusione per la previsione del singolo paziente}}{49}{table.5.9}
 \defcounter {refsection}{0}\relax 
 \contentsline {table}{\numberline {5.10}{\ignorespaces Metriche di misura della predizione per il singolo paziente}}{50}{table.5.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {5.11}{\ignorespaces Matrice confusione e metriche di misura della cross-validation con i dati di tutti i pazienti}}{51}{table.5.11}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Matrice confusione e metriche di misura della cross-validation con i dati di tutti i pazienti}}{50}{table.5.11}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

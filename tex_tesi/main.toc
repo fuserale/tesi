@@ -2,8 +2,6 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Ringraziamenti}{v}{chapter*.1}
-\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Contributo della Tesi}{1}{section.1.1}
@@ -22,15 +20,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.1}Cluster Analysis}{12}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{K-Means}{13}{subsubsection*.5}
+\contentsline {subsubsection}{K-Means}{13}{subsubsection*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{K-Medoids}{14}{subsubsection*.6}
+\contentsline {subsubsection}{K-Medoids}{14}{subsubsection*.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Hierarchical}{16}{subsubsection*.7}
+\contentsline {subsubsection}{Hierarchical}{16}{subsubsection*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Neural Networks}{17}{subsubsection*.8}
+\contentsline {subsubsection}{Neural Networks}{17}{subsubsection*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Fuzzy C-Means}{18}{subsubsection*.9}
+\contentsline {subsubsection}{Fuzzy C-Means}{18}{subsubsection*.8}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.2}Classificazione}{19}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
@@ -70,18 +68,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.3.6}Risultati Clustering}{44}{subsection.5.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.7}LDA con intervallo migliore}{45}{subsection.5.3.7}
+\contentsline {subsection}{\numberline {5.3.7}LDA con intervallo migliore}{44}{subsection.5.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.8}Risultati}{47}{subsection.5.3.8}
+\contentsline {subsection}{\numberline {5.3.8}Risultati}{46}{subsection.5.3.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Primo approccio di classificazione}{49}{section.5.4}
+\contentsline {section}{\numberline {5.4}Primo approccio di classificazione}{48}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.1}Risultati sul singolo paziente}{49}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.1}Risultati sul singolo paziente}{48}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Risultati usando i dati di tutti i pazienti}{51}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Risultati usando i dati di tutti i pazienti}{49}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Conclusione e Lavori Futuri}{53}{chapter.6}
+\contentsline {chapter}{\numberline {6}Conclusione e Lavori Futuri}{51}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Lavori Futuri}{54}{section.6.1}
+\contentsline {section}{\numberline {6.1}Lavori Futuri}{52}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{57}{chapter*.10}
+\contentsline {chapter}{Bibliography}{55}{chapter*.9}

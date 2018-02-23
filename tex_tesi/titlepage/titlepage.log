@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.1.17)  1 FEB 2018 10:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.1.17)  23 FEB 2018 16:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -506,7 +506,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 9.
 
-Overfull \hbox (36.77786pt too wide) in paragraph at lines 9--55
+Overfull \hbox (49.79321pt too wide) in paragraph at lines 9--58
  [] 
  []
 
@@ -527,7 +527,7 @@ Here is how much of TeX's memory you used:
 <c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 <c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on titlepage.pdf (1 page, 40630 bytes).
+Output written on titlepage.pdf (1 page, 41151 bytes).
 PDF statistics:
  20 PDF objects out of 1000 (max. 8388607)
  13 compressed objects within 1 object stream

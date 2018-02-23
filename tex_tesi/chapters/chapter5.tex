@@ -149,22 +149,7 @@ In letteratura, la finestra temporale su cui vengono calcolate le feature é sta
 \end{figure}
 \subsection{Pre-processamento dei dati}
 Gli accelerometri sono dispositivi che misurano le vibrazioni o l'accelerazione del movimento di una struttura. La forza generata dalle vibrazioni o una variazione del movimento (accelerazione) fa in modo che la massa "comprima" il materiale piezoelettrico, che genera una carica elettrica proporzionale alla forza esercitata su di esso. Dato che la carica è proporzionale alla forza e che la massa è una costante, la carica è proporzionale anche all'accelerazione. Come tutti i dispositivi che misurano delle grandezze presentano dell'incertezza strumentale che può portare ad avere rumore, ossia un segnale non desiderato, di origine naturale o artificiale, che si sovrappone all'informazione degli accelerometri stessi. Questo rumore porta ad avere dei punti definiti outlier, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni.\\
-%Al fine di rimuovere tali punti, che altererebbero in modo negativo il calcolo delle nostre feature, si rende necessario rimuoverli dal nostro dataset. Per identificarli, è stato implementato un filtro passa-alto che eliminano tutte le frequenze inferiori a 0.5Hz, le quali non appartengono al normale movimento umano ma indicano appunto la presenza di rumore, come evidenziato in \cite{21}. L'implementazione del filtro viene fornita in \ref{hpfilter}.
-%\begin{lstlisting}[style=Matlab-editor,frame=single, caption=hpfilter, label=hpfilter]  % Start your code-block
-%function Hd = hpfilter
-%% All frequency values are in Hz.
-%Fs = 64;  % Sampling Frequency
-%
-%Fstop = 0.4;    % Stopband Frequency
-%Fpass = 0.8;       % Passband Frequency
-%Astop = 60;      % Stopband Attenuation (dB)
-%Apass = 1;       % Passband Ripple (dB)
-%match = 'passband';  % Band to match exactly
-%
-%% Construct an FDESIGN object and call its ELLIP method.
-%h  = fdesign.highpass(Fstop, Fpass, Astop, Apass, Fs);
-%Hd = design(h, 'cheby2', 'MatchExactly', match);
-%\end{lstlisting}
+Al fine di rimuovere tali punti, che altererebbero in modo negativo il calcolo delle nostre feature, si rende necessario rimuoverli dal nostro dataset. Per identificarli, è stato implementato un filtro passa-alto che eliminano tutte le frequenze inferiori a 0.5Hz, le quali non appartengono al normale movimento umano ma indicano appunto la presenza di rumore, come evidenziato in \cite{21}.
 \subsection{Definizione degli intervalli}
 Una volta filtrati i dati, il passo successivo dell'algoritmo consiste nel dividerli in intervalli temporali, al fine di poter computare le caratteristiche degli stessi. Un intervallo contiene un determinato movimento, che però verrebbe "interrotto" con la fine della finestra stessa e quindi potrei perdere informazioni su tale movimento. Per evitare il più possibile tale perdita, è usato usato un approccio che sfrutta le sovrapposizioni tra intervalli, per cui ogni nuova finestra non inizia subito dopo la fine della precedente, ma all'interno di essa. La durata degli intervalli che sono stati presi in considerazione sono:
 \begin{itemize}
@@ -365,23 +350,6 @@ Ogni algoritmo di clustering, per tutte le combinazioni di finestra ed overlap, 
 
 \begin{lstlisting}[style=Matlab-editor,frame=single, caption=Calcolo delle prestazioni, label=rate]  % Start your code-block
 ...
-% Per tutti i file del paziente $isubject
-for r = 1:length(fileruns)
-
-% Etichette del dataset
-filename = [datadir fileruns(r).name];
-T1 = readtable(filename);
-[m1,n1] = size(T1);
-A1 = table2array(T1(:,n1));
-
-% Etichette cluster
-filename2 = [datadir fileruns2(r).name];
-T2 = readtable(filename2);
-[m2,n2] = size(T2);
-A2 = table2array(T2(:,2));
-% Etichette cluster e dataset
-D = [A2 A1];
-
 % Matrice di confusione
 [C,order] = confusionmat(D(:,2),D(:,1));
 accuracy = c_accuracy(C);
@@ -396,29 +364,6 @@ end
 Q = [Q ; [e E]];
 e = [e [0 0 0 0]];
 ...
-function accuracy = c_accuracy(C)
-giusti = sum(diag(C));
-totale = sum(sum(C));
-accuracy = giusti/totale;
-end
-
-function precision = c_precision(C)
-precision1 = C(1,1)/(C(1,1)+C(2,1)+C(3,1));
-precision2 = C(2,2)/(C(1,2)+C(2,2)+C(3,2));
-precision3 = C(3,3)/(C(1,3)+C(2,3)+C(3,3));
-precision = mean([precision1;precision2;precision3]);
-end
-
-function recall = c_recall(C)
-recall1 = C(1,1)/(C(1,1)+C(1,2)+C(1,3));
-recall2 = C(2,2)/(C(2,1)+C(2,2)+C(2,3));
-recall3 = C(3,3)/(C(3,1)+C(3,2)+C(3,3));
-recall = mean([recall1;recall2;recall3]);
-end
-
-function F1measure = c_F1measure(precision,recall)
-F1measure = 2*precision*recall/(precision+recall);
-end
 \end{lstlisting}
 Viene creata dunque una tabella che riassume, per ogni possibile intervallo, le prestazioni dell'algoritmo, come si vede in \ref{ratecluster1}, \ref{ratecluster2}, \ref{ratecluster3}.
 \begin{table}[htp]
