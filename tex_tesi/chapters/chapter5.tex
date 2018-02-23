@@ -588,6 +588,83 @@ L'obiettivo di sostituire il dottore nella prima fase di test, ossia raccogliere
 Il nostro studio degli intervalli, sia per la parte di clustering che per la parte di LDA, ci porta a concludere che il miglior modo con cui si possono dividere i dati in finestre per calcolare le feature e' scegliere 1 secondo di sovrapposizione tra le finestre e 1,5 o 2 secondi per quanto riguarda la lunghezza della finestra temporale.
 
 \section{Primo approccio di classificazione}
-Nella sezione precedente, è stato decritto uno studio degli intervalli temporali che ci ha portati a decidere quale sia la migliore scelta di durata sia per la finestra che per la sovrapposizione al fine di dividere al meglio i dati a nostra disposizione. Dalla figura \ref{LDAALL2.png}, si nota come le classi FoG e NoFoG sono a volte confuse tra di loro, mentre il preFoG è meno confuso nelle altre due classi. Ma quest'ultima classe è proprio quella che stiamo studiando ed è quella che ci porterebbe a prevenire le occorrenze di FoG, in quanto, identificandola, avrei il tempo di dare lo stimolo prima dell'avvenuta del FoG, mentre se cerco di identificare solo i Freezing darei lo stimolo uditorio in ritardo in ogni caso. Questo ci porta a provare un primo approccio di classificazione a 2 classi, dove raggruppiamo assieme i dati di FoG e noFoG e teniamo separate le occorrenze di preFoG. L'algoritmo che è stato scelto è il K-nearest Neighbours (KNN), spiegato nel capitolo \ref{chap3:background}. Usiamo sempre l'intervallo che è stato dimostrato nella sezione precedente essere quello più affidabile.\\
+Nella sezione precedente, è stato decritto uno studio degli intervalli temporali che ci ha portati a decidere quale sia la migliore scelta di durata sia per la finestra che per la sovrapposizione al fine di dividere al meglio i dati a nostra disposizione. Dalla figura \ref{LDAALL2.png}, si nota come le classi FoG e NoFoG sono a volte confuse tra di loro, mentre il preFoG è meno confuso nelle altre due classi. Ma quest'ultima classe è proprio quella che stiamo studiando ed è quella che ci porterebbe a prevenire le occorrenze di FoG, in quanto, identificandola, avrei il tempo di dare lo stimolo prima dell'avvenuta del FoG, mentre se cerco di identificare solo i Freezing darei lo stimolo uditorio in ritardo in ogni caso. Questo ci porta a provare un primo approccio di classificazione a 2 classi, dove raggruppiamo assieme i dati di FoG e noFoG e teniamo separate le occorrenze di preFoG. L'algoritmo che è stato scelto è il K-nearest Neighbours (KNN), spiegato nel capitolo \ref{chap3:background}. Usiamo sempre l'intervallo che è stato dimostrato nella sezione precedente essere quello più affidabile. L'algoritmo verrà testato in due modi:
+\begin{itemize}
+	\item alleniamo il knn su un paziente singolo, effettuiamo una cross-validation sul classificatore e lo testiamo su dei nuovi dati, ossia che non sono stati inclusi nella  cross-validation;
+	\item alleniamo il knn sui dati di tutti i pazienti contemporaneamente ed effettuiamo una cross-validation.
+\end{itemize}
+La cross-validation è una tecnica statistica utilizzabile in presenza di una buona numerosità del campione osservato o training set. In particolare la k-fold cross-validation consiste nella suddivisione del dataset totale in k parti di uguale numerosità (si chiama anche k-fold validation) e, ad ogni passo, la k-esima parte del dataset viene ad essere il validation dataset, mentre la restante parte costituisce il training dataset. In altre parole, si suddivide il campione osservato in gruppi di egual numerosità, si esclude iterativamente un gruppo alla volta e lo si cerca di predire con i gruppi non esclusi.\\
+\subsection{Risultati sul singolo paziente}
+Per ogni paziente su cui è stata effettuata la prova, abbiamo ricavato la media delle matrici di confusione della cross-validation. Successivamente, prendendo un altro dataset dello stesso paziente, utilizzando il knn allenato abbiamo cercato di predirre le classi del secondo dataset. Poiché non tutti i pazienti presentano, nel dataset, due diversi file (ossia due prove di camminata), la prova è stata possibile solo su alcuni di essi.\\
+In tabella \ref{MCcross1} possiamo osservare le matrici di confusione della cross-validation a 10 gruppi per i pazienti numero 1, 2, 3, 5, 7, ossia quelli con doppio file. Si può notare come la matrice risulti diagonali, il che vuole dire che etichetta, nella cross-validation, sempre giusti i nostri campioni sullo stesso paziente.\\
+In tabella \ref{MCprev1}, ossia quella relativa alla predizione su un nuovo file, osserviamo che la matrice è abbastanza più confusa, per cui alcune volte etichetta occorrenze di preFoG come altro e non casi di preFoG come preFog. In tabella \ref{Mpred} si possono osservare le metriche di accuracy, sensitivity, specificity ed F1-measure per la predizione. Questo risultato può essere dato dal fatto che, anche per lo stesso paziente, percorsi diversi o situazioni diverse portano ad una camminata differente da quelle precedenti, o quindi ho dati che possono risultare molto simili ma appartenere a casi diversi nei due test.\\
+La cross-validation restituisce delle metriche perfette, quindi l'algoritmo riesce a classificare molto bene i punti di un dataset anche allenandosi solo su una parte di esso e prevedendo i dati esclusi. Il caso della previsione su dati di file diversi, invece, è  da migliorare, in quanto restituisce una specificità bassa, ossia tende a confondere preFoG in NoFoG o FoG. Questo fatto può essere dovuto al fatto che i movimenti, e quindi i dati, di preFoG sono altamente soggettivi e dipendenti dalla situazione in cui il paziente si trova, quindi un movimento nuovo può essere classificato male rispetto al dataset di training. Una soluzione a questo problema sarebbe quello di ottenere dei dataset più grandi in modo da avere un maggior numero di movimenti su cui allenare il classificatore.
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage{graphicx}
+\begin{table}[]
+	\centering
+	\caption{Matrici di confusione per la cross-validation per il singolo paziente}
+	\label{MCcross1}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{Paziente}                                                                       &                & \textbf{01}                       & \textbf{}                        & \multicolumn{2}{c|}{\textbf{02}}                                     & \multicolumn{2}{c|}{\textbf{03}}                                     & \multicolumn{2}{c|}{\textbf{05}}                                     & \multicolumn{2}{c|}{\textbf{07}}                                     \\ \hline
+			\multicolumn{1}{|l|}{}                                                                  & \textbf{Label} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} \\ \hline
+			\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Matrice \\ Confusione\end{tabular}}} & \textbf{NPF}   & 1413                              & 0                                & 431                               & 0                                & 1335                              & 0                                & 983                               & 0                                & 1127                              & 0                                \\ \cline{2-12} 
+			& \textbf{PF}    & 0                                 & 36                               & 0                                 & 18                               & 0                                 & 84                               & 0                                 & 76                               & 0                                 & 32                               \\ \hline
+		\end{tabular}%
+	}
+\end{table}
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage{graphicx}
+\begin{table}[]
+	\centering
+	\caption{Matrici di confusione per la previsione del singolo paziente}
+	\label{MCprev1}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|l|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{Paziente}                                                                       &                & \textbf{01}                       & \textbf{}                        & \multicolumn{2}{c|}{\textbf{02}}                                     & \multicolumn{2}{c|}{\textbf{03}}                                     & \multicolumn{2}{c|}{\textbf{05}}                                     & \multicolumn{2}{c|}{\textbf{07}}                                     \\ \hline
+			\multicolumn{1}{|l|}{}                                                                  & \textbf{Label} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} \\ \hline
+			\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Matrice \\ Confusione\end{tabular}}} & \textbf{NPF}   & 412                               & 27                               & 808                               & 173                              & 229                               & 20                               & 621                               & 354                              & 343                               & 90                               \\ \cline{2-12} 
+			& \textbf{PF}    & 9                                 & 1                                & 23                                & 10                               & 9                                 & 1                                & 40                                & 14                               & 11                                & 5                                \\ \hline
+		\end{tabular}%
+	}
+\end{table}
 
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[]
+	\centering
+	\caption{Metriche di misura della predizione per il singolo paziente}
+	\label{Mpred}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			\multicolumn{1}{|l|}{\textbf{Paziente}} & \multicolumn{1}{l|}{\textbf{Accuracy}} & \multicolumn{1}{l|}{\textbf{Sensitivity}} & \multicolumn{1}{l|}{\textbf{Specificity}} & \multicolumn{1}{l|}{\textbf{F1-measure}} \\ \hline
+			\textbf{S01}                            & 0.9198                                 & 0.9385                                    & 0.1000                                    & 0.9581                                   \\ \hline
+			\textbf{S02}                            & 0.8067                                 & 0.8236                                    & 0.3030                                    & 0.8918                                   \\ \hline
+			\textbf{S03}                            & 0.8880                                 & 0.9197                                    & 0.1000                                    & 0.9404                                   \\ \hline
+			\textbf{S05}                            & 0.6171                                 & 0.6369                                    & 0.2593                                    & 0.7591                                   \\ \hline
+			\textbf{S07}                            & 0.7751                                 & 0.7921                                    & 0.3125                                    & 0.8716                                   \\ \hline
+		\end{tabular}%
+	}
+\end{table}
 
+\subsection{Risultati usando i dati di tutti i pazienti}
+Andando ad usare i dati provenienti da tutti i pazienti, si può osservare in tabella \ref{MCall}, che rappresenta la media delle matrici di confusione della cross-validation e le metriche di accuracy, sensitivity, specificity e F1-measure, come la matrice di confusione non sia diagonale come nel caso del paziente singolo, in quanto pazienti diversi hanno modi di camminare differenti e quindi porta ad avere dati diversi, i quali possono essere classificati nel modo sbagliato. Le metriche comunque sono molto buone, quindi possiamo dire che molti movimenti di preFoG sono comuni e quindi si può procedere con un modello futuro di previsione di nuovi dati, magari avendo a disposizione dei dataset più grandi e con un numero maggiore di pazienti.
+\begin{table}[]
+	\centering
+	\caption{Matrice confusione e metriche di misura della cross-validation con i dati di tutti i pazienti}
+	\label{MCall}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|l|c|c|c|c|c|c|}
+			\hline
+			\multicolumn{1}{|l|}{}                                                                  & \textbf{Label} & \multicolumn{1}{l|}{\textbf{NPF}} & \multicolumn{1}{l|}{\textbf{PF}} & \multicolumn{1}{l|}{\textbf{Accuracy}} & \multicolumn{1}{l|}{\textbf{Sensitivity}} & \multicolumn{1}{l|}{\textbf{Specificity}} & \multicolumn{1}{l|}{\textbf{F1-measure}} \\ \hline
+			\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Matrice \\ Confusione\end{tabular}}} & \textbf{NPF}   & 8426                              & 898                              & 0.90                                   & 0.90                                    & 0.89                                 & 0.95                                     \\ \cline{2-8} 
+			& \textbf{PF}    & 39                                & 309                              &                                        &                                         &                                      &                                          \\ \hline
+		\end{tabular}%
+	}
+\end{table}

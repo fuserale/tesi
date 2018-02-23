@@ -32,6 +32,14 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {table}{\numberline {5.7}{\ignorespaces Rate Pazienti per l'algoritmo di clustering Self-Organizing Map}}{47}{table.5.7}
 \defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {5.8}{\ignorespaces Matrici di confusione per la cross-validation per il singolo paziente}}{50}{table.5.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {5.9}{\ignorespaces Matrici di confusione per la previsione del singolo paziente}}{51}{table.5.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {5.10}{\ignorespaces Metriche di misura della predizione per il singolo paziente}}{51}{table.5.10}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {5.11}{\ignorespaces Matrice confusione e metriche di misura della cross-validation con i dati di tutti i pazienti}}{51}{table.5.11}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

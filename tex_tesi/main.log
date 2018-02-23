@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.25)  22 FEB 2018 13:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.1.25)  23 FEB 2018 10:11
 entering extended mode
 **./main.tex
 (main.tex
@@ -1675,7 +1675,7 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 (C:\Users\aless\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-<titlepage/titlepage.pdf, id=146, pagebox=cropbox, 597.50829pt x 845.0471pt>
+<titlepage/titlepage.pdf, id=154, pagebox=cropbox, 597.50829pt x 845.0471pt>
 File: titlepage/titlepage.pdf Graphic file (type pdf)
 <use titlepage/titlepage.pdf>
 Package pdftex.def Info: titlepage/titlepage.pdf  used on input line 161. on in
@@ -1688,7 +1688,7 @@ Package pdftex.def Info: titlepage/titlepage.pdf  used on input line 161. on in
 put line 161.
 Package pdftex.def Info: Requested size: 597.50682pt x 845.04504pt on input lin
 e 161.
-<titlepage/titlepage.pdf, id=149, page=1, pagebox=cropbox, 597.50829pt x 845.04
+<titlepage/titlepage.pdf, id=157, page=1, pagebox=cropbox, 597.50829pt x 845.04
 71pt>
 File: titlepage/titlepage.pdf Graphic file (type pdf)
 <use titlepage/titlepage.pdf, page 1>
@@ -1797,7 +1797,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--17
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 27.
 
-<images/Proportion_of_FOG_sub-types.png, id=426, 858.95906pt x 544.28343pt>
+<images/Proportion_of_FOG_sub-types.png, id=446, 858.95906pt x 544.28343pt>
 File: images/Proportion_of_FOG_sub-types.png Graphic file (type png)
 <use images/Proportion_of_FOG_sub-types.png>
 Package pdftex.def Info: images/Proportion_of_FOG_sub-types.png  used on input 
@@ -1808,7 +1808,7 @@ e 29.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 41.
 
-<images/Schema_Concettuale_Stress.png, id=429, 1091.57813pt x 539.76656pt>
+<images/Schema_Concettuale_Stress.png, id=449, 1091.57813pt x 539.76656pt>
 File: images/Schema_Concettuale_Stress.png Graphic file (type png)
 <use images/Schema_Concettuale_Stress.png>
 Package pdftex.def Info: images/Schema_Concettuale_Stress.png  used on input li
@@ -1826,7 +1826,7 @@ g of Gait (FoG)
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 58.
 
-<images/Tipologie_Machine_Learning.png, id=445, 304.13625pt x 233.37187pt>
+<images/Tipologie_Machine_Learning.png, id=465, 304.13625pt x 233.37187pt>
 File: images/Tipologie_Machine_Learning.png Graphic file (type png)
 <use images/Tipologie_Machine_Learning.png>
 Package pdftex.def Info: images/Tipologie_Machine_Learning.png  used on input l
@@ -1839,7 +1839,7 @@ earning.png>]
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 77.
 
-<images/Workflow_ML.png, id=459, 640.64343pt x 210.03468pt>
+<images/Workflow_ML.png, id=479, 640.64343pt x 210.03468pt>
 File: images/Workflow_ML.png Graphic file (type png)
 <use images/Workflow_ML.png>
 Package pdftex.def Info: images/Workflow_ML.png  used on input line 79. on inpu
@@ -1851,7 +1851,7 @@ e 79.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 96.
 
-<images/Esempio_Cluster.png, id=468, 453.19313pt x 225.84375pt>
+<images/Esempio_Cluster.png, id=488, 453.19313pt x 225.84375pt>
 File: images/Esempio_Cluster.png Graphic file (type png)
 <use images/Esempio_Cluster.png>
 Package pdftex.def Info: images/Esempio_Cluster.png  used on input line 98. on 
@@ -1872,7 +1872,7 @@ Overfull \hbox (21.91643pt too wide) in paragraph at lines 104--118
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [13 <./images/Esempio_Cluster.png>]
-<images/example_kmeans.png, id=478, 562.1pt x 421.575pt>
+<images/example_kmeans.png, id=498, 562.1pt x 421.575pt>
 File: images/example_kmeans.png Graphic file (type png)
 <use images/example_kmeans.png>
 Package pdftex.def Info: images/example_kmeans.png  used on input line 134. on 
@@ -1884,7 +1884,7 @@ e 134.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [14]
-<images/example_kmedoids.png, id=489, 562.1pt x 421.575pt>
+<images/example_kmedoids.png, id=509, 562.1pt x 421.575pt>
 File: images/example_kmedoids.png Graphic file (type png)
 <use images/example_kmedoids.png>
 Package pdftex.def Info: images/example_kmedoids.png  used on input line 150. o
@@ -1896,7 +1896,7 @@ e 150.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [15 <./images/example_kmeans.png (PNG copy)>]
-<images/example_dendogram.png, id=500, 803.0pt x 501.875pt>
+<images/example_dendogram.png, id=520, 803.0pt x 501.875pt>
 File: images/example_dendogram.png Graphic file (type png)
 <use images/example_dendogram.png>
 Package pdftex.def Info: images/example_dendogram.png  used on input line 164. 
@@ -1910,7 +1910,7 @@ Overfull \hbox (41.49902pt too wide) in paragraph at lines 164--165
 
 [16 <./images/example_kmedoids.png (PNG copy)>] [17 <./images/example_dendogram
 .png (PNG copy)>]
-<images/example_som.png, id=511, 347.2975pt x 114.4275pt>
+<images/example_som.png, id=531, 347.2975pt x 114.4275pt>
 File: images/example_som.png Graphic file (type png)
 <use images/example_som.png>
 Package pdftex.def Info: images/example_som.png  used on input line 183. on inp
@@ -1922,7 +1922,7 @@ Package pdftex.def Info: Requested size: 173.64832pt x 57.21361pt on input line
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 196.
 
-<images/Approcci_Clustering.png, id=521, 233.37187pt x 313.17pt>
+<images/Approcci_Clustering.png, id=541, 233.37187pt x 313.17pt>
 File: images/Approcci_Clustering.png Graphic file (type png)
 <use images/Approcci_Clustering.png>
 Package pdftex.def Info: images/Approcci_Clustering.png  used on input line 198
@@ -1930,7 +1930,7 @@ Package pdftex.def Info: images/Approcci_Clustering.png  used on input line 198
 Package pdftex.def Info: Requested size: 186.69774pt x 250.53633pt on input lin
 e 198.
 [19 <./images/Approcci_Clustering.png>] [20]
-<images/matrice_confusione.png, id=537, 628.59843pt x 359.84438pt>
+<images/matrice_confusione.png, id=557, 628.59843pt x 359.84438pt>
 File: images/matrice_confusione.png Graphic file (type png)
 <use images/matrice_confusione.png>
 Package pdftex.def Info: images/matrice_confusione.png  used on input line 225.
@@ -1938,7 +1938,7 @@ Package pdftex.def Info: images/matrice_confusione.png  used on input line 225.
 Package pdftex.def Info: Requested size: 314.29845pt x 179.92174pt on input lin
 e 225.
  [21 <./images/matrice_confusione.png>]
-<images/matrice_confusione_cclassi.png, id=543, 624.08156pt x 209.28188pt>
+<images/matrice_confusione_cclassi.png, id=563, 624.08156pt x 209.28188pt>
 File: images/matrice_confusione_cclassi.png Graphic file (type png)
 <use images/matrice_confusione_cclassi.png>
 Package pdftex.def Info: images/matrice_confusione_cclassi.png  used on input l
@@ -1950,7 +1950,7 @@ e 240.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 247.
 
-<images/pca.png, id=544, 378.66469pt x 325.96782pt>
+<images/pca.png, id=564, 378.66469pt x 325.96782pt>
 File: images/pca.png Graphic file (type png)
 <use images/pca.png>
 Package pdftex.def Info: images/pca.png  used on input line 249. on input line 
@@ -1965,7 +1965,7 @@ Underfull \vbox (badness 3118) has occurred while \output is active []
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 259.
 
-<images/lda.png, id=565, 366.61969pt x 303.38344pt>
+<images/lda.png, id=585, 366.61969pt x 303.38344pt>
 File: images/lda.png Graphic file (type png)
 <use images/lda.png>
 Package pdftex.def Info: images/lda.png  used on input line 261. on input line 
@@ -1984,7 +1984,7 @@ Capitolo 5.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 9.
 
-<images/FlussoTesi.png, id=586, 963.6pt x 722.7pt>
+<images/FlussoTesi.png, id=606, 963.6pt x 722.7pt>
 File: images/FlussoTesi.png Graphic file (type png)
 <use images/FlussoTesi.png>
 Package pdftex.def Info: images/FlussoTesi.png  used on input line 11. on input
@@ -2015,7 +2015,7 @@ File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 116.
 
-<images/LDAS01.png, id=700, 1445.4pt x 704.6325pt>
+<images/LDAS01.png, id=720, 1445.4pt x 704.6325pt>
 File: images/LDAS01.png Graphic file (type png)
 <use images/LDAS01.png>
 Package pdftex.def Info: images/LDAS01.png  used on input line 118. on input li
@@ -2031,7 +2031,7 @@ Overfull \hbox (1.34912pt too wide) in paragraph at lines 118--119
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 122.
 
-<images/LDAS02.png, id=701, 1445.4pt x 704.6325pt>
+<images/LDAS02.png, id=721, 1445.4pt x 704.6325pt>
 File: images/LDAS02.png Graphic file (type png)
 <use images/LDAS02.png>
 Package pdftex.def Info: images/LDAS02.png  used on input line 124. on input li
@@ -2047,7 +2047,7 @@ Overfull \hbox (1.34912pt too wide) in paragraph at lines 124--125
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 128.
 
-<images/LDAALL.png, id=702, 1020.81375pt x 641.39626pt>
+<images/LDAALL.png, id=722, 1020.81375pt x 641.39626pt>
 File: images/LDAALL.png Graphic file (type png)
 <use images/LDAALL.png>
 Package pdftex.def Info: images/LDAALL.png  used on input line 130. on input li
@@ -2056,7 +2056,7 @@ Package pdftex.def Info: Requested size: 306.24649pt x 192.42035pt on input lin
 e 130.
 [34 <./images/LDAS01.png (PNG copy)>] [35 <./images/LDAS02.png (PNG copy)> <./i
 mages/LDAALL.png (PNG copy)>]
-<images/flusso_feature.png, id=711, 496.85625pt x 361.35pt>
+<images/flusso_feature.png, id=731, 496.85625pt x 361.35pt>
 File: images/flusso_feature.png Graphic file (type png)
 <use images/flusso_feature.png>
 Package pdftex.def Info: images/flusso_feature.png  used on input line 145. on 
@@ -2135,7 +2135,7 @@ LaTeX Warning: No positions in optional float specifier.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 562.
 
-<images/LDAS01_best.png, id=991, 1445.4pt x 704.6325pt>
+<images/LDAS01_best.png, id=1011, 1445.4pt x 704.6325pt>
 File: images/LDAS01_best.png Graphic file (type png)
 <use images/LDAS01_best.png>
 Package pdftex.def Info: images/LDAS01_best.png  used on input line 564. on inp
@@ -2151,7 +2151,7 @@ Overfull \hbox (1.34912pt too wide) in paragraph at lines 564--565
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 568.
 
-<images/LDAS02_best.png, id=992, 1020.81375pt x 641.39626pt>
+<images/LDAS02_best.png, id=1012, 1020.81375pt x 641.39626pt>
 File: images/LDAS02_best.png Graphic file (type png)
 <use images/LDAS02_best.png>
 Package pdftex.def Info: images/LDAS02_best.png  used on input line 570. on inp
@@ -2162,7 +2162,7 @@ e 570.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 574.
 
-<images/LDAALL2.png, id=993, 1020.81375pt x 641.39626pt>
+<images/LDAALL2.png, id=1013, 1020.81375pt x 641.39626pt>
 File: images/LDAALL2.png Graphic file (type png)
 <use images/LDAALL2.png>
 Package pdftex.def Info: images/LDAALL2.png  used on input line 576. on input l
@@ -2171,43 +2171,73 @@ Package pdftex.def Info: Requested size: 306.24649pt x 192.42035pt on input lin
 e 576.
 [46] [47 <./images/LDAS01_best.png (PNG copy)>] [48 <./images/LDAS02_best.png (
 PNG copy)> <./images/LDAALL2.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 591--592
+Overfull \hbox (0.5884pt too wide) in paragraph at lines 593--594
+[]\T1/cmr/m/n/10.95 alleniamo il knn su un pa-zien-te sin-go-lo, ef-fet-tuia-mo
+ una cross-validation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 596--597
 
  []
 
-) (chapters/chapter9.tex [49] [50
+[49]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 605.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 622.
+
+
+Overfull \hbox (2.79884pt too wide) in paragraph at lines 598--636
+\T1/cmr/m/n/10.95 In ta-bel-la []5.8[] pos-sia-mo os-ser-va-re le ma-tri-ci di 
+con-fu-sio-ne del-la cross-validation
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 639.
+
+[50]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 662.
+
+) (chapters/chapter9.tex [51] [52
 
 ]
 Capitolo 6.
-) Excluding 'comment' comment. [51] [52
+) Excluding 'comment' comment. [53] [54
 
-] [53
+] [55
 
-] [54]
+] [56]
 Overfull \hbox (11.97609pt too wide) in paragraph at lines 217--217
 \T1/cmr/m/n/10.95 Ma-na-ge-ment of Par-kin-son's Di-sea-se.'' In: \T1/cmr/m/it/
 10.95 FP7-ICT-2011-7-287677. \T1/cmr/m/n/10.95 (2011-
  []
 
-[55] [56
+[57] [58
 
-] [57]
+] [59]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 236.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 236.
  (main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 236.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 236.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DB8604327CD5A247874F5DA7B506F201;2508.
+(rerunfilecheck)             Checksum: E2BC679ECCFA50A2AE9A0DCB6EC191A4;2691.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 29991 strings out of 493312
- 532418 string characters out of 3138899
+ 30009 strings out of 493312
+ 532604 string characters out of 3138899
  1018604 words of memory out of 3000000
- 32420 multiletter control sequences out of 15000+200000
+ 32430 multiletter control sequences out of 15000+200000
  20595 words of font info for 56 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,18n,120p,1973b,2988s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2235,9 +2265,9 @@ ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files
 9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
 lic/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (69 pages, 1617189 bytes).
+Output written on main.pdf (71 pages, 1628567 bytes).
 PDF statistics:
- 1649 PDF objects out of 1728 (max. 8388607)
- 518 named destinations out of 1000 (max. 500000)
- 423 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1682 PDF objects out of 1728 (max. 8388607)
+ 526 named destinations out of 1000 (max. 500000)
+ 439 words of extra memory for PDF output out of 10000 (max. 10000000)
 

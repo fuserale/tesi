@@ -4,6 +4,12 @@ classError =
      0
 
 
+cfMat =
+
+        1413           0
+           0          36
+
+
 C =
 
    412    27
@@ -14,14 +20,15 @@ rate =
 
     0.9198    0.9385    0.1000
 
-Warning: Matrix is close to singular or badly scaled. Results may be
-inaccurate. RCOND =  1.578158e-22. 
-> In ultimate_knn>LDA (line 141)
-  In ultimate_knn (line 38) 
-
 classError =
 
      0
+
+
+cfMat =
+
+   431     0
+     0    18
 
 
 C =
@@ -40,6 +47,12 @@ classError =
      0
 
 
+cfMat =
+
+        1335           0
+           0          84
+
+
 C =
 
    229    20
@@ -50,14 +63,16 @@ rate =
 
     0.8880    0.9197    0.1000
 
-Warning: Matrix is close to singular or badly scaled. Results may be
-inaccurate. RCOND =  2.174814e-20. 
-> In ultimate_knn>LDA (line 141)
-  In ultimate_knn (line 38) 
 
 classError =
 
      0
+
+
+cfMat =
+
+   983     0
+     0    76
 
 
 C =
@@ -76,6 +91,12 @@ classError =
      0
 
 
+cfMat =
+
+        1127           0
+           0          32
+
+
 C =
 
    343    90
@@ -86,3 +107,4 @@ rate =
 
     0.7751    0.7921    0.3125
 
+>> 

@@ -52,6 +52,17 @@ for isubject = [1 2 3 5 7]
     Mdl_LDA = fitcknn(Y',classi,'NumNeighbors',5,'Standardize',1);
     CVKNNMdl = crossval(Mdl_LDA);
     classError = kfoldLoss(CVKNNMdl)
+    %% prova
+    y = classi';
+    X = Y';
+    order = unique(y); % Order of the group labels
+    cp = cvpartition(y,'k',10); % Stratified cross-validation
+    
+    f = @(xtr,ytr,xte,yte)confusionmat(yte,...
+        classify(xte,xtr,ytr),'order',order);
+    
+    cfMat = crossval(f,X,y,'partition',cp);
+    cfMat = reshape(sum(cfMat),2,2)
     clear DATA FREEZE feature classi
     %% Carico i dati del secondo file dello stesso paziente
     fileruns2 = dir([datadir_patient 'S' num2str(isubject,'%02d') 'R02.csv']);
@@ -95,7 +106,6 @@ for isubject = [1 2 3 5 7]
     
     CP = classperf(classi,label);
     rate = [CP.CorrectRate CP.Sensitivity CP.Specificity]
-    [class,err,POSTERIOR,logp,coeff] = classify(feature1,feature, classi1');
 end
 
 
