@@ -1,6 +1,8 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\babel@toc {italian}{}
-\babel@toc {italian}{}
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
@@ -74,9 +76,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.4}Primo approccio di classificazione}{48}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.1}Risultati sul singolo paziente}{48}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.1}Risultati sul singolo paziente}{49}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Risultati usando i dati di tutti i pazienti}{49}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Risultati usando i dati di tutti i pazienti}{50}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {6}Conclusione e Lavori Futuri}{51}{chapter.6}
 \defcounter {refsection}{0}\relax 
