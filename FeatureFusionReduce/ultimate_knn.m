@@ -34,8 +34,6 @@ for isubject = [1 2 3 5 7]
         number_sample = number_sample + 1;
         
     end
-    
-    [W,Y] = LDA(feature',classi);
     for t = 1:length(classi)
         if classi(t) == 2
             classi(t) = 1;
@@ -44,6 +42,8 @@ for isubject = [1 2 3 5 7]
             classi(t) = 2;
         end
     end
+    [W,Y] = LDA(feature',classi);
+
     feature1 = feature;
     classi1 = classi;
 %     figure('visible', 'on'), gscatter(Y(1,:),Y(2,:),classi);
@@ -89,8 +89,6 @@ for isubject = [1 2 3 5 7]
     end
     
     %% Testo il knn
-    Y1 = W'*feature';
-%     [W,Y1] = LDA(feature',classi);
     for t = 1:length(classi)
         if classi(t) == 2
             classi(t) = 1;
@@ -99,6 +97,9 @@ for isubject = [1 2 3 5 7]
             classi(t) = 2;
         end
     end
+    Y1 = W'*feature';
+%     [W,Y1] = LDA(feature',classi);
+
 %     figure('visible', 'on'), gscatter(Y1(1,:),Y1(2,:),classi);
 %     legend('NoFog+Fog','PreFog');
     [label,~,~] = predict(Mdl_LDA,Y1');
