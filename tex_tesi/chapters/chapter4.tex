@@ -6,9 +6,7 @@
 
 
 \chapter{Motivazioni ed obiettivi}\label{chap4:Goals}
-Quello del FoG, come introdotto in precedenza, è un problema che debilita in modo anche grave il paziente affetto da Parkinson. Sarebbe utile quindi avere uno strumento in grado di riconoscere automaticamente le occorrenze di FoG e preFoG, al fine di prevedere e prevenire quanti più possibili casi di Freezing. A tale scopo, è necessario sviluppare una metodologia che permetta di identificare tali avvenimenti, quindi fornisca, nel modo più accurato possibile, l'informazione sulla presenza o meno di FoG ed anche sugli istanti immediatamente precedenti al blocco, che chiamiamo preFoG. L'obiettivo di questo lavoro e' quello, innanzitutto, di verificare l'esistenza della classe chiamata preFoG, dato che al momento é stata solo ipotizzata. Se viene verificata tale esistenza e si identifica una certa distinzione rispetto alle altre classi, ossia quelle di FoG e preFoG, allora un approccio a tale classe può essere sviluppato.\\
-Per poter trovare la migliore distinzione possibile tra le varie classi e dato che non é mai stato presentato in precedenza uno studio sulla durata degli intervalli di divisione dei dati sui quali calcolare le feature, un altro obiettivo é condurre questo studio, tenendo in considerazione anche delle possibili sovrapposizioni tra le finestre. Un altro motivo per condurre questo studio lo troviamo nel cercare di sostituire il dottore in una prima fase di test, ossia nel momento in cui al paziente viene fatto seguire un percorso e, tramite accelerometri, vengono raccolti dati dei movimenti ed il dottore, a video, etichetta tali dati secondo la tipologia del movimento del paziente, se in FoG o no-FoG. Per fare questo, attraverso lo studio degli intervalli si é cercato di sviluppare un approccio basato su algoritmi di clustering, e che quindi non avessero bisogno delle etichette assegnate dal dottore, per riconoscere in automatico le occorrenze o meno del FoG, prendendo in considerazione anche la classe di preFoG di cui si é dimostrata l'esistenza.\\
-Se si riesce a trovare un intervallo che divida abbastanza bene i dati nelle varie classi, allora si rende necessario cominciare a sviluppare una metodologia di classificazione che permetta, una volta allenati determinati algoritmi su dei dati, di riconoscere le classi di nuovi dati, al fine di prevedere le istanze di FoG e preFoG.\\
+
 \begin{tikzpicture}
 \node [mybox] (box){%
 	\begin{minipage}{.96\textwidth}
@@ -16,3 +14,10 @@ Se si riesce a trovare un intervallo che divida abbastanza bene i dati nelle var
 	\end{minipage}
 };
 \end{tikzpicture}%
+
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.35]{images/FlussoTesi.png}
+	\caption{Rappresentazione del flusso della tesi}
+	\label{FlussoTesi1}
+\end{figure}
