@@ -1,0 +1,14 @@
+Lavoro,Anno,Metodo algoritmico,Risultati più significanti presentati
+Han et al.,2003,Test Statistici,Osservazione della frequenza tra 6-8Hz in un episodio di FOG
+Moore et al.,2008,Basato su soglie,Soglia generale: 78.3% di successo. Soglia personalizzata: 89.1% di successo
+Zabaleta et al.,2008,Classificatore Lineare,"82,7% successo"
+Jovanov et al.,2009,Basato su soglie,Algoritmo real time con veloce risposta. Risultati non riportati
+Niazmand et al.,2011,Basato su soglie,"88,3% sensitività e 85,3% specificità "
+Zhao et al.,2012,Basato su soglie,"81,7% sensitività "
+Mazilu et al.,2012,Differenti classificatori,95% sensitività e 95% specificità con certe configurazioni
+Mazilu et al.,2013,Albero di decisione,70% F1-measure per il preFOG
+Moore et al.,2013,Basato su soglie,sensitività e specificità >70%
+Tripoli et al.,2013,Differenti classificatori usando entropia,"96,11% accuratezza con 6 accelerometri e 2 giroscopi "
+Rodriguez et al.,2014,Basato su soglie,Miglioramento del 5% rispetto a Moore nella specificità grazie alla contestualizzazione della postura
+Alrichs et al.,2015,Support Vector Machine,90% accuratezza
+Rodriguez et al.,2017,Support Vector Machine,Miglioramento dell’11% in media rispetto a Moore

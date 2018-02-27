@@ -1,8 +1,6 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\defcounter {refsection}{0}\relax 
-\select@language {italian}
-\defcounter {refsection}{0}\relax 
-\select@language {italian}
+\babel@toc {italian}{}
+\babel@toc {italian}{}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -10,56 +8,54 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Diversi tipi di Freezing esistenti e loro percentuale di incidenza su un certo gruppo di malati di Parkinson. [Fonte: J.M. Shine et al., 2012]}}{9}{figure.3.1}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diversi tipi di Freezing esistenti e loro percentuale di incidenza su un certo gruppo di malati di Parkinson. [Fonte: J.M. Shine et al., 2012]}}{11}{figure.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Quadro concettuale relativo al Freezing of Gait (FoG) riguardante aspetti mentali e motori.}}{10}{figure.3.2}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schema delle tipologie di Machine Learning}}{13}{figure.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Schema delle tipologie di Machine Learning}}{11}{figure.3.3}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Esempio di Workflow tramite Machine Learning}}{14}{figure.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Esempio di Workflow tramite Machine Learning}}{12}{figure.3.4}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Rappresentazione dei dati e dei gruppi ottenuti con l'analisi dei gruppi}}{15}{figure.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Rappresentazione dei dati e dei gruppi ottenuti con la cluster analysis}}{13}{figure.3.5}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Esempio di assegnazione dei dati tramite l'algoritmo k-means}}{16}{figure.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Esempio di assegnazione dei dati tramite l'algoritmo k-means}}{15}{figure.3.6}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Esempio di assegnazione dei dati tramite l'algoritmo k-medoids}}{17}{figure.3.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Esempio di assegnazione dei dati tramite l'algoritmo k-medoids}}{16}{figure.3.7}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Esempio di assegnazione dei dati tramite cluster gerarchico e la sua rappresentazione tramite dendogramma}}{18}{figure.3.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Esempio di assegnazione dei dati tramite cluster gerarchico e la sua rappresentazione tramite dendogramma}}{17}{figure.3.8}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Schema input-output per una SOM}}{20}{figure.3.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Schema input-output per una SOM}}{18}{figure.3.9}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Rappresentazione dei possibili approcci usando strategie di clustering}}{21}{figure.3.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Rappresentazione dei possibili approcci usando strategie di clustering}}{19}{figure.3.10}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Rappresentazione della matrice di confusione per 2 classi}}{23}{figure.3.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Rappresentazione della matrice di confusione per 2 classi}}{21}{figure.3.11}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Rappresentazione della matrice di confusione per c classi}}{23}{figure.3.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Rappresentazione della matrice di confusione per c classi}}{22}{figure.3.12}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite PCA}}{24}{figure.3.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite PCA}}{23}{figure.3.13}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite LDA}}{25}{figure.3.14}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Rappresentazione del cambio di dimensionalit\IeC {\`a} tramite LDA}}{27}{figure.3.13}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Rappresentazione del flusso della tesi}}{30}{figure.5.1}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Rappresentazione del flusso della tesi}}{32}{figure.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 1}}{34}{figure.5.2}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 1}}{36}{figure.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 2}}{35}{figure.5.3}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 2}}{37}{figure.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher presi tutti i pazienti}}{35}{figure.5.4}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher presi tutti i pazienti}}{37}{figure.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Schema generale di calcolo delle feature statistiche}}{36}{figure.5.5}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Schema generale di calcolo delle feature statistiche}}{38}{figure.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 1 con 2 secondi di finestra ed 1 secondo di overlap}}{46}{figure.5.6}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 1 con 2 secondi di finestra ed 1 secondo di overlap}}{48}{figure.5.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 2 con 2 secondi di finestra ed 1 secondo di overlap}}{47}{figure.5.7}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per il paziente 2 con 2 secondi di finestra ed 1 secondo di overlap}}{49}{figure.5.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per tutti i pazienti con 2 secondi di finestra ed 1 secondo di overlap}}{47}{figure.5.8}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Grafico delle 3 classi in base alla discriminazione dell'approccio di Fisher per tutti i pazienti con 2 secondi di finestra ed 1 secondo di overlap}}{49}{figure.5.8}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Possibile schema di sistema real-time per l'identificazione del preFoG}}{53}{figure.6.1}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Possibile schema di sistema real-time per l'identificazione del preFoG}}{55}{figure.6.1}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

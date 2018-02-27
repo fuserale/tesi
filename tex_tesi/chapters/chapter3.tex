@@ -38,11 +38,6 @@ Dallo studio di Schaafsma et al.\cite{30} emerge che gli episodi di Freezing pos
 La necessità di dividere il FoG in sottogruppi dipende dal fatto che questi ultimi potrebbero avere origine differente e quindi essere provocati da cause separate.
 \subsection{Influenza del FoG nella camminata}
 Il Freezing of Gait influenza il pattern del cammino sia all’inizio della deambulazione sia a regime incrementando o diminuendo in modo evidente i valori dei parametri sopra riportati. Ad esempio, nei parkinsoniani che manifestano frequenti fenomeni di Freezing, la variabilità della durata del passo risulta maggiore e la lunghezza del passo minore rispetto alle situazioni in cui il Freezing è assente. Inoltre, la velocità e la lunghezza dei primi tre passi sono significativamente inferiori nei pazienti con malattia di Parkinson e con Freezing rispetto ai soggetti sani. Anche se il Freezing è tipicamente considerato un problema motorio, il fatto che spesso compaia quando il paziente si trova in spazi ristretti, suggerisce che la percezione dello spazio contribuisce in larga misura a scatenare il sintomo\cite{37}. Inoltre, i pazienti con Freezing hanno velocità media del cammino minore rispetto a pazienti sani e subiscono una riduzione ulteriore della velocità nel momento in cui si trovano a dover attraversare una porta o uno spazio stretto. Depressione e ansia possono comportare un carico cronico sulla salute mentale, e la depressione è associata con i cambiamenti di andatura, tra cui una maggiore variabilità passo-a-passo. Il Dual-Tasking, l’ansia e la depressione possono incrementare la variabilità del passo, la de-sincronizzazione di gamba destra e sinistra e l'asimmetria nei pazienti con Parkinson riducendo così la soglia per il FoG. \\
-\begin{figure}[]
-	\centering
-	\includegraphics[scale=0.3]{images/Schema_Concettuale_Stress.png}
-	\caption{Quadro concettuale relativo al Freezing of Gait (FoG) riguardante aspetti mentali e motori.}
-\end{figure}
 
 \section{Machine Learning}
 Il Machine Learning (ML) è un settore dell'Intelligenza Artificiale che si occupa di studiare le modalità in cui un computer può imparare (o migliorare le sue prestazioni) dai dati\cite{10}. Un'ampia area di ricerca tratta l'apprendimento automatico di sequenze complesse di dati e compiere decisioni intelligenti su di essi. Per esempio, un tipico problema di ML è quello di programmare un computer in modo tale che possa automaticamente riconoscere codici postali scritti a mano nelle lettere, dopo aver fatto allenare il computer stesso su dei dati.
@@ -63,7 +58,7 @@ Il problema del ML è definito a partire da un universo di elementi: ciascun ele
 Lo scopo dell'apprendimento supervisionato è di costruire un \textbf{modello di predizioni} basato su evidenze in presenza di incertezze. Un algoritmo di apprendimento supervisionato prende un insieme conosciuto di dati di input e di risposte ai dati (output) ed allena un modello al fine di generare predizioni ragionevoli a nuovi dati di input. Esistono due tecniche per questo approccio:
 \begin{itemize}
 	\item \textbf{Classificazione}: tecnica per predire risposte discrete, classificando i dati di input in categorie;
-	\item \textbf{Regression}: tecnica per predirre risposte continue.
+	\item \textbf{RegressionE}: tecnica per predire risposte continue.
 \end{itemize}
 L'apprendimento non supervisionato, invece, trova pattern nascosti o strutture intrinseche nei dati. Tale tecnica è usata per identificare inferenze da un dataset consistente di dati di input senza classi già definite. Il clustering è l'approccio più diffuso di tale tecnica ed è utilizzato per trovare gruppi nei dati.\\
 L'approccio che si usa con il ML è differente da problema a problema, per cui non sempre si ha a priori un procedimento fissato da seguire, ma piuttosto si procede a tentativi ed errori, molte volte provando diverse idee ed approcci che appartengono a tale contesto. Per questo è importante definire uno schema di lavoro generale ed evidenziare alcuni punti di decisione chiave lungo il percorso:
@@ -82,9 +77,9 @@ L'approccio che si usa con il ML è differente da problema a problema, per cui n
 La scelta della modalità supervised o unsupervised si basa sui vantaggi e svantaggi di entrambe: la modalità supervised riesce a predire la giusta classe per le istanze appartenti al test set ma richiede una consistente quantità di istanze annotate e questo può rappresentare un processo costoso se effettuato manualmente. La modalità unsupervised tipica del clustering, invece, ha il vantaggio di non richiedere un training già annotato (situazione particolarmente frequente quando si
 ricorre al ML) ma fa più fatica ad etichettare correttamente i dati ed ottiene una precisione più scarsa rispetto al metodo supervisionato nell'associare le istanze ai cluster corretti. 
 
-\subsection{Cluster Analysis}
-Con il termine Cluster Analysis, o analisi dei gruppi, si intendono le procedure che permettono di individuare, all'interno di un insieme di oggetti di qualsiasi natura, alcuni sottinsiemi, \textbf{clusters} appunto, mutuamente esclusivi e tendenzialmente omogenei al loro interno. Le tecniche di Cluster Analysis creano i gruppi in modo tale che ogni osservazione sia molto simile a tutte le altre che appartengono allo stesso gruppo, in funzione di alcuni criteri prestabiliti. Alla fine del procedimento, i cluster finali dovrebbero esibire un'alta omogeneità interna (intra-cluster) ed un'alta eterogeneità esterna (inter-cluster), quindi gli oggetti all'interno dei cluster saranno vicini tra loro, mentre gli oggetti che appartengono a differenti cluster saranno più lontani tra loro.\\
-La cluster analysis rientra tra le tecniche di tipo esplorativo e pertanto non è necessaria alcuna assunzione a priori, anche se impone una serie di decisioni durante l'analisi:
+\subsection{Analisi dei Gruppi}
+Con il termine Cluster Analysis, o analisi dei gruppi, si intendono le procedure che permettono di individuare, all'interno di un insieme di oggetti di qualsiasi natura, alcuni sottoinsiemi, \textbf{clusters} appunto, mutuamente esclusivi e tendenzialmente omogenei al loro interno. Le tecniche di Cluster Analysis creano i gruppi in modo tale che ogni osservazione sia molto simile a tutte le altre che appartengono allo stesso gruppo, in funzione di alcuni criteri prestabiliti. Alla fine del procedimento, i cluster finali dovrebbero esibire un'alta omogeneità interna (intra-cluster) ed un'alta eterogeneità esterna (inter-cluster), quindi gli oggetti all'interno dei cluster saranno vicini tra loro, mentre gli oggetti che appartengono a differenti cluster saranno più lontani tra loro.\\
+L'analisi dei gruppi rientra tra le tecniche di tipo esplorativo e pertanto non è necessaria alcuna assunzione a priori, anche se impone una serie di decisioni durante l'analisi:
 \begin{itemize}
 	\item Scelta delle variabili;
 	\item Criteri di similarità o distanza;
@@ -96,39 +91,41 @@ La cluster analysis rientra tra le tecniche di tipo esplorativo e pertanto non �
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.8]{images/Esempio_Cluster.png}
-	\caption{Rappresentazione dei dati e dei gruppi ottenuti con la cluster analysis}
+	\caption{Rappresentazione dei dati e dei gruppi ottenuti con l'analisi dei gruppi}
 \end{figure}
-Per classificare e raggruppare gli elementi in gruppi omogenei, è necessario introdurre una nozione di prossimità o similarità. Un indice di prossimità tra due generici elementi $x_i$ e $x_j$ è definito come una funzione dei rispettivi vettori riga nella matrice dei dati: $IP_{ij} = f(x_{i}^{'},x_{j}^{'}) i,j=1,2,..,n$. Due individui sono vicini quando la loro dissimilarità o distanza è piccola o, equivalentemente, quando la loro similarità è grande. Le principali misure di similarità sono illustrate in tabella \ref{TAB:SIMILARITA'}.
+Per classificare e raggruppare gli elementi in gruppi omogenei, è necessario introdurre il concetto di prossimità o similarità. Due individui sono vicini quando la loro similarità o distanza è piccola o, equivalentemente, quando la loro similarità è grande.
+% Le principali misure di similarità sono illustrate in tabella \ref{TAB:SIMILARITA'}.
 
-\begin{table}[h!]
-	\begin{tabular}{| l | c | c | }
-	\multicolumn{1}{|l|}{Tipo di dato} &  
-	\multicolumn{1}{c|}{Misura} &
-	\multicolumn{1}{c|}{Formula}\\
-	\hline
-	\hline
-	Binario					&	Coefficiente di Sokal		&	$S_{ij}=(a+d)/(a+b+c+d)$	\\
-	Binario					&	Coefficiente di Jaccard		& 	$S_{ij}=a/(a+b+c)$\\
-	Categorici non binari	& 	Media delle variabili		&	$S_{ij}=(1/p) \sum_{k=1}^{p} s_{ijk}$\\
-	Dati Continui			& 	Distanza Euclidea			&	$d_{ij}=[\sum_{k=1}^{p}(x_{ik}-x_{jk})^2]^{1/2}$\\
-	Dati Continui			& 	Distanza City Block			&	$d_{ij}=\sum_{k=1}^{p}|x_{ik}-x_{jk}|$\\
-	
-\end{tabular}
-\vspace{0.1cm}
-\caption{Misure di Similarità}
-%\vspace{-0.2cm}
-\label{TAB:SIMILARITA'}
-\end{table}
+%\begin{table}[h!]
+%	\begin{tabular}{| l | c | c | }
+%	\multicolumn{1}{|l|}{Tipo di dato} &  
+%	\multicolumn{1}{c|}{Misura} &
+%	\multicolumn{1}{c|}{Formula}\\
+%	\hline
+%	\hline
+%	Binario					&	Coefficiente di Sokal		&	$S_{ij}=(a+d)/(a+b+c+d)$	\\
+%	Binario					&	Coefficiente di Jaccard		& 	$S_{ij}=a/(a+b+c)$\\
+%	Categorici non binari	& 	Media delle variabili		&	$S_{ij}=(1/p) \sum_{k=1}^{p} s_{ijk}$\\
+%	Dati Continui			& 	Distanza Euclidea			&	$d_{ij}=[\sum_{k=1}^{p}(x_{ik}-x_{jk})^2]^{1/2}$\\
+%	Dati Continui			& 	Distanza City Block			&	$d_{ij}=\sum_{k=1}^{p}|x_{ik}-x_{jk}|$\\
+%	
+%\end{tabular}
+%\vspace{0.1cm}
+%\caption{Misure di Similarità}
+%%\vspace{-0.2cm}
+%\label{TAB:SIMILARITA'}
+%\end{table}
 
 I principali algoritmi di clustering sono descritti nelle prossime sottosezioni.
 \subsubsection{K-Means}
-Il K-Means è un algoritmo di clustering partizionale che permette di suddividere un insieme di oggetti in K gruppi sulla base dei loro attributi. E' una variante dell'algoritmo di aspettativa-massimizzazione(EM) il cui obiettivo è determinare i K gruppi di dati generati da distribuzioni gaussiane. Si assume che gli attributi degli oggetti possano essere rappresentati come vettori e che quindi formino uno spazio vettoriale. L'obiettivo che l'algoritmo di prepone è di minimizzare la varianza intra-cluster, dove ogni cluster viene indentificato mediante un centroide o punto medio. L'algoritmo segue una procedura iterativa:
+Il K-Means è un algoritmo di clustering partizionale che permette di suddividere un insieme di oggetti in K gruppi sulla base dei loro attributi. E' una variante dell'algoritmo di aspettativa-massimizzazione(EM) il cui obiettivo è determinare i K gruppi di dati generati da distribuzioni gaussiane. Si assume che gli attributi degli oggetti possano essere rappresentati come vettori e che quindi formino uno spazio vettoriale. L'obiettivo che l'algoritmo si prepone è di minimizzare la varianza intra-cluster, dove ogni cluster viene identificato mediante un centroide o punto medio. L'algoritmo segue una procedura iterativa:
 \begin{enumerate}
-	\item Crea K partizioni (dove K è il numero di cluster che si vogliono ottenere) ed assegna ad ogni partizione dei punti di ingresso (scelti casualmente o euristicamente);
-	\item Costruisce una nuova partizione associando ogni punto d'ingresso al cluster il cui centroide è più vicino ad esso;
-	\item Vengono ricalcolati i centroidi per i nuovi cluster e si itera al punto 2 finché l'algoritmo non converge.
+	\item Sceglie in modo casuale o euristico k punti che rappresentano i centroidi iniziali dei cluster;
+	\item Ripete fino a che gli assegnamenti non cambiano
+		\subitem Assegna ciascun oggetto al cluster più vicino, ossia il cui centro risulta il più vicino all'oggetto dato
+		\subitem Calcola i centroidi dei cluster.
 \end{enumerate}
-L'algoritmo converge molto velocemente, infatti è stato osservato che il numero di iterazioni è minore del numero di punti da osservare. In termini di qualità delle soluzioni, però, l'algoritmo non garantisce il raggiungimento dell'ottimo globale poiché la soluzione dipende largamente dal set di cluster iniziale. Un rimedio a questo aspetto è l' applicare l'algoritmo più volte e, fra tutte le soluzioni prodotte, scegliere quella più soddisfacente. Un altro svantaggio è che l'algoritmo richiede di scegliere a priori il numero di cluster da trovare, per cui se i dati non sono naturalmente partizionati si ottengono risultati strani. Inoltre, l'algoritmo funziona bene solo quando sono individuabili cluster sferici nei dati.
+L'algoritmo converge molto velocemente, infatti è stato osservato che il numero di iterazioni è minore del numero di punti da osservare. In termini di qualità delle soluzioni, però, l'algoritmo non garantisce il raggiungimento dell'ottimo globale poiché la soluzione dipende largamente dal set di cluster iniziale. Un rimedio a questo aspetto è applicare l'algoritmo più volte e, fra tutte le soluzioni prodotte, scegliere quella più soddisfacente. Un altro svantaggio è che l'algoritmo richiede di scegliere a priori il numero di cluster da trovare, per cui se i dati non sono naturalmente partizionati si ottengono risultati strani. Inoltre, l'algoritmo funziona bene solo quando sono individuabili cluster sferici nei dati.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.50]{images/example_kmeans.png}
@@ -164,8 +161,8 @@ Per decidere quali cluster devono essere combinati (approccio agglomerativo) o q
 	\includegraphics[scale=0.50]{images/example_dendogram.png}
 	\caption{Esempio di assegnazione dei dati tramite cluster gerarchico e la sua rappresentazione tramite dendogramma}
 \end{figure}
-\subsubsection{Neural Networks}
-Le self-organizing map (SOM) sono una fattispecie di organizzazione di processi di informazione in rete analoghi alle reti neurali artificiali. È addestrata usando l'apprendimento non supervisionato per produrre una rappresentazione dei campioni di training in uno spazio a bassa dimensione preservando le proprietà topologiche dello spazio degli ingressi. Questa proprietà rende le SOM particolarmente utili per la visualizzazione di dati di dimensione elevata. Le self-organizing map sono reti neurali a connessioni laterali dove i neuroni di uscita sono organizzati in griglie di bassa dimensione (generalmente 2D o 3D). Ogni ingresso è connesso a tutti i neuroni di uscita. Ad ogni neurone è associato un vettore dei pesi della stessa dimensione dei vettori d'ingresso. La dimensione del vettore d'ingresso è generalmente molto più alta della dimensione della griglia di uscita. L'obiettivo dell'apprendimento nelle self-organizing map è di specializzare parti differenti del reticolo SOM a rispondere similmente a particolari pattern d'ingresso.\\
+\subsubsection{Reti Neurali}
+Una Rete Neurale é un modello matematico che calcola la funzione output=f(input,pesi) al variare dei pesi e senza specificare la forma della funzione f, o anche un sistema dinamico avente la topologia di un grafo orientato con nodi, i neuroni artificiali, ed archi, i pesi sinaptici, nel quale il termine rete è riferito alla topologia dei collegamenti tra i neuroni. Le self-organizing map (SOM) sono una tipologia di reti neurali artificiali. È addestrata usando l'apprendimento non supervisionato per produrre una rappresentazione dei campioni di training in uno spazio a bassa dimensione preservando le proprietà topologiche dello spazio degli ingressi. Questa proprietà rende le SOM particolarmente utili per la visualizzazione di dati di dimensione elevata. Le SOM sono reti neurali a connessioni laterali dove i neuroni di uscita sono organizzati in griglie di bassa dimensione (generalmente 2D o 3D). Ogni ingresso è connesso a tutti i neuroni di uscita. Ad ogni neurone è associato un vettore dei pesi della stessa dimensione dei vettori d'ingresso. La dimensione del vettore d'ingresso è generalmente molto più alta della dimensione della griglia di uscita. L'obiettivo dell'apprendimento nelle SOM è di specializzare parti differenti del reticolo SOM a rispondere similmente a particolari pattern d'ingresso.\\
 L'algoritmo di clustering è il seguente:
 \begin{enumerate}
 	\item Assegna ai vettori dei pesi valori casuali;
