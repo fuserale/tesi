@@ -13,25 +13,25 @@
 \BOOKMARK [2][-]{subsection.3.3.1}{Analisi Delle Componenti Principali}{section.3.3}% 13
 \BOOKMARK [2][-]{subsection.3.3.2}{Analisi dei Discriminanti Lineari}{section.3.3}% 14
 \BOOKMARK [0][-]{chapter.4}{Motivazioni ed obiettivi}{}% 15
-\BOOKMARK [0][-]{chapter.5}{Apprendimento non supervisionato}{}% 16
+\BOOKMARK [0][-]{chapter.5}{Identificazione dei contesti di preFOG}{}% 16
 \BOOKMARK [1][-]{section.5.1}{Studio sull'esistenza della classe preFOG}{chapter.5}% 17
 \BOOKMARK [2][-]{subsection.5.1.1}{Divisione dei dati}{section.5.1}% 18
 \BOOKMARK [2][-]{subsection.5.1.2}{Algoritmo di discriminazione}{section.5.1}% 19
-\BOOKMARK [1][-]{section.5.2}{Approccio non supervisionato ed intervalli}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.2}{Etichettatura dei dati non supervisionata}{chapter.5}% 20
 \BOOKMARK [2][-]{subsection.5.2.1}{Pre-processamento dei dati}{section.5.2}% 21
 \BOOKMARK [2][-]{subsection.5.2.2}{Definizione degli intervalli}{section.5.2}% 22
 \BOOKMARK [2][-]{subsection.5.2.3}{Calcolo delle Feature}{section.5.2}% 23
 \BOOKMARK [2][-]{subsection.5.2.4}{Clustering}{section.5.2}% 24
 \BOOKMARK [2][-]{subsection.5.2.5}{Calcolo delle prestazioni}{section.5.2}% 25
 \BOOKMARK [1][-]{section.5.3}{Classificazione del preFOG}{chapter.5}% 26
-\BOOKMARK [0][-]{chapter.6}{Risultati}{}% 27
+\BOOKMARK [0][-]{chapter.6}{Risultati Sperimentali}{}% 27
 \BOOKMARK [1][-]{section.6.1}{Dataset}{chapter.6}% 28
-\BOOKMARK [1][-]{section.6.2}{Studio sull'esistenza della classe preFOG}{chapter.6}% 29
-\BOOKMARK [2][-]{subsection.6.2.1}{Risultati}{section.6.2}% 30
-\BOOKMARK [2][-]{subsection.6.2.2}{Risultati Clustering}{section.6.2}% 31
-\BOOKMARK [2][-]{subsection.6.2.3}{LDA con intervallo migliore}{section.6.2}% 32
-\BOOKMARK [2][-]{subsection.6.2.4}{Risultati sul singolo paziente}{section.6.2}% 33
-\BOOKMARK [2][-]{subsection.6.2.5}{Risultati usando i dati di tutti i pazienti}{section.6.2}% 34
+\BOOKMARK [1][-]{section.6.2}{Risultati sull'esistenza della classe preFOG}{chapter.6}% 29
+\BOOKMARK [1][-]{section.6.3}{Risultati Etichettatura dei dati ed intervalli}{chapter.6}% 30
+\BOOKMARK [2][-]{subsection.6.3.1}{LDA con intervallo migliore}{section.6.3}% 31
+\BOOKMARK [1][-]{section.6.4}{Risultati Classificazione}{chapter.6}% 32
+\BOOKMARK [2][-]{subsection.6.4.1}{Risultati sul singolo paziente}{section.6.4}% 33
+\BOOKMARK [2][-]{subsection.6.4.2}{Risultati usando i dati di tutti i pazienti}{section.6.4}% 34
 \BOOKMARK [0][-]{chapter.7}{Conclusione e Lavori Futuri}{}% 35
 \BOOKMARK [1][-]{section.7.1}{Lavori Futuri}{chapter.7}% 36
 \BOOKMARK [0][-]{chapter*.9}{Bibliography}{}% 37

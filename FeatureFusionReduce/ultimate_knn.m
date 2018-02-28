@@ -56,7 +56,8 @@ for isubject = [1 2 3 5 7]
     y = classi';
     X = Y';
     order = unique(y); % Order of the group labels
-    cp = cvpartition(y,'k',10); % Stratified cross-validation
+    % Cross-Validation
+    cp = cvpartition(y,'k',10);
     
     f = @(xtr,ytr,xte,yte)confusionmat(yte,...
         classify(xte,xtr,ytr),'order',order);

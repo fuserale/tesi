@@ -5,19 +5,34 @@
 
 
 
-\chapter{Motivazioni ed obiettivi}\label{chap4:Goals}
-
+\chapter[Motivazioni ed obiettivi]{Motivazioni ed obiettivi}\label{chap4:Goals}
+Allo stato dell'arte, riassunto nella tabella \ref{letteratura}, sono presenti molti lavori di classificazione del Freezing, usando principalmente 2 classi, ossia noFOG, che corrisponde ad attività definite normali del paziente, e FOG, ossia un blocco motorio. Uno studio ha cercato di introdurre una nuova classe, intermedia tra le due, che é stata chiamata preFOG. Questa rappresenta una fase transitoria da uno stato di noFOG ad un'occorrenza di FOG. Identificare tale classe permetterebbe di prevedere i Freezing del paziente e quindi permettergli di non bloccarsi attraverso uno stimolo, uditorio o visivo.\\
+Gli studi condotti finora, inoltre, utilizzano dei dataset composti da dati ricavati tramite accelerometri ed etichettati manualmente da dottori. Non é stato ancora presentato un approccio che tenti di sostituire il lavoro di etichettatura dei dati del dottore.\\
+La tesi proposta si prefigge lo scopo di presentare un approccio non supervisionato per l'etichettatura dei dati provenienti da accelerometri senza l'ausilio del dottore ed usare un approccio di classificazione per identificare le occorrenze di preFOG al fine di prevedere i Freezing.\\
 \begin{tikzpicture}
 \node [mybox] (box){%
 	\begin{minipage}{.96\textwidth}
-	Quello che, dunque, si vuole dimostrare è innanzitutto l'esistenza di una nuova classe chiamata preFoG e che sia divisa da quelle di FoG e noFoG. Una volta dimostrato questo, si vuole trovare il miglior intervallo di suddivisione dei dati al fine di sviluppare un procedimento di riconoscimento non supervisionato di etichette delle varie classi attraverso algoritmi di clustering, sostituendo cosí il dottore nella prima fase di test. Sfruttando tale intervallo, inoltre, si vuole tentare un primo approccio di classificazione per poter etichettare nuovi dati rispetto a quelli contenuti nel nostro dataset di allenamento.
+		Gli obiettivi della tesi quindi sono:
+			\begin{itemize}
+				\item Verificare l'esistenza della classe preFOG;
+				\item Usare un approccio non supervisionato per l'etichettatura dei dati;
+				\item Classificare i dati per identificare le occorrenze di preFOG.
+			\end{itemize}
 	\end{minipage}
 };
 \end{tikzpicture}%
+%Il lavoro condotto, partendo da dati raccolti dagli assi x,y,z di più accelerometri, verifica la presenza di una nuova tipologia di classe, che chiameremo preFOG, dei dati e conduce uno studio algoritmico non supervisionato su feature ed intervalli temporali sui dati per etichettare tali dati, sostituendo in tale modo il lavoro del dottore. Inoltre, introduce un metodo di classificazione dei dati stessi, al fine di identificare tale classe per evitare le occorrenze del Freezing.\\
+%\begin{tikzpicture}
+%\node [mybox] (box){%
+%	\begin{minipage}{.96\textwidth}
+%	Quello che, dunque, si vuole studiare è innanzitutto l'esistenza di una nuova classe chiamata preFoG e che sia divisa da quelle di FoG e noFoG. Una volta verificato questo, si vuole sviluppare un procedimento di riconoscimento non supervisionato di etichette delle varie classi attraverso algoritmi di clustering, sostituendo cosí il dottore nella prima fase di test. Sfruttando tale intervallo, inoltre, si vuole tentare un approccio di classificazione per identificare le occorrenze di preFOG.
+%	\end{minipage}
+%};
+%\end{tikzpicture}%
 
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.35]{images/FlussoTesi.png}
-	\caption{Rappresentazione del flusso della tesi}
-	\label{FlussoTesi1}
+	\includegraphics[scale=0.46]{images/FlussoTesiGenerale.png}
+	\caption{Rappresentazione del flusso generale della tesi}
+	\label{FlussoTesiGenerale}
 \end{figure}

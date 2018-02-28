@@ -4,21 +4,27 @@
 % Automatic generation of a self-adaptive TLM model
 % ---------------------------------------------------------------
 
-\chapter[Apprendimento non supervisionato]{Identificazione dei contesti di preFOG}\label{chap5:Automatic}
-Il flusso della tesi viene rappresentato in figura \ref{FlussoTesi}.\\
+\chapter[Identificazione dei contesti di preFOG]{Identificazione dei contesti di preFOG}\label{chap5:Automatic}
+Il lavoro svolto, come precedentemente spiegato, si articola in 3 fasi:
+\begin{enumerate}
+	\item Verificare l'esistenza della classe preFOG;
+	\item Usare un approccio non supervisionato per l'etichettatura dei dati;
+	\item Classificare i dati per identificare le occorrenze di preFOG.
+\end{enumerate}
+Nella prima fase, vengono presi in input i dati etichettati di accelerometri e, tramite un approccio di studio dei dati e di discriminazione lineare, verificare l'esistenza di una nuova classe chiamata preFOG. Una volta condotto tale studio, nella fase 2, si presenta un approccio non supervisionato che, prendendo in input dati grezzi provenienti da accelerometri, pre-processa tali dati e ne ricava delle caratteristiche, o feature, utilizzando poi degli algoritmi di clustering al fine di etichettare tali dati. In questa fase viene anche condotta uno studio sulla divisione dei dati in intervalli temporali al fine di trovare quale sia la migliore durata di tali intervalli. Nella fase tre, invece, prendendo sempre in input dati di accelerometri, si conduce una classificazione tramite k-nearest neighbor (KNN) al fine di identificare la classe di preFOG. Quanto enunciato viene rappresentato in figura \ref{FlussoTesi}.\\
+In ogni fase, dunque, abbiamo come input dati provenienti da accelerometri, ognuno di questi rappresentato dagli assi x,y,z.\\
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.35]{images/FlussoTesi.png}
 	\caption{Rappresentazione del flusso della tesi}
 	\label{FlussoTesi}
 \end{figure}
-Lo sviluppo della procedura é stato svolto usando software Matlab.
+Lo sviluppo della tesi é stato svolto usando software Matlab.
 
 \section{Studio sull'esistenza della classe preFOG}
-Nel lavoro svolto in questa tesi si vogliono usare 3 classi invece delle 2 fornite dal dataset. Il primo passo dunque é quello di dimostrare che effettivamente le 3 classi sono distinte tra loro e che quindi sviluppare un approccio basandosi su tali classi é possibile.\\
-Per fare questo, si é usato un approccio di Discriminazione Lineare. Un discriminante é una funzione che prende in ingresso un vettore x e lo assegna ad una tra le K classi fornite. Il metodo di discriminazione che si vuole usare é quello di Fisher, il quale viene spiegato nella sezione \ref{Fisher}.\\
+Nel lavoro svolto in questa tesi si vogliono usare 3 classi invece delle 2 fornite dal dataset. Il primo passo dunque é quello di dimostrare che effettivamente le 3 classi sono distinte tra loro e che quindi sviluppare un approccio basandosi su tali classi é possibile. Per fare questo, si é usato un approccio di Discriminazione Lineare. Un discriminante é una funzione che prende in ingresso un vettore x e lo assegna ad una tra le K classi fornite. Il metodo di discriminazione che si vuole usare é quello di Fisher, il quale viene spiegato nella sezione \ref{Fisher}.\\
 \subsection{Divisione dei dati}
-Per ogni paziente, prendiamo in input la matrice di dati grezzi degli accelerometri fornita dal dataset, la quale contiene anche un campo relativo al tempo di ogni campione ed un'etichetta, che mi indica lo stato in cui si trova il mio paziente. Dividiamo i dati degli accelerometri da quelli relativi al tempo ed allo stato e calcoliamo delle feature su tali dati. Queste vengono calcolate vettorizzando finestre di dati grezzi, ossia prendendo tutte le righe e colonne della finestra e disponendole lungo un vettore riga.  Ogni nuova finestra non comincia dalla fine della precedente, ma presenta una certa sovrapposizione. Per tenere traccia dell'etichetta reale a cui ogni finestra temporale appartiene, abbiamo usato il vettore relativo all'etichetta fornita dal dataset e, per ogni finestra temporale, abbiamo tenuto quella che si presenta più volte all'interno di essa. Il codice implementativo di quanto appena descritto é fornito in \ref{vettorizzazione}.
+Per ogni paziente, prendiamo in input la matrice di dati grezzi degli accelerometri fornita dal dataset, la quale contiene anche un campo relativo al tempo di ogni campione ed un'etichetta, che mi indica lo stato in cui si trova il mio paziente. Dividiamo i dati degli accelerometri da quelli relativi al tempo ed allo stato e calcoliamo delle feature su tali dati. Queste vengono calcolate vettorizzando in  finestre temporali i dati grezzi, ossia prendendo tutte le righe e colonne di un certo intervallo e disponendole lungo un vettore riga. Per tenere traccia dell'etichetta reale a cui ogni finestra temporale appartiene, abbiamo usato il vettore relativo all'etichetta fornita dal dataset e, per ogni finestra temporale, abbiamo tenuto quella che si presenta più volte all'interno di essa. Il codice implementativo di quanto appena descritto é fornito in \ref{vettorizzazione}.
 \begin{lstlisting}[style=Matlab-editor,frame=single, caption=Vettorizzazione dei dati degli accelerometri, label=vettorizzazione]
 for i=1:size_windows_sample-size_overlap_samples:m - size_windows_sample
 B = A(i:i+size_windows_sample-1,:);
@@ -101,8 +107,8 @@ Y = W'*A;
 \end{lstlisting}
 
 
-\section{Approccio non supervisionato ed intervalli}
-In letteratura, la finestra temporale su cui vengono calcolate le feature é stata presa molte volte a priori, basandosi su delle ipotesi. Non é mai stato presentato uno studio su quale possa essere il miglior intervallo di divisione dei dati per calcolare le feature. Quello che ci prefissiamo in questa sezione é dunque testare diverse combinazioni di durata delle finestre con sovrapposizione al fine di trovare quella che meglio divide i nostri dati. Allo stesso tempo, usando tale studio,usiamo di algoritmi di clustering al fine di cercare di sostituire il dottore nella fase di etichettatura dei dati.  L'approccio che è stato preso in considerazione è basato sul calcolo di feature (o proprietà) derivanti dalla matematica statistica. Il flusso di tale approccio è:
+\section{Etichettatura dei dati non supervisionata}
+Allo stato dell'arte, sono stati condotti studi di classificazione, usando quindi dataset già etichettati da dottori. In questa sezione usiamo un approccio non supervisionato tramite clustering al fine di sostituire il dottore nella fase di etichettatura dei dati, usando uno studio sulla divisione dei dati in finestre temporali, trovando così anche quale sia il miglior modo di suddividere in intervalli i nostri dati. L'approccio che è stato preso in considerazione è basato sul calcolo di feature (o proprietà) derivanti dalla matematica statistica. Il flusso di tale approccio è:
 \begin{enumerate}
 	\item Pre-processamento dei dati degli accelerometri, al fine di eliminare il rumore presente ed identificare eventuali punti di outline, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni;
 	\item Finestramento dei dati in base ad intervalli variabili al fine di calcolare le feature, dove ogni intervallo presenta una certa sovrapposizione con l'intervallo precedente;
@@ -395,3 +401,23 @@ Nella sezione precedente, è stato decritto uno studio degli intervalli temporal
 	\item alleniamo il knn sui dati di tutti i pazienti contemporaneamente ed effettuiamo una cross-validation.
 \end{itemize}
 La cross-validation è una tecnica statistica utilizzabile in presenza di una buona numerosità del campione osservato o training set. In particolare la k-fold cross-validation consiste nella suddivisione del dataset totale in k parti di uguale numerosità (si chiama anche k-fold validation) e, ad ogni passo, la k-esima parte del dataset viene ad essere il validation dataset, mentre la restante parte costituisce il training dataset. In altre parole, si suddivide il campione osservato in gruppi di egual numerosità, si esclude iterativamente un gruppo alla volta e lo si cerca di predire con i gruppi non esclusi.\\
+Il codice implementativo viene fornito in \ref{validation}
+
+\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Cross-Validation, label=validation]  % Start your code-block
+
+% Cross-Validation
+cp = cvpartition(y,'k',10);
+
+f = @(xtr,ytr,xte,yte)confusionmat(yte,...
+classify(xte,xtr,ytr),'order',order);
+
+cfMat = crossval(f,X,y,'partition',cp);
+cfMat = reshape(sum(cfMat),2,2)
+...
+% Previsione nuovi dati
+[label,~,~] = predict(Mdl_LDA,Y1');
+[C,~] = confusionmat(classi,label)
+
+CP = classperf(classi,label);
+rate = [CP.CorrectRate CP.Sensitivity CP.Specificity CP.F1measure]
+\end{lstlisting}
