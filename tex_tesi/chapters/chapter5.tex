@@ -9,7 +9,7 @@ Il lavoro svolto, come precedentemente spiegato, si articola in 3 fasi:
 \begin{enumerate}
 	\item Verificare l'esistenza della classe preFOG;
 	\item Usare un approccio non supervisionato per l'etichettatura dei dati;
-	\item Classificare i dati per identificare le occorrenze di preFOG.
+	\item Classificare i dati per identificare le occorrenze di preFOG e fornire uno stimolo sensoriale per evitare FOG.
 \end{enumerate}
 Nella prima fase, vengono presi in input i dati etichettati di accelerometri e, tramite un approccio di studio dei dati e di discriminazione lineare, verificare l'esistenza di una nuova classe chiamata preFOG. Una volta condotto tale studio, nella fase 2, si presenta un approccio non supervisionato che, prendendo in input dati grezzi provenienti da accelerometri, pre-processa tali dati e ne ricava delle caratteristiche, o feature, utilizzando poi degli algoritmi di clustering al fine di etichettare tali dati. In questa fase viene anche condotta uno studio sulla divisione dei dati in intervalli temporali al fine di trovare quale sia la migliore durata di tali intervalli. Nella fase tre, invece, prendendo sempre in input dati di accelerometri, si conduce una classificazione tramite k-nearest neighbor (KNN) al fine di identificare la classe di preFOG. Quanto enunciato viene rappresentato in figura \ref{FlussoTesi}.\\
 In ogni fase, dunque, abbiamo come input dati provenienti da accelerometri, ognuno di questi rappresentato dagli assi x,y,z.\\
@@ -108,7 +108,7 @@ Y = W'*A;
 
 
 \section{Etichettatura dei dati non supervisionata}
-Allo stato dell'arte, sono stati condotti studi di classificazione, usando quindi dataset già etichettati da dottori. In questa sezione usiamo un approccio non supervisionato tramite clustering al fine di sostituire il dottore nella fase di etichettatura dei dati, usando uno studio sulla divisione dei dati in finestre temporali, trovando così anche quale sia il miglior modo di suddividere in intervalli i nostri dati. L'approccio che è stato preso in considerazione è basato sul calcolo di feature (o proprietà) derivanti dalla matematica statistica. Il flusso di tale approccio è:
+Allo stato dell'arte, sono stati condotti studi di classificazione, usando quindi dataset già etichettati da dottori. In questa sezione usiamo un approccio non supervisionato tramite clustering al fine di sostituire il medico nella fase di etichettatura dei dati, usando uno studio sulla divisione dei dati in finestre temporali, trovando così anche quale sia il miglior modo di suddividere in intervalli i nostri dati. L'approccio che è stato preso in considerazione è basato sul calcolo di feature (o proprietà) derivanti dalla matematica statistica. Il flusso di tale approccio è:
 \begin{enumerate}
 	\item Pre-processamento dei dati degli accelerometri, al fine di eliminare il rumore presente ed identificare eventuali punti di outline, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni;
 	\item Finestramento dei dati in base ad intervalli variabili al fine di calcolare le feature, dove ogni intervallo presenta una certa sovrapposizione con l'intervallo precedente;
@@ -251,7 +251,7 @@ number_sample = number_sample + 1;
 \end{lstlisting}
 \subsection{Clustering}
 Una volta finestrato il segnale, si procede con l'applicazione degli algoritmi di clustering. Quelli che sono stati presi in considerazione nella nostra analisi sono: K-means, Fuzzy C-Means e Neural Network. Il K-means viene testato in 4 varianti diverse, in base alle seguenti metriche di distanza: cityblock, correlation, cosine, euclidean.\\
-Ogni algoritmo di clustering viene applicato in tutte le possibili combinazioni di intervalli ed ognuno di essi restituisce un vettore di numeri, che corrispondono alle etichette che assegnano ad ogni vettore di feature. Questi vengono salvati e verranno poi utilizzati per calcolare le prestazioni degli algoritmi stessi in confronto alla classificazione originale del dottore. L'implementazione del codice è fornita in \ref{clustering}
+Ogni algoritmo di clustering viene applicato in tutte le possibili combinazioni di intervalli ed ognuno di essi restituisce un vettore di numeri, che corrispondono alle etichette che assegnano ad ogni vettore di feature. Questi vengono salvati e verranno poi utilizzati per calcolare le prestazioni degli algoritmi stessi in confronto alla classificazione originale del medico. L'implementazione del codice è fornita in \ref{clustering}
 \begin{lstlisting}[style=Matlab-editor,frame=single, caption=Uso degli algoritmi di clustering, label=clustering]  % Start your code-block
 ...
             %% k-means %%%

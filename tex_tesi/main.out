@@ -1,18 +1,18 @@
 \BOOKMARK [0][-]{chapter.1}{Introduzione}{}% 1
 \BOOKMARK [1][-]{section.1.1}{Contributo della Tesi}{chapter.1}% 2
-\BOOKMARK [0][-]{chapter.2}{Letteratura}{}% 3
-\BOOKMARK [0][-]{chapter.3}{Conoscenze Preliminari}{}% 4
-\BOOKMARK [1][-]{section.3.1}{Freezing Of Gait}{chapter.3}% 5
-\BOOKMARK [2][-]{subsection.3.1.1}{Le tipologie di Fog}{section.3.1}% 6
-\BOOKMARK [2][-]{subsection.3.1.2}{Influenza del FoG nella camminata}{section.3.1}% 7
-\BOOKMARK [1][-]{section.3.2}{Machine Learning}{chapter.3}% 8
-\BOOKMARK [2][-]{subsection.3.2.1}{Analisi dei Gruppi}{section.3.2}% 9
-\BOOKMARK [2][-]{subsection.3.2.2}{Classificazione}{section.3.2}% 10
-\BOOKMARK [2][-]{subsection.3.2.3}{Validazione della Classificazione}{section.3.2}% 11
-\BOOKMARK [1][-]{section.3.3}{Riduzione della dimensionalit\340}{chapter.3}% 12
-\BOOKMARK [2][-]{subsection.3.3.1}{Analisi Delle Componenti Principali}{section.3.3}% 13
-\BOOKMARK [2][-]{subsection.3.3.2}{Analisi dei Discriminanti Lineari}{section.3.3}% 14
-\BOOKMARK [0][-]{chapter.4}{Motivazioni ed obiettivi}{}% 15
+\BOOKMARK [0][-]{chapter.2}{Conoscenze Preliminari}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Freezing Of Gait}{chapter.2}% 4
+\BOOKMARK [2][-]{subsection.2.1.1}{Le tipologie di Fog}{section.2.1}% 5
+\BOOKMARK [2][-]{subsection.2.1.2}{Influenza del FoG nella camminata}{section.2.1}% 6
+\BOOKMARK [1][-]{section.2.2}{Machine Learning}{chapter.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.1}{Analisi dei Gruppi}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.2}{Classificazione}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.3}{Validazione della Classificazione}{section.2.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Riduzione della dimensionalit\340}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.3.1}{Analisi Delle Componenti Principali}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.2}{Analisi dei Discriminanti Lineari}{section.2.3}% 13
+\BOOKMARK [0][-]{chapter.3}{Letteratura}{}% 14
+\BOOKMARK [0][-]{chapter.4}{Obiettivi}{}% 15
 \BOOKMARK [0][-]{chapter.5}{Identificazione dei contesti di preFOG}{}% 16
 \BOOKMARK [1][-]{section.5.1}{Studio sull'esistenza della classe preFOG}{chapter.5}% 17
 \BOOKMARK [2][-]{subsection.5.1.1}{Divisione dei dati}{section.5.1}% 18

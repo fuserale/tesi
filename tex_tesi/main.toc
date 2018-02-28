@@ -6,41 +6,41 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Contributo della Tesi}{1}{section.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Letteratura}{3}{chapter.2}
+\contentsline {chapter}{\numberline {2}Conoscenze Preliminari}{3}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Conoscenze Preliminari}{9}{chapter.3}
+\contentsline {section}{\numberline {2.1}Freezing Of Gait}{3}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Freezing Of Gait}{9}{section.3.1}
+\contentsline {subsection}{\numberline {2.1.1}Le tipologie di Fog}{4}{subsection.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}Le tipologie di Fog}{10}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Influenza del FoG nella camminata}{4}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Influenza del FoG nella camminata}{10}{subsection.3.1.2}
+\contentsline {section}{\numberline {2.2}Machine Learning}{5}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Machine Learning}{11}{section.3.2}
+\contentsline {subsection}{\numberline {2.2.1}Analisi dei Gruppi}{8}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.1}Analisi dei Gruppi}{14}{subsection.3.2.1}
+\contentsline {subsubsection}{K-Means}{9}{subsubsection*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{K-Means}{15}{subsubsection*.4}
+\contentsline {subsubsection}{K-Medoids}{10}{subsubsection*.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{K-Medoids}{16}{subsubsection*.5}
+\contentsline {subsubsection}{Hierarchical}{11}{subsubsection*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Hierarchical}{17}{subsubsection*.6}
+\contentsline {subsubsection}{Reti Neurali}{13}{subsubsection*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Reti Neurali}{19}{subsubsection*.7}
+\contentsline {subsubsection}{Fuzzy C-Means}{14}{subsubsection*.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Fuzzy C-Means}{20}{subsubsection*.8}
+\contentsline {subsection}{\numberline {2.2.2}Classificazione}{14}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.2}Classificazione}{20}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Validazione della Classificazione}{16}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.3}Validazione della Classificazione}{22}{subsection.3.2.3}
+\contentsline {section}{\numberline {2.3}Riduzione della dimensionalit\IeC {\`a}}{18}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Riduzione della dimensionalit\IeC {\`a}}{24}{section.3.3}
+\contentsline {subsection}{\numberline {2.3.1}Analisi Delle Componenti Principali}{18}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Analisi Delle Componenti Principali}{24}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Analisi dei Discriminanti Lineari}{19}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Analisi dei Discriminanti Lineari}{25}{subsection.3.3.2}
+\contentsline {chapter}{\numberline {3}Letteratura}{23}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Motivazioni ed obiettivi}{29}{chapter.4}
+\contentsline {chapter}{\numberline {4}Obiettivi}{29}{chapter.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Identificazione dei contesti di preFOG}{31}{chapter.5}
 \defcounter {refsection}{0}\relax 
