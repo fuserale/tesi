@@ -26,10 +26,10 @@ Il FoG è un episodio transitorio che usualmente dura pochi secondi e di cui anc
 Come la malattia progredisce, però, il FoG può apparire spontaneamente anche in uno spazio aperto, evidenziando così l’aspetto imprevedibile di questo fenomeno. Inoltre, fonti di distrazione, che possono distogliere l’attenzione del soggetto dal cammino, o il compimento contemporaneo di più azioni (dual-tasking) possono aumentare la probabilità che si verifichi un episodio di Freezing.\\
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.4]{images/Proportion_of_FOG_sub-types.png}
+	\includegraphics[width=1\textwidth]{images/Proportion_of_FOG_sub-types.png}
 	\caption{Diversi tipi di Freezing esistenti e loro percentuale di incidenza su un certo gruppo di malati di Parkinson. [Fonte: J.M. Shine et al., 2012]}
 \end{figure}
-Dallo studio di Schaafsma et al.\cite{30} emerge che gli episodi di Freezing possono anche essere suddivisi in ulteriori tre sottotipi andando ad osservare i movimenti delle gambe dei pazienti e applicando la classificazione di Thompson e Marsden (1995):
+Dallo studio di Schaafsma et al.~\cite{30} emerge che gli episodi di Freezing possono anche essere suddivisi in ulteriori tre sottotipi andando ad osservare i movimenti delle gambe dei pazienti e applicando la classificazione di Thompson e Marsden (1995):
 \begin{enumerate}
 	\item FoG associato a passi molto piccoli e strascicati con il minimo movimento in avanti (trascinamento con piccoli passi);
 	\item FoG caratterizzato da tremore alle gambe, ma nessun movimento in avanti efficace (tremito da fermo);
@@ -37,11 +37,11 @@ Dallo studio di Schaafsma et al.\cite{30} emerge che gli episodi di Freezing pos
 \end{enumerate}
 La necessità di dividere il FoG in sottogruppi dipende dal fatto che questi ultimi potrebbero avere origine differente e quindi essere provocati da cause separate.
 \subsection{Influenza del FoG nella camminata}
-Il Freezing of Gait influenza il pattern del cammino sia all’inizio della deambulazione sia a regime incrementando o diminuendo in modo evidente i valori dei parametri sopra riportati. Ad esempio, nei parkinsoniani che manifestano frequenti fenomeni di Freezing, la variabilità della durata del passo risulta maggiore e la lunghezza del passo minore rispetto alle situazioni in cui il Freezing è assente. Inoltre, la velocità e la lunghezza dei primi tre passi sono significativamente inferiori nei pazienti con malattia di Parkinson e con Freezing rispetto ai soggetti sani. Anche se il Freezing è tipicamente considerato un problema motorio, il fatto che spesso compaia quando il paziente si trova in spazi ristretti, suggerisce che la percezione dello spazio contribuisce in larga misura a scatenare il sintomo\cite{37}. Inoltre, i pazienti con Freezing hanno velocità media del cammino minore rispetto a pazienti sani e subiscono una riduzione ulteriore della velocità nel momento in cui si trovano a dover attraversare una porta o uno spazio stretto. Depressione e ansia possono comportare un carico cronico sulla salute mentale, e la depressione è associata con i cambiamenti di andatura, tra cui una maggiore variabilità passo-a-passo. Il Dual-Tasking, l’ansia e la depressione possono incrementare la variabilità del passo, la de-sincronizzazione di gamba destra e sinistra e l'asimmetria nei pazienti con Parkinson riducendo così la soglia per il FoG. \\
+Il Freezing of Gait influenza il pattern del cammino sia all’inizio della deambulazione sia a regime incrementando o diminuendo in modo evidente i valori dei parametri sopra riportati. Ad esempio, nei parkinsoniani che manifestano frequenti fenomeni di Freezing, la variabilità della durata del passo risulta maggiore e la lunghezza del passo minore rispetto alle situazioni in cui il Freezing è assente. Inoltre, la velocità e la lunghezza dei primi tre passi sono significativamente inferiori nei pazienti con malattia di Parkinson e con Freezing rispetto ai soggetti sani. Anche se il Freezing è tipicamente considerato un problema motorio, il fatto che spesso compaia quando il paziente si trova in spazi ristretti, suggerisce che la percezione dello spazio contribuisce in larga misura a scatenare il sintomo~\cite{37}. Inoltre, i pazienti con Freezing hanno velocità media del cammino minore rispetto a pazienti sani e subiscono una riduzione ulteriore della velocità nel momento in cui si trovano a dover attraversare una porta o uno spazio stretto. Depressione e ansia possono comportare un carico cronico sulla salute mentale, e la depressione è associata con i cambiamenti di andatura, tra cui una maggiore variabilità passo-a-passo. Il Dual-Tasking, l’ansia e la depressione possono incrementare la variabilità del passo, la de-sincronizzazione di gamba destra e sinistra e l'asimmetria nei pazienti con Parkinson riducendo così la soglia per il FoG. \\
 
 \section{Machine Learning}
-Il Machine Learning (ML) è un settore dell'Intelligenza Artificiale che si occupa di studiare le modalità in cui un computer può imparare (o migliorare le sue prestazioni) dai dati\cite{10}. Un'ampia area di ricerca tratta l'apprendimento automatico di sequenze complesse di dati e compiere decisioni intelligenti su di essi. Per esempio, un tipico problema di ML è quello di programmare un computer in modo tale che possa automaticamente riconoscere codici postali scritti a mano nelle lettere, dopo aver fatto allenare il computer stesso su dei dati.
-Gli algoritmi di apprendimento automatico sono tradizionalmente divisi in tre principali tipologie:
+Il Machine Learning (ML) è un settore della scienza dei computer che si occupa di studiare le modalità in cui un computer può imparare (o migliorare le sue prestazioni) dai dati~\cite{10}. Un'ampia area di ricerca tratta l'apprendimento automatico di sequenze complesse di dati e compiere decisioni intelligenti su di essi. Per esempio, un tipico problema di ML è quello di programmare un computer in modo tale che possa automaticamente riconoscere codici postali scritti a mano nelle lettere, dopo aver fatto allenare il computer stesso su dei dati.
+Gli algoritmi di apprendimento automatico sono tradizionalmente divisi in tre principali tipologie~\cite{10}:
 \begin{itemize}
 	\item \textbf{Apprendimento supervisionato}: quando l'utente fornisce esempi (e controesempi) di quello che si deve apprendere. E' il problema più studiato	nel machine learning. Esso si pone l’obiettivo di prevedere, dato un
 	elemento di cui si conoscono un insieme di parametri (features), il valore di un diverso parametro di output relativo all’elemento stesso;
@@ -52,13 +52,13 @@ Gli algoritmi di apprendimento automatico sono tradizionalmente divisi in tre pr
 Il problema del ML è definito a partire da un universo di elementi: ciascun elemento x è descritto dai valori assunti da un insieme di features considerate come input del problema. Ad ogni x è associato un valore y di output (o target). A partire dalla conoscenza di un insieme T di elementi (denominato training set) in cui ogni elemento è descritto da una coppia ($x_i$ ,$y_i$), con $x_i$ = vettore dei valori delle d features $x_{i1}, x_{i2}, ... , x_{id}$ e $y_i$ = valore di output, si vuole derivare un modello delle relazioni sconosciute tra features e valori di output, che, dato un nuovo elemento x, consenta di predire il corrispondente valore di output y. 
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=1]{images/Tipologie_Machine_Learning.png}
+	\includegraphics[width=1\textwidth]{images/Tipologie_Machine_Learning.png}
 	\caption{Schema delle tipologie di Machine Learning}
 \end{figure}
-Lo scopo dell'apprendimento supervisionato è di costruire un \textbf{modello di predizioni} basato su evidenze in presenza di incertezze. Un algoritmo di apprendimento supervisionato prende un insieme conosciuto di dati di input e di risposte ai dati (output) ed allena un modello al fine di generare predizioni ragionevoli a nuovi dati di input. Esistono due tecniche per questo approccio:
+Lo scopo dell'apprendimento supervisionato è di costruire un \textbf{modello di predizioni} basato su evidenze in presenza di incertezze. Un algoritmo di apprendimento supervisionato prende un insieme conosciuto di dati di input e di risposte ai dati (output) ed allena un modello al fine di generare predizioni ragionevoli a nuovi dati di input. Esistono due tecniche per questo approccio~\cite{10}:
 \begin{itemize}
 	\item \textbf{Classificazione}: tecnica per predire risposte discrete, classificando i dati di input in categorie;
-	\item \textbf{RegressionE}: tecnica per predire risposte continue.
+	\item \textbf{Regressione}: tecnica per predire risposte continue.
 \end{itemize}
 L'apprendimento non supervisionato, invece, trova pattern nascosti o strutture intrinseche nei dati. Tale tecnica è usata per identificare inferenze da un dataset consistente di dati di input senza classi già definite. Il clustering è l'approccio più diffuso di tale tecnica ed è utilizzato per trovare gruppi nei dati.\\
 L'approccio che si usa con il ML è differente da problema a problema, per cui non sempre si ha a priori un procedimento fissato da seguire, ma piuttosto si procede a tentativi ed errori, molte volte provando diverse idee ed approcci che appartengono a tale contesto. Per questo è importante definire uno schema di lavoro generale ed evidenziare alcuni punti di decisione chiave lungo il percorso:
@@ -71,7 +71,7 @@ L'approccio che si usa con il ML è differente da problema a problema, per cui n
 \end{enumerate}
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.55]{images/Workflow_ML.png}
+	\includegraphics[width=1\textwidth]{images/Workflow_ML.png}
 	\caption{Esempio di Workflow tramite Machine Learning}
 \end{figure}
 La scelta della modalità supervised o unsupervised si basa sui vantaggi e svantaggi di entrambe: la modalità supervised riesce a predire la giusta classe per le istanze appartenti al test set ma richiede una consistente quantità di istanze annotate e questo può rappresentare un processo costoso se effettuato manualmente. La modalità unsupervised tipica del clustering, invece, ha il vantaggio di non richiedere un training già annotato (situazione particolarmente frequente quando si
@@ -88,10 +88,15 @@ L'analisi dei gruppi rientra tra le tecniche di tipo esplorativo e pertanto non 
 	\item Valutazione della qualità della soluzione;
 	\item Scelta fra le diverse possibili soluzioni.
 \end{itemize}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{images/Esempio_Cluster.png}
+	\caption{Rappresentazione dei dati e dei gruppi ottenuti con l'analisi dei gruppi}
+\end{figure}
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.8]{images/Esempio_Cluster.png}
-	\caption{Rappresentazione dei dati e dei gruppi ottenuti con l'analisi dei gruppi}
+	\includegraphics[width=1\textwidth]{images/Approcci_Clustering.png}
+	\caption{Rappresentazione dei possibili approcci usando strategie di clustering}
 \end{figure}
 Per classificare e raggruppare gli elementi in gruppi omogenei, è necessario introdurre il concetto di prossimità o similarità. Due individui sono vicini quando la loro similarità o distanza è piccola o, equivalentemente, quando la loro similarità è grande.
 % Le principali misure di similarità sono illustrate in tabella \ref{TAB:SIMILARITA'}.
@@ -118,7 +123,7 @@ Per classificare e raggruppare gli elementi in gruppi omogenei, è necessario in
 
 I principali algoritmi di clustering sono descritti nelle prossime sottosezioni.
 \subsubsection{K-Means}
-Il K-Means è un algoritmo di clustering partizionale che permette di suddividere un insieme di oggetti in K gruppi sulla base dei loro attributi. E' una variante dell'algoritmo di aspettativa-massimizzazione(EM) il cui obiettivo è determinare i K gruppi di dati generati da distribuzioni gaussiane. Si assume che gli attributi degli oggetti possano essere rappresentati come vettori e che quindi formino uno spazio vettoriale. L'obiettivo che l'algoritmo si prepone è di minimizzare la varianza intra-cluster, dove ogni cluster viene identificato mediante un centroide o punto medio. L'algoritmo segue una procedura iterativa:
+Il K-Means è un algoritmo di clustering partizionale che permette di suddividere un insieme di oggetti in K gruppi sulla base dei loro attributi~\cite{10}. E' una variante dell'algoritmo di aspettativa-massimizzazione(EM) il cui obiettivo è determinare i K gruppi di dati generati da distribuzioni gaussiane. Si assume che gli attributi degli oggetti possano essere rappresentati come vettori e che quindi formino uno spazio vettoriale. L'obiettivo che l'algoritmo si prepone è di minimizzare la varianza intra-cluster, dove ogni cluster viene identificato mediante un centroide o punto medio. L'algoritmo segue una procedura iterativa:
 \begin{enumerate}
 	\item Sceglie in modo casuale o euristico k punti che rappresentano i centroidi iniziali dei cluster;
 	\item Ripete fino a che gli assegnamenti non cambiano
@@ -128,11 +133,11 @@ Il K-Means è un algoritmo di clustering partizionale che permette di suddivider
 L'algoritmo converge molto velocemente, infatti è stato osservato che il numero di iterazioni è minore del numero di punti da osservare. In termini di qualità delle soluzioni, però, l'algoritmo non garantisce il raggiungimento dell'ottimo globale poiché la soluzione dipende largamente dal set di cluster iniziale. Un rimedio a questo aspetto è applicare l'algoritmo più volte e, fra tutte le soluzioni prodotte, scegliere quella più soddisfacente. Un altro svantaggio è che l'algoritmo richiede di scegliere a priori il numero di cluster da trovare, per cui se i dati non sono naturalmente partizionati si ottengono risultati strani. Inoltre, l'algoritmo funziona bene solo quando sono individuabili cluster sferici nei dati.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.50]{images/example_kmeans.png}
+	\includegraphics[width=1\textwidth]{images/example_kmeans.png}
 	\caption{Esempio di assegnazione dei dati tramite l'algoritmo k-means}
 \end{figure}
 \subsubsection{K-Medoids}
-K-medoids è un algoritmo di clustering partizionale correlato all'algoritmo K-means. Prevede in input un insieme di n oggetti e un numero k che determina quanti cluster si vogliono in output. Entrambi gli algoritmi sono partizionali (suddividendo il dataset in gruppi) ed entrambi cercano di minimizzare l'errore quadratico medio, la distanza tra punti di un cluster e il punto designato per esserne il centro. In K-means il punto è artificiale, dato che è la pura media di tutti i punti nel cluster. Nel K-medoids è usato il punto collocato più centralmente, in questo modo il centro è uno dei datapoint attuali. K-medoids è più robusto al rumore e agli outlier rispetto al k-means. Un medoid può essere definito come un oggetto di un cluster la cui dissimilarità media rispetto a tutti gli oggetti nel cluster è minima, in questo modo esso sarà il punto più centrale di un dato dataset.
+K-medoids è un algoritmo di clustering partizionale correlato all'algoritmo K-means~\cite{10}. Prevede in input un insieme di n oggetti e un numero k che determina quanti cluster si vogliono in output. Entrambi gli algoritmi sono partizionali (suddividendo il dataset in gruppi) ed entrambi cercano di minimizzare l'errore quadratico medio, la distanza tra punti di un cluster e il punto designato per esserne il centro. In K-means il punto è artificiale, dato che è la pura media di tutti i punti nel cluster. Nel K-medoids è usato il punto collocato più centralmente, in questo modo il centro è uno dei datapoint attuali. K-medoids è più robusto al rumore e agli outlier rispetto al k-means. Un medoid può essere definito come un oggetto di un cluster la cui dissimilarità media rispetto a tutti gli oggetti nel cluster è minima, in questo modo esso sarà il punto più centrale di un dato dataset.
 L'algoritmo di clustering è il seguente:
 \begin{enumerate}
 	\item Si scelgono arbitrariamente k oggetti (dove K è il numero di cluster che si vogliono ottenere) come punti medoid da un insieme di n data point (n>k);
@@ -144,25 +149,25 @@ L'algoritmo di clustering è il seguente:
 \end{enumerate}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.50]{images/example_kmedoids.png}
+	\includegraphics[width=1\textwidth]{images/example_kmedoids.png}
 	\caption{Esempio di assegnazione dei dati tramite l'algoritmo k-medoids}
 \end{figure}
-\subsubsection{Hierarchical}
-Il clustering gerarchico è un approccio di clustering che mira a costruire una gerarchia di cluster. Le strategie per il clustering gerarchico sono tipicamente di due tipi:
+\subsubsection{Gerarchico}
+Il clustering gerarchico è un approccio di clustering che mira a costruire una gerarchia di cluster~\cite{10}. Le strategie per il clustering gerarchico sono tipicamente di due tipi:
 \begin{itemize}
 	\item Agglomerativo: si tratta di un approccio "bottom up" (dal basso verso l'alto) in cui si parte dall'inserimento di ciascun elemento in un cluster differente e si procede quindi all'accorpamento graduale di cluster a due a due;
 	\item Divisivo: si tratta di un approccio "top down" (dall'alto verso il basso) in cui tutti gli elementi si trovano inizialmente in un singolo cluster che viene via via suddiviso ricorsivamente in sotto-cluster.
 \end{itemize}
 Il risultato di un clustering gerarchico è rappresentato in un dendrogramma. Questo è uno strumento grafico per la visualizzazione del coefficiente di similarità quantificato dalle varie macchine e dai vari cluster nel processo di “raggruppamento”. Il dendrogramma viene utilizzato per fornire una rappresentazione grafica del processo di raggruppamento delle istanze che esprime nell'asse delle ascisse la distanza logica dei clusters secondo la metrica definita, nell'asse delle ordinate il livello gerarchico di aggregazione (valori interi positivi). 
 La scelta del livello gerarchico (del valore dell'asse Y) definisce la partizione rappresentativa del processo di aggregazione.\\
-Per decidere quali cluster devono essere combinati (approccio agglomerativo) o quale cluster deve essere suddiviso (approccio divisivo) è necessario definire una misura di dissimilarità tra cluster. Nella maggior parte dei metodi di clustering gerarchico si fa uso di metriche specifiche che quantificano la distanza tra coppie di elementi e di un criterio di collegamento che specifica la dissimilarità di due insiemi di elementi (cluster) come funzione della distanza a coppie tra elementi nei due insiemi. Le metriche di distanza più comuni sono: euclidea, Manhattan, uniforme, Mahalanobis, Hamming. Le metriche più diffuse sono: complete linkage (massima distanza tra due punti), single linkage (minima distanza tra due punti) o average linkage (media distanza tra due punti).
+Per decidere quali cluster devono essere combinati (approccio agglomerativo) o quale cluster deve essere suddiviso (approccio divisivo) è necessario definire una misura di dissimilarità tra cluster. Nella maggior parte dei metodi di clustering gerarchico si fa uso di metriche specifiche che quantificano la distanza tra coppie di elementi e di un criterio di collegamento che specifica la dissimilarità di due insiemi di elementi (cluster) come funzione della distanza a coppie tra elementi nei due insiemi. Le metriche di distanza più comuni sono: Euclidea, Manhattan, Uniforme, Mahalanobis, Hamming. Le metriche più diffuse sono: Complete Linkage (massima distanza tra due punti), Single Linkage (minima distanza tra due punti) o Average Linkage (media distanza tra due punti).
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.50]{images/example_dendogram.png}
+	\includegraphics[width=1\textwidth]{images/example_dendogram.png}
 	\caption{Esempio di assegnazione dei dati tramite cluster gerarchico e la sua rappresentazione tramite dendogramma}
 \end{figure}
 \subsubsection{Reti Neurali}
-Una Rete Neurale é un modello matematico che calcola la funzione output=f(input,pesi) al variare dei pesi e senza specificare la forma della funzione f, o anche un sistema dinamico avente la topologia di un grafo orientato con nodi, i neuroni artificiali, ed archi, i pesi sinaptici, nel quale il termine rete è riferito alla topologia dei collegamenti tra i neuroni. Le self-organizing map (SOM) sono una tipologia di reti neurali artificiali. È addestrata usando l'apprendimento non supervisionato per produrre una rappresentazione dei campioni di training in uno spazio a bassa dimensione preservando le proprietà topologiche dello spazio degli ingressi. Questa proprietà rende le SOM particolarmente utili per la visualizzazione di dati di dimensione elevata. Le SOM sono reti neurali a connessioni laterali dove i neuroni di uscita sono organizzati in griglie di bassa dimensione (generalmente 2D o 3D). Ogni ingresso è connesso a tutti i neuroni di uscita. Ad ogni neurone è associato un vettore dei pesi della stessa dimensione dei vettori d'ingresso. La dimensione del vettore d'ingresso è generalmente molto più alta della dimensione della griglia di uscita. L'obiettivo dell'apprendimento nelle SOM è di specializzare parti differenti del reticolo SOM a rispondere similmente a particolari pattern d'ingresso.\\
+Una Rete Neurale é un modello matematico che calcola la funzione output=f(input,pesi) al variare dei pesi e senza specificare la forma della funzione f, o anche un sistema dinamico avente la topologia di un grafo orientato con nodi, i neuroni artificiali, ed archi, i pesi sinaptici, nel quale il termine rete è riferito alla topologia dei collegamenti tra i neuroni~\cite{10}. Le self-organizing map (SOM) sono una tipologia di reti neurali artificiali. È addestrata usando l'apprendimento non supervisionato per produrre una rappresentazione dei campioni di training in uno spazio a bassa dimensione preservando le proprietà topologiche dello spazio degli ingressi. Questa proprietà rende le SOM particolarmente utili per la visualizzazione di dati di dimensione elevata. Le SOM sono reti neurali a connessioni laterali dove i neuroni di uscita sono organizzati in griglie di bassa dimensione (generalmente 2D o 3D). Ogni ingresso è connesso a tutti i neuroni di uscita. Ad ogni neurone è associato un vettore dei pesi della stessa dimensione dei vettori d'ingresso. La dimensione del vettore d'ingresso è generalmente molto più alta della dimensione della griglia di uscita. L'obiettivo dell'apprendimento nelle SOM è di specializzare parti differenti del reticolo SOM a rispondere similmente a particolari pattern d'ingresso.\\
 L'algoritmo di clustering è il seguente:
 \begin{enumerate}
 	\item Assegna ai vettori dei pesi valori casuali;
@@ -177,7 +182,7 @@ Ci sono due modi per interpretare una SOM:
 \end{itemize}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.50]{images/example_som.png}
+	\includegraphics[width=1\textwidth]{images/example_som.png}
 	\caption{Schema input-output per una SOM}
 \end{figure}
 \subsubsection{Fuzzy C-Means}
@@ -190,11 +195,7 @@ Il Fuzzy C-means (anche riferito come soft clustering) è un algoritmo di cluste
 	\item Itera fino ad avere convergenza.
 \end{enumerate}
 
-\begin{figure}[]
-	\centering
-	\includegraphics[scale=0.8]{images/Approcci_Clustering.png}
-	\caption{Rappresentazione dei possibili approcci usando strategie di clustering}
-\end{figure}
+
 \subsection{Classificazione}
 I principali approcci di classificazione sono due. In un modello parametrico, il modello stesso è preventivamente caratterizzato da un vettore X di parametri: si suppone quindi che esista una relazione tra features e input e che tale relazione sia rappresentabile all’interno di una famiglia di
 relazioni parametriche rispetto a X che costituisce un modello; in altre parole, un'assegnazione di valori al vettore X definisce una specifica relazione della famiglia. Gli elementi nel training set sono utilizzati proprio per derivare tale
@@ -207,7 +208,7 @@ I principali algoritmi di classificazione sono:
 	\item \textbf{K-Nearest-Neighbors}: esso memorizza le istanza del training, poi, basandosi su un criterio di vicinanza, mette in relazione l'istanza da classificare con alcune istanze del training set presenti nello spazio delle feature.  In pratica, l'istanza è classificata “a maggioranza” in base alla
 	classe più comune tra le k istanze più vicine del training. Tutto il lavoro è fatto dal classificatore in runtime. Data una nuova istanza x da classificare, il classificatore cerca i k esempi del training che sono più “simili” a x e
 	guarda le loro etichette. Qualsiasi label ricorra più frequentemente tra le k label più vicine è scelta per assegnare la classe a x.
-	\item \textbf{Support Vector Machine}:  l'idea principale di questo classificatore consiste nel rappresentare gli esempi del training come punti nello spazio mappati in modo tale che punti appartenenti a classi differenti siano separati dal più ampio gap possibile. I punti che mappano il test set saranno assegnati ad una categoria o all'altra in base al lato del gap su cui cadono. Più specificatamente, SVM costruisce un iperpiano ed esegue una buona separazione quando l'iperpiano ha la più ampia distanza dai punti di training più vicini di ciascuna classe. Ci sono molti iperpiani che potrebbero classificare il dato. La miglior scelta è quella di selezionare l'iperpiano che rappresenta la più ampia separazione, o margine, tra due classi, ossia l'iperpiano tale che la distanza tra esso e il punto più vicino su ciascun lato sia massima.
+	\item \textbf{Support Vector Machine}~\cite{89}:  l'idea principale di questo classificatore consiste nel rappresentare gli esempi del training come punti nello spazio mappati in modo tale che punti appartenenti a classi differenti siano separati dal più ampio gap possibile. I punti che mappano il test set saranno assegnati ad una categoria o all'altra in base al lato del gap su cui cadono. Più specificatamente, SVM costruisce un iperpiano ed esegue una buona separazione quando l'iperpiano ha la più ampia distanza dai punti di training più vicini di ciascuna classe. Ci sono molti iperpiani che potrebbero classificare il dato. La miglior scelta è quella di selezionare l'iperpiano che rappresenta la più ampia separazione, o margine, tra due classi, ossia l'iperpiano tale che la distanza tra esso e il punto più vicino su ciascun lato sia massima.
 \end{itemize}
 \subsection{Validazione della Classificazione}
 Al fine di valutare la bontà della classificazione effettuata, viene introdotto il concetto di \textbf{Matrice di Confusione}. Essa è una matrice nxn, con n=numero di classi, nella quale vengono messe a confronto le etichette reali con quelle del classificatore proposto. La figura \ref{immagine_matrice_confusione_2classi}  rapprestra la matrice di confusione con 2 classi possibili:
@@ -219,7 +220,7 @@ Al fine di valutare la bontà della classificazione effettuata, viene introdotto
 \end{itemize}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.5]{images/matrice_confusione.png}
+	\includegraphics[width=1\textwidth]{images/matrice_confusione.png}
 	\caption{Rappresentazione della matrice di confusione per 2 classi}
 	\label{immagine_matrice_confusione_2classi}
 \end{figure}
@@ -228,13 +229,13 @@ La condizione ideale di classificazione sarebbe quella in cui la matrice di conf
 	\item \textbf{Accuratezza}: $\dfrac{tp+tn}{tp+tn+fp+fn}$
 	\item \textbf{Precisione}: $\dfrac{tp}{tp+fp}$
 	\item \textbf{Sensitività}: $\dfrac{tp}{tp+tn}$
-	\item \textbf{F1-measure}: $\dfrac{2*precisione*sensitivita' }{sensitivita' + precisione}$
+	\item \textbf{F1-measure}: $\dfrac{2*precisione*sensitivita }{sensitivita + precisione}$
 	\item \textbf{Specificità}: $\dfrac{tn}{fp+tn}$
 \end{itemize}
 Nel caso di più classi, si possono generalizzare le misure di precisione e sensitività associate alle singole classe, mentre il concetto di accuratezza resta sempre lo stesso. La figura \ref{immagine_matrice_confusione_cclassi} rappresenta la generalizzazione delle formula suddette.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.5]{images/matrice_confusione_cclassi.png}
+	\includegraphics[width=1\textwidth]{images/matrice_confusione_cclassi.png}
 	\caption{Rappresentazione della matrice di confusione per c classi}
 	\label{immagine_matrice_confusione_cclassi}
 \end{figure}
@@ -243,7 +244,7 @@ Nel caso di più classi, si possono generalizzare le misure di precisione e sens
 \subsection{Analisi Delle Componenti Principali}
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.8]{images/pca.png}
+	\includegraphics[width=1\textwidth]{images/pca.png}
 	\caption{Rappresentazione del cambio di dimensionalità tramite PCA}
 \end{figure}
 L'analisi in componenti principali o \textbf{PCA} è una tecnica per la semplificazione dei dati, con lo scopo primario di ridurre un numero più o meno elevato di variabili in alcune caratteristiche latenti. Questo procedimento prende il nome di \textbf{feature reduction}. Ciò avviene tramite una trasformazione lineare delle variabili che proietta quelle originarie in un nuovo sistema cartesiano nel quale la nuova variabile con la maggiore varianza viene proiettata sul primo asse, la seconda variabile per dimensione della varianza sul secondo asse e così via. La riduzione della complessità avviene quindi limitandosi ad analizzare le principali (per varianza) tra le nuove variabili. Diversamente da altre trasformazioni lineari, in questa tecnica sono i dati stessi che determinano i vettori di trasformazione.\\
@@ -255,6 +256,6 @@ La soluzione del criterio di Fisher viene chiamata anche \textbf{Problema dell'A
 Nel caso si abbiano più di 2 classi, la matrice di dispersione tra le classi, la quali misura la separazione tra le classi, diventa: \begin{equation}S_B=\sum_{i=1}^{c} n_i(m_i-m)(m_i-m)^T\end{equation} con $n_i$ = numero di campioni di training appartenenti alla classe i ed m = media di tutti i campioni di training. Ci saranno quindi C-1 autovettori, ognuno proveniente da una soluzione di (3.5), che potrebbero non essere ortogonali tra loro ma formano uno sottospazio lineare tale per cui il criterio di Fisher è massimizzato. Questi vengono inseriti in una matrice W e si calcolano le feature come in (3.6). 
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.8]{images/lda.png}
+	\includegraphics[width=1\textwidth]{images/lda.png}
 	\caption{Rappresentazione del cambio di dimensionalità tramite LDA}
 \end{figure}

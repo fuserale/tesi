@@ -1,0 +1,1 @@
+aggiungi alla tesi parte di confronto tra clustering a 3 classi e LDA a tre classi di predizione

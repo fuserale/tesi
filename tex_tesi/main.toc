@@ -1,6 +1,8 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\babel@toc {italian}{}
-\babel@toc {italian}{}
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
+\defcounter {refsection}{0}\relax 
+\select@language {italian}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
@@ -14,74 +16,74 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Influenza del FoG nella camminata}{4}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Machine Learning}{5}{section.2.2}
+\contentsline {section}{\numberline {2.2}Machine Learning}{6}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Analisi dei Gruppi}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}Analisi dei Gruppi}{9}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{K-Means}{9}{subsubsection*.4}
+\contentsline {subsubsection}{K-Means}{11}{subsubsection*.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{K-Medoids}{10}{subsubsection*.5}
+\contentsline {subsubsection}{K-Medoids}{11}{subsubsection*.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Hierarchical}{11}{subsubsection*.6}
+\contentsline {subsubsection}{Gerarchico}{13}{subsubsection*.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Reti Neurali}{13}{subsubsection*.7}
+\contentsline {subsubsection}{Reti Neurali}{15}{subsubsection*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Fuzzy C-Means}{14}{subsubsection*.8}
+\contentsline {subsubsection}{Fuzzy C-Means}{16}{subsubsection*.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}Classificazione}{14}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.2}Classificazione}{17}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.3}Validazione della Classificazione}{16}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}Validazione della Classificazione}{18}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Riduzione della dimensionalit\IeC {\`a}}{18}{section.2.3}
+\contentsline {section}{\numberline {2.3}Riduzione della dimensionalit\IeC {\`a}}{20}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Analisi Delle Componenti Principali}{18}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1}Analisi Delle Componenti Principali}{20}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}Analisi dei Discriminanti Lineari}{19}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.2}Analisi dei Discriminanti Lineari}{22}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Letteratura}{23}{chapter.3}
+\contentsline {chapter}{\numberline {3}Letteratura}{25}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Obiettivi}{29}{chapter.4}
+\contentsline {chapter}{\numberline {4}Obiettivi}{31}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Identificazione dei contesti di preFOG}{31}{chapter.5}
+\contentsline {chapter}{\numberline {5}Identificazione dei contesti di preFOG}{33}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Studio sull'esistenza della classe preFOG}{31}{section.5.1}
+\contentsline {section}{\numberline {5.1}Studio della classe preFOG}{33}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.1}Divisione dei dati}{32}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.1}Divisione dei dati}{34}{subsection.5.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.2}Algoritmo di discriminazione}{33}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.2}Algoritmo di discriminazione}{35}{subsection.5.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Etichettatura dei dati non supervisionata}{35}{section.5.2}
+\contentsline {section}{\numberline {5.2}Etichettatura dei dati non supervisionata}{37}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.1}Pre-processamento dei dati}{35}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.1}Pre-processamento dei dati}{37}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}Definizione degli intervalli}{36}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.2}Definizione degli intervalli}{38}{subsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.3}Calcolo delle Feature}{37}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.3}Calcolo delle Feature}{39}{subsection.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.4}Clustering}{40}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.4}Clustering}{41}{subsection.5.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.5}Calcolo delle prestazioni}{42}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.5}Calcolo delle prestazioni}{43}{subsection.5.2.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.3}Classificazione del preFOG}{43}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Risultati Sperimentali}{45}{chapter.6}
+\contentsline {chapter}{\numberline {6}Risultati Sperimentali}{47}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Dataset}{45}{section.6.1}
+\contentsline {section}{\numberline {6.1}Dataset}{47}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Risultati sull'esistenza della classe preFOG}{46}{section.6.2}
+\contentsline {section}{\numberline {6.2}Risultati sull'esistenza della classe preFOG}{48}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Risultati Etichettatura dei dati ed intervalli}{48}{section.6.3}
+\contentsline {section}{\numberline {6.3}Risultati Etichettatura dei dati ed intervalli}{50}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.1}LDA con intervallo migliore}{50}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.1}LDA con intervallo migliore}{52}{subsection.6.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Risultati Classificazione}{52}{section.6.4}
+\contentsline {section}{\numberline {6.4}Risultati Classificazione}{54}{section.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.1}Risultati sul singolo paziente}{52}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.1}Risultati sul singolo paziente}{54}{subsection.6.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.2}Risultati usando i dati di tutti i pazienti}{52}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.2}Risultati usando i dati di tutti i pazienti}{55}{subsection.6.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Conclusione e Lavori Futuri}{55}{chapter.7}
+\contentsline {chapter}{\numberline {7}Conclusione e Lavori Futuri}{57}{chapter.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Lavori Futuri}{56}{section.7.1}
+\contentsline {section}{\numberline {7.1}Lavori Futuri}{58}{section.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliography}{59}{chapter*.9}
+\contentsline {chapter}{Bibliography}{61}{chapter*.9}

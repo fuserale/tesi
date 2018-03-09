@@ -998,6 +998,32 @@
     \field{year}{2011}
   \endentry
 
+  \entry{89}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MA}{%
+         family={M.},
+         familyi={M\bibinitperiod},
+         given={Adankon},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MC}{%
+         family={M.},
+         familyi={M\bibinitperiod},
+         given={Cheriet},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MAMC1}
+    \strng{fullhash}{MAMC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{Support Vector Machine}
+    \field{journaltitle}{Encyclopedia of Biometrics}
+    \field{year}{2009}
+  \endentry
+
   \entry{21}{article}{}
     \name{author}{6}{}{%
       {{hash=MB}{%

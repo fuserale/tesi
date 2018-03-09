@@ -15,14 +15,14 @@ Nella prima fase, vengono presi in input i dati etichettati di accelerometri e, 
 In ogni fase, dunque, abbiamo come input dati provenienti da accelerometri, ognuno di questi rappresentato dagli assi x,y,z.\\
 \begin{figure}[]
 	\centering
-	\includegraphics[scale=0.35]{images/FlussoTesi.png}
+	\includegraphics[width=1\textwidth]{images/FlussoTesi.png}
 	\caption{Rappresentazione del flusso della tesi}
 	\label{FlussoTesi}
 \end{figure}
 Lo sviluppo della tesi é stato svolto usando software Matlab.
 
-\section{Studio sull'esistenza della classe preFOG}
-Nel lavoro svolto in questa tesi si vogliono usare 3 classi invece delle 2 fornite dal dataset. Il primo passo dunque é quello di dimostrare che effettivamente le 3 classi sono distinte tra loro e che quindi sviluppare un approccio basandosi su tali classi é possibile. Per fare questo, si é usato un approccio di Discriminazione Lineare. Un discriminante é una funzione che prende in ingresso un vettore x e lo assegna ad una tra le K classi fornite. Il metodo di discriminazione che si vuole usare é quello di Fisher, il quale viene spiegato nella sezione \ref{Fisher}.\\
+\section{Studio della classe preFOG}
+Nel lavoro svolto in questa tesi si vogliono usare 3 classi invece delle 2 fornite dal dataset. Il primo passo dunque é quello di dimostrare che effettivamente le 3 classi sono distinte tra loro e che quindi sviluppare un approccio basandosi su tali classi é possibile. Per fare questo, si é partiti con uno studio tramite Discriminazione Lineare. Un discriminante é una funzione che prende in ingresso un vettore x e lo assegna ad una tra le K classi fornite. Il metodo di discriminazione che si vuole usare é quello di Fisher, il quale viene introdotto nella sezione \ref{Fisher}.\\
 \subsection{Divisione dei dati}
 Per ogni paziente, prendiamo in input la matrice di dati grezzi degli accelerometri fornita dal dataset, la quale contiene anche un campo relativo al tempo di ogni campione ed un'etichetta, che mi indica lo stato in cui si trova il mio paziente. Dividiamo i dati degli accelerometri da quelli relativi al tempo ed allo stato e calcoliamo delle feature su tali dati. Queste vengono calcolate vettorizzando in  finestre temporali i dati grezzi, ossia prendendo tutte le righe e colonne di un certo intervallo e disponendole lungo un vettore riga. Per tenere traccia dell'etichetta reale a cui ogni finestra temporale appartiene, abbiamo usato il vettore relativo all'etichetta fornita dal dataset e, per ogni finestra temporale, abbiamo tenuto quella che si presenta più volte all'interno di essa. Il codice implementativo di quanto appena descritto é fornito in \ref{vettorizzazione}.
 \begin{lstlisting}[style=Matlab-editor,frame=single, caption=Vettorizzazione dei dati degli accelerometri, label=vettorizzazione]
@@ -42,7 +42,7 @@ number_sample = number_sample + 1;
 end
 \end{lstlisting}
 \subsection{Algoritmo di discriminazione}
-Una volta vettorizzato l'intero dataset, si procede ad applicare l'algoritmo di discriminazione, il quale per prima cosa divide le feature appena calcolate tramite le classi di appartenenza. Calcola quindi la media per ogni classe e determina la dimensione di ognuna di esse. A questo punto, ricava la within class covariance e la between class covariance, ossia quanta similarità esiste tra gli elementi della stessa classe e quanta dissimilarità è presente tra classi differenti. Una volta trovate tali misure, prende gli autovalori ed autovettori della soluzione del problema dell'autovalore generalizzato e tiene solo quelli più rappresentativi, che nel caso dell'approccio di Fisher sono pari al numero di classi presenti meno 1. Questi autovalori vengono poi moltiplicati per le feature calcolate precedentemente per ottenere una riduzione della dimensionalità' ed avere 2 feature rappresentative. Il codice della discriminazione viene fornito in \ref{code_LDA}.
+Una volta vettorizzato l'intero dataset, si procede ad applicare l'algoritmo di discriminazione, il quale per prima cosa divide le feature appena calcolate tramite le classi di appartenenza. Calcola quindi la media per ogni classe e determina la dimensione di ognuna di esse. A questo punto, ricava la within class covariance e la between class covariance, ossia quanta similarità esiste tra gli elementi della stessa classe e quanta dissimilarità è presente tra classi differenti. Una volta trovate tali misure, prende gli autovalori ed autovettori della soluzione del problema dell'autovalore generalizzato e tiene solo quelli più rappresentativi, che nel caso dell'approccio di Fisher sono pari al numero di classi presenti meno 1. Questi autovalori vengono poi moltiplicati per le feature calcolate precedentemente per ottenere una riduzione della dimensionalità' ed avere una matrice nx2 di feature rappresentative, dove n è il numero di intervalli e 2 è la riduzione della dimensionalità effettuato da LDA. Il codice della discriminazione viene fornito in \ref{code_LDA}.
 \begin{lstlisting}[style=Matlab-editor,frame=single, caption=LDA, label=code_LDA]
 A=F';
 
@@ -118,13 +118,13 @@ Allo stato dell'arte, sono stati condotti studi di classificazione, usando quind
 \end{enumerate}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.6]{images/flusso_feature.png}
+	\includegraphics[width=1\textwidth]{images/flusso_feature.png}
 	\caption{Schema generale di calcolo delle feature statistiche}
 	\label{Flusso Feature}
 \end{figure}
 \subsection{Pre-processamento dei dati}
 Gli accelerometri sono dispositivi che misurano le vibrazioni o l'accelerazione del movimento di una struttura. La forza generata dalle vibrazioni o una variazione del movimento (accelerazione) fa in modo che la massa "comprima" il materiale piezoelettrico, che genera una carica elettrica proporzionale alla forza esercitata su di esso. Dato che la carica è proporzionale alla forza e che la massa è una costante, la carica è proporzionale anche all'accelerazione. Come tutti i dispositivi che misurano delle grandezze presentano dell'incertezza strumentale che può portare ad avere rumore, ossia un segnale non desiderato, di origine naturale o artificiale, che si sovrappone all'informazione degli accelerometri stessi. Questo rumore porta ad avere dei punti definiti outlier, ossia campioni che non presentano affinità col resto dei dati poiché dovuti a movimenti non consoni.\\
-Al fine di non alterare in modo negativo il calcolo delle nostre feature, si rende necessario rimuoverli dal nostro dataset. Per identificarli, è stato implementato un filtro passa-alto che elimina tutte le frequenze inferiori a 0.5Hz, le quali non appartengono al normale movimento umano ma indicano appunto la presenza di rumore, come evidenziato in \cite{21}.
+Al fine di non alterare in modo negativo il calcolo delle nostre feature, si rende necessario rimuoverli dal nostro dataset. Per identificarli, è stato implementato un filtro passa-alto che elimina tutte le frequenze inferiori a 0.5Hz, le quali non appartengono al normale movimento umano ma indicano appunto la presenza di rumore, come evidenziato in ~\cite{21}.
 \subsection{Definizione degli intervalli}
 Una volta filtrati i dati, il passo successivo dell'algoritmo consiste nel dividerli in intervalli temporali, al fine di poter computare le caratteristiche degli stessi. Un intervallo contiene un determinato movimento, che però verrebbe "interrotto" con la fine della finestra stessa e quindi potrei perdere informazioni su tale movimento. Per evitare il più possibile tale perdita, viene usato un approccio che sfrutta le sovrapposizioni tra intervalli, per cui ogni nuova finestra non inizia subito dopo la fine della precedente, ma all'interno di essa. La durata degli intervalli che sono stati presi in considerazione sono:
 \begin{itemize}
@@ -188,70 +188,71 @@ B = A(i:i+size_windows_sample-1,:);
 \caption{Descrizione delle Feature Statistiche}
 \label{TAB:Feature}
 \end{table}\\
-Nel dataset, ogni campione è etichettato. Poiché le nostre feature sono composte da molti campioni messi assieme, si rende necessario trovare un metodo per unire, sbagliando il meno possibile, tutte le etichette della finestra che prendiamo in considerazione. Per fare ciò, si è deciso di utilizzare la funzione di moda, ossia il numero che si ripete più spesso all'interno dell'intervallo considerato. L'etichetta risultante viene inserita nella tabella e verrà utilizzata come criterio di confronto, al fine di valutare le prestazioni degli algoritmi di clustering. L'implementazione del codice è fornito in \ref{extract_feature}
-\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Calcolo delle Feature, label=extract_feature]  % Start your code-block
-...
-%time sample
-F(number_sample, 1) = TIME(i,:);
-%min --> minimum value for each accelerometer
-F(number_sample, 2:10) = min(B);
-%max --> maximum value for each accelerometer
-F(number_sample, 11:19) = max(B);
-%median --> median signal value
-F(number_sample, 20:28) = median(B);
-%mean --> average value
-F(number_sample, 29:37) = mean(B);
-%ArmMean --> harmonic average of the signal
-F(number_sample, 38:46) = harmmean(B);
-%root mean square --> quadratic mean value of the signal
-F(number_sample, 47:55) = rms(B);
-%variance --> square of the standard deviation
-F(number_sample, 56:64) = var(B);
-%standard deviation --> mean deviation of the signal compared to the
-%average
-F(number_sample, 65:73) = std(B);
-%kurtosis --> degree of peakedness of the sensor signal distribution
-%(allontanamento dalla normalita distributiva)
-F(number_sample, 74:82) = kurtosis(B);
-%skewdness --> degree of asymmetry of the sensor signal distribution
-F(number_sample, 83:91) = skewness(B);
-%mode --> number that appears most often in the signal
-F(number_sample, 92:100) = mode(B);
-%trim mean --> trimmed mean of the signal in the window
-F(number_sample, 101:109) = trimmean(B,10);
-%range --> difference between the largest and the smallest values of
-%the signal
-F(number_sample, 110:118) = range(B);
-%signal magnitude vector --> sum of the euclidean norm over the three
-%axis over the entire window normalized by the windows lenght
-F(number_sample, 119) = svmn(B(:,1:3), length(B));
-F(number_sample, 120) = svmn(B(:,4:6), length(B));
-F(number_sample, 121) = svmn(B(:,7:9), length(B));
-%normalized signal magnitude area --> acceleration magnitude summed
-%over three axes normalized by the windows length
-F(number_sample, 122) = sman(B(:,1:3), length(B));
-F(number_sample, 123) = sman(B(:,4:6), length(B));
-F(number_sample, 124) = sman(B(:,7:9), length(B));
-%eigenvalues of dominant directions --> eigenvalues of the
-%covariance matrix of the acceleration data along x, y and z axis
-F(number_sample,125) = eigs(cov(B(:,1:3)),1);
-F(number_sample,126) = eigs(cov(B(:,4:6)),1);
-F(number_sample,127) = eigs(cov(B(:,7:9)),1);
-%averaged acceleration energy --> mean value of the energy over
-%three acceleration axes
-F(number_sample,128) = energyn(B(:,1:3),length(B));
-F(number_sample,129) = energyn(B(:,4:6),length(B));
-F(number_sample,130) = energyn(B(:,7:9),length(B));
-%is freezing?
-F(number_sample,131) = mode(FREEZE(i:i+size_windows_sample-1,:));
-
-%go to next sample
-number_sample = number_sample + 1;
-...
-\end{lstlisting}
+Nel dataset, ogni campione è etichettato. Poiché le nostre feature sono composte da molti campioni messi assieme, si rende necessario trovare un metodo per unire, sbagliando il meno possibile, tutte le etichette della finestra che prendiamo in considerazione. Per fare ciò, si è deciso di utilizzare la funzione di moda, ossia il numero che si ripete più spesso all'interno dell'intervallo considerato. L'etichetta risultante viene inserita nella tabella e verrà utilizzata come criterio di confronto, al fine di valutare le prestazioni degli algoritmi di clustering. 
+%L'implementazione del codice è fornito in \ref{extract_feature}
+%\begin{lstlisting}[style=Matlab-editor,frame=single, caption=Calcolo delle Feature, label=extract_feature]  % Start your code-block
+%...
+%%time sample
+%F(number_sample, 1) = TIME(i,:);
+%%min --> minimum value for each accelerometer
+%F(number_sample, 2:10) = min(B);
+%%max --> maximum value for each accelerometer
+%F(number_sample, 11:19) = max(B);
+%%median --> median signal value
+%F(number_sample, 20:28) = median(B);
+%%mean --> average value
+%F(number_sample, 29:37) = mean(B);
+%%ArmMean --> harmonic average of the signal
+%F(number_sample, 38:46) = harmmean(B);
+%%root mean square --> quadratic mean value of the signal
+%F(number_sample, 47:55) = rms(B);
+%%variance --> square of the standard deviation
+%F(number_sample, 56:64) = var(B);
+%%standard deviation --> mean deviation of the signal compared to the
+%%average
+%F(number_sample, 65:73) = std(B);
+%%kurtosis --> degree of peakedness of the sensor signal distribution
+%%(allontanamento dalla normalita distributiva)
+%F(number_sample, 74:82) = kurtosis(B);
+%%skewdness --> degree of asymmetry of the sensor signal distribution
+%F(number_sample, 83:91) = skewness(B);
+%%mode --> number that appears most often in the signal
+%F(number_sample, 92:100) = mode(B);
+%%trim mean --> trimmed mean of the signal in the window
+%F(number_sample, 101:109) = trimmean(B,10);
+%%range --> difference between the largest and the smallest values of
+%%the signal
+%F(number_sample, 110:118) = range(B);
+%%signal magnitude vector --> sum of the euclidean norm over the three
+%%axis over the entire window normalized by the windows lenght
+%F(number_sample, 119) = svmn(B(:,1:3), length(B));
+%F(number_sample, 120) = svmn(B(:,4:6), length(B));
+%F(number_sample, 121) = svmn(B(:,7:9), length(B));
+%%normalized signal magnitude area --> acceleration magnitude summed
+%%over three axes normalized by the windows length
+%F(number_sample, 122) = sman(B(:,1:3), length(B));
+%F(number_sample, 123) = sman(B(:,4:6), length(B));
+%F(number_sample, 124) = sman(B(:,7:9), length(B));
+%%eigenvalues of dominant directions --> eigenvalues of the
+%%covariance matrix of the acceleration data along x, y and z axis
+%F(number_sample,125) = eigs(cov(B(:,1:3)),1);
+%F(number_sample,126) = eigs(cov(B(:,4:6)),1);
+%F(number_sample,127) = eigs(cov(B(:,7:9)),1);
+%%averaged acceleration energy --> mean value of the energy over
+%%three acceleration axes
+%F(number_sample,128) = energyn(B(:,1:3),length(B));
+%F(number_sample,129) = energyn(B(:,4:6),length(B));
+%F(number_sample,130) = energyn(B(:,7:9),length(B));
+%%is freezing?
+%F(number_sample,131) = mode(FREEZE(i:i+size_windows_sample-1,:));
+%
+%%go to next sample
+%number_sample = number_sample + 1;
+%...
+%\end{lstlisting}
 \subsection{Clustering}
-Una volta finestrato il segnale, si procede con l'applicazione degli algoritmi di clustering. Quelli che sono stati presi in considerazione nella nostra analisi sono: K-means, Fuzzy C-Means e Neural Network. Il K-means viene testato in 4 varianti diverse, in base alle seguenti metriche di distanza: cityblock, correlation, cosine, euclidean.\\
-Ogni algoritmo di clustering viene applicato in tutte le possibili combinazioni di intervalli ed ognuno di essi restituisce un vettore di numeri, che corrispondono alle etichette che assegnano ad ogni vettore di feature. Questi vengono salvati e verranno poi utilizzati per calcolare le prestazioni degli algoritmi stessi in confronto alla classificazione originale del medico. L'implementazione del codice è fornita in \ref{clustering}
+Una volta finestrato il segnale, si procede con l'applicazione degli algoritmi di clustering. Quelli che sono stati presi in considerazione nella nostra analisi sono: K-means, Fuzzy C-Means e Neural Network. Il K-means viene testato in 4 varianti diverse, in base alle seguenti metriche di distanza: Cityblock, Correlation, Cosine, Euclidean.\\
+Ogni algoritmo di clustering viene applicato in tutte le possibili combinazioni di intervalli ed ognuno di essi restituisce un vettore di numeri, che corrispondono alle etichette che assegnano ad ogni vettore di feature. Questi vengono salvati e verranno poi utilizzati per calcolare le prestazioni degli algoritmi stessi in confronto alla classificazione originale del medico (ground truth). L'implementazione del codice è fornita in \ref{clustering}
 \begin{lstlisting}[style=Matlab-editor,frame=single, caption=Uso degli algoritmi di clustering, label=clustering]  % Start your code-block
 ...
             %% k-means %%%
@@ -341,64 +342,64 @@ e = [e [0 0 0 0]];
 ...
 \end{lstlisting}
 Viene creata dunque una tabella che riassume, per ogni possibile intervallo, le prestazioni dell'algoritmo, come si vede in \ref{ratecluster1}, \ref{ratecluster2}, \ref{ratecluster3}.
-\begin{table}[htp]
+\begin{table}[]
 	\centering
 	\caption{Esempio di tabelle delle prestazioni del clustering}
 	\label{ratecluster1}
 	\resizebox{\textwidth}{!}{%
 	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 		\hline
-		& \multicolumn{4}{c|}{Secondi: 1} & \multicolumn{4}{c|}{Secondi: 1.5} & \multicolumn{4}{c|}{Secondi: 2} \\ \hline
+		& \multicolumn{4}{c|}{Intervallo: 1} & \multicolumn{4}{c|}{Intervallo: 1.5} & \multicolumn{4}{c|}{Intervallo: 2} \\ \hline
 		Ov 0.5 & 0,7 & 0,6 & 0,3 & 0,4 & 0,8 & 0,3 & 0,3 & 0,3 & 0,91 & 0,5 & 0,5 & 0,5 \\ \hline
-		Ov 1 & 0 & 0 & 0 & 0 & 0,7 & 0,3 & 0,3 & 0,3 & 0,8 & 0,6 & 0,5 & 0,55 \\ \hline
-		Ov 1.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,91 & 0,72 & 0,6 & 0,6 \\ \hline
+		Ov 1 & ~ & ~ & ~ & ~ & 0,7 & 0,3 & 0,3 & 0,3 & 0,8 & 0,6 & 0,5 & 0,55 \\ \hline
+		Ov 1.5 & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & 0,91 & 0,72 & 0,6 & 0,6 \\ \hline
 	\end{tabular}%
 }
 \end{table}
-\begin{table}[htp]
-	\centering
-	\caption{Esempio di tabelle delle prestazioni del clustering}
-	\label{ratecluster2}
-	\resizebox{\textwidth}{!}{%
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
-		\hline
-		& \multicolumn{4}{c|}{Secondi: 2.5} & \multicolumn{4}{c|}{Secondi: 3} & \multicolumn{4}{c|}{Secondi: 3.5} \\ \hline
-		Ov 0.5 & 0,7 & 0,3 & 0,3 & 0,3 & 0,4 & 0,1 & 0,2 & 0,17 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
-		Ov 1 & 0,05 & 0,3 & 0,2 & 0,3 & 0,46 & 0,3 & 0,4 & 0,38 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
-		Ov 1.5 & 0,75 & 0,2 & 0,2 & 0,2 & 0,8 & 0,3 & 0,3 & 0,3 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
-		Ov 2 & 0,8 & 0,3 & 0,3 & 0,3 & 0,6 & 0,3 & 0,1 & 0,21 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
-		Ov2.5 & 0 & 0 & 0 & 0 & 0,81 & 0,26 & 0,24 & 0,25 & 0,7 & 0,3 & 0,2 & 0,26 \\ \hline
-		Ov 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,6 & 0,3 & 0,31 & 0,31 \\ \hline
-	\end{tabular}%
-}
-\end{table}
-\begin{table}[htp]
-	\centering
-	\caption{Esempio di tabelle delle prestazioni del clustering}
-	\label{ratecluster3}
-	\resizebox{\textwidth}{!}{%
-	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
-		\hline
-		& \multicolumn{4}{c|}{Secondi: 4} & \multicolumn{4}{c|}{Secondi: 4.5} & \multicolumn{4}{c|}{Secondi: 5} \\ \hline
-		Ov 0.5 & 0,8 & 0,36 & 0,35 & 0,35 & 0,81 & 0,32 & 0,34 & 0,33 & 0,75 & 0,24 & 0,26 & 0,25 \\ \hline
-		Ov 1 & 0,76 & 0,21 & 0,28 & 0,26 & 0,79 & 0,32 & 0,34 & 0,31 & 0,79 & 0,3 & 0,3 & 0,3 \\ \hline
-		Ov 1.5 & 0,46 & 0,36 & 0,33 & 0,35 & 0,8 & 0,36 & 0,35 & 0,35 & 0,59 & 0,24 & 0,33 & 0,29 \\ \hline
-		Ov 2 & 0,41 & 0,33 & 0,44 & 0,39 & 0,76 & 0,21 & 0,28 & 0,26 & 0,26 & 0,79 & 0,32 & 0,34 \\ \hline
-		Ov2.5 & 0,59 & 0,24 & 0,33 & 0,29 & 0,46 & 0,36 & 0,33 & 0,35 & 0,35 & 0,8 & 0,36 & 0,35 \\ \hline
-		Ov 3 & 0,44 & 0,11 & 0,12 & 0,11 & 0,41 & 0,33 & 0,44 & 0,39 & 0,8 & 0,36 & 0,35 & 0,35 \\ \hline
-		Ov 3.5 & 0,78 & 0,23 & 0,33 & 0,28 & 0,75 & 0,24 & 0,26 & 0,25 & 0,76 & 0,21 & 0,28 & 0,26 \\ \hline
-		Ov 4 & 0 & 0 & 0 & 0 & 0,79 & 0,3 & 0,3 & 0,3 & 0,75 & 0,24 & 0,26 & 0,25 \\ \hline
-		Ov 4.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,79 & 0,3 & 0,3 & 0,3 \\ \hline
-	\end{tabular}%
-	}
-\end{table}
+%\begin{table}[]
+%	\centering
+%	\caption{Esempio di tabelle delle prestazioni del clustering}
+%	\label{ratecluster2}
+%	\resizebox{\textwidth}{!}{%
+%	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+%		\hline
+%		& \multicolumn{4}{c|}{Secondi: 2.5} & \multicolumn{4}{c|}{Secondi: 3} & \multicolumn{4}{c|}{Secondi: 3.5} \\ \hline
+%		Ov 0.5 & 0,7 & 0,3 & 0,3 & 0,3 & 0,4 & 0,1 & 0,2 & 0,17 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+%		Ov 1 & 0,05 & 0,3 & 0,2 & 0,3 & 0,46 & 0,3 & 0,4 & 0,38 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+%		Ov 1.5 & 0,75 & 0,2 & 0,2 & 0,2 & 0,8 & 0,3 & 0,3 & 0,3 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+%		Ov 2 & 0,8 & 0,3 & 0,3 & 0,3 & 0,6 & 0,3 & 0,1 & 0,21 & 0,46 & 0,32 & 0,4 & 0,35 \\ \hline
+%		Ov2.5 & 0 & 0 & 0 & 0 & 0,81 & 0,26 & 0,24 & 0,25 & 0,7 & 0,3 & 0,2 & 0,26 \\ \hline
+%		Ov 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,6 & 0,3 & 0,31 & 0,31 \\ \hline
+%	\end{tabular}%
+%}
+%\end{table}
+%\begin{table}[h]
+%	\centering
+%	\caption{Esempio di tabelle delle prestazioni del clustering}
+%	\label{ratecluster3}
+%	\resizebox{\textwidth}{!}{%
+%	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+%		\hline
+%		& \multicolumn{4}{c|}{Secondi: 4} & \multicolumn{4}{c|}{Secondi: 4.5} & \multicolumn{4}{c|}{Secondi: 5} \\ \hline
+%		Ov 0.5 & 0,8 & 0,36 & 0,35 & 0,35 & 0,81 & 0,32 & 0,34 & 0,33 & 0,75 & 0,24 & 0,26 & 0,25 \\ \hline
+%		Ov 1 & 0,76 & 0,21 & 0,28 & 0,26 & 0,79 & 0,32 & 0,34 & 0,31 & 0,79 & 0,3 & 0,3 & 0,3 \\ \hline
+%		Ov 1.5 & 0,46 & 0,36 & 0,33 & 0,35 & 0,8 & 0,36 & 0,35 & 0,35 & 0,59 & 0,24 & 0,33 & 0,29 \\ \hline
+%		Ov 2 & 0,41 & 0,33 & 0,44 & 0,39 & 0,76 & 0,21 & 0,28 & 0,26 & 0,26 & 0,79 & 0,32 & 0,34 \\ \hline
+%		Ov2.5 & 0,59 & 0,24 & 0,33 & 0,29 & 0,46 & 0,36 & 0,33 & 0,35 & 0,35 & 0,8 & 0,36 & 0,35 \\ \hline
+%		Ov 3 & 0,44 & 0,11 & 0,12 & 0,11 & 0,41 & 0,33 & 0,44 & 0,39 & 0,8 & 0,36 & 0,35 & 0,35 \\ \hline
+%		Ov 3.5 & 0,78 & 0,23 & 0,33 & 0,28 & 0,75 & 0,24 & 0,26 & 0,25 & 0,76 & 0,21 & 0,28 & 0,26 \\ \hline
+%		Ov 4 & 0 & 0 & 0 & 0 & 0,79 & 0,3 & 0,3 & 0,3 & 0,75 & 0,24 & 0,26 & 0,25 \\ \hline
+%		Ov 4.5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0,79 & 0,3 & 0,3 & 0,3 \\ \hline
+%	\end{tabular}%
+%	}
+%\end{table}
 
 
 \section{Classificazione del preFOG}
 Nella sezione precedente, è stato decritto uno studio degli intervalli temporali che ci ha portati a decidere quale sia la migliore scelta di durata sia per la finestra che per la sovrapposizione al fine di dividere al meglio i dati a nostra disposizione. Dalla figura \ref{LDAALL2.png}, si nota come le classi FoG e NoFoG sono a volte confuse tra di loro, mentre il preFOG è più o meno diviso dalle altre due classi. Ma quest'ultima classe è proprio quella che stiamo studiando ed è quella che ci porterebbe a prevenire le occorrenze di FoG, in quanto, identificandola, avrei il tempo di dare lo stimolo prima dell'avvenuta del FoG, mentre se cerco di identificare solo i Freezing darei lo stimolo uditorio in ritardo in ogni caso. Questo ci porta a provare un primo approccio di classificazione a 2 classi, dove raggruppiamo assieme i dati di FoG e noFoG e teniamo separate le occorrenze di preFOG. L'algoritmo  di classificazione scelto è il K-nearest Neighbours (KNN), spiegato nel capitolo \ref{chap3:background}. Usiamo sempre l'intervallo che è stato dimostrato nella sezione precedente essere quello più affidabile. L'algoritmo verrà testato in due modi:
 \begin{itemize}
 	\item alleniamo il knn su un paziente singolo, effettuiamo una cross-validation sul classificatore e lo testiamo su dei nuovi dati, ossia che non sono stati inclusi nella  cross-validation;
-	\item alleniamo il knn sui dati di tutti i pazienti contemporaneamente ed effettuiamo una cross-validation.
+	\item alleniamo il knn sui dati di tutti i pazienti contemporaneamente ed effettuiamo una cross-validation a 10 fold .
 \end{itemize}
 La cross-validation è una tecnica statistica utilizzabile in presenza di una buona numerosità del campione osservato o training set. In particolare la k-fold cross-validation consiste nella suddivisione del dataset totale in k parti di uguale numerosità (si chiama anche k-fold validation) e, ad ogni passo, la k-esima parte del dataset viene ad essere il validation dataset, mentre la restante parte costituisce il training dataset. In altre parole, si suddivide il campione osservato in gruppi di egual numerosità, si esclude iterativamente un gruppo alla volta e lo si cerca di predire con i gruppi non esclusi.\\
 Il codice implementativo viene fornito in \ref{validation}
