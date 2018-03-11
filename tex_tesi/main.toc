@@ -1,8 +1,6 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\defcounter {refsection}{0}\relax 
-\select@language {italian}
-\defcounter {refsection}{0}\relax 
-\select@language {italian}
+\babel@toc {italian}{}
+\babel@toc {italian}{}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \defcounter {refsection}{0}\relax 
@@ -70,9 +68,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.1}Dataset}{47}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Risultati sull'esistenza della classe preFOG}{48}{section.6.2}
+\contentsline {section}{\numberline {6.2}Risultati sullo studio della classe preFOG}{48}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Risultati Etichettatura dei dati ed intervalli}{50}{section.6.3}
+\contentsline {section}{\numberline {6.3}Risultati etichettatura dei dati ed intervalli}{50}{section.6.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {6.3.1}LDA con intervallo migliore}{52}{subsection.6.3.1}
 \defcounter {refsection}{0}\relax 
